@@ -94,7 +94,7 @@ function decapCallbackResponse(status: "success" | "error", content: Record<stri
       };
 
       window.addEventListener("message", receiveMessage, false);
-      window.opener.postMessage("authorizing:github", targetOrigin);
+      window.opener.postMessage("authorizing:github", "*");
     </script>
   </body>
 </html>`;
