@@ -1,0 +1,194 @@
+backend:
+  name: github
+  repo: germanestaytelecolim-a11y/hidrourgencias-web
+  branch: main
+
+locale: es
+media_folder: "public/uploads"
+public_folder: "/uploads"
+site_url: "https://hidrourgencias.cl"
+display_url: "https://hidrourgencias.cl"
+
+collections:
+  - name: "site_settings"
+    label: "Configuración editable del sitio"
+    files:
+      - label: "Home Principal"
+        name: "home"
+        file: "content/site-settings/home.md"
+        fields:
+          - { label: "Título principal Home", name: "hero_title", widget: "string" }
+          - { label: "Subtítulo Home", name: "hero_subtitle", widget: "text" }
+          - { label: "Imagen principal Home", name: "hero_image", widget: "image" }
+          - { label: "Alt imagen Home", name: "hero_image_alt", widget: "string" }
+          - { label: "Texto botón principal", name: "primary_cta_text", widget: "string" }
+          - { label: "URL botón principal", name: "primary_cta_url", widget: "string" }
+          - { label: "Texto botón secundario", name: "secondary_cta_text", widget: "string", required: false }
+          - { label: "URL botón secundario", name: "secondary_cta_url", widget: "string", required: false }
+
+      - label: "Tecnología y Equipamiento"
+        name: "equipment"
+        file: "content/site-settings/equipment.md"
+        fields:
+          - label: "Equipos"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "Nombre del equipo", name: "title", widget: "string" }
+              - { label: "Descripción técnica", name: "description", widget: "text" }
+              - { label: "Imagen del equipo", name: "image", widget: "image" }
+              - { label: "Alt SEO", name: "alt", widget: "string" }
+
+      - label: "Servicios Destacados"
+        name: "featured_services"
+        file: "content/site-settings/featured-services.md"
+        fields:
+          - label: "Servicios"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "Nombre del servicio", name: "title", widget: "string" }
+              - { label: "Descripción breve", name: "description", widget: "text" }
+              - { label: "Imagen", name: "image", widget: "image" }
+              - { label: "Alt SEO", name: "alt", widget: "string" }
+              - { label: "URL interna", name: "url", widget: "string" }
+
+      - label: "Clientes y Logos"
+        name: "clients"
+        file: "content/site-settings/clients.md"
+        fields:
+          - label: "Clientes"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "Nombre cliente", name: "name", widget: "string" }
+              - { label: "Logo", name: "logo", widget: "image", required: false }
+              - { label: "Alt SEO", name: "alt", widget: "string" }
+
+      - label: "Bloques Comerciales"
+        name: "commercial_blocks"
+        file: "content/site-settings/commercial-blocks.md"
+        fields:
+          - label: "Bloques"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "Título", name: "title", widget: "string" }
+              - { label: "Texto", name: "text", widget: "text" }
+              - { label: "Imagen", name: "image", widget: "image", required: false }
+              - { label: "Alt SEO", name: "alt", widget: "string", required: false }
+              - { label: "Texto botón", name: "cta_text", widget: "string", required: false }
+              - { label: "URL botón", name: "cta_url", widget: "string", required: false }
+
+  - name: "casos_exito"
+    label: "Casos de Éxito"
+    folder: "content/casos-exito"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    preview_path: "casos-de-exito/{{slug}}"
+    fields:
+      - { label: "Publicado", name: "published", widget: "boolean", default: true }
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Subtítulo", name: "subtitle", widget: "string", required: false }
+      - { label: "Descripción breve", name: "description", widget: "text" }
+      - { label: "Servicio relacionado", name: "service", widget: "select", options: ["Destape de alcantarillado y desagües", "Hidrojet de alta presión", "Destape de edificios", "Mantención preventiva de redes", "Destape de verticales", "Destape de horizontales", "Destape de cámaras de inspección", "Destape de artefactos sanitarios", "Videoinspección sanitaria", "Reparación de tuberías HDPE", "Motobombas para extracción de aguas", "Sanitización e higienización", "Urgencias sanitarias 24/7"] }
+      - { label: "Comuna", name: "commune", widget: "select", options: ["Viña del Mar", "Valparaíso", "Concón", "Quilpué", "Villa Alemana", "Limache", "Quillota", "Reñaca", "Placilla", "Curauma", "Casablanca", "Puchuncaví", "Quintero"] }
+      - { label: "Fecha del servicio", name: "date", widget: "datetime" }
+      - { label: "Cliente o referencia", name: "client", widget: "string", required: false }
+      - { label: "Imagen principal", name: "image", widget: "image" }
+      - { label: "Alt SEO", name: "alt", widget: "string" }
+      - label: "Galería adicional"
+        name: "gallery"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Imagen", name: "image", widget: "image" }
+          - { label: "Alt SEO", name: "alt", widget: "string" }
+      - { label: "URL video", name: "video_url", widget: "string", required: false }
+      - { label: "Contenido técnico", name: "body", widget: "markdown", required: false }
+
+  - name: "trabajos_reales"
+    label: "Trabajos Reales"
+    folder: "content/trabajos-reales"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Publicado", name: "published", widget: "boolean", default: true }
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Descripción breve", name: "description", widget: "text" }
+      - { label: "Servicio relacionado", name: "service", widget: "select", options: ["Destape de alcantarillado y desagües", "Hidrojet de alta presión", "Destape de edificios", "Mantención preventiva de redes", "Destape de verticales", "Destape de horizontales", "Destape de cámaras de inspección", "Destape de artefactos sanitarios", "Videoinspección sanitaria", "Reparación de tuberías HDPE", "Motobombas para extracción de aguas", "Sanitización e higienización", "Urgencias sanitarias 24/7"] }
+      - { label: "Comuna", name: "commune", widget: "select", options: ["Viña del Mar", "Valparaíso", "Concón", "Quilpué", "Villa Alemana", "Limache", "Quillota", "Reñaca", "Placilla", "Curauma", "Casablanca", "Puchuncaví", "Quintero"] }
+      - { label: "Fecha del trabajo", name: "date", widget: "datetime" }
+      - { label: "Cliente o referencia", name: "client", widget: "string", required: false }
+      - { label: "Imagen principal", name: "image", widget: "image" }
+      - { label: "Alt SEO", name: "alt", widget: "string" }
+      - label: "Galería adicional"
+        name: "gallery"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Imagen", name: "image", widget: "image" }
+          - { label: "Alt SEO", name: "alt", widget: "string" }
+      - { label: "Contenido técnico", name: "body", widget: "markdown", required: false }
+
+  - name: "galeria"
+    label: "Galería"
+    folder: "content/galeria"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Publicado", name: "published", widget: "boolean", default: true }
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Descripción", name: "description", widget: "text", required: false }
+      - { label: "Servicio relacionado", name: "service", widget: "string", required: false }
+      - { label: "Comuna", name: "commune", widget: "string", required: false }
+      - { label: "Fecha", name: "date", widget: "datetime", required: false }
+      - { label: "Imagen", name: "image", widget: "image" }
+      - { label: "Alt SEO", name: "alt", widget: "string" }
+
+  - name: "videos"
+    label: "Videos"
+    folder: "content/videos"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Publicado", name: "published", widget: "boolean", default: true }
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Descripción", name: "description", widget: "text", required: false }
+      - { label: "Servicio relacionado", name: "service", widget: "string", required: false }
+      - { label: "Comuna", name: "commune", widget: "string", required: false }
+      - { label: "Fecha", name: "date", widget: "datetime", required: false }
+      - { label: "URL video", name: "video_url", widget: "string" }
+      - { label: "Miniatura", name: "thumbnail", widget: "image" }
+      - { label: "Alt SEO miniatura", name: "thumbnail_alt", widget: "string" }
+
+  - name: "blog"
+    label: "Blog técnico"
+    folder: "content/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    preview_path: "blog/{{slug}}"
+    fields:
+      - { label: "Publicado", name: "published", widget: "boolean", default: true }
+      - { label: "Título SEO", name: "title", widget: "string" }
+      - { label: "H1", name: "h1", widget: "string" }
+      - { label: "Descripción SEO", name: "description", widget: "text" }
+      - { label: "Resumen superior", name: "hero_summary", widget: "text", required: false }
+      - { label: "Fecha", name: "date", widget: "datetime", required: false }
+      - { label: "Imagen principal", name: "image", widget: "image" }
+      - { label: "Alt SEO", name: "alt", widget: "string" }
+      - { label: "Palabras clave", name: "keywords", widget: "list", required: false, field: { label: "Keyword", name: "keyword", widget: "string" } }
+      - { label: "Mensaje WhatsApp CTA", name: "cta_message", widget: "text", required: false }
+      - { label: "Contenido", name: "body", widget: "markdown" }
+
+  - name: "clientes_destacados"
+    label: "Clientes destacados"
+    folder: "content/clientes-destacados"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Publicado", name: "published", widget: "boolean", default: true }
+      - { label: "Nombre cliente", name: "name", widget: "string" }
+      - { label: "Descripción", name: "description", widget: "text", required: false }
+      - { label: "Logo", name: "logo", widget: "image", required: false }
+      - { label: "Alt SEO", name: "alt", widget: "string" }
