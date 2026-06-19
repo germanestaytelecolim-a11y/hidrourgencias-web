@@ -2,6 +2,9 @@ backend:
   name: github
   repo: germanestaytelecolim-a11y/hidrourgencias-web
   branch: main
+  base_url: https://hidrourgencias.cl
+  auth_endpoint: api/auth
+  auth_scope: repo
 
 locale: es
 media_folder: "public/uploads"

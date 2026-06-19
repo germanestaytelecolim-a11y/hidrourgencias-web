@@ -181,6 +181,14 @@ const nextConfig: NextConfig = {
         source: "/admin/:path*",
         headers: [adminNoStoreHeader],
       },
+      {
+        source: "/api/auth",
+        headers: [adminNoStoreHeader],
+      },
+      {
+        source: "/api/auth/:path*",
+        headers: [adminNoStoreHeader],
+      },
     ];
   },
   async redirects() {

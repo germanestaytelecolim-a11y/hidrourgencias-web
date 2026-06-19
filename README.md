@@ -37,7 +37,9 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## Uso del panel administrador HIDROURGENCIAS
 
-El sitio usa Decap CMS como panel híbrido. Antes de usarlo en producción, editar `public/admin/config.yml` y reemplazar `USUARIO/REPOSITORIO` por el repositorio real de GitHub. El backend guarda cambios como archivos Markdown dentro de `content/` y las imágenes en `public/uploads`.
+El sitio usa Decap CMS como panel hibrido. El repositorio real ya esta configurado en `public/admin/config.yml` como `germanestaytelecolim-a11y/hidrourgencias-web`, rama `main`. El backend guarda cambios como archivos Markdown dentro de `content/` y las imagenes en `public/uploads`.
+
+Para produccion en Vercel, Decap CMS autentica contra GitHub usando el OAuth proxy propio del sitio: inicio en `https://hidrourgencias.cl/api/auth` y callback en `https://hidrourgencias.cl/api/auth/callback`. La GitHub OAuth App debe usar `https://hidrourgencias.cl` como Homepage URL y `https://hidrourgencias.cl/api/auth/callback` como Authorization callback URL. Las variables privadas requeridas en Vercel son `GITHUB_CLIENT_ID` y `GITHUB_CLIENT_SECRET`; no se deben guardar secretos en `public/admin/config.yml` ni en el repositorio.
 
 Para ingresar al panel, abrir `https://hidrourgencias.cl/admin` o, en desarrollo local, `http://localhost:3000/admin`. Iniciar sesión con la cuenta de GitHub autorizada para escribir en el repositorio.
 
