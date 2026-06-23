@@ -1,6 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { getGitHubClientId, getGitHubClientSecret, verifySignedState } from "@/lib/decap-oauth";
+import {
+  getGitHubClientId,
+  getGitHubClientSecret,
+  missingGitHubOAuthConfigMessage,
+  verifySignedState,
+} from "@/lib/decap-oauth";
 
 export const runtime = "nodejs";
 
@@ -15,7 +20,7 @@ type GitHubTokenResponse = {
 export async function GET(request: NextRequest) {
   if (!getGitHubClientId() || !getGitHubClientSecret()) {
     return decapCallbackResponse("error", {
-      message: "GitHub OAuth no esta configurado. Falta GITHUB_CLIENT_ID o GITHUB_CLIENT_SECRET.",
+      message: missingGitHubOAuthConfigMessage,
     });
   }
 

@@ -1,6 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { createSignedState, getGitHubClientId, getGitHubClientSecret } from "@/lib/decap-oauth";
+import {
+  createSignedState,
+  getGitHubClientId,
+  getGitHubClientSecret,
+  missingGitHubOAuthConfigMessage,
+} from "@/lib/decap-oauth";
 
 export const runtime = "nodejs";
 
@@ -9,7 +14,7 @@ export function GET(request: NextRequest) {
   const clientSecret = getGitHubClientSecret();
 
   if (!clientId || !clientSecret) {
-    return oauthErrorResponse("GitHub OAuth no esta configurado. Falta GITHUB_CLIENT_ID o GITHUB_CLIENT_SECRET.");
+    return oauthErrorResponse(missingGitHubOAuthConfigMessage);
   }
 
   const provider = request.nextUrl.searchParams.get("provider") ?? "github";
@@ -45,4 +50,3 @@ function oauthErrorResponse(message: string) {
     },
   });
 }
-

@@ -2,6 +2,9 @@ import { createHmac, randomBytes, timingSafeEqual } from "node:crypto";
 
 const stateMaxAgeMs = 10 * 60 * 1000;
 
+export const missingGitHubOAuthConfigMessage =
+  "GitHub OAuth no esta configurado. Falta GITHUB_CLIENT_ID o GITHUB_CLIENT_SECRET en Vercel. Agrega ambas variables en Project Settings > Environment Variables, habilitadas para Production, y luego ejecuta un Redeploy.";
+
 type DecapOAuthState = {
   nonce: string;
   provider: "github";
@@ -57,7 +60,7 @@ function signPayload(payload: string) {
   const secret = getGitHubClientSecret();
 
   if (!secret) {
-    throw new Error("GITHUB_CLIENT_SECRET is not configured");
+    throw new Error(missingGitHubOAuthConfigMessage);
   }
 
   return createHmac("sha256", secret).update(payload).digest("base64url");
@@ -69,4 +72,3 @@ function safeEqual(left: string, right: string) {
 
   return leftBuffer.length === rightBuffer.length && timingSafeEqual(leftBuffer, rightBuffer);
 }
-
