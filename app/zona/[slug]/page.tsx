@@ -24,7 +24,9 @@ function normalizeZonaValue(value: string) {
 function getContextoZona(zona: string, comuna: string) {
   const contextos = {
     Recreo: "sector con alta densidad residencial y edificios en pendiente",
-    Renaca: "zona costera con alto uso de sistemas sanitarios en temporada",
+    Renaca: "zona costera con departamentos de temporada, condominios y rebalses críticos en niveles inferiores",
+    Forestal: "sector con viviendas en pendiente, cámaras con sedimento y retornos por pérdida de evacuación",
+    GomezCarreno: "sector con condominios, cámaras domiciliarias y redes interiores o exteriores de alta carga residencial",
     Belloto: "sector residencial con redes antiguas y acumulacion de grasas",
     Penablanca: "zona con viviendas unifamiliares y redes domiciliarias extensas",
     Centro: "sector con alto flujo sanitario y colectores exigidos",
@@ -39,6 +41,14 @@ function getContextoZona(zona: string, comuna: string) {
 
   if (zonaNormalizada.includes("renaca")) {
     return contextos.Renaca;
+  }
+
+  if (zonaNormalizada.includes("forestal")) {
+    return contextos.Forestal;
+  }
+
+  if (zonaNormalizada.includes("gomez") || zonaNormalizada.includes("carreno")) {
+    return contextos.GomezCarreno;
   }
 
   if (zonaNormalizada.includes("belloto")) {
@@ -177,7 +187,7 @@ export default async function ZonaPage({ params }: Props) {
     areaServed: [zona.nombre, zona.comuna, ...zona.nearbyComunas],
     description: `Atencion 24/7 para destape de alcantarillado, desagues y urgencias sanitarias cerca de ${zona.nombre}, ${zona.comuna}.`,
     provider: {
-      "@type": "Plumber",
+      "@type": "LocalBusiness",
       name: siteConfig.name,
       telephone: siteConfig.phoneDisplay,
       url: siteConfig.siteUrl,

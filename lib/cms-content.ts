@@ -246,11 +246,11 @@ const defaultFeaturedServices: CmsFeaturedService[] = [
     url: "/servicios/limpieza-higienizacion-sanitizacion",
   },
   {
-    title: "Reparación de tuberías HDPE",
-    description: "Reparaciones técnicas en redes HDPE para recuperar continuidad sanitaria y reducir filtraciones.",
+    title: "Recuperación de espacios e higienización técnica",
+    description: "Limpieza profunda, control de olores y recuperación higiénico-sanitaria posterior a rebalses, recambios o intervenciones sanitarias.",
     image: "/images/hero-mantencion.jpg",
-    alt: "Reparación de tuberías HDPE",
-    url: "/servicios/reparacion-tuberias-hdpe",
+    alt: "Recuperación de espacios e higienización técnica",
+    url: "/servicios/limpieza-domicilios-recuperacion-espacios",
   },
 ];
 

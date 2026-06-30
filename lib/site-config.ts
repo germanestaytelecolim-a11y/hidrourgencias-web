@@ -12,6 +12,9 @@ Nombre:
 Teléfono:
 Comuna:
 Dirección:
+Tipo de inmueble:
+Síntoma:
+Nivel de urgencia:
 Tipo de requerimiento:
 Detalle del problema:
 
@@ -103,13 +106,13 @@ export const serviceCatalog: ServiceCatalogItem[] = [
     ),
   },
   {
-    title: "Reparación de tuberías HDPE",
+    title: "Revisión técnica de tramos HDPE sanitarios",
     description:
-      "Reparación técnica de tuberías HDPE para agua potable y aguas servidas, con evaluación del tramo, control de estanqueidad y recomendaciones de mantención.",
+      "Evaluación técnica de tramos HDPE asociados a redes sanitarias, aguas servidas y continuidad de evacuación, con recomendaciones para decidir acciones correctivas.",
     href: "/servicios/reparacion-tuberias-hdpe",
-    ctaLabel: "Solicitar reparación",
+    ctaLabel: "Solicitar revisión técnica",
     ctaHref: createWhatsAppUrl(
-      "Hola, necesito solicitar información por el servicio de reparación de tuberías HDPE de Hidrourgencias SpA. Indico comuna, tipo de red y antecedentes de la falla.",
+      "Hola, necesito solicitar información por revisión técnica de tramos HDPE sanitarios con Hidrourgencias SpA. Indico comuna, tipo de red y antecedentes de la falla.",
     ),
   },
   {

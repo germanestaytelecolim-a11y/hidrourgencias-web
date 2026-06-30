@@ -48,9 +48,9 @@ const comunaProfiles: ComunaProfile[] = [
   {
     slug: "destape-alcantarillado-vina-del-mar",
     comuna: "Vina del Mar",
-    nearbyZones: ["Recreo", "Forestal", "Miraflores", "Achupallas", "Renaca", "Gomez Carreno"],
+    nearbyZones: ["Centro", "Avenida Libertad", "Recreo", "Forestal", "Miraflores", "Achupallas", "Renaca", "Gomez Carreno"],
     localContext:
-      "una red sanitaria exigida por alta densidad residencial, edificios en altura, gastronomia y comercios con flujo continuo de clientes",
+      "una red sanitaria exigida por edificios en altura, restaurantes, comunidades, Avenida Libertad, centro, Renaca, Gomez Carreno, Forestal y comercio con flujo continuo de clientes",
     riskDrivers: [
       "acumulacion de grasa y sedimentos en cocinas de alto uso",
       "sobrecarga en redes verticales de edificios con alta ocupacion",

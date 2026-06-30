@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import {
   ArrowRight,
+  AlertTriangle,
   BadgeCheck,
   Building2,
   ExternalLink,
@@ -138,6 +139,35 @@ const authorityPoints: Array<{ icon: IconComponent; title: string; description: 
   },
 ];
 
+const symptomItems = [
+  {
+    title: "Rebalse sanitario activo",
+    description: "Aguas servidas expuestas, retorno por WC, cámara saturada o inundación que compromete uso del inmueble.",
+  },
+  {
+    title: "Evacuación lenta o intermitente",
+    description: "Desagües, lavaplatos, urinarios o redes interiores que pierden flujo y anticipan una obstrucción mayor.",
+  },
+  {
+    title: "Redes verticales u horizontales exigidas",
+    description: "Edificios, condominios, restaurantes y empresas con carga sanitaria alta o eventos recurrentes.",
+  },
+  {
+    title: "Olores persistentes y riesgo higiénico",
+    description: "Sectores afectados por aguas servidas, grasas, sedimentos o intervenciones sanitarias que requieren recuperación técnica.",
+  },
+];
+
+const antiPortfolioExclusions = [
+  "Gasfitería doméstica general",
+  "Cambio de llaves, sifones o gomas",
+  "Instalación de artefactos sanitarios",
+  "Detección de fugas de agua potable",
+  "Reparaciones estructurales directas",
+  "Limpieza de vidrios",
+  "Aseo doméstico básico",
+];
+
 const mailButtonClass =
   "rounded-xl border border-slate-300 bg-white px-4 py-3 text-center text-sm font-bold text-black shadow-sm shadow-slate-900/10 transition hover:border-slate-400 hover:bg-slate-50";
 
@@ -251,6 +281,72 @@ function SocialIcon({ label }: { label: string }) {
   );
 }
 
+function SymptomsSection() {
+  return (
+    <section id="sintomas" className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:py-14">
+      <div className="rounded-[2rem] border border-sky-200 bg-white px-6 py-8 shadow-[0_24px_70px_-44px_rgba(8,56,95,0.55)] sm:px-10">
+        <div className="max-w-4xl">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-sky-700">Síntomas que requieren respuesta técnica</p>
+          <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
+            Si la red sanitaria falla, el tiempo de reacción importa
+          </h2>
+          <p className="mt-4 text-sm leading-8 text-slate-700 sm:text-base">
+            Priorizamos síntomas de alto impacto para asignar el recurso correcto: RIDGID, hidrojet, motobomba,
+            videoinspección o recuperación higiénico-sanitaria posterior.
+          </p>
+        </div>
+
+        <div className="mt-7 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {symptomItems.map((item) => (
+            <article key={item.title} className="rounded-2xl border border-sky-100 bg-sky-50 p-5">
+              <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white text-sky-700 shadow-sm">
+                <AlertTriangle className="h-5 w-5" />
+              </div>
+              <h3 className="mt-4 text-lg font-extrabold tracking-tight text-slate-950">{item.title}</h3>
+              <p className="mt-2 text-sm leading-7 text-slate-700">{item.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function AntiPortfolioSection() {
+  return (
+    <section id="especialidad-sanitaria" className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:py-14">
+      <div className="grid gap-6 rounded-[2rem] border border-slate-200 bg-white px-6 py-8 shadow-md sm:px-10 lg:grid-cols-[0.95fr_1.05fr] lg:py-10">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-sky-700">Especialización operativa</p>
+          <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
+            Nuestra especialidad es la red sanitaria de alto impacto
+          </h2>
+          <p className="mt-4 text-sm leading-8 text-slate-700 sm:text-base">
+            Para garantizar tiempos de respuesta rápidos, criterio técnico y calidad operativa, Hidrourgencias SpA
+            concentra su trabajo en alcantarillado, desagüe, hidrojet, videoinspección sanitaria, mantención preventiva,
+            revisión técnica de redes, recuperación de espacios afectados e higienización técnica.
+          </p>
+          <p className="mt-5 text-base font-extrabold text-[#08385f]">
+            No somos gasfitería básica. Somos especialistas en urgencias sanitarias, alcantarillado, desagüe, revisión
+            técnica de redes, recuperación higiénico-sanitaria y continuidad operativa.
+          </p>
+        </div>
+
+        <div className="rounded-2xl border border-rose-100 bg-rose-50 p-5">
+          <h3 className="text-xl font-extrabold tracking-tight text-slate-950">Hidrourgencias SpA NO realiza:</h3>
+          <div className="mt-5 grid gap-3 sm:grid-cols-2">
+            {antiPortfolioExclusions.map((item) => (
+              <p key={item} className="rounded-xl border border-white bg-white px-4 py-3 text-sm font-bold leading-6 text-slate-700">
+                {item}
+              </p>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function HomePage({ cmsContent }: HomePageContentProps) {
   const blogPosts = (cmsContent?.blogPosts ?? []).slice(0, 3);
   const displayedClients = (cmsContent?.clients.length ? cmsContent.clients : featuredClients).map((client) => {
@@ -293,7 +389,9 @@ export default function HomePage({ cmsContent }: HomePageContentProps) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: schema }} />
 
       <HeroUrgencias settings={cmsContent?.homeSettings} />
+      <SymptomsSection />
       <ServiciosGrid services={cmsContent?.featuredServices} />
+      <AntiPortfolioSection />
 
       <section id="comunas" className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:py-16">
         <div className="relative overflow-hidden rounded-[2rem] border border-sky-200/70 bg-white px-6 py-9 shadow-[0_24px_70px_-44px_rgba(8,56,95,0.55)] sm:px-10 sm:py-11">
@@ -617,6 +715,10 @@ export default function HomePage({ cmsContent }: HomePageContentProps) {
             </div>
             <div className="grid gap-3">
               <ServiceTermsNotice tone="dark" />
+              <p className="rounded-xl border border-white/15 bg-white/10 px-4 py-3 text-sm leading-7 text-slate-200">
+                Mientras más claro sea el síntoma, mejor podemos asignar equipo: RIDGID, hidrojet, motobomba,
+                videoinspección o revisión técnica sanitaria.
+              </p>
               <a
                 href={createWhatsAppUrl("Hola, necesito atención por urgencia sanitaria. Requiero prioridad por posible rebalse activo.")}
                 target="_blank"

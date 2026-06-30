@@ -87,7 +87,7 @@ export function SeoServiceAreaLanding({ route }: Props) {
     serviceType: route.service.nombre,
     areaServed: [route.sector, route.comuna.comuna],
     provider: {
-      "@type": "Plumber",
+      "@type": "LocalBusiness",
       name: siteConfig.name,
       telephone: siteConfig.phoneDisplay,
       url: siteConfig.siteUrl,

@@ -88,11 +88,11 @@ export function GaleriaOperativa({ equipmentItems, galleryItems = [] }: GaleriaO
             Tecnologia y equipamiento
           </span>
           <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-            Herramientas profesionales para diagnosticar, destapar y prevenir
+            Tecnología sanitaria para intervenir sin improvisar
           </h2>
           <p className="mt-4 text-base leading-8 text-slate-300">
-            Trabajamos con equipos RIDGID, hidrojet, videoinspección, motobombas y herramientas de diagnóstico para
-            elegir la maniobra correcta según red, severidad del bloqueo y continuidad operativa del cliente.
+            El diferencial no está solo en llegar rápido. Está en llegar con el equipo correcto: máquinas seccionales
+            RIDGID, hidrojet de alta presión, videoinspección sanitaria y equipos de apoyo para extracción y sanitización.
           </p>
         </div>
 

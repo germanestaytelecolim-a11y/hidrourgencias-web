@@ -2,7 +2,7 @@ export const serviceTermsNotice =
   "Importante: el servicio contratado corresponde a una intervención técnica especializada. Existen fallas estructurales, colapsos, raíces, pérdidas de pendiente y daños internos de tuberías que pueden impedir una desobstrucción total. En tales casos, Hidrourgencias SpA entregará diagnóstico técnico y alternativas de solución. Los recursos técnicos, maquinaria, movilización, horas hombre y servicios ejecutados en terreno constituyen prestaciones efectivamente realizadas y sujetas a cobro.";
 
 const serviceTermsNoticeSummary =
-  "Al contactar aceptas que el servicio corresponde a una intervención técnica especializada sujeta a diagnóstico, recursos movilizados y condiciones reales de la red.";
+  "Servicio sujeto a diagnóstico técnico, condiciones reales de la red, accesibilidad, nivel de obstrucción y recursos requeridos.";
 
 const serviceTerms = [
   "Hidrourgencias SpA presta servicios especializados de diagnóstico, limpieza, mantenimiento y desobstrucción de redes de alcantarillado y desagües mediante maquinaria eléctrica, sistema hidrojet, videoinspección sanitaria y otros procedimientos técnicos aplicables según cada caso.",
@@ -23,21 +23,10 @@ type ServiceTermsNoticeProps = {
 };
 
 export function ServiceTermsNotice({ tone = "light", className = "" }: ServiceTermsNoticeProps) {
-  const toneClass =
-    tone === "dark"
-      ? "border-amber-200/25 bg-amber-300/10 text-amber-50"
-      : "border-amber-200 bg-amber-50 text-amber-950";
+  void tone;
+  void className;
 
-  const linkClass = tone === "dark" ? "text-amber-100 underline-offset-4 hover:underline" : "text-amber-900 underline-offset-4 hover:underline";
-
-  return (
-    <p className={`break-words rounded-2xl border px-4 py-3 text-xs font-semibold leading-6 ${toneClass} ${className}`}>
-      {serviceTermsNoticeSummary}{" "}
-      <a href="#terminos-servicio" className={linkClass}>
-        Ver términos completos
-      </a>
-    </p>
-  );
+  return null;
 }
 
 export function ServiceTermsSection() {
@@ -51,10 +40,13 @@ export function ServiceTermsSection() {
               Términos y condiciones del servicio
             </h2>
             <p className="mt-4 text-sm leading-7 text-slate-700">
-              Esta información aplica antes de solicitar llamadas, WhatsApp, cotizaciones o asistencia técnica en terreno.
+              {serviceTermsNoticeSummary}{" "}
+              <a href="#terminos-servicio-detalle" className="font-bold text-sky-800 underline-offset-4 hover:underline">
+                Ver términos del servicio.
+              </a>
             </p>
           </div>
-          <details open className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+          <details id="terminos-servicio-detalle" className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
             <summary className="cursor-pointer list-none text-base font-extrabold text-slate-950 marker:hidden">
               Leer condiciones comerciales y técnicas
             </summary>

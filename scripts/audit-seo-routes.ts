@@ -4,6 +4,7 @@ import { join } from "node:path";
 import sitemap, { getSitemapPriority, getSitemapRouteSpecs, type SitemapRouteKind } from "../app/sitemap";
 import nextConfig from "../next.config";
 import { getBlogSlugs } from "../lib/blog-data";
+import { getCaseStudySlugs } from "../lib/case-studies";
 import { getComunaPaths } from "../lib/comuna-landings";
 import {
   MAX_PROGRAMMATIC_ROUTES,
@@ -20,7 +21,7 @@ type AuditRouteKind = SitemapRouteKind;
 type AuditRouteSpec = {
   path: string;
   kind: AuditRouteKind;
-  source: "home" | "blog-index" | "landing" | "blog-post" | "service" | "zone" | "programmatic";
+  source: "home" | "blog-index" | "case-study-index" | "landing" | "blog-post" | "case-study" | "service" | "zone" | "programmatic";
 };
 
 type DuplicateEntry = {
@@ -131,10 +132,12 @@ function getKnownRouteSpecs(): AuditRouteSpec[] {
   return uniqueByPath([
     { path: "/", kind: "home", source: "home" },
     { path: "/blog", kind: "blog-index", source: "blog-index" },
+    { path: "/casos-de-exito", kind: "case-study-index", source: "case-study-index" },
     ...getComunaPaths().map((slug) => ({ path: `/${slug}`, kind: "landing" as const, source: "landing" as const })),
     ...getZonaSlugs().map((slug) => ({ path: `/zona/${slug}`, kind: "zone" as const, source: "zone" as const })),
     ...getServicioSlugs().map((slug) => ({ path: `/servicios/${slug}`, kind: "service" as const, source: "service" as const })),
     ...getBlogSlugs().map((slug) => ({ path: `/blog/${slug}`, kind: "blog-post" as const, source: "blog-post" as const })),
+    ...getCaseStudySlugs().map((slug) => ({ path: `/casos-de-exito/${slug}`, kind: "case-study" as const, source: "case-study" as const })),
     ...getAllSeoRoutes().map((route) => ({
       path: `/${route.slug}`,
       kind: "programmatic" as const,

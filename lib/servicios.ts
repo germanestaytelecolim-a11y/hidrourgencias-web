@@ -22,22 +22,25 @@ export type ServicioPageData = {
 const servicios: ServicioPageData[] = [
   {
     slug: "reparacion-tuberias-hdpe",
-    navLabel: "Reparacion de tuberias HDPE",
-    h1: "Reparacion de tuberias HDPE para agua potable y aguas servidas",
+    navLabel: "Revision tecnica de tramos HDPE sanitarios",
+    h1: "Revision tecnica de tramos HDPE asociados a redes sanitarias",
     summary:
-      "Ejecutamos reparaciones tecnicas en tuberias HDPE con protocolos de evaluacion, trazabilidad y control de riesgo para redes de agua potable y aguas servidas en entornos residenciales, comerciales e industriales.",
+      "Evaluamos tramos HDPE asociados a evacuacion sanitaria, aguas servidas y continuidad operativa para identificar deformaciones, uniones comprometidas, perdida de estanqueidad sanitaria visible o condiciones que requieren accion correctiva especializada.",
     image: "/images/hero-mantencion.jpg",
     methodology: [
-      "Levantamiento tecnico del tramo comprometido y condicion estructural del sistema.",
-      "Definicion de estrategia de reparacion segun diametro, carga y continuidad operativa requerida.",
-      "Intervencion con control sanitario y verificacion de estanqueidad posterior.",
-      "Informe tecnico de cierre con recomendaciones de mantencion preventiva.",
+      "Levantamiento tecnico del tramo comprometido y condicion sanitaria del sistema.",
+      "Revision de accesibilidad, continuidad de evacuacion y sintomas asociados a la red.",
+      "Diagnostico visual y operativo para definir si corresponde destape, hidrojet, videoinspeccion o derivacion correctiva.",
+      "Informe tecnico de cierre con recomendaciones de continuidad preventiva.",
     ],
-    equipment: ["Equipos RIDGID para diagnostico", "Herramientas de union y ajuste HDPE", "Instrumentos de presion y control"],
-    benefits: ["Menor riesgo de filtracion recurrente", "Intervencion con criterio sanitario", "Trazabilidad para administradores y empresas"],
-    whenToRequest: ["Fuga visible", "Perdida de presion", "Rotura por impacto", "Tramo HDPE deformado o fatigado"],
-    obstructionTypes: ["Fisuras en union", "Perdida de estanqueidad", "Deformaciones por sobrecarga", "Fallas de continuidad en matriz"],
-    ctaMessage: "Necesito reparacion de tuberias HDPE y evaluacion tecnica en terreno.",
+    equipment: ["Equipos RIDGID para diagnostico", "Videoinspeccion sanitaria cuando corresponde", "Herramientas de revision tecnica"],
+    benefits: ["Criterio sanitario antes de intervenir", "Mejor decision sobre acciones correctivas", "Trazabilidad para administradores y empresas"],
+    whenToRequest: ["Red sanitaria HDPE con comportamiento anomalo", "Tramo deformado o fatigado", "Evacuacion irregular", "Reincidencia despues de destapes"],
+    obstructionTypes: ["Uniones comprometidas", "Perdida de estanqueidad sanitaria visible", "Deformaciones por sobrecarga", "Fallas de continuidad de evacuacion"],
+    ctaMessage: "Necesito revision tecnica de tramos HDPE sanitarios y evaluacion en terreno.",
+    metadataTitle: "Revision tecnica de tramos HDPE sanitarios",
+    metadataDescription:
+      "Evaluacion tecnica de tramos HDPE asociados a redes sanitarias, aguas servidas y continuidad de evacuacion en la Region de Valparaiso.",
   },
   {
     slug: "motobombas-extraccion-aguas",

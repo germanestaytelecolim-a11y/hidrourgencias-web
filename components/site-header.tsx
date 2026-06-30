@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 import { ExternalLink, Mail, PhoneCall } from "@/components/icons";
 import { StaticPicture } from "@/components/static-picture";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { GOOGLE_REVIEWS_URL, createMailToUrl, createWhatsAppUrl } from "@/lib/site-config";
 import { comunasSeo, createSeoSlug, serviciosSeo } from "@/lib/seo-territorial";
 
@@ -16,6 +17,9 @@ const navItems = [
 
 const mailButtonClass =
   "inline-flex items-center justify-center gap-2 rounded-full border border-sky-200 bg-white px-3.5 py-2 text-xs font-bold text-slate-950 shadow-sm shadow-slate-900/10 transition hover:-translate-y-0.5 hover:border-sky-300 hover:bg-sky-50 xl:px-4 xl:text-sm";
+const adminAccessHref = "/acceso-administradores-empresas";
+const adminAccessButtonClass =
+  "inline-flex items-center justify-center rounded-full border border-sky-200 bg-sky-50 px-3.5 py-2 text-center text-xs font-black leading-tight text-sky-950 shadow-sm shadow-sky-950/10 transition hover:-translate-y-0.5 hover:border-sky-300 hover:bg-white xl:px-4";
 
 const coverageComunas = comunasSeo.slice(0, 7);
 const coverageSectors = comunasSeo.flatMap((comuna) =>
@@ -34,12 +38,7 @@ const coverageServices = [
   {
     slug: "limpieza-domicilios-recuperacion-espacios",
     pageSlug: "limpieza-domicilios-recuperacion-espacios",
-    nombre: "Limpieza de domicilios",
-  },
-  {
-    slug: "limpieza-fachadas-hidrolavado-superficies",
-    pageSlug: "limpieza-fachadas-hidrolavado-superficies",
-    nombre: "Hidrolavado de fachadas",
+    nombre: "Recuperación de espacios",
   },
   {
     slug: "extraccion-aguas-estanques-piscinas",
@@ -147,6 +146,10 @@ export function SiteHeader() {
             <Mail className="h-4 w-4" />
             Enviar solicitud por correo
           </a>
+          <a href={adminAccessHref} className={`${adminAccessButtonClass} hidden 2xl:inline-flex`}>
+            Acceso Administradores / Empresas
+          </a>
+          <ThemeToggle compact className="h-10 w-10 px-0 xl:h-10 xl:w-10" />
           <a
             href={createWhatsAppUrl("Hola, necesito urgencia sanitaria 24/7 en Región de Valparaíso.")}
             target="_blank"
@@ -169,6 +172,9 @@ export function SiteHeader() {
                   {item.label}
                 </a>
               ))}
+              <a href={adminAccessHref} className="block rounded-lg border border-sky-200 bg-sky-50 px-3 py-2 text-center text-sm font-black text-sky-950 hover:bg-white">
+                Acceso Administradores / Empresas
+              </a>
             </div>
             <div className="mt-3 border-t border-slate-200 pt-3">
               <p className="px-3 text-xs font-bold uppercase tracking-[0.18em] text-sky-700">Cobertura</p>
@@ -186,6 +192,7 @@ export function SiteHeader() {
               </div>
             </div>
             <div className="mt-3 grid gap-2">
+              <ThemeToggle className="w-full rounded-lg px-3 py-2 text-sm" />
               <a href="#terminos-servicio" className="rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-center text-sm font-bold text-amber-950">
                 Términos del servicio
               </a>

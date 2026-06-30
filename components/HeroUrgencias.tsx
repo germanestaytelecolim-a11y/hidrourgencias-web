@@ -7,14 +7,14 @@ import { GOOGLE_REVIEWS_URL, createWhatsAppUrl, siteConfig } from "@/lib/site-co
 const callHref = siteConfig.phoneHref;
 
 const defaultHeroSettings: CmsHomeSettings = {
-  heroTitle: "Disponibles 24/7 en la Región de Valparaíso",
-  heroSubtitle: "Urgencias sanitarias 24 horas con respuesta técnica",
+  heroTitle: "Destape de alcantarillado e hidrojet 24/7 en la Región de Valparaíso",
+  heroSubtitle: "No intentamos, solucionamos.",
   heroImage: "/images/logo-hidrourgencias.jpg",
   heroImageAlt: "Logo Hidrourgencias SpA",
-  primaryCtaText: "WhatsApp urgencia",
+  primaryCtaText: "WhatsApp urgente",
   primaryCtaUrl: "whatsapp:Urgencia sanitaria: necesito ayuda inmediata en la Región de Valparaíso",
-  secondaryCtaText: "Servicios sanitarios",
-  secondaryCtaUrl: "/#servicios",
+  secondaryCtaText: "Llamar ahora",
+  secondaryCtaUrl: callHref,
 };
 
 type HeroUrgenciasProps = {
@@ -37,6 +37,11 @@ export function HeroUrgencias({ settings }: HeroUrgenciasProps) {
   const hero = settings ?? defaultHeroSettings;
   const primaryHref = resolveCtaHref(hero.primaryCtaUrl, "Urgencia sanitaria: necesito ayuda inmediata en la Región de Valparaíso");
   const secondaryHref = hero.secondaryCtaUrl ? resolveCtaHref(hero.secondaryCtaUrl, "Necesito información sobre servicios sanitarios.") : "";
+  const heroBullets = [
+    "Atención prioritaria 24/7",
+    "Equipos RIDGID e hidrojet de alta presión",
+    "Diagnóstico, destape y verificación de flujo en terreno",
+  ];
 
   return (
     <section className="relative flex min-h-[88vh] items-center overflow-hidden bg-[#08385f]">
@@ -68,11 +73,19 @@ export function HeroUrgencias({ settings }: HeroUrgenciasProps) {
             </p>
 
             <p className="mt-6 max-w-[calc(100vw-2rem)] break-words text-sm leading-7 text-slate-100 sm:max-w-2xl sm:text-xl sm:leading-8">
-              Destape de alcantarillado, hidrojet 4000 PSI, videoinspección y mantención preventiva con criterio
-              profesional para edificios, comunidades, empresas y viviendas.
+              Respuesta técnica para rebalses, cámaras saturadas, WC tapados, redes verticales, horizontales y
+              emergencias sanitarias en edificios, empresas, restaurantes y viviendas.
             </p>
 
             <ServiceTermsNotice tone="dark" className="mt-7 max-w-[calc(100vw-2rem)] sm:max-w-3xl" />
+
+            <ul className="mt-6 grid max-w-[calc(100vw-2rem)] gap-3 text-sm font-bold leading-6 text-slate-50 sm:max-w-3xl sm:grid-cols-3">
+              {heroBullets.map((bullet) => (
+                <li key={bullet} className="rounded-2xl border border-white/15 bg-white/10 px-4 py-3">
+                  {bullet}
+                </li>
+              ))}
+            </ul>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <a

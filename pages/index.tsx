@@ -28,16 +28,14 @@ const siteUrl = "https://hidrourgencias.cl";
 const ogImage = "/images/hero-urgencia.jpg";
 
 const localBusinessSchema = {
-  "@context": "https://schema.org",
-  "@type": ["LocalBusiness", "Plumber"],
+  "@type": ["LocalBusiness", "ProfessionalService"],
   name: "Hidrourgencias SpA",
   slogan: "Urgencias sanitarias 24/7 con criterio técnico profesional",
   description:
-    "Servicio de destape de alcantarillado cerca de ti en la Región de Valparaíso, con atención inmediata 24/7 para urgencias sanitarias.",
+    "Empresa técnica especializada en evacuación sanitaria, alcantarillado, desagüe, hidrojet, videoinspección sanitaria, mantención preventiva y recuperación higiénico-sanitaria en la Región de Valparaíso.",
   url: siteUrl,
   image: `${siteUrl}${ogImage}`,
   telephone: "+56 9 4091 8672",
-  priceRange: "$$",
   areaServed: [
     "Viña del Mar",
     "Valparaíso",
@@ -89,6 +87,26 @@ const localBusinessSchema = {
   },
 };
 
+const organizationSchema = {
+  "@type": "Organization",
+  name: "Hidrourgencias SpA",
+  url: siteUrl,
+  logo: `${siteUrl}/images/logo-hidrourgencias.jpg`,
+  sameAs: localBusinessSchema.sameAs,
+};
+
+const websiteSchema = {
+  "@type": "WebSite",
+  name: "Hidrourgencias SpA",
+  url: siteUrl,
+  inLanguage: "es-CL",
+};
+
+const homeStructuredData = {
+  "@context": "https://schema.org",
+  "@graph": [localBusinessSchema, organizationSchema, websiteSchema],
+};
+
 type HomePageProps = {
   cmsContent: HomePageCmsContent;
 };
@@ -116,7 +134,7 @@ export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
 };
 
 export default function HomePage({ cmsContent }: HomePageProps) {
-  const businessSchemaJson = JSON.stringify(localBusinessSchema).replace(/</g, "\\u003c");
+  const businessSchemaJson = JSON.stringify(homeStructuredData).replace(/</g, "\\u003c");
   const floatingMessage = createWhatsAppUrl(
     "Hola, necesito atención inmediata por urgencia sanitaria en la Región de Valparaíso.",
   );
@@ -159,9 +177,6 @@ export default function HomePage({ cmsContent }: HomePageProps) {
       <HomePageContent cmsContent={cmsContent} />
       <ServiceTermsSection />
       <div className="fixed bottom-4 right-4 z-50 w-auto max-w-[calc(100vw-2rem)] sm:w-[17rem]">
-        <p className="mb-2 hidden h-10 items-center rounded-2xl border border-amber-200 bg-white px-3 py-2 text-[11px] font-bold leading-4 text-amber-950 shadow-lg sm:flex">
-          Al contactar aceptas los términos del servicio.
-        </p>
         <a
           href={floatingMessage}
           target="_blank"

@@ -5,6 +5,7 @@ import { GoogleAdsConversionTracking } from "@/components/google-ads-conversion-
 import { ServiceTermsSection } from "@/components/service-terms";
 import { SiteHeader } from "@/components/site-header";
 import { createWhatsAppUrl } from "@/lib/site-config";
+import { themeInitScript, themeToggleScript } from "@/lib/theme-scripts";
 
 import "./globals.css";
 
@@ -79,16 +80,14 @@ export const metadata: Metadata = {
 };
 
 const localBusinessSchema = {
-  "@context": "https://schema.org",
-  "@type": ["LocalBusiness", "Plumber"],
+  "@type": ["LocalBusiness", "ProfessionalService"],
   name: "Hidrourgencias SpA",
   slogan: "Urgencias sanitarias 24/7 con criterio técnico profesional",
   description:
-    "Servicio de destape de alcantarillado cerca de ti en la Región de Valparaíso, con atención inmediata 24/7 para urgencias sanitarias.",
+    "Empresa técnica especializada en evacuación sanitaria, alcantarillado, desagüe, hidrojet, videoinspección sanitaria, mantención preventiva y recuperación higiénico-sanitaria en la Región de Valparaíso.",
   url: siteUrl,
   image: `${siteUrl}${ogImage}`,
   telephone: "+56 9 4091 8672",
-  priceRange: "$$",
   areaServed: [
     "Viña del Mar",
     "Valparaíso",
@@ -140,19 +139,40 @@ const localBusinessSchema = {
   },
 };
 
+const organizationSchema = {
+  "@type": "Organization",
+  name: "Hidrourgencias SpA",
+  url: siteUrl,
+  logo: `${siteUrl}/images/logo-hidrourgencias.jpg`,
+  sameAs: localBusinessSchema.sameAs,
+};
+
+const websiteSchema = {
+  "@type": "WebSite",
+  name: "Hidrourgencias SpA",
+  url: siteUrl,
+  inLanguage: "es-CL",
+};
+
+const siteStructuredData = {
+  "@context": "https://schema.org",
+  "@graph": [localBusinessSchema, organizationSchema, websiteSchema],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const businessSchemaJson = JSON.stringify(localBusinessSchema).replace(/</g, "\\u003c");
+  const businessSchemaJson = JSON.stringify(siteStructuredData).replace(/</g, "\\u003c");
   const floatingMessage = createWhatsAppUrl(
     "Hola, necesito atención inmediata por urgencia sanitaria en la Región de Valparaíso.",
   );
 
   return (
-    <html lang="es-CL">
+    <html lang="es-CL" suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
@@ -164,9 +184,6 @@ export default function RootLayout({
         {children}
         <ServiceTermsSection />
         <div className="fixed bottom-4 right-4 z-50 w-[17rem] max-w-[calc(100vw-2rem)]">
-          <p className="mb-2 flex h-10 items-center rounded-2xl border border-amber-200 bg-white px-3 py-2 text-[11px] font-bold leading-4 text-amber-950 shadow-lg">
-            Al contactar aceptas los términos del servicio.
-          </p>
           <a
             href={floatingMessage}
             target="_blank"
@@ -179,6 +196,7 @@ export default function RootLayout({
           </a>
         </div>
         <GoogleAdsConversionTracking />
+        <script dangerouslySetInnerHTML={{ __html: themeToggleScript }} />
       </body>
     </html>
   );
