@@ -188,7 +188,7 @@ export default function RootLayout({
             href={floatingMessage}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex h-12 items-center gap-2 rounded-full bg-emerald-500 px-5 py-3 text-sm font-bold text-white shadow-2xl shadow-emerald-600/40 transition hover:bg-emerald-600"
+            className="hu-cta-primary inline-flex h-12 items-center gap-2 rounded-full px-5 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5"
             aria-label="Abrir WhatsApp de urgencias sanitarias"
           >
             <span className="h-2.5 w-2.5 rounded-full bg-white" aria-hidden="true" />

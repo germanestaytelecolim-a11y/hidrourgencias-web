@@ -16,10 +16,10 @@ const navItems = [
 ];
 
 const mailButtonClass =
-  "inline-flex items-center justify-center gap-2 rounded-full border border-sky-200 bg-white px-3.5 py-2 text-xs font-bold text-slate-950 shadow-sm shadow-slate-900/10 transition hover:-translate-y-0.5 hover:border-sky-300 hover:bg-sky-50 xl:px-4 xl:text-sm";
+  "inline-flex items-center justify-center gap-2 rounded-full border border-sky-200 bg-white px-3.5 py-2 text-xs font-bold text-slate-950 shadow-sm shadow-slate-900/10 transition hover:-translate-y-0.5 hover:border-sky-300 hover:bg-sky-50 hover:shadow-md xl:px-4 xl:text-sm";
 const adminAccessHref = "/acceso-administradores-empresas";
 const adminAccessButtonClass =
-  "inline-flex items-center justify-center rounded-full border border-sky-200 bg-sky-50 px-3.5 py-2 text-center text-xs font-black leading-tight text-sky-950 shadow-sm shadow-sky-950/10 transition hover:-translate-y-0.5 hover:border-sky-300 hover:bg-white xl:px-4";
+  "inline-flex items-center justify-center rounded-full border border-sky-200 bg-[linear-gradient(135deg,#eff8ff,#ffffff)] px-3.5 py-2 text-center text-xs font-black leading-tight text-sky-950 shadow-sm shadow-sky-950/10 transition hover:-translate-y-0.5 hover:border-sky-300 hover:bg-white hover:shadow-md xl:px-4";
 
 const coverageComunas = comunasSeo.slice(0, 7);
 const coverageSectors = comunasSeo.flatMap((comuna) =>
@@ -59,10 +59,10 @@ const coverageServices = [
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-50 border-b border-sky-100/90 bg-white/95 shadow-lg shadow-sky-950/10 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-sky-100/90 bg-white/95 shadow-[0_18px_44px_-34px_rgba(8,56,95,0.82)] backdrop-blur-xl">
       <div className="mx-auto flex w-full max-w-7xl items-center gap-3 px-4 py-2.5 sm:px-6">
         <a href="/" className="flex min-w-0 flex-1 items-center gap-3 lg:min-w-[22rem]">
-          <div className="relative h-14 w-14 flex-none overflow-hidden rounded-2xl border border-sky-100 bg-white p-1 shadow-lg shadow-sky-950/15 sm:h-16 sm:w-16 lg:h-[4.5rem] lg:w-[4.5rem]">
+          <div className="relative h-14 w-14 flex-none overflow-hidden rounded-2xl border border-sky-100 bg-white p-1 shadow-lg shadow-sky-950/15 ring-4 ring-sky-100/60 sm:h-16 sm:w-16 lg:h-[4.5rem] lg:w-[4.5rem]">
             <StaticPicture
               src="/images/logo-hidrourgencias.jpg"
               alt="Logo Hidrourgencias SpA"
@@ -165,7 +165,7 @@ export function SiteHeader() {
           <summary className="list-none rounded-xl border border-sky-200 bg-sky-50 px-3 py-2 text-sm font-semibold text-sky-950 [&::-webkit-details-marker]:hidden">
             Menu
           </summary>
-          <div className="absolute right-0 mt-2 max-h-[calc(100vh-6rem)] w-[min(22rem,calc(100vw-2rem))] overflow-y-auto rounded-2xl border border-sky-100 bg-white p-4 shadow-xl shadow-sky-950/20">
+          <div className="absolute right-0 mt-2 max-h-[calc(100vh-6rem)] w-[min(22rem,calc(100vw-2rem))] overflow-y-auto rounded-2xl border border-sky-100 bg-white p-4 shadow-2xl shadow-sky-950/25">
             <div className="space-y-1">
               {navItems.map((item) => (
                 <a key={item.href} href={item.href} className="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-sky-50 hover:text-sky-800">

@@ -54,6 +54,8 @@ const equipos = [
   },
 ];
 
+const methodSteps = ["Diagnóstico", "Intervención", "Verificación", "Respaldo"];
+
 type GaleriaOperativaProps = {
   equipmentItems?: CmsEquipmentItem[];
   galleryItems?: CmsGalleryEntry[];
@@ -81,26 +83,39 @@ export function GaleriaOperativa({ equipmentItems, galleryItems = [] }: GaleriaO
   });
 
   return (
-    <section className="bg-slate-950 py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-12 max-w-4xl">
-          <span className="inline-block text-sm font-semibold uppercase tracking-[0.22em] text-sky-300">
-            Tecnologia y equipamiento
-          </span>
-          <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-            Tecnología sanitaria para intervenir sin improvisar
-          </h2>
-          <p className="mt-4 text-base leading-8 text-slate-300">
-            El diferencial no está solo en llegar rápido. Está en llegar con el equipo correcto: máquinas seccionales
-            RIDGID, hidrojet de alta presión, videoinspección sanitaria y equipos de apoyo para extracción y sanitización.
-          </p>
+    <section className="hu-section-dark py-20 text-white">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-12 grid gap-8 lg:grid-cols-[0.9fr_0.72fr] lg:items-end">
+          <div className="max-w-4xl">
+            <span className="hu-badge rounded-full px-4 py-2 text-sm font-semibold uppercase tracking-[0.22em] text-sky-100">
+              Tecnologia y equipamiento
+            </span>
+            <h2 className="mt-5 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+              Tecnología sanitaria para intervenir sin improvisar
+            </h2>
+            <p className="mt-4 text-base leading-8 text-slate-300">
+              El diferencial no está solo en llegar rápido. Está en llegar con el equipo correcto: máquinas seccionales
+              RIDGID, hidrojet de alta presión, videoinspección sanitaria y equipos de apoyo para extracción y sanitización.
+            </p>
+          </div>
+
+          <div className="rounded-[1.75rem] border border-white/10 bg-white/10 p-5 shadow-[0_26px_70px_-46px_rgba(25,199,255,0.72)] backdrop-blur">
+            <p className="text-xs font-black uppercase tracking-[0.18em] text-cyan-100">Metodología técnica</p>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              {methodSteps.map((step, index) => (
+                <div key={step} className="hu-metric-chip rounded-2xl px-4 py-3">
+                  <p className="text-sm font-black text-white">{index + 1}. {step}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
           {visibleEquipment.map((equipo) => (
             <article
               key={equipo.nombre}
-              className="group overflow-hidden rounded-2xl border border-sky-500/35 bg-slate-900 shadow-lg shadow-slate-950/30 transition duration-300 hover:-translate-y-1 hover:border-sky-300 hover:bg-slate-900/80"
+              className="hu-gradient-border hu-card-lift group overflow-hidden rounded-2xl bg-slate-900 [--hu-card-bg:#0f172a]"
             >
               <div className="relative aspect-[4/3] overflow-hidden bg-slate-800">
                 <StaticPicture
@@ -121,7 +136,7 @@ export function GaleriaOperativa({ equipmentItems, galleryItems = [] }: GaleriaO
                   href={createWhatsAppUrl(`Hola, necesito evaluar uso de ${equipo.nombre} para una red sanitaria.`)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-5 inline-flex w-full items-center justify-center rounded-xl bg-emerald-500 px-4 py-3 text-sm font-bold text-white transition hover:bg-emerald-600"
+                  className="hu-cta-primary mt-5 inline-flex w-full items-center justify-center rounded-xl px-4 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5"
                 >
                   Consultar por WhatsApp
                 </a>
@@ -144,7 +159,7 @@ export function GaleriaOperativa({ equipmentItems, galleryItems = [] }: GaleriaO
               {galleryItems.slice(0, 6).map((item) => (
                 <article
                   key={item.slug}
-                  className="group overflow-hidden rounded-2xl border border-sky-500/35 bg-slate-900 shadow-lg shadow-slate-950/30 transition duration-300 hover:-translate-y-1 hover:border-sky-300"
+                  className="hu-gradient-border hu-card-lift group overflow-hidden rounded-2xl bg-slate-900 [--hu-card-bg:#0f172a]"
                 >
                   <div className="relative aspect-[4/3] overflow-hidden bg-slate-800">
                     <StaticPicture

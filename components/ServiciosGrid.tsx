@@ -156,6 +156,37 @@ const groupedServiceAreas = [
   },
 ];
 
+const areaVisualStyles = [
+  {
+    label: "Urgencia",
+    icon: Droplets,
+    iconClass: "bg-amber-100 text-amber-700 ring-amber-200",
+    badgeClass: "border-amber-200 bg-amber-50 text-amber-900",
+    railClass: "bg-amber-400",
+  },
+  {
+    label: "Preventivo",
+    icon: Shield,
+    iconClass: "bg-emerald-100 text-emerald-700 ring-emerald-200",
+    badgeClass: "border-emerald-200 bg-emerald-50 text-emerald-900",
+    railClass: "bg-emerald-500",
+  },
+  {
+    label: "Diagnóstico",
+    icon: Camera,
+    iconClass: "bg-cyan-100 text-cyan-700 ring-cyan-200",
+    badgeClass: "border-cyan-200 bg-cyan-50 text-cyan-900",
+    railClass: "bg-cyan-500",
+  },
+  {
+    label: "Higienización",
+    icon: Home,
+    iconClass: "bg-teal-100 text-teal-700 ring-teal-200",
+    badgeClass: "border-teal-200 bg-teal-50 text-teal-900",
+    railClass: "bg-teal-500",
+  },
+];
+
 type ServiciosGridProps = {
   services?: CmsFeaturedService[];
 };
@@ -191,29 +222,38 @@ export function ServiciosGrid({ services }: ServiciosGridProps) {
 
         <div className="grid gap-6 lg:grid-cols-2">
           {groupedServiceAreas.map((area, areaIndex) => {
-            const AreaIcon = [Droplets, Shield, Camera, Home][areaIndex];
+            const visual = areaVisualStyles[areaIndex] ?? areaVisualStyles[0];
+            const AreaIcon = visual.icon;
 
             return (
-              <article key={area.title} className="brand-card rounded-3xl p-6 sm:p-7">
+              <article key={area.title} className="hu-gradient-border hu-card-lift group rounded-3xl p-6 sm:p-7">
                 <div className="flex items-start gap-4">
-                  <div className="flex h-14 w-14 flex-none items-center justify-center rounded-2xl bg-white text-sky-700 shadow-sm">
+                  <div className={`flex h-14 w-14 flex-none items-center justify-center rounded-2xl shadow-sm ring-1 ${visual.iconClass}`}>
                     <AreaIcon className="h-6 w-6" />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-black leading-8 text-[#08385f]">{area.title}</h3>
+                    <span className={`inline-flex rounded-full border px-3 py-1 text-xs font-black uppercase tracking-[0.14em] ${visual.badgeClass}`}>
+                      {visual.label}
+                    </span>
+                    <h3 className="mt-3 text-2xl font-black leading-8 text-[#08385f]">{area.title}</h3>
                     <p className="mt-3 text-sm leading-7 text-slate-700">{area.description}</p>
                   </div>
                 </div>
 
                 <div className="mt-6 grid gap-2">
                   {area.services.map((item) => (
-                    <p key={item} className="rounded-2xl border border-sky-100 bg-white px-4 py-3 text-sm font-semibold leading-6 text-slate-700">
-                      {item}
+                    <p key={item} className="flex gap-3 rounded-2xl border border-sky-100 bg-white px-4 py-3 text-sm font-semibold leading-6 text-slate-700 shadow-sm">
+                      <span className={`mt-1.5 h-2 w-2 flex-none rounded-full ${visual.railClass}`} aria-hidden="true" />
+                      <span>{item}</span>
                     </p>
                   ))}
                 </div>
 
-                {area.note ? <p className="mt-5 rounded-2xl border border-emerald-100 bg-emerald-50 px-4 py-3 text-sm leading-7 text-slate-700">{area.note}</p> : null}
+                {area.note ? (
+                  <p className="mt-5 rounded-2xl border border-emerald-100 bg-emerald-50 px-4 py-3 text-sm font-semibold leading-7 text-slate-700 shadow-sm">
+                    {area.note}
+                  </p>
+                ) : null}
 
                 <div className="mt-6 flex flex-wrap gap-2">
                   {area.serviceHrefs.map((href) => {
@@ -227,7 +267,7 @@ export function ServiciosGrid({ services }: ServiciosGridProps) {
                       <a
                         key={`${area.title}-${href}`}
                         href={href}
-                        className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-4 py-2 text-sm font-bold text-sky-800 transition hover:-translate-y-0.5 hover:border-sky-300 hover:bg-white"
+                        className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-4 py-2 text-sm font-bold text-sky-800 shadow-sm transition hover:-translate-y-0.5 hover:border-sky-300 hover:bg-white hover:shadow-md"
                       >
                         {servicio.title}
                         <ArrowRight className="h-4 w-4" />

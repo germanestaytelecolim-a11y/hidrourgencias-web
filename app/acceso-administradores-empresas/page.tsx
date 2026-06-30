@@ -50,26 +50,18 @@ const companyCoordinationHref = createWhatsAppUrl(
   "Hola, necesito coordinar atención para empresa, comunidad, restaurante o administración con requerimiento sanitario.",
 );
 
+const operationalSignals = ["Trazabilidad operativa", "Informes técnicos", "Mantención preventiva", "Coordinación con administraciones"];
+
 export default function AccesoAdministradoresEmpresasPage() {
   return (
-    <main className="min-h-screen">
-      <section className="relative overflow-hidden bg-[linear-gradient(135deg,#082f4f_0%,#08385f_48%,#0e5f86_100%)] text-white">
-        <div className="absolute inset-0 opacity-15">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)",
-              backgroundSize: "34px 34px",
-            }}
-          />
-        </div>
-
+    <main className="min-h-screen bg-[linear-gradient(180deg,#f7fbff_0%,#eef8ff_44%,#ffffff_100%)]">
+      <section className="hu-technical-bg text-white">
         <div className="relative mx-auto grid max-w-7xl gap-8 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_0.72fr] lg:items-center lg:px-8 lg:py-20">
           <div>
-            <p className="inline-flex rounded-full border border-white/25 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.22em] text-sky-100">
+            <p className="hu-badge rounded-full px-4 py-2 text-xs font-bold uppercase tracking-[0.22em] text-sky-100">
               Clientes corporativos
             </p>
-            <h1 className="mt-5 max-w-4xl text-4xl font-black tracking-tight sm:text-5xl">
+            <h1 className="mt-5 max-w-4xl text-4xl font-black tracking-tight drop-shadow-[0_18px_40px_rgba(0,0,0,0.34)] sm:text-5xl">
               Acceso Administradores / Empresas
             </h1>
             <p className="mt-5 max-w-4xl text-lg font-semibold leading-8 text-sky-50">
@@ -84,7 +76,7 @@ export default function AccesoAdministradoresEmpresasPage() {
             <ServiceTermsNotice tone="dark" className="mt-7 max-w-4xl" />
           </div>
 
-          <div className="rounded-[2rem] border border-white/15 bg-white/10 p-5 shadow-[0_30px_80px_-44px_rgba(0,0,0,0.9)] backdrop-blur">
+          <div className="hu-gradient-border hu-card-lift rounded-[2rem] p-5 [--hu-card-bg:rgba(255,255,255,0.1)] backdrop-blur">
             <div className="rounded-[1.5rem] border border-sky-100/20 bg-slate-950/20 p-5">
               <Building2 className="h-10 w-10 text-sky-100" aria-hidden="true" />
               <p className="mt-5 text-sm font-bold uppercase tracking-[0.22em] text-sky-100">Continuidad operativa</p>
@@ -95,14 +87,22 @@ export default function AccesoAdministradoresEmpresasPage() {
                 Soporte orientado a administradores, comunidades, empresas y restaurantes que requieren diagnóstico,
                 metodología técnica y respaldo formal de trabajos ejecutados.
               </p>
+              <div className="mt-5 grid gap-2">
+                {operationalSignals.map((signal) => (
+                  <p key={signal} className="hu-metric-chip rounded-xl px-3 py-2 text-sm font-bold text-slate-100">
+                    {signal}
+                  </p>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-        <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-          <div>
+        <div className="hu-premium-panel rounded-[2rem] px-6 py-8 sm:px-8">
+          <div className="relative z-10 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+            <div>
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-sky-700">Coordinación técnica</p>
             <h2 className="mt-3 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">
               Coordinación técnica para clientes corporativos
@@ -112,14 +112,14 @@ export default function AccesoAdministradoresEmpresasPage() {
               técnicos, respaldo de trabajos ejecutados y coordinación operativa con administraciones, comunidades y
               empresas.
             </p>
-          </div>
+            </div>
 
-          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             {commercialCards.map((card) => {
               const Icon = card.icon;
 
               return (
-                <article key={card.title} className="brand-card rounded-2xl p-5">
+                <article key={card.title} className="hu-gradient-border hu-card-lift rounded-2xl p-5">
                   <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-sky-50 text-sky-800">
                     <Icon className="h-5 w-5" aria-hidden="true" />
                   </div>
@@ -128,13 +128,15 @@ export default function AccesoAdministradoresEmpresasPage() {
                 </article>
               );
             })}
+            </div>
           </div>
         </div>
       </section>
 
       <section className="brand-section px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
         <div className="relative z-10 mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.95fr_0.8fr] lg:items-start">
-          <div className="rounded-[2rem] border border-sky-100 bg-white p-6 shadow-[0_24px_70px_-45px_rgba(8,56,95,0.7)] sm:p-8">
+          <div className="hu-premium-panel rounded-[2rem] p-6 sm:p-8">
+            <div className="relative z-10">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-sky-700">Habilitación progresiva</p>
             <h2 className="mt-3 text-3xl font-black tracking-tight text-slate-950">
               Portal en etapa de habilitación para clientes corporativos
@@ -163,6 +165,7 @@ export default function AccesoAdministradoresEmpresasPage() {
                 Coordinar atención empresa
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </a>
+            </div>
             </div>
           </div>
 

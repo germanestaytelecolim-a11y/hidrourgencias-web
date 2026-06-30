@@ -284,8 +284,8 @@ function SocialIcon({ label }: { label: string }) {
 function SymptomsSection() {
   return (
     <section id="sintomas" className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:py-14">
-      <div className="rounded-[2rem] border border-sky-200 bg-white px-6 py-8 shadow-[0_24px_70px_-44px_rgba(8,56,95,0.55)] sm:px-10">
-        <div className="max-w-4xl">
+      <div className="hu-premium-panel rounded-[2rem] px-6 py-8 sm:px-10">
+        <div className="relative z-10 max-w-4xl">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-sky-700">Síntomas que requieren respuesta técnica</p>
           <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
             Si la red sanitaria falla, el tiempo de reacción importa
@@ -296,10 +296,10 @@ function SymptomsSection() {
           </p>
         </div>
 
-        <div className="mt-7 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <div className="relative z-10 mt-7 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {symptomItems.map((item) => (
-            <article key={item.title} className="rounded-2xl border border-sky-100 bg-sky-50 p-5">
-              <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white text-sky-700 shadow-sm">
+            <article key={item.title} className="hu-card-lift rounded-2xl border border-sky-100 bg-white p-5">
+              <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-amber-50 text-amber-700 shadow-sm ring-1 ring-amber-200/70">
                 <AlertTriangle className="h-5 w-5" />
               </div>
               <h3 className="mt-4 text-lg font-extrabold tracking-tight text-slate-950">{item.title}</h3>
@@ -315,28 +315,28 @@ function SymptomsSection() {
 function AntiPortfolioSection() {
   return (
     <section id="especialidad-sanitaria" className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:py-14">
-      <div className="grid gap-6 rounded-[2rem] border border-slate-200 bg-white px-6 py-8 shadow-md sm:px-10 lg:grid-cols-[0.95fr_1.05fr] lg:py-10">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-sky-700">Especialización operativa</p>
-          <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
+      <div className="hu-section-dark grid gap-6 rounded-[2rem] px-6 py-8 shadow-[0_28px_80px_-44px_rgba(8,56,95,0.88)] sm:px-10 lg:grid-cols-[0.95fr_1.05fr] lg:py-10">
+        <div className="relative z-10">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-sky-200">Especialización operativa</p>
+          <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
             Nuestra especialidad es la red sanitaria de alto impacto
           </h2>
-          <p className="mt-4 text-sm leading-8 text-slate-700 sm:text-base">
+          <p className="mt-4 text-sm leading-8 text-slate-300 sm:text-base">
             Para garantizar tiempos de respuesta rápidos, criterio técnico y calidad operativa, Hidrourgencias SpA
             concentra su trabajo en alcantarillado, desagüe, hidrojet, videoinspección sanitaria, mantención preventiva,
             revisión técnica de redes, recuperación de espacios afectados e higienización técnica.
           </p>
-          <p className="mt-5 text-base font-extrabold text-[#08385f]">
+          <p className="mt-5 rounded-2xl border border-cyan-200/20 bg-cyan-300/10 px-4 py-3 text-base font-extrabold text-cyan-50">
             No somos gasfitería básica. Somos especialistas en urgencias sanitarias, alcantarillado, desagüe, revisión
             técnica de redes, recuperación higiénico-sanitaria y continuidad operativa.
           </p>
         </div>
 
-        <div className="rounded-2xl border border-rose-100 bg-rose-50 p-5">
-          <h3 className="text-xl font-extrabold tracking-tight text-slate-950">Hidrourgencias SpA NO realiza:</h3>
+        <div className="relative z-10 rounded-2xl border border-amber-200/20 bg-white/10 p-5 backdrop-blur">
+          <h3 className="text-xl font-extrabold tracking-tight text-white">Hidrourgencias SpA NO realiza:</h3>
           <div className="mt-5 grid gap-3 sm:grid-cols-2">
             {antiPortfolioExclusions.map((item) => (
-              <p key={item} className="rounded-xl border border-white bg-white px-4 py-3 text-sm font-bold leading-6 text-slate-700">
+              <p key={item} className="rounded-xl border border-white/10 bg-white/10 px-4 py-3 text-sm font-bold leading-6 text-slate-100">
                 {item}
               </p>
             ))}
@@ -385,7 +385,7 @@ export default function HomePage({ cmsContent }: HomePageContentProps) {
   }).replace(/</g, "\\u003c");
 
   return (
-    <main className="min-h-screen text-slate-900">
+    <main className="min-h-screen bg-[radial-gradient(circle_at_8%_18%,rgba(25,199,255,0.12),transparent_30%),linear-gradient(180deg,#ffffff_0%,#f0f8ff_42%,#ffffff_100%)] text-slate-900">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: schema }} />
 
       <HeroUrgencias settings={cmsContent?.homeSettings} />
@@ -394,7 +394,8 @@ export default function HomePage({ cmsContent }: HomePageContentProps) {
       <AntiPortfolioSection />
 
       <section id="comunas" className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:py-16">
-        <div className="relative overflow-hidden rounded-[2rem] border border-sky-200/70 bg-white px-6 py-9 shadow-[0_24px_70px_-44px_rgba(8,56,95,0.55)] sm:px-10 sm:py-11">
+        <div className="hu-premium-panel rounded-[2rem] px-6 py-9 sm:px-10 sm:py-11">
+          <div className="relative z-10">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-sky-700">Comunas y sectores donde atendemos</p>
           <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">Cobertura territorial</h2>
           <p className="mt-4 max-w-4xl text-sm leading-8 text-slate-700 sm:text-base">
@@ -484,6 +485,7 @@ export default function HomePage({ cmsContent }: HomePageContentProps) {
               ))}
             </div>
           </details>
+          </div>
         </div>
       </section>
 
@@ -701,8 +703,8 @@ export default function HomePage({ cmsContent }: HomePageContentProps) {
       </section>
 
       <section id="contacto" className="mx-auto max-w-7xl px-4 pb-28 pt-10 sm:px-6 lg:pb-24 lg:pt-14">
-        <div className="rounded-[2rem] bg-slate-950 px-6 py-9 text-white shadow-[0_26px_58px_-24px_rgba(2,6,23,0.85)] sm:px-10 sm:py-11">
-          <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+        <div className="hu-section-dark rounded-[2rem] px-6 py-9 text-white shadow-[0_26px_58px_-24px_rgba(2,6,23,0.85)] sm:px-10 sm:py-11">
+          <div className="relative z-10 grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-sky-200">Contacto directo</p>
               <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">

@@ -17,11 +17,13 @@ export function AdminAccessDemoForm() {
     <form
       onSubmit={handleSubmit}
       autoComplete="off"
-      className="rounded-[2rem] border border-sky-100 bg-white p-5 shadow-[0_24px_70px_-45px_rgba(8,56,95,0.75)] sm:p-7"
+      className="hu-gradient-border hu-card-lift rounded-[2rem] p-5 sm:p-7"
       aria-describedby="admin-access-note"
     >
       <div className="mb-6">
-        <p className="text-xs font-bold uppercase tracking-[0.22em] text-sky-700">Portal demostrativo</p>
+        <p className="inline-flex rounded-full border border-sky-200 bg-sky-50 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-sky-800">
+          Portal demostrativo
+        </p>
         <h2 className="mt-2 text-2xl font-black tracking-tight text-slate-950">Ingreso corporativo</h2>
         <p className="mt-2 text-sm leading-7 text-slate-600">
           Acceso referencial en etapa de habilitación. No valida, almacena ni procesa credenciales reales.
@@ -36,7 +38,7 @@ export function AdminAccessDemoForm() {
             type="text"
             placeholder="Ingrese ID de cliente"
             autoComplete="off"
-            className="h-12 rounded-xl border border-sky-100 bg-white px-4 text-sm font-semibold text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-sky-400 focus:ring-4 focus:ring-sky-100"
+            className="hu-input h-12 rounded-xl px-4 text-sm font-semibold text-slate-900 outline-none transition placeholder:text-slate-400"
           />
         </label>
 
@@ -47,7 +49,7 @@ export function AdminAccessDemoForm() {
             type="text"
             placeholder="Nombre de cliente o comunidad"
             autoComplete="off"
-            className="h-12 rounded-xl border border-sky-100 bg-white px-4 text-sm font-semibold text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-sky-400 focus:ring-4 focus:ring-sky-100"
+            className="hu-input h-12 rounded-xl px-4 text-sm font-semibold text-slate-900 outline-none transition placeholder:text-slate-400"
           />
         </label>
 
@@ -58,14 +60,14 @@ export function AdminAccessDemoForm() {
             type="password"
             placeholder="Ingrese password"
             autoComplete="off"
-            className="h-12 rounded-xl border border-sky-100 bg-white px-4 text-sm font-semibold text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-sky-400 focus:ring-4 focus:ring-sky-100"
+            className="hu-input h-12 rounded-xl px-4 text-sm font-semibold text-slate-900 outline-none transition placeholder:text-slate-400"
           />
         </label>
       </div>
 
       <button
         type="submit"
-        className="mt-6 inline-flex w-full items-center justify-center rounded-xl bg-[#08385f] px-6 py-3.5 text-sm font-black text-white shadow-lg shadow-sky-950/20 transition hover:-translate-y-0.5 hover:bg-[#0e5f86] focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-sky-300"
+        className="mt-6 inline-flex w-full items-center justify-center rounded-xl bg-[linear-gradient(135deg,#08385f,#0e5f86)] px-6 py-3.5 text-sm font-black text-white shadow-lg shadow-sky-950/25 transition hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-sky-300"
       >
         Ingresar al portal
       </button>
