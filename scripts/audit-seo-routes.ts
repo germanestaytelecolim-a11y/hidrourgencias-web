@@ -308,6 +308,9 @@ async function main() {
     pageIdRedirect?.statusCode === 301
       ? null
       : "The /?page_id=12 redirect must use HTTP status 301.",
+    nextConfig.skipProxyUrlNormalize === true
+      ? null
+      : "Proxy URL normalization must remain disabled so Location stays absolute.",
     unrelatedPageIdRedirect === null ? null : "The legacy redirect must only match page_id=12.",
     campaignOnlyRedirect === null ? null : "Campaign parameters without page_id=12 must not redirect.",
     campaignPageIdRedirect?.destination ===

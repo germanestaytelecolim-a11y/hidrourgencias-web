@@ -144,6 +144,7 @@ const adminNoStoreHeader = {
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   compress: true,
+  skipProxyUrlNormalize: true,
   experimental: {
     inlineCss: true,
   },
