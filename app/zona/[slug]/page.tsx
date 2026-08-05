@@ -3,9 +3,11 @@ import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 import { notFound } from "next/navigation";
 
+import { LandingVisualHero } from "@/components/landing-visual-hero";
 import { ServiceTermsNotice } from "@/components/service-terms";
 import { getAllBlogPosts } from "@/lib/blog-data";
 import { getAllComunaLandings, getComunaLandingBySlug } from "@/lib/comuna-landings";
+import { getZoneVisualProfile } from "@/lib/landing-visuals";
 import { GOOGLE_REVIEWS_URL, buildCanonicalUrl, createWhatsAppUrl, siteConfig } from "@/lib/site-config";
 import { getAllServicios } from "@/lib/servicios";
 import { getZonaBySlug, getZonaSlugs } from "@/lib/zonas-detalle";
@@ -173,6 +175,11 @@ export default async function ZonaPage({ params }: Props) {
   const contextoZona = getContextoZona(zona.nombre, zona.comuna);
   const keywordVariations = getKeywordVariations(zona.nombre);
   const uniqueZonaParagraphs = getUniqueZonaParagraphs(zona.nombre, zona.comuna);
+  const visualProfile = getZoneVisualProfile(zona.slug);
+
+  if (!visualProfile) {
+    throw new Error(`Falta perfil visual para la zona ${zona.slug}.`);
+  }
 
   const zonaMessage = createWhatsAppUrl(`Urgencia sanitaria en ${zona.nombre}`);
   const evaluationMessage = createWhatsAppUrl(
@@ -204,28 +211,12 @@ export default async function ZonaPage({ params }: Props) {
         </Link>
       </div>
 
-      <section className="rounded-[2rem] border border-sky-200/30 bg-[linear-gradient(135deg,#082f4f_0%,#08385f_52%,#0e5f86_100%)] p-7 text-white shadow-[0_28px_65px_-30px_rgba(2,6,23,0.8)] sm:p-10">
-        <p className="inline-flex rounded-full border border-white/30 bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-sky-100">
-          Cobertura por zona
-        </p>
-        <h1 className="mt-4 max-w-4xl text-4xl font-extrabold tracking-tight sm:text-5xl">
-          {`Destape de alcantarillado en ${zona.nombre} - ${zona.comuna}`}
-        </h1>
-        <p className="mt-5 max-w-4xl text-base leading-8 text-slate-100 sm:text-lg">
-          En {zona.nombre}, {contextoZona}, las redes sanitarias suelen presentar obstrucciones por acumulacion de
-          grasas, sedimentos y residuos solidos.
-        </p>
-        <p className="mt-4 max-w-4xl text-base leading-8 text-slate-100 sm:text-lg">
-          Nuestro servicio en {zona.nombre} esta orientado a la resolucion de colapsos sanitarios, restitucion de
-          flujo y control de rebalses en sistemas domiciliarios y colectivos.
-        </p>
-        <p className="mt-4 max-w-4xl text-base leading-8 text-slate-100 sm:text-lg">{uniqueZonaParagraphs[0]}</p>
-        <p className="mt-4 max-w-4xl text-base leading-8 text-slate-100 sm:text-lg">
-          Atendemos {keywordVariations[0]}, {keywordVariations[1]}, {keywordVariations[2]} y{" "}
-          {keywordVariations[3]} con disponibilidad inmediata.
-        </p>
-        <ServiceTermsNotice tone="dark" className="mt-7 max-w-4xl" />
-        <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+      <LandingVisualHero
+        profile={visualProfile}
+        eyebrow="Cobertura por zona"
+        title={`Destape de alcantarillado en ${zona.nombre} - ${zona.comuna}`}
+        actions={
+          <>
           <a
             href={zonaMessage}
             target="_blank"
@@ -251,8 +242,24 @@ export default async function ZonaPage({ params }: Props) {
             <ExternalLink className="h-4 w-4 text-sky-600" />
             Resenas Google
           </a>
-        </div>
-      </section>
+          </>
+        }
+      >
+        <p>
+          En {zona.nombre}, {contextoZona}, las redes sanitarias suelen presentar obstrucciones por acumulacion de
+          grasas, sedimentos y residuos solidos.
+        </p>
+        <p>
+          Nuestro servicio en {zona.nombre} esta orientado a la resolucion de colapsos sanitarios, restitucion de
+          flujo y control de rebalses en sistemas domiciliarios y colectivos.
+        </p>
+        <p>{uniqueZonaParagraphs[0]}</p>
+        <p>
+          Atendemos {keywordVariations[0]}, {keywordVariations[1]}, {keywordVariations[2]} y{" "}
+          {keywordVariations[3]} con disponibilidad inmediata.
+        </p>
+        <ServiceTermsNotice tone="dark" className="mt-7 max-w-4xl" />
+      </LandingVisualHero>
 
       <section className="mt-9 grid gap-6 lg:grid-cols-2">
         <article className="brand-card rounded-3xl p-6 sm:p-8">

@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { ExternalLink, PhoneCall } from "lucide-react";
 import { notFound } from "next/navigation";
 
+import { LandingVisualHero } from "@/components/landing-visual-hero";
 import { ServiceTermsNotice } from "@/components/service-terms";
 import { getAllBlogPosts } from "@/lib/blog-data";
 import { getAllComunaLandings } from "@/lib/comuna-landings";
+import { getServiceVisualProfile } from "@/lib/landing-visuals";
 import { GOOGLE_REVIEWS_URL, createWhatsAppUrl, siteConfig } from "@/lib/site-config";
 import { buildServicioMetadata, getAllServicios, getServicioBySlug, getServicioSlugs } from "@/lib/servicios";
 import { getZonaBySlug, getZonaSlugs } from "@/lib/zonas-detalle";
@@ -60,6 +61,11 @@ export default async function ServicioPage({ params }: Props) {
     .filter((zone): zone is NonNullable<ReturnType<typeof getZonaBySlug>> => zone !== undefined);
   const serviceMessage = createWhatsAppUrl(`Necesito ${servicio.navLabel.toLowerCase()} en la Region de Valparaiso.`);
   const callHref = siteConfig.phoneHref;
+  const visualProfile = getServiceVisualProfile(servicio.slug);
+
+  if (!visualProfile) {
+    throw new Error(`Falta perfil visual para el servicio ${servicio.slug}.`);
+  }
 
   return (
     <main className="mx-auto min-h-screen max-w-6xl px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
@@ -69,16 +75,12 @@ export default async function ServicioPage({ params }: Props) {
         </Link>
       </div>
 
-      <section className="overflow-hidden rounded-[2rem] border border-sky-200/30 bg-[linear-gradient(130deg,#082f4f_0%,#08385f_52%,#0e5f86_100%)] text-white shadow-[0_28px_65px_-30px_rgba(2,6,23,0.8)]">
-        <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch">
-          <div className="p-7 sm:p-10">
-            <p className="inline-flex rounded-full border border-white/30 bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-sky-100">
-              Servicio especializado
-            </p>
-            <h1 className="mt-4 max-w-4xl text-4xl font-extrabold tracking-tight sm:text-5xl">{servicio.h1}</h1>
-            <p className="mt-5 max-w-4xl text-base leading-8 text-slate-100 sm:text-lg">{servicio.summary}</p>
-            <ServiceTermsNotice tone="dark" className="mt-7 max-w-4xl" />
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+      <LandingVisualHero
+        profile={visualProfile}
+        eyebrow="Servicio especializado"
+        title={servicio.h1}
+        actions={
+          <>
               <a
                 href={serviceMessage}
                 target="_blank"
@@ -109,24 +111,12 @@ export default async function ServicioPage({ params }: Props) {
                 <ExternalLink className="h-4 w-4 text-sky-600" />
                 Opiniones Google
               </a>
-            </div>
-          </div>
-          <div className="relative min-h-[260px] lg:min-h-full">
-            <Image
-              src={servicio.image}
-              alt={servicio.h1}
-              fill
-              sizes="(min-width: 1024px) 46vw, 100vw"
-              className="object-cover"
-              preload
-              fetchPriority="high"
-              loading="eager"
-              decoding="async"
-            />
-            <div className="absolute inset-0 bg-slate-950/20" />
-          </div>
-        </div>
-      </section>
+          </>
+        }
+      >
+        <p>{servicio.summary}</p>
+        <ServiceTermsNotice tone="dark" className="mt-7 max-w-4xl" />
+      </LandingVisualHero>
 
       <section className="mt-9 grid gap-6 lg:grid-cols-2">
         <article className="brand-card rounded-3xl p-6 sm:p-8">

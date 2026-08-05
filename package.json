@@ -7,7 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "audit:seo": "tsx scripts/audit-seo-routes.ts"
+    "audit:seo": "tsx scripts/audit-seo-routes.ts",
+    "audit:landings:baseline": "tsx scripts/capture-landing-baseline.ts",
+    "audit:landings:compare": "tsx scripts/compare-landing-baseline.ts",
+    "audit:landings:matrix": "tsx scripts/report-landing-visual-matrix.ts",
+    "assets:zones": "tsx scripts/import-zone-visuals.ts",
+    "assets:services": "tsx scripts/build-service-visuals.ts"
   },
   "dependencies": {
     "@types/js-yaml": "^4.0.9",

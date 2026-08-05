@@ -3,6 +3,7 @@ import { Manrope, Rajdhani } from "next/font/google";
 
 import { GoogleAdsConversionTracking } from "@/components/google-ads-conversion-tracking";
 import { ServiceTermsSection } from "@/components/service-terms";
+import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { createWhatsAppUrl } from "@/lib/site-config";
 import { themeInitScript, themeToggleScript } from "@/lib/theme-scripts";
@@ -183,7 +184,8 @@ export default function RootLayout({
         <SiteHeader />
         {children}
         <ServiceTermsSection />
-        <div className="fixed bottom-4 right-4 z-50 w-[17rem] max-w-[calc(100vw-2rem)]">
+        <SiteFooter />
+        <div className="hu-floating-whatsapp fixed bottom-4 right-4 z-50 w-[17rem] max-w-[calc(100vw-2rem)]">
           <a
             href={floatingMessage}
             target="_blank"
