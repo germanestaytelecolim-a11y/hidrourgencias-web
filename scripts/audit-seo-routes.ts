@@ -6,6 +6,7 @@ import nextConfig from "../next.config";
 import { getBlogSlugs } from "../lib/blog-data";
 import { getCaseStudySlugs } from "../lib/case-studies";
 import { getComunaPaths } from "../lib/comuna-landings";
+import { getLegacyPageIdRedirect, legacyPageIdRedirect } from "../lib/legacy-url-redirects";
 import {
   MAX_PROGRAMMATIC_ROUTES,
   getAllSeoRoutes,
@@ -292,6 +293,29 @@ async function main() {
       destinationPath: redirect.destinationPath,
     }));
 
+  const pageIdRedirect = getLegacyPageIdRedirect("/", new URLSearchParams("page_id=12"));
+  const unrelatedPageIdRedirect = getLegacyPageIdRedirect("/", new URLSearchParams("page_id=13"));
+  const campaignOnlyRedirect = getLegacyPageIdRedirect("/", new URLSearchParams("utm_source=google"));
+  const campaignPageIdRedirect = getLegacyPageIdRedirect(
+    "/",
+    new URLSearchParams("page_id=12&utm_source=google&gclid=test-click&fbclid=test-social"),
+  );
+  const pageIdRedirectIssues = [
+    pageIdRedirect ? null : "Missing redirect for /?page_id=12.",
+    pageIdRedirect?.destination === "https://hidrourgencias.cl/"
+      ? null
+      : "The /?page_id=12 redirect must point directly to https://hidrourgencias.cl/.",
+    pageIdRedirect?.statusCode === 301
+      ? null
+      : "The /?page_id=12 redirect must use HTTP status 301.",
+    unrelatedPageIdRedirect === null ? null : "The legacy redirect must only match page_id=12.",
+    campaignOnlyRedirect === null ? null : "Campaign parameters without page_id=12 must not redirect.",
+    campaignPageIdRedirect?.destination ===
+    "https://hidrourgencias.cl/?utm_source=google&gclid=test-click&fbclid=test-social"
+      ? null
+      : "The legacy redirect must remove only page_id and preserve campaign parameters.",
+  ].filter((issue): issue is string => issue !== null);
+
   const expectedCanonicals = knownRoutes.map((route) => ({
     path: route.path,
     url: buildCanonicalUrl(route.path),
@@ -373,6 +397,11 @@ async function main() {
       chains: redirectChains,
       destinationsMissingBuild: redirectDestinationsMissingBuild,
       criticalMap: redirects,
+      pageId12: {
+        redirect: legacyPageIdRedirect,
+        campaignRedirect: campaignPageIdRedirect,
+        issues: pageIdRedirectIssues,
+      },
     },
     robots: {
       expectedUserAgent: "*",
@@ -389,6 +418,7 @@ async function main() {
       redirectLoops: redirectLoops.length,
       redirectChains: redirectChains.length,
       redirectDestinationsMissingBuild: redirectDestinationsMissingBuild.length,
+      pageIdRedirectIssues: pageIdRedirectIssues.length,
     },
   };
 
@@ -423,7 +453,8 @@ async function main() {
     redirectSourcesInSitemap.length > 0 ||
     redirectLoops.length > 0 ||
     redirectChains.length > 0 ||
-    redirectDestinationsMissingBuild.length > 0;
+    redirectDestinationsMissingBuild.length > 0 ||
+    pageIdRedirectIssues.length > 0;
 
   if (hasBlockingIssues) {
     process.exitCode = 1;
