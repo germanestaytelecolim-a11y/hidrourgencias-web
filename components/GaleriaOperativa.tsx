@@ -1,56 +1,87 @@
-import { StaticPicture } from "@/components/static-picture";
+import Image from "next/image";
 import type { CmsEquipmentItem, CmsGalleryEntry } from "@/lib/cms-content";
 import { createWhatsAppUrl } from "@/lib/site-config";
 
 const equipos = [
   {
-    src: "/images/PRINCIPAL/WhatsApp Image 2026-05-19 at 3.36.38 PM.jpeg",
-    nombre: "RIDGID K-50",
+    src: "/images/equipos/maquina-seccional-compacta.webp",
+    nombre: "Destape mecánico para redes interiores",
     sirve: "Destape compacto para redes interiores, desagües, WC, lavamanos, lavaplatos y urinarios.",
     beneficios: "Permite trabajar en espacios reducidos con precisión y menor intervención.",
     cuando: "Ideal para obstrucciones domiciliarias, comerciales o tramos de menor diámetro.",
+    alt: "Máquina seccional compacta para destape de redes interiores",
   },
   {
-    src: "/images/PRINCIPAL/WhatsApp Image 2026-05-24 at 3.30.50 AM.jpeg",
-    nombre: "RIDGID K-1500",
+    src: "/images/servicios/heroes/destape-horizontales.webp",
+    nombre: "RIDGID K-1500A",
     sirve: "Destape profesional de colectores principales, cámaras y redes horizontales.",
     beneficios: "Entrega fuerza mecánica para obstrucciones severas, sólidos y redes de mayor diámetro.",
     cuando: "Solicítalo ante cámaras saturadas, colectores sin flujo o rebalses en tramos principales.",
+    alt: "Equipo RIDGID K-1500A operando en una red horizontal",
   },
   {
-    src: "/images/PRINCIPAL/WhatsApp Image 2026-05-24 at 3.54.35 AM.jpeg",
+    src: "/images/servicios/heroes/hidrojet.webp",
     nombre: "Hidrojet de alta presión",
     sirve: "Limpieza hidrodinámica de redes con grasa, sarro, sedimentos y residuos adheridos.",
     beneficios: "Recupera capacidad hidráulica y reduce obstrucciones recurrentes.",
     cuando: "Recomendado para mantención preventiva, redes colapsadas o tramos con baja evacuación.",
+    alt: "Equipo hidrojet de alta presión en una intervención sanitaria",
   },
   {
-    src: "/images/PRINCIPAL/WhatsApp Image 2026-05-15 at 10.19.09 PM.jpeg",
+    src: "/images/servicios/heroes/analisis-tecnico-propiedad-redes-sanitarias.webp",
     nombre: "Videoinspección sanitaria",
     sirve: "Diagnóstico visual de fisuras, contrapendientes, raíces, sedimentos y deformaciones.",
     beneficios: "Permite decidir con evidencia antes o después del destape.",
     cuando: "Solicítala si el problema es recurrente, incierto o requiere respaldo técnico.",
+    alt: "Sistema de videoinspección con cámara, carrete y monitor",
   },
   {
-    src: "/images/hero-motobomba.jpg",
+    src: "/images/servicios/heroes/motobombas-extraccion-aguas.webp",
     nombre: "Motobombas",
     sirve: "Extracción de aguas acumuladas en emergencias sanitarias, cámaras, subterráneos y espacios técnicos.",
     beneficios: "Ayuda a contener inundaciones y recuperar condiciones operativas con mayor rapidez.",
     cuando: "Útil ante rebalses, lluvias, cámaras colapsadas o acumulación crítica de aguas.",
+    alt: "Motobomba utilizada para extracción de aguas acumuladas",
   },
   {
-    src: "/images/trabajo-3.jpg",
+    src: "/images/servicios/heroes/asesoria-mantenimiento-integral-redes-sanitarias.webp",
     nombre: "Herramientas de diagnóstico",
     sirve: "Revisión técnica de puntos sanitarios, cámaras, artefactos y tramos con pérdida de flujo.",
     beneficios: "Reduce intervenciones innecesarias y orienta la maniobra correcta.",
     cuando: "Recomendado antes de trabajos complejos o cuando hay reincidencia del problema.",
+    alt: "Técnico revisando planos e instrumentos de diagnóstico sanitario",
   },
   {
-    src: "/images/servicios/default (2).jpg",
+    src: "/images/servicios/heroes/limpieza-higienizacion-sanitizacion.webp",
     nombre: "Sanitización e higienización",
     sirve: "Limpieza, control de olores y recuperación de espacios afectados por aguas servidas o residuos.",
     beneficios: "Protege habitabilidad, operación y continuidad posterior a una contingencia sanitaria.",
     cuando: "Necesario después de rebalses, inundaciones o exposición a residuos sanitarios.",
+    alt: "Técnico con elementos de protección realizando sanitización",
+  },
+  {
+    src: "/images/equipos/bomba-sumergible.webp",
+    nombre: "Bomba sumergible",
+    sirve: "Extracción localizada de aguas en pozos, cámaras y espacios inundados.",
+    beneficios: "Opera bajo el nivel del agua y permite evacuar acumulaciones en puntos de acceso reducido.",
+    cuando: "Indicada para achique controlado en recintos técnicos y emergencias con agua acumulada.",
+    alt: "Bomba sumergible instalada para extracción de agua",
+  },
+  {
+    src: "/images/equipos/aspiradora-industrial-wet-dry.webp",
+    nombre: "Aspiradora industrial",
+    sirve: "Retiro controlado de líquidos y residuos húmedos después de una intervención sanitaria.",
+    beneficios: "Facilita la limpieza del área sin dispersar residuos ni humedad remanente.",
+    cuando: "Se utiliza como apoyo en terminaciones, recuperación de recintos y limpieza técnica.",
+    alt: "Aspiradora industrial para líquidos y residuos húmedos",
+  },
+  {
+    src: "/images/equipos/aplicacion-amonio-cuaternario.webp",
+    nombre: "Amonio cuaternario",
+    sirve: "Aplicación controlada de solución sanitizante en superficies previamente limpiadas.",
+    beneficios: "Complementa el protocolo de higienización con dosificación y elementos de protección adecuados.",
+    cuando: "Corresponde después de retirar residuos y limpiar áreas afectadas por una contingencia.",
+    alt: "Aplicación controlada de sanitizante con elementos de protección",
   },
 ];
 
@@ -63,7 +94,9 @@ type GaleriaOperativaProps = {
 
 export function GaleriaOperativa({ equipmentItems, galleryItems = [] }: GaleriaOperativaProps) {
   const visibleEquipment = (equipmentItems?.length ? equipmentItems : equipos).map((item, index) => {
-    const fallback = equipos[index % equipos.length];
+    const fallback = "title" in item
+      ? equipos.find((candidate) => candidate.nombre === item.title) ?? equipos[index % equipos.length]
+      : equipos[index % equipos.length];
 
     if ("image" in item) {
       return {
@@ -78,7 +111,7 @@ export function GaleriaOperativa({ equipmentItems, galleryItems = [] }: GaleriaO
 
     return {
       ...item,
-      alt: `${item.nombre} para destape de alcantarillado y urgencias sanitarias`,
+      alt: item.alt,
     };
   });
 
@@ -118,11 +151,12 @@ export function GaleriaOperativa({ equipmentItems, galleryItems = [] }: GaleriaO
               className="hu-gradient-border hu-card-lift group overflow-hidden rounded-2xl bg-slate-900 [--hu-card-bg:#0f172a]"
             >
               <div className="relative aspect-[4/3] overflow-hidden bg-slate-800">
-                <StaticPicture
+                <Image
                   src={equipo.src}
                   alt={equipo.alt}
                   width={640}
                   height={480}
+                  sizes="(max-width: 768px) calc(100vw - 32px), (max-width: 1280px) 50vw, 25vw"
                   loading="lazy"
                   className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                 />
@@ -162,11 +196,12 @@ export function GaleriaOperativa({ equipmentItems, galleryItems = [] }: GaleriaO
                   className="hu-gradient-border hu-card-lift group overflow-hidden rounded-2xl bg-slate-900 [--hu-card-bg:#0f172a]"
                 >
                   <div className="relative aspect-[4/3] overflow-hidden bg-slate-800">
-                    <StaticPicture
+                    <Image
                       src={item.image}
                       alt={item.alt}
                       width={640}
                       height={480}
+                      sizes="(max-width: 768px) calc(100vw - 32px), (max-width: 1280px) 50vw, 33vw"
                       loading="lazy"
                       className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                     />

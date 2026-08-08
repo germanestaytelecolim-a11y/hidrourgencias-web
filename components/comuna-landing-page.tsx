@@ -16,6 +16,7 @@ import {
 
 import { Galeria } from "@/components/Galeria";
 import { ServiceTermsNotice } from "@/components/service-terms";
+import { TerritorialLandingHero } from "@/components/territorial-landing-hero";
 import type { ComunaLandingData } from "@/lib/comuna-landings";
 import { GOOGLE_REVIEWS_URL, createMailToUrl, createWhatsAppUrl, serviceCatalog, siteConfig } from "@/lib/site-config";
 import { getAllServicios } from "@/lib/servicios";
@@ -31,14 +32,20 @@ const mailButtonClass =
   "inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-bold text-black shadow-sm shadow-slate-900/10 transition hover:border-slate-400 hover:bg-slate-50";
 
 export function ComunaLandingPage({ landing, allLandings }: Props) {
+  const { presentation } = landing;
   const linksToOtherCommunes = allLandings.filter((item) => item.slug !== landing.slug).slice(0, 7);
   const linkedServices = getAllServicios();
+  const displayedServices =
+    landing.slug === "hidrojet-concon"
+      ? serviceCatalog.filter((service) => service.href === "/servicios/hidrojet")
+      : serviceCatalog;
   const showSeoGallery =
     landing.slug === "destape-alcantarillado-vina-del-mar" || landing.slug === "destape-alcantarillado-valparaiso";
   const zoneCoverageTargets = getZonasDetalleByLandingSlug(landing.slug);
   const hasProgrammaticZones = zoneCoverageTargets.length > 0;
   const coverageZones = zoneCoverageTargets.length > 0 ? zoneCoverageTargets.map((zone) => zone.nombre) : landing.nearbyZones;
   const mainLandingHref = `/${landing.slug}`;
+  const coverageServiceLabel = `${presentation.coverageServiceName.charAt(0).toUpperCase()}${presentation.coverageServiceName.slice(1)}`;
 
   const faqSchema = JSON.stringify({
     "@context": "https://schema.org",
@@ -56,7 +63,7 @@ export function ComunaLandingPage({ landing, allLandings }: Props) {
   const serviceSchema = JSON.stringify({
     "@context": "https://schema.org",
     "@type": "Service",
-    serviceType: "Destape de alcantarillado y urgencias sanitarias",
+    serviceType: presentation.schemaServiceType,
     areaServed: [landing.comuna, ...coverageZones],
     provider: {
       "@type": "LocalBusiness",
@@ -68,23 +75,48 @@ export function ComunaLandingPage({ landing, allLandings }: Props) {
     description: landing.metaDescription,
   }).replace(/</g, "\\u003c");
 
+  const breadcrumbSchema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Inicio",
+        item: `${siteConfig.siteUrl}/`,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: presentation.serviceName,
+        item: `${siteConfig.siteUrl}/${landing.slug}`,
+      },
+    ],
+  }).replace(/</g, "\\u003c");
+
   return (
     <main className="mx-auto min-h-screen max-w-6xl px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: faqSchema }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serviceSchema }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbSchema }} />
 
-      <div className="mb-6">
+      <nav aria-label="Migas de pan" className="mb-6 flex items-center gap-2 text-sm">
         <Link href="/" className="inline-flex items-center text-sm font-semibold text-sky-700 hover:text-sky-800">
-          {"\u2190"} Volver al inicio
+          Inicio
         </Link>
-      </div>
+        <ChevronRight className="h-4 w-4 text-slate-400" aria-hidden="true" />
+        <span className="font-semibold text-slate-700">{presentation.serviceName}</span>
+      </nav>
 
+      {landing.visual ? (
+        <TerritorialLandingHero landing={landing} />
+      ) : (
       <section className="relative overflow-hidden rounded-[2rem] border border-sky-200/30 bg-[linear-gradient(140deg,#082f4f_0%,#08385f_52%,#0e5f86_100%)] p-6 text-white shadow-[0_30px_70px_-32px_rgba(2,6,23,0.8)] sm:p-10">
         <div className="pointer-events-none absolute -right-12 top-8 h-52 w-52 opacity-10 sm:h-64 sm:w-64">
           <Image src="/images/logo-hidrourgencias.jpg" alt="" fill sizes="220px" className="object-contain" />
         </div>
         <p className="inline-flex rounded-full border border-white/25 bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.23em] text-sky-100">
-          Solucion sanitaria en terreno
+          {presentation.schemaServiceType}
         </p>
         <h1 className="mt-5 max-w-4xl text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">{landing.h1}</h1>
         <div className="relative mt-6 space-y-5 text-base leading-8 text-slate-100 sm:text-lg">
@@ -104,7 +136,7 @@ export function ComunaLandingPage({ landing, allLandings }: Props) {
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center rounded-full bg-emerald-500 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-emerald-700/30 transition hover:bg-emerald-600"
           >
-            WhatsApp urgencia sanitaria
+            {presentation.primaryCtaLabel}
           </a>
           <a
             href={createWhatsAppUrl(landing.ctaMidMessage)}
@@ -112,7 +144,7 @@ export function ComunaLandingPage({ landing, allLandings }: Props) {
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center rounded-full bg-sky-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-sky-700"
           >
-            Cotizar mantencion preventiva
+            {presentation.secondaryCtaLabel}
           </a>
           <a
             href={createMailToUrl()}
@@ -132,11 +164,12 @@ export function ComunaLandingPage({ landing, allLandings }: Props) {
           </a>
         </div>
       </section>
+      )}
 
       <section className="brand-card mt-9 rounded-3xl p-6 sm:p-8">
         <p className="text-xs font-semibold uppercase tracking-[0.22em] text-sky-700">Diagnostico del problema</p>
         <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
-          Rebalses, malos olores, drenaje lento y urgencias sanitarias en {landing.comuna}
+          {presentation.problemHeading}
         </h2>
         <p className="mt-5 text-base leading-8 text-slate-700 sm:text-lg">{landing.problemSummary}</p>
         <div className="mt-6 grid gap-3 md:grid-cols-2">
@@ -151,13 +184,13 @@ export function ComunaLandingPage({ landing, allLandings }: Props) {
       <section className="brand-card mt-9 rounded-3xl p-6 sm:p-8">
         <p className="text-xs font-semibold uppercase tracking-[0.22em] text-sky-700">Servicios disponibles</p>
         <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
-          Cobertura completa de servicios sanitarios en {landing.comuna}
+          {presentation.servicesHeading}
         </h2>
         <p className="mt-5 text-base leading-8 text-slate-700 sm:text-lg">
-          En esta comuna resolvemos destape de alcantarillado, desagues, hidrojet, mantencion preventiva, videoinspeccion y urgencias 24/7 bajo una misma metodologia de trabajo.
+          {presentation.servicesIntro}
         </p>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
-          {serviceCatalog.map((service, index) => {
+          {displayedServices.map((service, index) => {
             const Icon = serviceIcons[index % serviceIcons.length];
             return (
               <article key={service.title} className="rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4 transition hover:border-sky-300 hover:bg-white">
@@ -243,7 +276,7 @@ export function ComunaLandingPage({ landing, allLandings }: Props) {
         <article className="rounded-3xl border border-slate-200 bg-slate-950 p-6 text-white shadow-md sm:p-8">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-sky-200">Bloque tecnico</p>
           <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
-            Hidrojet 4000 PSI, equipos RIDGID y diagnostico profesional
+            {presentation.technicalHeading}
           </h2>
           <div className="mt-5 space-y-5 text-sm leading-8 text-slate-200 sm:text-base">
             {landing.technicalParagraphs.map((paragraph) => (
@@ -267,7 +300,7 @@ export function ComunaLandingPage({ landing, allLandings }: Props) {
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-xl bg-emerald-500 px-5 py-3 text-sm font-bold text-white transition hover:bg-emerald-600"
             >
-              WhatsApp urgencia sanitaria
+              {presentation.primaryCtaLabel}
             </a>
             <a
               href={createWhatsAppUrl(landing.ctaMidMessage)}
@@ -275,7 +308,7 @@ export function ComunaLandingPage({ landing, allLandings }: Props) {
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-xl bg-sky-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-sky-700"
             >
-              Cotizar mantencion preventiva
+              {presentation.secondaryCtaLabel}
             </a>
             <a
               href={createWhatsAppUrl("Hola, solicito evaluacion tecnica para definir plan de trabajo sanitario.")}
@@ -321,8 +354,8 @@ export function ComunaLandingPage({ landing, allLandings }: Props) {
             <p key={paragraph}>{paragraph}</p>
           ))}
           <p>
-            Servicio de destape de alcantarillado cerca de ti en {landing.comuna}, con cobertura inmediata en sectores
-            clave para urgencias sanitarias 24 horas.
+            Servicio de {presentation.coverageServiceName} en {landing.comuna}, con coordinacion tecnica en sectores
+            cercanos y revision previa de los antecedentes del caso.
           </p>
         </div>
 
@@ -335,7 +368,7 @@ export function ComunaLandingPage({ landing, allLandings }: Props) {
                   href={`/zona/${zone.slug}`}
                   className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm font-semibold text-slate-700 transition hover:border-sky-300 hover:bg-white hover:text-sky-800"
                 >
-                  {`Destape en ${zone.nombre}`}
+                  {`${coverageServiceLabel} en ${zone.nombre}`}
                 </Link>
               ))}
             </div>
@@ -343,16 +376,16 @@ export function ComunaLandingPage({ landing, allLandings }: Props) {
             <div className="mt-8 space-y-6">
               {zoneCoverageTargets.map((zone) => {
                 const zoneMessage = createWhatsAppUrl(
-                  `Hola, necesito destape urgente de alcantarillado en ${zone.nombre}, ${landing.comuna}.`,
+                  `Hola, necesito ${presentation.coverageServiceName} en ${zone.nombre}, ${landing.comuna}.`,
                 );
 
                 return (
                   <article key={zone.slug} className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
                     <h3 className="text-xl font-extrabold tracking-tight text-slate-950">
-                      {`Destape de alcantarillado en ${zone.nombre}`}
+                      {`${coverageServiceLabel} en ${zone.nombre}`}
                     </h3>
                     <p className="mt-3 text-sm leading-7 text-slate-700 sm:text-base">
-                      {`Servicio de destape de alcantarillado en ${zone.nombre}, con atencion 24/7 para obstrucciones, rebalses y mantenimiento preventivo de redes sanitarias. Ejecutamos destape de desagues en ${zone.nombre} con apoyo hidrojet y diagnostico tecnico en terreno.`}
+                      {`Coordinamos ${presentation.coverageServiceName} en ${zone.nombre} con diagnostico tecnico, seleccion de equipo y verificacion del resultado segun el alcance de esta landing.`}
                     </p>
                     <p className="mt-3 text-sm leading-7 text-slate-700 sm:text-base">
                       {zone.contextNote}
@@ -361,7 +394,7 @@ export function ComunaLandingPage({ landing, allLandings }: Props) {
                       {`${zone.networkNote} ${zone.issueNote} ${zone.clientNote}`}
                     </p>
                     <p className="mt-3 text-sm leading-7 text-slate-700 sm:text-base">
-                      {`Atendemos destape de desagues en ${zone.nombre}, destape de bano en ${zone.nombre} y servicio hidrojet en ${zone.nombre}, con respuesta urgente cerca de ti para continuidad operacional.`}
+                      {`La cobertura de ${presentation.coverageServiceName} en ${zone.nombre} considera accesos, condicion de red y continuidad operativa del inmueble.`}
                     </p>
                     <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
                       <a
@@ -445,7 +478,7 @@ export function ComunaLandingPage({ landing, allLandings }: Props) {
               href={`/${item.slug}`}
               className="inline-flex items-center justify-between rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4 text-sm font-bold text-slate-900 transition hover:border-sky-300 hover:bg-white"
             >
-              <span>{`destape de alcantarillado en ${item.comuna}`}</span>
+              <span>{item.presentation.serviceName}</span>
               <ChevronRight className="h-4 w-4 text-sky-700" />
             </Link>
           ))}
@@ -473,11 +506,10 @@ export function ComunaLandingPage({ landing, allLandings }: Props) {
       <section className="mt-9 rounded-[2rem] border border-slate-200 bg-slate-950 p-7 text-white shadow-md sm:p-10">
         <p className="text-xs font-semibold uppercase tracking-[0.22em] text-sky-200">Cierre de atencion</p>
         <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
-          Respuesta inmediata para urgencias sanitarias en {landing.comuna}
+          {presentation.closingHeading}
         </h2>
         <p className="mt-4 max-w-4xl text-sm leading-8 text-slate-200 sm:text-base">
-          Si necesitas destape de alcantarillado, desagues, hidrojet, mantencion preventiva o videoinspeccion sanitaria,
-          activa atencion inmediata. Nuestro equipo prioriza casos con rebalse activo y continuidad comercial comprometida.
+          {presentation.closingParagraph}
         </p>
         <ServiceTermsNotice tone="dark" className="mt-5 max-w-4xl" />
         <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
@@ -487,7 +519,7 @@ export function ComunaLandingPage({ landing, allLandings }: Props) {
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center rounded-full bg-emerald-500 px-6 py-3 text-sm font-bold text-white transition hover:bg-emerald-600"
           >
-            WhatsApp urgencia 24/7
+            {presentation.finalCtaLabel}
           </a>
           <a
             href={siteConfig.phoneHref}

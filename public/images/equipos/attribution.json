@@ -1,0 +1,62 @@
+[
+  {
+    "slug": "maquina-seccional-compacta",
+    "file": "/images/equipos/maquina-seccional-compacta.webp",
+    "sourceType": "imagegen",
+    "generator": "OpenAI ImageGen",
+    "generatedAt": "2026-08-06",
+    "generatedFor": "Hidrourgencias SpA",
+    "destination": "Home, tarjeta Destape mecanico para redes interiores",
+    "promptSummary": "Maquina seccional compacta generica y sin marca, preparada para intervenir un desague interior con guantes y cable profesional.",
+    "status": "generated",
+    "license": "Recurso original generado para Hidrourgencias SpA; sujeto a los terminos de uso de OpenAI.",
+    "modifications": "Recorte 3:2, redimensionado a 1200 x 800 px y conversion WebP para uso web.",
+    "integrityStatement": "No muestra marcas, modelos, texto incrustado, personas identificables ni ubicaciones reales.",
+    "safetyReview": "Aprobado: guantes visibles y operacion representada sin exposicion sanitaria."
+  },
+  {
+    "slug": "bomba-sumergible",
+    "file": "/images/equipos/bomba-sumergible.webp",
+    "sourceType": "imagegen",
+    "generator": "OpenAI ImageGen",
+    "generatedAt": "2026-08-06",
+    "generatedFor": "Hidrourgencias SpA",
+    "destination": "Home, tarjeta Bomba sumergible",
+    "promptSummary": "Bomba sumergible profesional generica extrayendo agua acumulada desde un pozo tecnico, con manguera y cable dispuestos de forma controlada.",
+    "status": "generated",
+    "license": "Recurso original generado para Hidrourgencias SpA; sujeto a los terminos de uso de OpenAI.",
+    "modifications": "Recorte 3:2, redimensionado a 1200 x 800 px y conversion WebP para uso web.",
+    "integrityStatement": "No muestra marcas, texto incrustado, personas identificables ni ubicaciones reales.",
+    "safetyReview": "Aprobado: bomba, descarga y alimentacion se representan en una instalacion tecnica controlada."
+  },
+  {
+    "slug": "aspiradora-industrial-wet-dry",
+    "file": "/images/equipos/aspiradora-industrial-wet-dry.webp",
+    "sourceType": "imagegen",
+    "generator": "OpenAI ImageGen",
+    "generatedAt": "2026-08-06",
+    "generatedFor": "Hidrourgencias SpA",
+    "destination": "Home, tarjeta Aspiradora industrial",
+    "promptSummary": "Aspiradora industrial wet/dry generica recuperando agua residual en un area de servicio, con tecnico equipado y conexion electrica elevada.",
+    "status": "generated",
+    "license": "Recurso original generado para Hidrourgencias SpA; sujeto a los terminos de uso de OpenAI.",
+    "modifications": "Correccion de seguridad electrica, recorte 3:2, redimensionado a 1200 x 800 px y conversion WebP para uso web.",
+    "integrityStatement": "No muestra marcas, texto incrustado, personas identificables ni ubicaciones reales.",
+    "safetyReview": "Aprobado tras retirar el cable del piso mojado y mantener la conexion en un punto elevado y seco."
+  },
+  {
+    "slug": "aplicacion-amonio-cuaternario",
+    "file": "/images/equipos/aplicacion-amonio-cuaternario.webp",
+    "sourceType": "imagegen",
+    "generator": "OpenAI ImageGen",
+    "generatedAt": "2026-08-06",
+    "generatedFor": "Hidrourgencias SpA",
+    "destination": "Home, tarjeta Amonio cuaternario",
+    "promptSummary": "Tecnico con EPP aplicando de manera controlada una solucion preparada de amonio cuaternario sobre superficies limpias mediante pulverizador generico de baja presion.",
+    "status": "generated",
+    "license": "Recurso original generado para Hidrourgencias SpA; sujeto a los terminos de uso de OpenAI.",
+    "modifications": "Recorte 3:2, redimensionado a 1200 x 800 px y conversion WebP para uso web.",
+    "integrityStatement": "No muestra marcas, etiquetas falsas, texto incrustado, personas identificables ni ubicaciones reales.",
+    "safetyReview": "Aprobado: EPP completo, aplicacion dirigida y ausencia de mezcla o recipientes quimicos abiertos."
+  }
+]

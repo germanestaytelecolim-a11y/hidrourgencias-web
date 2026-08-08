@@ -1,0 +1,114 @@
+[
+  {
+    "file": "/images/servicios/heroes/destape-camaras-inspeccion.webp",
+    "status": "corporate-owned",
+    "rightsRecord": "/images/servicios/heroes/attribution.json#destape-camaras-inspeccion",
+    "usedOn": ["/destape-alcantarillado-valparaiso"],
+    "purpose": "Hero territorial de Valparaiso"
+  },
+  {
+    "file": "/images/servicios/heroes/destape-edificios.webp",
+    "status": "corporate-owned",
+    "rightsRecord": "/images/servicios/heroes/attribution.json#destape-edificios",
+    "usedOn": ["/destape-alcantarillado-vina-del-mar"],
+    "purpose": "Hero territorial de Vina del Mar"
+  },
+  {
+    "file": "/images/servicios/heroes/hidrojet.webp",
+    "status": "corporate-owned",
+    "rightsRecord": "/images/servicios/heroes/attribution.json#hidrojet",
+    "usedOn": ["/hidrojet-concon", "/#tecnologia-y-equipamiento", "/#casos-tecnicos"],
+    "purpose": "Hero de hidrojet, tarjeta de equipo y caso tecnico"
+  },
+  {
+    "file": "/images/servicios/heroes/destape-artefactos-sanitarios.webp",
+    "status": "corporate-owned",
+    "rightsRecord": "/images/servicios/heroes/attribution.json#destape-artefactos-sanitarios",
+    "usedOn": ["/destape-alcantarillado-villa-alemana"],
+    "purpose": "Hero territorial residencial de Villa Alemana"
+  },
+  {
+    "file": "/images/servicios/heroes/destape-horizontales.webp",
+    "status": "corporate-owned",
+    "rightsRecord": "/images/servicios/heroes/attribution.json#destape-horizontales",
+    "usedOn": ["/destape-alcantarillado-quilpue", "/#tecnologia-y-equipamiento", "/#casos-tecnicos"],
+    "purpose": "Hero territorial, equipo RIDGID K-1500A y caso tecnico"
+  },
+  {
+    "file": "/images/servicios/heroes/destape-verticales.webp",
+    "status": "corporate-owned",
+    "rightsRecord": "/images/servicios/heroes/attribution.json#destape-verticales",
+    "usedOn": ["/#casos-tecnicos"],
+    "purpose": "Caso tecnico de destape de verticales"
+  },
+  {
+    "file": "/images/servicios/heroes/mantencion-preventiva-redes.webp",
+    "status": "corporate-owned",
+    "rightsRecord": "/images/servicios/heroes/attribution.json#mantencion-preventiva-redes",
+    "usedOn": ["/#casos-tecnicos"],
+    "purpose": "Caso tecnico de mantencion preventiva"
+  },
+  {
+    "file": "/images/servicios/heroes/destape-alcantarillado.webp",
+    "status": "corporate-owned",
+    "rightsRecord": "/images/servicios/heroes/attribution.json#destape-alcantarillado",
+    "usedOn": ["/#casos-tecnicos"],
+    "purpose": "Caso tecnico de emergencia sanitaria"
+  },
+  {
+    "file": "/images/servicios/heroes/motobombas-extraccion-aguas.webp",
+    "status": "corporate-owned",
+    "rightsRecord": "/images/servicios/heroes/attribution.json#motobombas-extraccion-aguas",
+    "usedOn": ["/#tecnologia-y-equipamiento"],
+    "purpose": "Tarjeta de motobombas"
+  },
+  {
+    "file": "/images/servicios/heroes/analisis-tecnico-propiedad-redes-sanitarias.webp",
+    "status": "generated",
+    "rightsRecord": "/images/servicios/heroes/attribution.json#analisis-tecnico-propiedad-redes-sanitarias",
+    "usedOn": ["/#tecnologia-y-equipamiento", "/#casos-tecnicos"],
+    "purpose": "Videoinspeccion y caso tecnico de diagnostico"
+  },
+  {
+    "file": "/images/servicios/heroes/asesoria-mantenimiento-integral-redes-sanitarias.webp",
+    "status": "generated",
+    "rightsRecord": "/images/servicios/heroes/attribution.json#asesoria-mantenimiento-integral-redes-sanitarias",
+    "usedOn": ["/#tecnologia-y-equipamiento"],
+    "purpose": "Tarjeta de herramientas de diagnostico"
+  },
+  {
+    "file": "/images/servicios/heroes/limpieza-higienizacion-sanitizacion.webp",
+    "status": "generated",
+    "rightsRecord": "/images/servicios/heroes/attribution.json#limpieza-higienizacion-sanitizacion",
+    "usedOn": ["/#tecnologia-y-equipamiento"],
+    "purpose": "Tarjeta de sanitizacion e higienizacion"
+  },
+  {
+    "file": "/images/equipos/maquina-seccional-compacta.webp",
+    "status": "generated",
+    "rightsRecord": "/images/equipos/attribution.json#maquina-seccional-compacta",
+    "usedOn": ["/#tecnologia-y-equipamiento"],
+    "purpose": "Tarjeta de destape mecanico para redes interiores"
+  },
+  {
+    "file": "/images/equipos/bomba-sumergible.webp",
+    "status": "generated",
+    "rightsRecord": "/images/equipos/attribution.json#bomba-sumergible",
+    "usedOn": ["/#tecnologia-y-equipamiento"],
+    "purpose": "Tarjeta de bomba sumergible"
+  },
+  {
+    "file": "/images/equipos/aspiradora-industrial-wet-dry.webp",
+    "status": "generated",
+    "rightsRecord": "/images/equipos/attribution.json#aspiradora-industrial-wet-dry",
+    "usedOn": ["/#tecnologia-y-equipamiento"],
+    "purpose": "Tarjeta de aspiradora industrial"
+  },
+  {
+    "file": "/images/equipos/aplicacion-amonio-cuaternario.webp",
+    "status": "generated",
+    "rightsRecord": "/images/equipos/attribution.json#aplicacion-amonio-cuaternario",
+    "usedOn": ["/#tecnologia-y-equipamiento"],
+    "purpose": "Tarjeta de aplicacion de amonio cuaternario"
+  }
+]

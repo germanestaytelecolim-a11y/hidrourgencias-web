@@ -1,0 +1,32 @@
+export const emergencyAlertModalConfig = {
+  enabled: true,
+  sessionStorageKey: "hidrourgencias_alerta_roja_2026",
+  issuedAt: "2026",
+  excludedPathPrefixes: ["/admin", "/cms", "/api"],
+  excludedExactPaths: ["/acceso-administradores-empresas"],
+  content: {
+    title: "🚨 ALERTA ROJA EN LA REGIÓN DE VALPARAÍSO",
+    paragraphs: [
+      "Hidrourgencias SpA se encuentra desplegado en terreno atendiendo una alta demanda de emergencias sanitarias.",
+      "Cada urgencia será evaluada según su nivel de criticidad para gestionar asistencia técnica a la brevedad posible.",
+      "Agradecemos su comprensión.",
+    ],
+    warningText: "Nuestra disponibilidad está temporalmente limitada.",
+    companyName: "Hidrourgencias SpA",
+    closingText: "Urgencias sanitarias 24/7",
+    confirmLabel: "Entendido",
+    closeLabel: "Cerrar comunicado de alerta roja",
+  },
+  colors: {
+    overlay: "rgba(2, 6, 23, 0.78)",
+    modalBackground: "#061827",
+    modalBorder: "#0e5f86",
+    corporateBlue: "#0e5f86",
+    corporateBlueHover: "#0b74a5",
+    lightBlue: "#7dd3fc",
+    emergencyRed: "#ff5a5f",
+    emergencyRedDark: "#b91c1c",
+    white: "#f8fbff",
+    mutedText: "#d8e9f7",
+  },
+} as const;

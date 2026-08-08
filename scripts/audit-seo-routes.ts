@@ -5,10 +5,15 @@ import sitemap, { getSitemapPriority, getSitemapRouteSpecs, type SitemapRouteKin
 import nextConfig from "../next.config";
 import { getBlogSlugs } from "../lib/blog-data";
 import { getCaseStudySlugs } from "../lib/case-studies";
-import { getComunaPaths } from "../lib/comuna-landings";
+import { getAllComunaLandings, getComunaPaths } from "../lib/comuna-landings";
 import { getLegacyPageIdRedirect, legacyPageIdRedirect } from "../lib/legacy-url-redirects";
 import {
   MAX_PROGRAMMATIC_ROUTES,
+  buildProgrammaticCtaLabel,
+  buildProgrammaticWhatsAppMessage,
+  buildSeoH1,
+  buildSeoMetadata,
+  buildSeoRouteContent,
   getAllSeoRoutes,
   getPrioritySeoRoutes,
   reservedRootSlugs,
@@ -34,6 +39,319 @@ type ManualIndexationLevel = {
   title: string;
   paths: string[];
 };
+
+type SeoContentEntry = {
+  path: string;
+  title: string;
+  h1: string;
+  description: string;
+  headings: string[];
+  paragraphs: string[];
+  faqQuestions: string[];
+  faqAnswers: string[];
+  ctas: string[];
+};
+
+type ContentDuplicateGroup = {
+  value: string;
+  paths: string[];
+};
+
+type SimilarityPair = {
+  pathA: string;
+  pathB: string;
+  score: number;
+};
+
+const MIN_REPEATED_SENTENCE_WORDS = 8;
+const CONTENT_NGRAM_SIZE = 5;
+const CONTENT_SIMILARITY_THRESHOLD = 0.9;
+
+const seoContentBaseline = {
+  source: "Medicion local previa a la correccion editorial del 2026-08-04.",
+  landings: 844,
+  duplicateTitleGroups: 2,
+  duplicateH1Groups: 2,
+  duplicateMetaDescriptionGroups: 2,
+  exactParagraphGroups: 580,
+  repeatedSentenceGroups: 569,
+  duplicateFaqQuestionGroups: 128,
+  duplicateFaqAnswerGroups: 223,
+  identicalHeadingSequenceGroups: 1,
+  defectivePhraseOccurrences: 153,
+};
+
+function normalizeContent(value: string) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+function countWords(value: string) {
+  const normalized = normalizeContent(value);
+  return normalized ? normalized.split(" ").length : 0;
+}
+
+function splitSentences(value: string) {
+  const protectedAbbreviations = value.replace(/\b(Av|Sr|Sra|Dr|Dra)\./g, "$1<dot>");
+
+  return protectedAbbreviations
+    .split(/[.!?]+/)
+    .map((sentence) => sentence.replaceAll("<dot>", ".").trim())
+    .filter(Boolean);
+}
+
+function findContentDuplicateGroups(values: Array<{ path: string; value: string }>): ContentDuplicateGroup[] {
+  const groups = new Map<string, { value: string; paths: Set<string> }>();
+
+  for (const item of values) {
+    const normalized = normalizeContent(item.value);
+    if (!normalized) {
+      continue;
+    }
+
+    const group = groups.get(normalized) ?? { value: item.value.trim(), paths: new Set<string>() };
+    group.paths.add(item.path);
+    groups.set(normalized, group);
+  }
+
+  return Array.from(groups.values())
+    .filter((group) => group.paths.size > 1)
+    .map((group) => ({ value: group.value, paths: Array.from(group.paths).sort() }))
+    .sort((a, b) => b.paths.length - a.paths.length || a.value.localeCompare(b.value));
+}
+
+function getMetadataText(value: unknown) {
+  return typeof value === "string" ? value : "";
+}
+
+function getSeoContentEntries(): SeoContentEntry[] {
+  const comunaEntries = getAllComunaLandings().map<SeoContentEntry>((landing) => ({
+    path: `/${landing.slug}`,
+    title: landing.metaTitle,
+    h1: landing.h1,
+    description: landing.metaDescription,
+    headings: [
+      landing.presentation.problemHeading,
+      landing.presentation.servicesHeading,
+      landing.presentation.technicalHeading,
+      ...landing.procedureSteps.map((step) => step.title),
+      landing.presentation.closingHeading,
+    ],
+    paragraphs: [
+      ...landing.heroParagraphs,
+      landing.problemSummary,
+      ...landing.technicalParagraphs,
+      ...landing.procedureSteps.map((step) => step.description),
+      ...landing.coverageParagraphs,
+      landing.clientParagraph,
+    ],
+    faqQuestions: landing.faq.map((item) => item.question),
+    faqAnswers: landing.faq.map((item) => item.answer),
+    ctas: [
+      landing.presentation.primaryCtaLabel,
+      landing.presentation.secondaryCtaLabel,
+      landing.presentation.finalCtaLabel,
+      landing.ctaPrimaryMessage,
+      landing.ctaMidMessage,
+      landing.ctaFinalMessage,
+    ],
+  }));
+
+  const programmaticEntries = getAllSeoRoutes().map<SeoContentEntry>((route) => {
+    const metadata = buildSeoMetadata(route);
+    const content = buildSeoRouteContent(route);
+
+    return {
+      path: `/${route.slug}`,
+      title: getMetadataText(metadata.title),
+      h1: buildSeoH1(route),
+      description: getMetadataText(metadata.description),
+      headings: [
+        content.localHeading,
+        content.problemHeading,
+        content.whenToRequestHeading,
+        content.procedureHeading,
+        content.equipmentHeading,
+        content.nearbyCoverageHeading,
+        content.preventionHeading,
+        content.ctaHeading,
+      ],
+      paragraphs: [
+        ...content.introParagraphs,
+        ...content.localParagraphs,
+        content.problemIntro,
+        ...content.whenToRequestItems,
+        content.procedureIntro,
+        content.equipmentIntro,
+        content.equipmentRecommendation,
+        content.nearbyCoverageParagraph,
+        ...content.preventionParagraphs,
+        content.ctaParagraph,
+      ],
+      faqQuestions: content.faq.map((item) => item.question),
+      faqAnswers: content.faq.map((item) => item.answer),
+      ctas: [
+        buildProgrammaticCtaLabel(route),
+        buildProgrammaticWhatsAppMessage(route),
+        content.ctaHeading,
+        content.ctaParagraph,
+      ],
+    };
+  });
+
+  return [...comunaEntries, ...programmaticEntries];
+}
+
+function buildWordNgrams(value: string, size: number) {
+  const words = normalizeContent(value).split(" ").filter(Boolean);
+  const ngrams = new Set<string>();
+
+  for (let index = 0; index <= words.length - size; index += 1) {
+    ngrams.add(words.slice(index, index + size).join(" "));
+  }
+
+  return ngrams;
+}
+
+function getContentSimilarity(entries: SeoContentEntry[]) {
+  const documents = entries.map((entry) => ({
+    path: entry.path,
+    ngrams: buildWordNgrams(
+      [
+        entry.title,
+        entry.h1,
+        entry.description,
+        ...entry.headings,
+        ...entry.paragraphs,
+        ...entry.faqQuestions,
+        ...entry.faqAnswers,
+        ...entry.ctas,
+      ].join(" "),
+      CONTENT_NGRAM_SIZE,
+    ),
+  }));
+  const excessivePairs: SimilarityPair[] = [];
+  let maximum: SimilarityPair | null = null;
+
+  for (let leftIndex = 0; leftIndex < documents.length; leftIndex += 1) {
+    for (let rightIndex = leftIndex + 1; rightIndex < documents.length; rightIndex += 1) {
+      const left = documents[leftIndex];
+      const right = documents[rightIndex];
+      const smaller = left.ngrams.size <= right.ngrams.size ? left.ngrams : right.ngrams;
+      const larger = left.ngrams.size <= right.ngrams.size ? right.ngrams : left.ngrams;
+      let intersection = 0;
+
+      for (const ngram of smaller) {
+        if (larger.has(ngram)) {
+          intersection += 1;
+        }
+      }
+
+      const union = left.ngrams.size + right.ngrams.size - intersection;
+      const score = union === 0 ? 0 : intersection / union;
+      const pair = {
+        pathA: left.path,
+        pathB: right.path,
+        score: Number(score.toFixed(4)),
+      };
+
+      if (maximum === null || score > maximum.score) {
+        maximum = pair;
+      }
+
+      if (score >= CONTENT_SIMILARITY_THRESHOLD) {
+        excessivePairs.push(pair);
+      }
+    }
+  }
+
+  return {
+    maximum,
+    excessivePairs: excessivePairs.sort((a, b) => b.score - a.score),
+  };
+}
+
+function auditSeoContent() {
+  const entries = getSeoContentEntries();
+  const titleDuplicates = findContentDuplicateGroups(entries.map((entry) => ({ path: entry.path, value: entry.title })));
+  const h1Duplicates = findContentDuplicateGroups(entries.map((entry) => ({ path: entry.path, value: entry.h1 })));
+  const descriptionDuplicates = findContentDuplicateGroups(
+    entries.map((entry) => ({ path: entry.path, value: entry.description })),
+  );
+  const exactParagraphDuplicates = findContentDuplicateGroups(
+    entries.flatMap((entry) =>
+      entry.paragraphs
+        .filter((paragraph) => countWords(paragraph) >= MIN_REPEATED_SENTENCE_WORDS)
+        .map((paragraph) => ({ path: entry.path, value: paragraph })),
+    ),
+  );
+  const repeatedSentences = findContentDuplicateGroups(
+    entries.flatMap((entry) =>
+      [...entry.paragraphs, ...entry.faqAnswers]
+        .flatMap(splitSentences)
+        .filter((sentence) => countWords(sentence) >= MIN_REPEATED_SENTENCE_WORDS)
+        .map((sentence) => ({ path: entry.path, value: sentence })),
+    ),
+  );
+  const faqQuestionDuplicates = findContentDuplicateGroups(
+    entries.flatMap((entry) => entry.faqQuestions.map((value) => ({ path: entry.path, value }))),
+  );
+  const faqAnswerDuplicates = findContentDuplicateGroups(
+    entries.flatMap((entry) => entry.faqAnswers.map((value) => ({ path: entry.path, value }))),
+  );
+  const headingSequenceDuplicates = findContentDuplicateGroups(
+    entries.map((entry) => ({ path: entry.path, value: entry.headings.join(" > ") })),
+  );
+  const defectivePhrasePaths = entries
+    .filter((entry) =>
+      [...entry.paragraphs, ...entry.faqAnswers].some((value) =>
+        normalizeContent(value).includes("retorno de aguas servidas retorno drenaje lento"),
+      ),
+    )
+    .map((entry) => entry.path);
+  const similarity = getContentSimilarity(entries);
+
+  return {
+    method: {
+      scope: "Contenido SEO principal generado; excluye navegacion, footer y avisos legales globales.",
+      sentenceMinimumWords: MIN_REPEATED_SENTENCE_WORDS,
+      similarity: `${CONTENT_NGRAM_SIZE}-gramas de palabras con Jaccard`,
+      similarityThreshold: CONTENT_SIMILARITY_THRESHOLD,
+      globalExceptions: [],
+    },
+    baseline: seoContentBaseline,
+    current: {
+      landings: entries.length,
+      duplicateTitleGroups: titleDuplicates.length,
+      duplicateH1Groups: h1Duplicates.length,
+      duplicateMetaDescriptionGroups: descriptionDuplicates.length,
+      exactParagraphGroups: exactParagraphDuplicates.length,
+      repeatedSentenceGroups: repeatedSentences.length,
+      duplicateFaqQuestionGroups: faqQuestionDuplicates.length,
+      duplicateFaqAnswerGroups: faqAnswerDuplicates.length,
+      identicalHeadingSequenceGroups: headingSequenceDuplicates.length,
+      defectivePhraseOccurrences: defectivePhrasePaths.length,
+      excessiveSimilarityPairs: similarity.excessivePairs.length,
+      maximumPairwiseSimilarity: similarity.maximum,
+    },
+    failures: {
+      duplicateTitles: titleDuplicates,
+      duplicateH1s: h1Duplicates,
+      duplicateMetaDescriptions: descriptionDuplicates,
+      exactParagraphs: exactParagraphDuplicates,
+      repeatedSentences,
+      duplicateFaqQuestions: faqQuestionDuplicates,
+      duplicateFaqAnswers: faqAnswerDuplicates,
+      identicalHeadingSequences: headingSequenceDuplicates,
+      defectivePhrasePaths,
+      excessiveSimilarityPairs: similarity.excessivePairs,
+    },
+  };
+}
 
 const reportsDir = join(process.cwd(), "reports");
 const seoAuditReportPath = join(reportsDir, "seo-audit.json");
@@ -228,6 +546,7 @@ async function main() {
   const sitemapPathSet = new Set(sitemapPaths);
   const sitemapSpecByPath = new Map(sitemapSpecs.map((spec) => [normalizeCanonicalPath(spec.path), spec]));
   const redirects = nextConfig.redirects ? await nextConfig.redirects() : [];
+  const contentUniqueness = auditSeoContent();
 
   const rootDirectories = getRootDirectories();
   const reserved = new Set<string>([...reservedRootSlugs, ...rootDirectories]);
@@ -257,30 +576,33 @@ async function main() {
     .map((path) => ({ path, url: buildCanonicalUrl(path) }));
 
   const exactRedirects = redirects.filter((redirect) => !isPatternPath(redirect.source));
-  const redirectSources = exactRedirects.map((redirect) => normalizeCanonicalPath(redirect.source));
+  const unconditionalExactRedirects = exactRedirects.filter(
+    (redirect) => !("has" in redirect && redirect.has?.length) && !("missing" in redirect && redirect.missing?.length),
+  );
+  const redirectSources = unconditionalExactRedirects.map((redirect) => normalizeCanonicalPath(redirect.source));
   const redirectSourceSet = new Set(redirectSources);
-  const redirectSourcesInSitemap = exactRedirects
+  const redirectSourcesInSitemap = unconditionalExactRedirects
     .filter((redirect) => sitemapPathSet.has(normalizeCanonicalPath(redirect.source)))
     .map((redirect) => ({
       source: redirect.source,
       destination: redirect.destination,
       sourceUrl: buildCanonicalUrl(redirect.source),
     }));
-  const redirectLoops = exactRedirects
+  const redirectLoops = unconditionalExactRedirects
     .map((redirect) => ({
       source: normalizeCanonicalPath(redirect.source),
       destination: redirect.destination,
       destinationPath: destinationPath(redirect.destination),
     }))
     .filter((redirect) => redirect.destinationPath !== null && redirect.source === redirect.destinationPath);
-  const redirectChains = exactRedirects
+  const redirectChains = unconditionalExactRedirects
     .map((redirect) => ({
       source: normalizeCanonicalPath(redirect.source),
       destination: redirect.destination,
       destinationPath: destinationPath(redirect.destination),
     }))
     .filter((redirect) => redirect.destinationPath !== null && redirectSourceSet.has(redirect.destinationPath));
-  const redirectDestinationsMissingBuild = exactRedirects
+  const redirectDestinationsMissingBuild = unconditionalExactRedirects
     .map((redirect) => ({
       source: redirect.source,
       destination: redirect.destination,
@@ -354,7 +676,7 @@ async function main() {
   );
 
   const shouldNotBeInSitemap = [
-    ...exactRedirects.map((redirect) => ({
+    ...unconditionalExactRedirects.map((redirect) => ({
       path: normalizeCanonicalPath(redirect.source),
       url: buildCanonicalUrl(redirect.source),
       reason: `Redirects to ${redirect.destination}.`,
@@ -406,6 +728,7 @@ async function main() {
         issues: pageIdRedirectIssues,
       },
     },
+    contentUniqueness,
     robots: {
       expectedUserAgent: "*",
       expectedAllow: "/",
@@ -422,6 +745,16 @@ async function main() {
       redirectChains: redirectChains.length,
       redirectDestinationsMissingBuild: redirectDestinationsMissingBuild.length,
       pageIdRedirectIssues: pageIdRedirectIssues.length,
+      duplicateSeoTitles: contentUniqueness.current.duplicateTitleGroups,
+      duplicateSeoH1s: contentUniqueness.current.duplicateH1Groups,
+      duplicateSeoMetaDescriptions: contentUniqueness.current.duplicateMetaDescriptionGroups,
+      exactSeoParagraphs: contentUniqueness.current.exactParagraphGroups,
+      repeatedSeoSentences: contentUniqueness.current.repeatedSentenceGroups,
+      duplicateSeoFaqQuestions: contentUniqueness.current.duplicateFaqQuestionGroups,
+      duplicateSeoFaqAnswers: contentUniqueness.current.duplicateFaqAnswerGroups,
+      identicalSeoHeadingSequences: contentUniqueness.current.identicalHeadingSequenceGroups,
+      defectiveSeoPhrases: contentUniqueness.current.defectivePhraseOccurrences,
+      excessiveSeoSimilarityPairs: contentUniqueness.current.excessiveSimilarityPairs,
     },
   };
 
@@ -457,7 +790,17 @@ async function main() {
     redirectLoops.length > 0 ||
     redirectChains.length > 0 ||
     redirectDestinationsMissingBuild.length > 0 ||
-    pageIdRedirectIssues.length > 0;
+    pageIdRedirectIssues.length > 0 ||
+    contentUniqueness.current.duplicateTitleGroups > 0 ||
+    contentUniqueness.current.duplicateH1Groups > 0 ||
+    contentUniqueness.current.duplicateMetaDescriptionGroups > 0 ||
+    contentUniqueness.current.exactParagraphGroups > 0 ||
+    contentUniqueness.current.repeatedSentenceGroups > 0 ||
+    contentUniqueness.current.duplicateFaqQuestionGroups > 0 ||
+    contentUniqueness.current.duplicateFaqAnswerGroups > 0 ||
+    contentUniqueness.current.identicalHeadingSequenceGroups > 0 ||
+    contentUniqueness.current.defectivePhraseOccurrences > 0 ||
+    contentUniqueness.current.excessiveSimilarityPairs > 0;
 
   if (hasBlockingIssues) {
     process.exitCode = 1;

@@ -48,6 +48,78 @@ export type SeoRoute = {
   networkType: string;
 };
 
+export type ExclusiveSeoIntent = {
+  intent: string;
+  service: string;
+  ctaLabel: string;
+  whatsappMessage: string;
+  h1: string;
+  title: string;
+  description: string;
+};
+
+const exclusiveSeoIntents: Record<string, ExclusiveSeoIntent> = {
+  "destape-horizontales-cerro-bellavista-valparaiso": {
+    intent: "Diagnostico y despeje de colectores, ramales horizontales y camaras",
+    service: "Destape de redes horizontales",
+    ctaLabel: "Solicitar diagn\u00f3stico de red horizontal",
+    whatsappMessage:
+      "Hola, necesito solicitar un diagn\u00f3stico de red horizontal en Cerro Bellavista, Valpara\u00edso.",
+    h1: "Destape de horizontales en Cerro Bellavista, Valpara\u00edso",
+    title: "Destape de horizontales en Cerro Bellavista | Colectores y camaras",
+    description:
+      "Diagn\u00f3stico y destape de colectores, ramales horizontales y camaras en Cerro Bellavista, Valpara\u00edso. Evaluacion tecnica y prueba de flujo.",
+  },
+  "mantencion-preventiva-redes-cerro-bellavista-valparaiso": {
+    intent: "Mantencion sanitaria planificada para comunidades, edificios y comercios",
+    service: "Mantencion preventiva de redes sanitarias",
+    ctaLabel: "Programar mantenci\u00f3n preventiva",
+    whatsappMessage:
+      "Hola, quiero programar una mantenci\u00f3n preventiva de redes sanitarias en Cerro Bellavista, Valpara\u00edso.",
+    h1: "Mantenci\u00f3n preventiva en Cerro Bellavista, Valpara\u00edso",
+    title: "Mantenci\u00f3n preventiva en Cerro Bellavista | Redes sanitarias planificadas",
+    description:
+      "Mantenci\u00f3n preventiva planificada para comunidades, edificios y comercios de Cerro Bellavista. Frecuencias, puntos de control y registro tecnico.",
+  },
+  "hidrojet-playa-ancha-valparaiso": {
+    intent: "Limpieza hidrodinamica de tuberias mediante agua a presion",
+    service: "Limpieza de redes con hidrojet",
+    ctaLabel: "Coordinar limpieza con hidrojet",
+    whatsappMessage:
+      "Hola, necesito coordinar una limpieza de red con hidrojet en Playa Ancha, Valpara\u00edso.",
+    h1: "Hidrojet en Playa Ancha, Valpara\u00edso",
+    title: "Hidrojet en Playa Ancha | Limpieza hidrodinamica de redes",
+    description:
+      "Limpieza hidrodinamica con hidrojet para tuberias con grasa, sarro o sedimentos en Playa Ancha, Valpara\u00edso. Evaluacion y control de flujo.",
+  },
+  "destape-desagues-playa-ancha-valparaiso": {
+    intent: "Evaluacion localizada de ramales interiores y artefactos sanitarios",
+    service: "Destape de desagues",
+    ctaLabel: "Evaluar desag\u00fce obstruido",
+    whatsappMessage:
+      "Hola, necesito evaluar un desag\u00fce obstruido en Playa Ancha, Valpara\u00edso.",
+    h1: "Destape de desag\u00fces en Playa Ancha, Valpara\u00edso",
+    title: "Destape de desag\u00fces en Playa Ancha | Ramales y artefactos",
+    description:
+      "Evaluacion y destape localizado de desag\u00fces, ramales interiores y artefactos sanitarios en Playa Ancha. Diagnostico del punto afectado.",
+  },
+};
+
+export function getExclusiveSeoIntent(route: SeoRoute): ExclusiveSeoIntent | undefined {
+  return exclusiveSeoIntents[route.slug];
+}
+
+export function buildSeoH1(route: SeoRoute): string {
+  return (
+    getExclusiveSeoIntent(route)?.h1 ??
+    `${route.service.nombre} en ${route.sector}, ${route.comuna.comuna} | Atencion 24/7`
+  );
+}
+
+export function buildProgrammaticCtaLabel(route: SeoRoute): string {
+  return getExclusiveSeoIntent(route)?.ctaLabel ?? "Solicitar evaluacion tecnica";
+}
+
 export const equiposSeo = {
   hidrojet: "Hidrojet RIDGID KJ-3100",
   k1500: "RIDGID K-1500A",
@@ -101,7 +173,7 @@ export const comunasSeo: ComunaSeo[] = [
     contexto: "alta densidad residencial, edificios en altura y comercio activo",
   },
   {
-    comuna: "Valparaiso",
+    comuna: "Valpara\u00edso",
     slug: "valparaiso",
     landingPath: "/destape-alcantarillado-valparaiso",
     sectores: [
@@ -125,19 +197,19 @@ export const comunasSeo: ComunaSeo[] = [
     contexto: "topografia de cerros, redes antiguas y actividad comercial intensiva",
   },
   {
-    comuna: "Concon",
+    comuna: "Conc\u00f3n",
     slug: "concon",
     landingPath: "/hidrojet-concon",
     sectores: [
       "Bosques de Montemar",
       "Costa de Montemar",
       "Lomas de Montemar",
-      "Centro Concon",
+      "Centro Conc\u00f3n",
       "La Boca",
       "Colmo",
       "Mantagua",
-      "Rotonda Concon",
-      "Av. Concon-Renaca",
+      "Rotonda Conc\u00f3n",
+      "Av. Conc\u00f3n-Renaca",
     ],
     tiposRed: ["desagues gastronomicos", "redes de condominios", "colectores costeros"],
     clientes: ["restaurantes", "condominios", "administraciones premium"],
@@ -442,8 +514,13 @@ export function getPrioritySeoRoutes(limit = MAX_PROGRAMMATIC_ROUTES): SeoRoute[
 }
 
 export function buildSeoMetadata(route: SeoRoute): Metadata {
-  const title = `${route.service.nombre} en ${route.sector} | ${route.comuna.comuna} 24/7 | Hidrourgencias`;
-  const description = `Servicio de ${route.service.nombre.toLowerCase()} en ${route.sector}, ${route.comuna.comuna}. Atencion 24/7, diagnostico tecnico, equipos RIDGID, hidrojet y respuesta inmediata.`;
+  const exclusiveIntent = getExclusiveSeoIntent(route);
+  const title =
+    exclusiveIntent?.title ??
+    `${route.service.nombre} en ${route.sector} | ${route.comuna.comuna} 24/7`;
+  const description =
+    exclusiveIntent?.description ??
+    `Servicio de ${route.service.nombre.toLowerCase()} en ${route.sector}, ${route.comuna.comuna}. Atencion 24/7, diagnostico tecnico, equipos RIDGID, hidrojet y respuesta inmediata.`;
   const canonical = buildCanonicalUrl(`/${route.slug}`);
 
   return {
@@ -486,7 +563,10 @@ export function buildSeoRouteContent(route: SeoRoute): SeoLandingContent {
 }
 
 export function buildProgrammaticWhatsAppMessage(route: SeoRoute): string {
-  return `Necesito ${route.service.nombre.toLowerCase()} en ${route.sector} ${route.comuna.comuna}`;
+  return (
+    getExclusiveSeoIntent(route)?.whatsappMessage ??
+    `Necesito ${route.service.nombre.toLowerCase()} en ${route.sector}, ${route.comuna.comuna}.`
+  );
 }
 
 export function getSeoRouteCounts() {

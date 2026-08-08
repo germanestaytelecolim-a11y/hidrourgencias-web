@@ -23,6 +23,29 @@ export type FaqItem = {
   answer: string;
 };
 
+export type ComunaLandingPresentation = {
+  serviceName: string;
+  schemaServiceType: string;
+  problemHeading: string;
+  servicesHeading: string;
+  servicesIntro: string;
+  technicalHeading: string;
+  coverageServiceName: string;
+  closingHeading: string;
+  closingParagraph: string;
+  primaryCtaLabel: string;
+  secondaryCtaLabel: string;
+  finalCtaLabel: string;
+};
+
+export type ComunaLandingVisual = {
+  treatment: "port" | "coastal" | "hydrojet" | "residential" | "operations";
+  image: string;
+  alt: string;
+  accent: string;
+  imagePosition: string;
+};
+
 export type ComunaLandingData = {
   slug: string;
   comuna: string;
@@ -42,6 +65,46 @@ export type ComunaLandingData = {
   ctaPrimaryMessage: string;
   ctaMidMessage: string;
   ctaFinalMessage: string;
+  presentation: ComunaLandingPresentation;
+  visual?: ComunaLandingVisual;
+};
+
+const territorialVisuals: Record<string, ComunaLandingVisual> = {
+  "destape-alcantarillado-valparaiso": {
+    treatment: "port",
+    image: "/images/servicios/heroes/destape-camaras-inspeccion.webp",
+    alt: "Intervención técnica en cámara sanitaria de Valparaíso",
+    accent: "#d49a2a",
+    imagePosition: "68% center",
+  },
+  "destape-alcantarillado-vina-del-mar": {
+    treatment: "coastal",
+    image: "/images/servicios/heroes/destape-edificios.webp",
+    alt: "Trabajo sanitario técnico para edificios de Viña del Mar",
+    accent: "#18b8c9",
+    imagePosition: "42% center",
+  },
+  "hidrojet-concon": {
+    treatment: "hydrojet",
+    image: "/images/servicios/heroes/hidrojet.webp",
+    alt: "Equipo hidrojet de alta presión operando en Concón",
+    accent: "#20c6a4",
+    imagePosition: "62% center",
+  },
+  "destape-alcantarillado-villa-alemana": {
+    treatment: "residential",
+    image: "/images/servicios/heroes/destape-artefactos-sanitarios.webp",
+    alt: "Destape técnico de artefactos sanitarios en Villa Alemana",
+    accent: "#e2a14a",
+    imagePosition: "62% center",
+  },
+  "destape-alcantarillado-quilpue": {
+    treatment: "operations",
+    image: "/images/servicios/heroes/destape-horizontales.webp",
+    alt: "Equipo técnico interviniendo una red horizontal en Quilpué",
+    accent: "#2a9b8f",
+    imagePosition: "58% center",
+  },
 };
 
 const comunaProfiles: ComunaProfile[] = [
@@ -73,7 +136,7 @@ const comunaProfiles: ComunaProfile[] = [
   },
   {
     slug: "destape-alcantarillado-valparaiso",
-    comuna: "Valparaiso",
+    comuna: "Valpara\u00edso",
     nearbyZones: ["Cerro Alegre", "Cerro Baron", "Placilla", "Playa Ancha", "Avenida Argentina", "Puerto"],
     localContext:
       "una comuna con topografia compleja, infraestructura heterogenea y zonas comerciales con alta dependencia de redes sanitarias",
@@ -99,7 +162,7 @@ const comunaProfiles: ComunaProfile[] = [
   },
   {
     slug: "hidrojet-concon",
-    comuna: "Concon",
+    comuna: "Conc\u00f3n",
     nearbyZones: ["Bosques de Montemar", "Costa de Montemar", "Avenida Borgono", "Lomas de Montemar", "Higuerillas"],
     localContext:
       "un entorno residencial y gastronomico con alta carga organica en desagues y demanda continua de continuidad comercial",
@@ -121,7 +184,7 @@ const comunaProfiles: ComunaProfile[] = [
       "empresas con exigencia de continuidad",
     ],
     operationNote:
-      "El plan tecnico en Concon prioriza limpieza profunda con hidrojet, confirmacion de resultado y pauta preventiva ajustada al uso real.",
+      "El plan tecnico en Conc\u00f3n prioriza limpieza profunda con hidrojet, confirmacion de resultado y pauta preventiva ajustada al uso real.",
   },
   {
     slug: "mantencion-desagues-quilpue",
@@ -359,73 +422,266 @@ const comunaProfiles: ComunaProfile[] = [
   },
 ];
 
-function buildProcedure(comuna: string): ProcedureStep[] {
+function buildPresentation(profile: ComunaProfile): ComunaLandingPresentation {
+  if (profile.slug === "hidrojet-concon") {
+    return {
+      serviceName: "Hidrojet en Conc\u00f3n",
+      schemaServiceType: "Limpieza hidrodinamica de redes con hidrojet",
+      problemHeading: "Cuando una red de Conc\u00f3n necesita limpieza hidrodinamica",
+      servicesHeading: "Hidrojet para redes sanitarias de Conc\u00f3n",
+      servicesIntro:
+        "La atencion se concentra en limpieza interna con agua a presion, seleccion de boquilla, control del residuo removido y verificacion de caudal en redes compatibles.",
+      technicalHeading: "Agua a presion, boquillas y control de flujo",
+      coverageServiceName: "hidrojet",
+      closingHeading: "Solicita servicio hidrojet en Conc\u00f3n",
+      closingParagraph:
+        "Indica el tipo de red, el acceso disponible y el material que se ha acumulado. Con esos antecedentes evaluamos la factibilidad y preparamos la limpieza hidrodinamica.",
+      primaryCtaLabel: "Solicitar servicio hidrojet en Conc\u00f3n",
+      secondaryCtaLabel: "Coordinar limpieza hidrodinamica",
+      finalCtaLabel: "Solicitar servicio hidrojet",
+    };
+  }
+
+  if (profile.slug === "mantencion-desagues-quilpue") {
+    return {
+      serviceName: "Mantencion de desagues en Quilpue",
+      schemaServiceType: "Mantencion preventiva de desagues",
+      problemHeading: "Senales para programar mantencion de desagues en Quilpue",
+      servicesHeading: "Mantencion tecnica de desagues en Quilpue",
+      servicesIntro:
+        "La atencion combina revision de puntos recurrentes, limpieza programada y recomendaciones segun la carga real de la red sanitaria.",
+      technicalHeading: "Equipos para mantencion y control de desagues",
+      coverageServiceName: "mantencion de desagues",
+      closingHeading: "Programa mantencion de desagues en Quilpue",
+      closingParagraph:
+        "Comparte el tipo de inmueble, los puntos criticos y el historial disponible para definir un alcance preventivo adecuado.",
+      primaryCtaLabel: "Solicitar mantencion de desagues",
+      secondaryCtaLabel: "Cotizar plan preventivo",
+      finalCtaLabel: "Programar mantencion",
+    };
+  }
+
+  if (profile.slug === "urgencias-sanitarias-villa-alemana") {
+    return {
+      serviceName: "Urgencias sanitarias en Villa Alemana",
+      schemaServiceType: "Atencion de urgencias sanitarias",
+      problemHeading: "Contingencias sanitarias urgentes en Villa Alemana",
+      servicesHeading: "Respuesta tecnica para urgencias en Villa Alemana",
+      servicesIntro:
+        "La atencion prioriza la contencion del riesgo, el diagnostico del punto afectado y la recuperacion de la continuidad sanitaria.",
+      technicalHeading: "Equipos para contingencias sanitarias",
+      coverageServiceName: "urgencias sanitarias",
+      closingHeading: "Reporta una urgencia sanitaria en Villa Alemana",
+      closingParagraph:
+        "Indica la ubicacion, el punto afectado y si existe exposicion sanitaria para clasificar correctamente la prioridad de respuesta.",
+      primaryCtaLabel: "Reportar urgencia sanitaria",
+      secondaryCtaLabel: "Solicitar evaluacion tecnica",
+      finalCtaLabel: "Contactar atencion 24/7",
+    };
+  }
+
+  return {
+    serviceName: `Destape de alcantarillado en ${profile.comuna}`,
+    schemaServiceType: "Destape de alcantarillado y urgencias sanitarias",
+    problemHeading: `Problemas de alcantarillado que requieren diagnostico en ${profile.comuna}`,
+    servicesHeading: `Destape de alcantarillado y apoyo sanitario en ${profile.comuna}`,
+    servicesIntro:
+      "La atencion integra diagnostico, destape mecanico, hidrojet cuando corresponde, verificacion de flujo y una recomendacion preventiva acorde con la red.",
+    technicalHeading: "Hidrojet, equipos RIDGID y diagnostico profesional",
+    coverageServiceName: "destape de alcantarillado",
+    closingHeading: `Respuesta tecnica para alcantarillado en ${profile.comuna}`,
+    closingParagraph:
+      "Describe el punto afectado, la condicion de uso y los accesos disponibles para preparar una evaluacion tecnica proporcionada al caso.",
+    primaryCtaLabel: "Solicitar destape de alcantarillado",
+    secondaryCtaLabel: "Cotizar mantencion preventiva",
+    finalCtaLabel: "Contactar atencion 24/7",
+  };
+}
+
+function buildProcedure(profile: ComunaProfile, serviceName: string): ProcedureStep[] {
+  const scope = `${serviceName.toLowerCase()} en ${profile.comuna}`;
+
   return [
     {
       title: "1. Levantamiento inicial y triage de urgencia",
-      description: `Recibimos datos clave del caso en ${comuna}, clasificamos nivel de riesgo sanitario y definimos una respuesta proporcional al impacto operativo del cliente.`,
+      description: `Para ${scope}, recibimos datos del caso y definimos una respuesta proporcional al impacto operativo del cliente.`,
     },
     {
       title: "2. Diagnostico en terreno con criterio tecnico",
-      description:
-        "Inspeccionamos puntos de descarga, artefactos y trazado de red para identificar la causa principal y evitar intervenciones superficiales.",
+      description: `Durante ${scope}, inspeccionamos puntos de descarga, artefactos y trazado para identificar la causa principal.`,
     },
     {
       title: "3. Ejecucion tecnica segun diagnostico",
-      description:
-        "Aplicamos destape mecanico, hidrojet 4000 PSI y apoyo de inspeccion RIDGID cuando corresponde, priorizando efectividad y seguridad sanitaria.",
+      description: `En ${scope}, aplicamos la tecnologia compatible con el diagnostico, el acceso y la seguridad sanitaria.`,
     },
     {
       title: "4. Verificacion de flujo y estabilidad",
-      description:
-        "Realizamos pruebas de descarga y confirmamos que no exista retorno de aguas servidas ni sintomas residuales al cierre del servicio.",
+      description: `Al cerrar ${scope}, realizamos pruebas de descarga y confirmamos la recuperacion observada en los puntos revisados.`,
     },
     {
       title: "5. Plan de continuidad preventiva",
-      description:
-        "Entregamos recomendaciones operativas para reducir reincidencia: frecuencia de mantencion, puntos de control y criterios para activar urgencia temprana.",
+      description: `La entrega de ${scope} incluye recomendaciones sobre frecuencia, puntos de control y criterios de seguimiento.`,
     },
   ];
 }
 
 function buildFaq(profile: ComunaProfile): FaqItem[] {
+  const presentation = buildPresentation(profile);
+  const scope = presentation.serviceName.toLowerCase();
+
   return [
     {
-      question: `Atienden urgencias sanitarias 24/7 en ${profile.comuna}?`,
-      answer:
-        "Si. Operamos con prioridad para rebalses activos, retorno de aguas servidas y escenarios que comprometen habitabilidad o continuidad comercial.",
+      question: `Atienden ${scope} durante las 24 horas?`,
+      answer: `Si. La cobertura de ${scope} prioriza escenarios que comprometen habitabilidad o continuidad del inmueble.`,
     },
     {
-      question: `El servicio en ${profile.comuna} incluye hidrojet y videoinspeccion?`,
-      answer:
-        "Si. Evaluamos cada caso y definimos si corresponde destape mecanico, hidrojet 4000 PSI, videoinspeccion sanitaria o una combinacion de tecnologias.",
+      question: `Como seleccionan los equipos para ${scope}?`,
+      answer: `En ${scope}, el diagnostico define si corresponde equipo mecanico, hidrojet, videoinspeccion o una combinacion tecnica.`,
     },
     {
-      question: "Puedo solicitar cotizacion de mantencion preventiva?",
-      answer:
-        "Si. Disenamos planes preventivos para comunidades, edificios, empresas y locales comerciales con frecuencia adaptada al uso real de la red.",
+      question: `Puedo pedir una pauta preventiva despues de ${scope}?`,
+      answer: `Si. El cierre de ${scope} puede incluir frecuencia sugerida y puntos de control segun el uso real de la red.`,
     },
     {
-      question: "Que datos debo enviar por WhatsApp para una atencion mas rapida?",
-      answer:
-        "Comuna, direccion, tipo de sintoma, si existe rebalse activo y evidencia visual. Con esos datos asignamos mejor el recurso tecnico.",
+      question: `Que datos envio por WhatsApp para ${scope}?`,
+      answer: `Para coordinar ${scope}, envia direccion, punto afectado, condicion de uso, accesos disponibles y evidencia visual.`,
     },
     {
-      question: "Trabajan con clientes corporativos y administradores?",
-      answer:
-        "Si. Operamos con enfoque comercial-profesional para clientes exigentes que necesitan trazabilidad, continuidad y respaldo tecnico real.",
+      question: `Atienden administraciones y empresas que requieren ${scope}?`,
+      answer: `Si. La atencion de ${scope} puede coordinar accesos, responsables y trazabilidad para comunidades o clientes corporativos.`,
     },
   ];
 }
 
 function buildLandingData(profile: ComunaProfile): ComunaLandingData {
-  const h1 = `Destape de Alcantarillado en ${profile.comuna} | Urgencias 24/7`;
-  const metaTitle = `Destape de Alcantarillado en ${profile.comuna} | Urgencias 24/7 | Hidrourgencias`;
-  const metaDescription = `Servicio profesional de destape de alcantarillado en ${profile.comuna}, desagues y emergencias sanitarias. Hidrojet, diagnostico tecnico y respuesta inmediata 24/7.`;
+  const presentation = buildPresentation(profile);
+  const scope = presentation.serviceName.toLowerCase();
+  const isHidrojetConcon = profile.slug === "hidrojet-concon";
+  const isMaintenanceQuilpue = profile.slug === "mantencion-desagues-quilpue";
+  const isUrgencyVillaAlemana = profile.slug === "urgencias-sanitarias-villa-alemana";
+  const h1 = isHidrojetConcon
+    ? "Hidrojet en Conc\u00f3n | Limpieza hidrodinamica de redes"
+    : isMaintenanceQuilpue
+      ? "Mantencion de desagues en Quilpue | Plan preventivo"
+      : isUrgencyVillaAlemana
+        ? "Urgencias sanitarias en Villa Alemana | Atencion 24/7"
+        : `Destape de Alcantarillado en ${profile.comuna} | Urgencias 24/7`;
+  const metaTitle = isHidrojetConcon
+    ? "Hidrojet en Conc\u00f3n | Limpieza hidrodinamica de redes"
+    : isMaintenanceQuilpue
+      ? "Mantencion de desagues en Quilpue | Plan preventivo"
+      : isUrgencyVillaAlemana
+        ? "Urgencias sanitarias en Villa Alemana | Atencion 24/7"
+        : `Destape de Alcantarillado en ${profile.comuna} | Urgencias 24/7`;
+  const metaDescription = isHidrojetConcon
+    ? "Servicio de hidrojet en Conc\u00f3n para limpieza hidrodinamica de redes con grasa, sarro y sedimentos. Evaluacion tecnica, agua a presion y control de flujo."
+    : isMaintenanceQuilpue
+      ? "Mantencion de desagues en Quilpue para comunidades, empresas y comercios. Revision de puntos criticos, limpieza programada y pauta preventiva."
+      : isUrgencyVillaAlemana
+        ? "Atencion de urgencias sanitarias en Villa Alemana con diagnostico tecnico, contencion del riesgo y respuesta disponible durante las 24 horas."
+        : `Servicio profesional de destape de alcantarillado en ${profile.comuna}, con diagnostico tecnico, equipos RIDGID, hidrojet cuando corresponde y atencion 24/7.`;
   const riskList = profile.riskDrivers.join(", ");
   const nearby = profile.nearbyZones.join(", ");
   const scenarios = profile.urgentScenarios.join("; ");
   const clients = profile.clientFocus.join(", ");
+
+  if (isHidrojetConcon) {
+    return {
+      slug: profile.slug,
+      comuna: profile.comuna,
+      h1,
+      metaTitle,
+      metaDescription,
+      heroParagraphs: [
+        "El servicio de hidrojet en Conc\u00f3n ejecuta limpieza hidrodinamica en redes que han perdido seccion util por grasa, sarro o sedimentos adheridos. La maniobra utiliza agua a presion y una boquilla seleccionada despues de revisar acceso, diametro y material del conducto.",
+        "Condominios, restaurantes y comercios de Conc\u00f3n necesitan controlar tanto el desprendimiento como el destino del residuo removido. Por eso la faena delimita el tramo, protege el punto de descarga y comprueba el caudal entre accesos al finalizar.",
+        "El hidrojet no reemplaza una reparacion estructural ni se aplica automaticamente a toda obstruccion. Si la red presenta una condicion incompatible con agua a presion, el diagnostico orienta otra tecnica o una inspeccion adicional.",
+      ],
+      problemBullets: [
+        "grasa adherida en redes de cocinas comerciales",
+        "sarro que reduce la seccion interior del conducto",
+        "sedimentos distribuidos entre camaras de condominios",
+        "lodo acumulado en tramos de baja velocidad",
+        "recurrencia despues de despejes que no limpiaron las paredes",
+        "necesidad de preparar la red antes de periodos de alta carga",
+      ],
+      problemSummary:
+        "La indicacion principal para hidrojet es una acumulacion adherida o distribuida que puede movilizarse con limpieza hidrodinamica. La evaluacion en Conc\u00f3n verifica que el conducto, el acceso y el punto de descarga permitan trabajar con control.",
+      technicalParagraphs: [
+        "La configuracion del hidrojet en Conc\u00f3n combina presion, caudal, boquilla y velocidad de avance. Esas variables se ajustan al diametro y al residuo; una cifra de presion por si sola no describe la calidad ni la seguridad de la limpieza.",
+        "Cuando aporta evidencia, la videoinspeccion permite comparar la condicion interna y detectar fisuras, deformaciones o contrapendientes que la limpieza no corrige. El cierre se apoya en una prueba de flujo y en el registro del tramo atendido.",
+      ],
+      procedureSteps: [
+        {
+          title: "1. Revision de acceso y factibilidad",
+          description:
+            "En Conc\u00f3n se identifica el tramo, su material, diametro y capacidad para recibir una maniobra hidrodinamica controlada.",
+        },
+        {
+          title: "2. Seleccion de boquilla y punto de descarga",
+          description:
+            "La configuracion considera el residuo esperado y el lugar donde se controlara el material desplazado por el agua.",
+        },
+        {
+          title: "3. Pasadas de limpieza hidrodinamica",
+          description:
+            "El avance del hidrojet desprende adherencias y arrastra residuos sin tratar todos los tramos con una unica configuracion.",
+        },
+        {
+          title: "4. Control del material removido",
+          description:
+            "La faena revisa la salida del residuo para evitar que la acumulacion simplemente cambie de ubicacion dentro de la red.",
+        },
+        {
+          title: "5. Verificacion de caudal",
+          description:
+            "El servicio hidrojet en Conc\u00f3n termina comparando el flujo y dejando una recomendacion segun la carga observada.",
+        },
+      ],
+      nearbyZones: profile.nearbyZones,
+      coverageParagraphs: [
+        `La cobertura de hidrojet considera ${nearby}, con coordinacion previa de accesos y puntos de descarga para redes residenciales o comerciales.`,
+        "Los servicios en distintos sectores de Conc\u00f3n se programan segun factibilidad tecnica, longitud del tramo y condiciones de operacion del inmueble.",
+      ],
+      clientParagraph:
+        "El hidrojet en Conc\u00f3n esta orientado a condominios, administraciones, restaurantes y empresas que necesitan recuperar capacidad y documentar la limpieza de sus redes.",
+      clientList: profile.clientFocus.map((item) => item),
+      faq: [
+        {
+          question: "Que limpia el hidrojet dentro de una tuberia?",
+          answer:
+            "El agua a presion puede desprender grasa, sarro, lodo y sedimentos compatibles con la condicion del conducto y el acceso disponible.",
+        },
+        {
+          question: "El hidrojet sirve para cualquier red de Conc\u00f3n?",
+          answer:
+            "No. Antes de trabajar se revisan material, diametro, estado, acceso y capacidad para controlar el agua y los residuos removidos.",
+        },
+        {
+          question: "Como seleccionan la presion y la boquilla?",
+          answer:
+            "La configuracion responde al residuo, la longitud, el diametro y el material del tramo; la presion no se decide de forma aislada.",
+        },
+        {
+          question: "Pueden atender restaurantes y condominios?",
+          answer:
+            "Si. La visita puede coordinar ventanas de trabajo, accesos tecnicos y continuidad operativa para redes comerciales o comunitarias.",
+        },
+        {
+          question: "Como verifican el resultado de la limpieza?",
+          answer:
+            "Se controla el material extraido y se compara el flujo entre puntos accesibles; la videoinspeccion puede complementar la validacion.",
+        },
+      ],
+      ctaPrimaryMessage:
+        "Hola, necesito solicitar servicio de hidrojet en Conc\u00f3n. Puedo indicar tipo de red, acceso y material acumulado.",
+      ctaMidMessage:
+        "Hola, quiero coordinar una limpieza hidrodinamica con hidrojet en Conc\u00f3n.",
+      ctaFinalMessage:
+        "Hola, solicito evaluar la factibilidad de hidrojet para una red sanitaria en Conc\u00f3n.",
+      presentation,
+    };
+  }
 
   return {
     slug: profile.slug,
@@ -434,32 +690,36 @@ function buildLandingData(profile: ComunaProfile): ComunaLandingData {
     metaTitle,
     metaDescription,
     heroParagraphs: [
-      `En ${profile.comuna}, Hidrourgencias SpA trabaja sobre ${profile.localContext}. Nuestro enfoque es integral: destape de alcantarillado, destape de desagues, hidrojet, videoinspeccion, mantencion preventiva y urgencias sanitarias 24/7. Este esquema permite resolver contingencias reales sin perder continuidad operativa.`,
-      `La experiencia de terreno muestra que en ${profile.comuna} los principales detonantes son ${riskList}. Cuando una red sanitaria se satura, el impacto no es solo tecnico: afecta reputacion, habitabilidad, continuidad comercial y costos de administracion. Por eso intervenimos con criterio sanitario, lectura comercial y metodologia operativa clara.`,
-      `${profile.operationNote} Desde el primer contacto buscamos una evaluacion precisa para decidir la maniobra correcta y evitar retrabajos. La meta es que cada intervencion entregue resultado inmediato y, al mismo tiempo, reduzca la probabilidad de urgencias repetidas.`,
+      `La atencion de ${scope} considera ${profile.localContext}. Para ${scope} se combinan diagnostico, tecnologia compatible y verificacion de flujo segun la condicion observada. La coordinacion de ${scope} busca recuperar continuidad sin ampliar innecesariamente el alcance.`,
+      `En ${scope}, los principales factores locales son ${riskList}. El diagnostico de ${scope} relaciona esos antecedentes con la red y el uso del inmueble. La decision tecnica de ${scope} se toma despues de identificar el punto o tramo que explica la falla.`,
+      `${profile.operationNote} Desde el primer contacto de ${scope} se solicitan datos suficientes para preparar la visita. El cierre de ${scope} deja una recomendacion vinculada con la causa probable y la prueba realizada.`,
     ],
     problemBullets: profile.urgentScenarios.map((scenario) => scenario),
-    problemSummary: `Los problemas frecuentes en ${profile.comuna} incluyen ${scenarios}. En todos estos casos, esperar suele aumentar el dano y el costo total del servicio. Por eso ejecutamos una estrategia de respuesta que parte con triage tecnico-comercial, continua con diagnostico profesional y termina con recomendaciones preventivas accionables para el cliente.`,
+    problemSummary: `Los escenarios considerados para ${scope} incluyen ${scenarios}. La prioridad de ${scope} se define con la exposicion sanitaria, los puntos sin uso y el impacto operativo del inmueble. La respuesta de ${scope} comienza con clasificacion, continua con diagnostico y termina con una recomendacion asociada al hallazgo.`,
     technicalParagraphs: [
-      `El bloque tecnico se ejecuta con hidrojet 4000 PSI para remover grasa, sarro y sedimentos adheridos en redes de alto uso. Complementamos con equipos RIDGID para diagnostico de tramos criticos y validacion de resultados. Esta combinacion entrega mayor precision y reduce la probabilidad de que la obstruccion reaparezca en pocos dias.`,
-      `El diagnostico profesional considera estado de la red, historial de fallas, comportamiento de descarga y contexto de uso del inmueble. Con esa base definimos si basta una accion correctiva puntual o si corresponde establecer un plan de mantencion preventiva con videoinspeccion sanitaria y control de puntos recurrentes.`,
+      `El bloque tecnico de ${scope} puede utilizar hidrojet para adherencias y equipos RIDGID para obstrucciones compatibles con trabajo mecanico. La seleccion para ${scope} depende del acceso, diametro, residuo y estado probable del tramo. La prueba posterior de ${scope} confirma el comportamiento observado antes del cierre.`,
+      `El diagnostico de ${scope} considera estado de red, historial, descarga y uso del inmueble. Con esa base, ${scope} distingue una accion correctiva puntual de una necesidad preventiva o de inspeccion. La recomendacion final de ${scope} queda vinculada con esa distincion.`,
     ],
-    procedureSteps: buildProcedure(profile.comuna),
+    procedureSteps: buildProcedure(profile, presentation.serviceName),
     nearbyZones: profile.nearbyZones,
     coverageParagraphs: [
-      `La cobertura en ${profile.comuna} considera sectores de alta demanda sanitaria y zonas cercanas como ${nearby}. Esto permite responder con mayor eficiencia, sobre todo en urgencias con rebalse activo o compromiso de continuidad comercial.`,
-      `Si tu operacion esta distribuida en varias comunas, podemos coordinar una malla de atencion regional con criterios unificados de destape, hidrojet, mantencion preventiva y respuesta 24/7. Asi obtienes control tecnico y administrativo desde una sola contraparte.`,
+      `La cobertura de ${scope} considera sectores cercanos como ${nearby}. La coordinacion territorial de ${scope} ayuda a preparar accesos, equipos y prioridad antes del desplazamiento.`,
+      `Si una operacion requiere ${scope} en varias sedes, la programacion puede unificar responsables y antecedentes tecnicos. El orden documental de ${scope} facilita comparar intervenciones sin confundir redes ni alcances entre ubicaciones.`,
     ],
-    clientParagraph: `Este servicio esta orientado a ${clients}. La propuesta combina velocidad de respuesta, metodologia tecnica y trazabilidad comercial, factores clave para clientes que no pueden aceptar improvisacion en contingencias sanitarias.`,
+    clientParagraph: `La atencion de ${scope} esta orientada a ${clients}. Para clientes de ${scope}, la coordinacion de accesos y la trazabilidad tecnica son parte del resultado esperado.`,
     clientList: profile.clientFocus.map((item) => item),
     faq: buildFaq(profile),
-    ctaPrimaryMessage: `Hola, necesito destape de alcantarillado en ${profile.comuna} con respuesta tecnica inmediata.`,
-    ctaMidMessage: `Hola, quiero cotizar mantencion preventiva, hidrojet y videoinspeccion en ${profile.comuna}.`,
-    ctaFinalMessage: `Hola, reporto urgencia sanitaria 24/7 en ${profile.comuna} por rebalse o retorno de aguas servidas.`,
+    ctaPrimaryMessage: `Hola, necesito solicitar ${scope}. Puedo indicar punto afectado y accesos disponibles.`,
+    ctaMidMessage: `Hola, quiero cotizar una pauta preventiva asociada a ${scope}.`,
+    ctaFinalMessage: `Hola, necesito coordinar ${scope} y compartir antecedentes del caso.`,
+    presentation,
   };
 }
 
-const landingData = comunaProfiles.map((profile) => buildLandingData(profile));
+const landingData = comunaProfiles.map((profile) => ({
+  ...buildLandingData(profile),
+  visual: territorialVisuals[profile.slug],
+}));
 const landingMap = new Map(landingData.map((item) => [item.slug, item]));
 
 export function getComunaLandingBySlug(slug: string) {

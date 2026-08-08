@@ -511,21 +511,24 @@ export default function HomePage({ cmsContent }: HomePageContentProps) {
               return (
                 <article
                   key={item.title}
-                  className={`relative overflow-hidden rounded-2xl border p-5 shadow-md transition duration-300 hover:-translate-y-1 hover:shadow-xl ${
+                  tabIndex={0}
+                  className={`relative overflow-hidden rounded-lg border p-5 shadow-md transition duration-300 hover:-translate-y-1 hover:shadow-xl focus-visible:-translate-y-1 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-400/50 active:translate-y-0 ${
                     isDark
-                      ? "border-sky-900/20 bg-[linear-gradient(145deg,#08385f_0%,#0e5f86_100%)] text-white"
-                      : "border-sky-200 bg-[linear-gradient(145deg,#ffffff_0%,#eff8ff_100%)] text-slate-900"
+                      ? "border-[#052d4d] bg-[#08385f] text-white hover:bg-[#0a466f] focus-visible:bg-[#0a466f]"
+                      : "border-sky-200 bg-[#f7fbff] text-slate-950 hover:border-sky-400 hover:bg-white focus-visible:border-sky-500 focus-visible:bg-white"
                   }`}
                 >
                   <div
                     className={`inline-flex h-11 w-11 items-center justify-center rounded-xl ${
-                      isDark ? "bg-white/15 text-sky-100" : "bg-white text-sky-700 shadow-sm"
+                      isDark ? "bg-white/15 text-white" : "bg-sky-100 text-sky-800 shadow-sm"
                     }`}
                   >
-                    <item.icon className="h-5 w-5" />
+                    <item.icon className="h-5 w-5" aria-hidden="true" />
                   </div>
-                  <h3 className="mt-3 text-lg font-extrabold tracking-tight">{item.title}</h3>
-                  <p className={`mt-2 text-sm leading-7 ${isDark ? "text-slate-100" : "text-slate-700"}`}>{item.description}</p>
+                  <h3 className={`mt-3 text-lg font-extrabold tracking-tight ${isDark ? "text-white" : "text-slate-950"}`}>
+                    {item.title}
+                  </h3>
+                  <p className={`mt-2 text-sm leading-7 ${isDark ? "text-sky-50" : "text-slate-700"}`}>{item.description}</p>
                 </article>
               );
             })}

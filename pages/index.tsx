@@ -149,7 +149,7 @@ export default function HomePage({ cmsContent }: HomePageProps) {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="index,follow" />
-        <link rel="canonical" href={siteUrl} />
+        <link rel="canonical" href={`${siteUrl}/`} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
@@ -176,16 +176,16 @@ export default function HomePage({ cmsContent }: HomePageProps) {
       <SiteHeader />
       <HomePageContent cmsContent={cmsContent} />
       <ServiceTermsSection />
-      <div className="fixed bottom-4 right-4 z-50 w-auto max-w-[calc(100vw-2rem)] sm:w-[17rem]">
+      <div className="hu-floating-whatsapp fixed z-50 w-auto max-w-[calc(100vw-2rem)] sm:w-[17rem]">
         <a
           href={floatingMessage}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex h-12 items-center gap-2 rounded-full bg-emerald-500 px-5 py-3 text-sm font-bold text-white shadow-2xl shadow-emerald-600/40 transition hover:bg-emerald-600"
+          className="hu-floating-whatsapp__link hu-cta-primary inline-flex h-12 items-center gap-2 rounded-full px-5 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-300"
           aria-label="Abrir WhatsApp de urgencias sanitarias"
         >
           <span className="h-2.5 w-2.5 rounded-full bg-white" aria-hidden="true" />
-          WhatsApp 24/7
+          <span className="hu-floating-whatsapp__label">WhatsApp 24/7</span>
         </a>
       </div>
       <GoogleAdsConversionTracking />

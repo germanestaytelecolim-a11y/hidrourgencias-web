@@ -193,7 +193,12 @@ const nextConfig: NextConfig = {
     ];
   },
   async redirects() {
-    return [...legacyLandingRedirects, ...legacyServiceRedirects, ...encodedAccentRedirects, hostRedirect];
+    return [
+      ...legacyLandingRedirects,
+      ...legacyServiceRedirects,
+      ...encodedAccentRedirects,
+      hostRedirect,
+    ];
   },
   async rewrites() {
     return [

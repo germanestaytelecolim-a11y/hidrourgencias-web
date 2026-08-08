@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope, Rajdhani } from "next/font/google";
 
+import { EmergencyAlertModal } from "@/components/EmergencyAlertModal";
 import { GoogleAdsConversionTracking } from "@/components/google-ads-conversion-tracking";
 import { ServiceTermsSection } from "@/components/service-terms";
 import { SiteFooter } from "@/components/site-footer";
@@ -185,19 +186,20 @@ export default function RootLayout({
         {children}
         <ServiceTermsSection />
         <SiteFooter />
-        <div className="hu-floating-whatsapp fixed bottom-4 right-4 z-50 w-[17rem] max-w-[calc(100vw-2rem)]">
+        <div className="hu-floating-whatsapp fixed z-50 w-auto max-w-[calc(100vw-2rem)] sm:w-[17rem]">
           <a
             href={floatingMessage}
             target="_blank"
             rel="noopener noreferrer"
-            className="hu-cta-primary inline-flex h-12 items-center gap-2 rounded-full px-5 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5"
+            className="hu-floating-whatsapp__link hu-cta-primary inline-flex h-12 items-center gap-2 rounded-full px-5 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-300"
             aria-label="Abrir WhatsApp de urgencias sanitarias"
           >
             <span className="h-2.5 w-2.5 rounded-full bg-white" aria-hidden="true" />
-            WhatsApp 24/7
+            <span className="hu-floating-whatsapp__label">WhatsApp 24/7</span>
           </a>
         </div>
         <GoogleAdsConversionTracking />
+        <EmergencyAlertModal />
         <script dangerouslySetInnerHTML={{ __html: themeToggleScript }} />
       </body>
     </html>

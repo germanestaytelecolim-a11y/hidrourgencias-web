@@ -1,6 +1,7 @@
 import type { AppProps } from "next/app";
 import { Manrope, Rajdhani } from "next/font/google";
 
+import { EmergencyAlertModal } from "@/components/EmergencyAlertModal";
 import "@/app/globals.css";
 
 const manrope = Manrope({
@@ -20,6 +21,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <div className={`${manrope.variable} ${rajdhani.variable} bg-white text-slate-900 antialiased`}>
       <Component {...pageProps} />
+      <EmergencyAlertModal />
     </div>
   );
 }

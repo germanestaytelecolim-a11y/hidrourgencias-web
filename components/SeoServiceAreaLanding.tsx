@@ -7,7 +7,10 @@ import { getAllBlogPosts } from "@/lib/blog-data";
 import { GOOGLE_REVIEWS_URL, createWhatsAppUrl, siteConfig } from "@/lib/site-config";
 import {
   buildProgrammaticWhatsAppMessage,
+  buildProgrammaticCtaLabel,
+  buildSeoH1,
   buildSeoRouteContent,
+  getExclusiveSeoIntent,
   getNearbySeoRoutes,
   getServicePagePath,
   type SeoRoute,
@@ -37,6 +40,41 @@ const equipmentBenefits: Record<string, string> = {
     "Diagnostico visual de fisuras, contrapendientes, raices, deformaciones y puntos criticos antes o despues del destape.",
 };
 
+const exclusiveProblemItems: Record<string, string[]> = {
+  "destape-horizontales-cerro-bellavista-valparaiso": [
+    "colector detenido entre dos camaras",
+    "ramal compartido por varios recintos",
+    "sedimento acumulado en tramo horizontal",
+    "diferencia de nivel entre accesos consecutivos",
+    "reincidencia despues de limpiar un artefacto",
+    "flujo sin continuidad hacia la camara siguiente",
+  ],
+  "mantencion-preventiva-redes-cerro-bellavista-valparaiso": [
+    "historial de intervenciones sin trazabilidad",
+    "puntos criticos sin frecuencia definida",
+    "alta carga sanitaria en horarios previsibles",
+    "accesos que requieren coordinacion comunitaria",
+    "limpiezas correctivas sin registro comparativo",
+    "temporadas de ocupacion que exigen planificacion",
+  ],
+  "hidrojet-playa-ancha-valparaiso": [
+    "grasa adherida a la pared de la tuberia",
+    "sarro que reduce la seccion util",
+    "lodo distribuido entre camaras",
+    "sedimento compactado en un tramo largo",
+    "red compatible con limpieza mediante agua a presion",
+    "necesidad de arrastre hacia un punto controlado",
+  ],
+  "destape-desagues-playa-ancha-valparaiso": [
+    "lavaplatos con bloqueo localizado",
+    "lavamanos que falla de forma aislada",
+    "ducha con residuos en el ramal inmediato",
+    "WC con posible objeto atrapado",
+    "sifon o acceso interior comprometido",
+    "dos artefactos cercanos que comparten descarga",
+  ],
+};
+
 function getRelatedBlogPosts(slug: string) {
   const posts = getAllBlogPosts();
   const seed = stableHash(slug);
@@ -53,19 +91,23 @@ export function SeoServiceAreaLanding({ route }: Props) {
   const nearbyRoutes = getNearbySeoRoutes(route, 3);
   const relatedPosts = getRelatedBlogPosts(route.slug);
   const whatsappHref = createWhatsAppUrl(buildProgrammaticWhatsAppMessage(route));
+  const ctaLabel = buildProgrammaticCtaLabel(route);
+  const exclusiveIntent = getExclusiveSeoIntent(route);
   const servicePath = getServicePagePath(route.service);
-  const h1 = `${route.service.nombre} en ${route.sector}, ${route.comuna.comuna} | Atencion 24/7`;
-  const problemItems = Array.from(
-    new Set([
-      ...route.service.problemas,
-      "rebalse de aguas servidas",
-      "desague lento",
-      "retorno por WC",
-      "camara saturada",
-      "grasa, sarro y sedimentos",
-      "perdida de capacidad hidraulica",
-    ]),
-  ).slice(0, 8);
+  const h1 = buildSeoH1(route);
+  const problemItems =
+    exclusiveProblemItems[route.slug] ??
+    Array.from(
+      new Set([
+        ...route.service.problemas,
+        "rebalse de aguas servidas",
+        "desague lento",
+        "retorno por WC",
+        "camara saturada",
+        "grasa, sarro y sedimentos",
+        "perdida de capacidad hidraulica",
+      ]),
+    ).slice(0, 8);
 
   const faqSchema = JSON.stringify({
     "@context": "https://schema.org",
@@ -84,7 +126,7 @@ export function SeoServiceAreaLanding({ route }: Props) {
     "@context": "https://schema.org",
     "@type": "Service",
     name: h1,
-    serviceType: route.service.nombre,
+    serviceType: exclusiveIntent?.service ?? route.service.nombre,
     areaServed: [route.sector, route.comuna.comuna],
     provider: {
       "@type": "LocalBusiness",
@@ -92,7 +134,9 @@ export function SeoServiceAreaLanding({ route }: Props) {
       telephone: siteConfig.phoneDisplay,
       url: siteConfig.siteUrl,
     },
-    description: `${route.service.nombre} en ${route.sector}, ${route.comuna.comuna}, con equipos RIDGID, hidrojet y atencion 24/7.`,
+    description:
+      exclusiveIntent?.description ??
+      `${route.service.nombre} en ${route.sector}, ${route.comuna.comuna}, con equipos RIDGID, hidrojet y atencion 24/7.`,
   }).replace(/</g, "\\u003c");
 
   return (
@@ -129,7 +173,7 @@ export function SeoServiceAreaLanding({ route }: Props) {
                   className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-500 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-emerald-600/30 transition hover:bg-emerald-600"
                 >
                   <PhoneCall className="h-4 w-4" />
-                  WhatsApp inmediato
+                  {ctaLabel}
                 </a>
                 <a
                   href={siteConfig.phoneHref}
@@ -349,7 +393,7 @@ export function SeoServiceAreaLanding({ route }: Props) {
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-500 px-5 py-3 text-sm font-bold text-white transition hover:bg-emerald-600"
               >
                 <PhoneCall className="h-4 w-4" />
-                WhatsApp 24/7
+                {ctaLabel}
               </a>
               <a
                 href={siteConfig.phoneHref}

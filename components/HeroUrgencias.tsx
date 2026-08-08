@@ -1,6 +1,7 @@
+import Image from "next/image";
+
 import { ArrowRight, Clock, ExternalLink, MapPin, Phone, Shield } from "@/components/icons";
 import { ServiceTermsNotice } from "@/components/service-terms";
-import { StaticPicture } from "@/components/static-picture";
 import type { CmsHomeSettings } from "@/lib/cms-content";
 import { GOOGLE_REVIEWS_URL, createWhatsAppUrl, siteConfig } from "@/lib/site-config";
 
@@ -148,38 +149,21 @@ export function HeroUrgencias({ settings }: HeroUrgenciasProps) {
 
           <div className="relative mx-auto w-full max-w-xl lg:max-w-none">
             <div className="hu-gradient-border hu-card-lift rounded-[2rem] p-4 [--hu-card-bg:rgba(255,255,255,0.1)] backdrop-blur-sm sm:p-6">
-              <div className="relative mb-4 overflow-hidden rounded-[1.5rem] border border-white/15 bg-slate-950/30">
-                <StaticPicture
-                  src="/images/hero-urgencia.jpg"
-                  alt="Operación técnica sanitaria de Hidrourgencias SpA"
-                  width={720}
-                  height={420}
-                  className="h-52 w-full object-cover opacity-90 sm:h-64"
-                  loading="eager"
-                  fetchPriority="high"
+              <div className="relative mb-4 aspect-[16/10] overflow-hidden rounded-[1.5rem] border border-sky-100/80 bg-white shadow-[0_24px_70px_rgba(3,31,58,0.24)]">
+                <Image
+                  src="/images/logo-hidrourgencias.webp"
+                  alt="Hidrourgencias SpA"
+                  width={980}
+                  height={973}
+                  sizes="(max-width: 640px) calc(100vw - 64px), 520px"
+                  className="h-full w-full object-contain px-10 py-8 sm:px-16 sm:py-10"
+                  preload
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/12 to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-2">
-                  {["Diagnóstico", "Intervención", "Verificación"].map((item) => (
-                    <span key={item} className="rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-black uppercase tracking-[0.14em] text-white backdrop-blur">
-                      {item}
-                    </span>
-                  ))}
-                </div>
               </div>
               <div className="rounded-[1.6rem] border border-sky-200/20 bg-[linear-gradient(145deg,rgba(255,255,255,0.13),rgba(255,255,255,0.05))] p-5 sm:p-7">
                 <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
-                  <div className="relative h-24 w-24 flex-none overflow-hidden rounded-3xl border border-white/30 bg-white p-2 shadow-xl">
-                    <StaticPicture
-                      src={hero.heroImage}
-                      alt={hero.heroImageAlt}
-                      width={96}
-                      height={96}
-                      className="h-full w-full object-cover"
-                      loading="eager"
-                      fetchPriority="high"
-                      decoding="async"
-                    />
+                  <div className="flex h-20 w-20 flex-none items-center justify-center rounded-2xl border border-sky-200/30 bg-sky-50/10 shadow-xl sm:h-24 sm:w-24">
+                    <Shield className="h-10 w-10 text-sky-100 sm:h-12 sm:w-12" aria-hidden="true" />
                   </div>
                   <div className="min-w-0">
                     <p className="text-sm font-bold uppercase tracking-[0.22em] text-sky-100">Respuesta inmediata</p>
