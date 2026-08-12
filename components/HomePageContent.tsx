@@ -50,11 +50,11 @@ const coverageComunas = [
   { name: "Villa Alemana", href: "/destape-alcantarillado-villa-alemana", detail: "Urgencias y mantención sanitaria" },
   { name: "Limache", href: "/destape-alcantarillado-limache", detail: "Redes urbanas y productivas" },
   { name: "Quillota", href: "/destape-alcantarillado-quillota", detail: "Edificios, empresas y viviendas" },
-  { name: "Casablanca", href: "/#contacto", detail: "Consulta cobertura técnica" },
+  { name: "Casablanca", href: "/destape-alcantarillado-casablanca", detail: "Viviendas, parcelas y comercio local" },
   { name: "Puchuncaví", href: "/destape-alcantarillado-puchuncavi", detail: "Sectores costeros e industriales" },
-  { name: "Maitencillo", href: "/destape-alcantarillado-puchuncavi", detail: "Cobertura vía Puchuncaví" },
-  { name: "Curauma", href: "/destape-alcantarillado-placilla-curauma", detail: "Condominios y redes compartidas" },
-  { name: "Placilla", href: "/destape-alcantarillado-placilla-curauma", detail: "Placilla y Curauma" },
+  { name: "Maitencillo", href: "/destape-alcantarillado-maitencillo-puchuncavi", detail: "Viviendas costeras, condominios y restaurantes" },
+  { name: "Curauma", href: "/zona/curauma-valparaiso", detail: "Condominios y redes compartidas" },
+  { name: "Placilla", href: "/zona/placilla-valparaiso", detail: "Viviendas, comercio y redes privadas" },
 ];
 
 const highlightedZones = [
@@ -62,7 +62,7 @@ const highlightedZones = [
   { label: "Recreo, Viña del Mar", href: "/destape-alcantarillado-recreo-vina-del-mar" },
   { label: "Cerro Barón, Valparaíso", href: "/destape-alcantarillado-cerro-baron-valparaiso" },
   { label: "Placilla y Curauma", href: "/destape-alcantarillado-placilla-curauma" },
-  { label: "Maitencillo, Puchuncaví", href: "/destape-alcantarillado-puchuncavi" },
+  { label: "Maitencillo, Puchuncaví", href: "/destape-alcantarillado-maitencillo-puchuncavi" },
   { label: "Concón costero", href: "/hidrojet-concon" },
 ];
 

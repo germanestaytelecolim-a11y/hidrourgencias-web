@@ -110,6 +110,14 @@ function serviceProfile(
 }
 
 const zoneVisualProfiles = new Map<string, LandingVisualProfile>([
+  zoneProfile("curauma-valparaiso", "recovery", "Entorno residencial y urbano de Curauma en Valparaíso", "#34d399", {
+    objectPosition: "center 48%",
+    imageSide: "left",
+  }),
+  zoneProfile("placilla-valparaiso", "engineering", "Entorno urbano y residencial de Placilla de Peñuelas en Valparaíso", "#f59e0b", {
+    objectPosition: "center 52%",
+    imageSide: "right",
+  }),
   zoneProfile("renaca-vina-del-mar", "panorama", "Borde costero y playa de Reñaca en Viña del Mar", "#22d3ee", {
     objectPosition: "center 54%",
     imageSide: "right",

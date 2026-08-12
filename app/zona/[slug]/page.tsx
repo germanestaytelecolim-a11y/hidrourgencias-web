@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ExternalLink } from "lucide-react";
+import { ChevronRight, ExternalLink } from "lucide-react";
 import { notFound } from "next/navigation";
 
 import { LandingVisualHero } from "@/components/landing-visual-hero";
@@ -36,6 +36,14 @@ function getContextoZona(zona: string, comuna: string) {
 
   const zonaNormalizada = normalizeZonaValue(zona);
   const comunaNormalizada = normalizeZonaValue(comuna);
+
+  if (zonaNormalizada.includes("curauma")) {
+    return "sector de conjuntos residenciales, condominios y vialidad interior con redes compartidas y variaciones de uso";
+  }
+
+  if (zonaNormalizada.includes("placilla")) {
+    return "sector urbano-residencial con viviendas, comercio, instalaciones productivas y redes privadas de distinta escala";
+  }
 
   if (zonaNormalizada.includes("recreo")) {
     return contextos.Recreo;
@@ -176,6 +184,7 @@ export default async function ZonaPage({ params }: Props) {
   const keywordVariations = getKeywordVariations(zona.nombre);
   const uniqueZonaParagraphs = getUniqueZonaParagraphs(zona.nombre, zona.comuna);
   const visualProfile = getZoneVisualProfile(zona.slug);
+  const isPlacillaCuraumaIndividual = zona.slug === "curauma-valparaiso" || zona.slug === "placilla-valparaiso";
 
   if (!visualProfile) {
     throw new Error(`Falta perfil visual para la zona ${zona.slug}.`);
@@ -201,15 +210,47 @@ export default async function ZonaPage({ params }: Props) {
     },
   }).replace(/</g, "\\u003c");
 
+  const breadcrumbSchema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Inicio",
+        item: `${siteConfig.siteUrl}/`,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: `Destape de alcantarillado en ${zona.nombre}`,
+        item: buildCanonicalUrl(`/zona/${zona.slug}`),
+      },
+    ],
+  }).replace(/</g, "\\u003c");
+
   return (
     <main className="mx-auto min-h-screen max-w-6xl px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: zonaSchema }} />
+      {isPlacillaCuraumaIndividual ? (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbSchema }} />
+      ) : null}
 
-      <div className="mb-6">
-        <Link href="/" className="inline-flex items-center text-sm font-semibold text-sky-700 hover:text-sky-800">
-          {"\u2190"} Volver al inicio
-        </Link>
-      </div>
+      {isPlacillaCuraumaIndividual ? (
+        <nav aria-label="Migas de pan" className="mb-6 flex items-center gap-2 text-sm">
+          <Link href="/" className="inline-flex items-center font-semibold text-sky-700 hover:text-sky-800">
+            Inicio
+          </Link>
+          <ChevronRight className="h-4 w-4 text-slate-400" aria-hidden="true" />
+          <span className="font-semibold text-slate-700">{zona.nombre}</span>
+        </nav>
+      ) : (
+        <div className="mb-6">
+          <Link href="/" className="inline-flex items-center text-sm font-semibold text-sky-700 hover:text-sky-800">
+            {"\u2190"} Volver al inicio
+          </Link>
+        </div>
+      )}
 
       <LandingVisualHero
         profile={visualProfile}
@@ -254,6 +295,16 @@ export default async function ZonaPage({ params }: Props) {
           flujo y control de rebalses en sistemas domiciliarios y colectivos.
         </p>
         <p>{uniqueZonaParagraphs[0]}</p>
+        {isPlacillaCuraumaIndividual ? (
+          <p>
+            Esta página aborda cobertura territorial general de {zona.nombre}; el servicio específico de destape para
+            ambos sectores se mantiene en{" "}
+            <Link href="/destape-alcantarillado-placilla-curauma" className="font-semibold underline underline-offset-2">
+              la landing combinada de Placilla y Curauma
+            </Link>
+            .
+          </p>
+        ) : null}
         <p>
           Atendemos {keywordVariations[0]}, {keywordVariations[1]}, {keywordVariations[2]} y{" "}
           {keywordVariations[3]} con disponibilidad inmediata.
@@ -300,6 +351,12 @@ export default async function ZonaPage({ params }: Props) {
             Trabajamos desagues domiciliarios, redes verticales de edificios, tramos horizontales de condominios y
             camaras de inspeccion con protocolo de diagnostico, correccion y verificacion final.
           </p>
+          {zona.slug === "curauma-valparaiso" ? (
+            <p className="mt-4 text-sm leading-7 text-slate-700 sm:text-base">
+              En Curauma también se revisan puntos donde aguas lluvias, patios, estacionamientos o cámaras exteriores
+              pueden aumentar la carga sobre la evacuación sanitaria; la inspección separa ambos sistemas antes de intervenir.
+            </p>
+          ) : null}
         </article>
       </section>
 

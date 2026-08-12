@@ -1,7 +1,69 @@
 [
   {
+    "slug": "casablanca",
+    "filename": "casablanca.webp",
+    "file": "/images/zonas/casablanca.webp",
+    "landing": "/zona/casablanca",
+    "commonsTitle": "File:Casablanca - panoramio (2).jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Casablanca_-_panoramio_(2).jpg",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/5/52/Casablanca_-_panoramio_%282%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "author": "meschmarco",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "description": "casablanca",
+    "modifications": "Recorte 3:2, redimensionado y optimización WebP para uso web.",
+    "importedAt": "2026-08-11T16:56:23.761Z"
+  },
+  {
+    "slug": "maitencillo-puchuncavi",
+    "filename": "maitencillo-puchuncavi.webp",
+    "file": "/images/zonas/maitencillo-puchuncavi.webp",
+    "landing": "/zona/maitencillo-puchuncavi",
+    "commonsTitle": "File:093-365 - Maitencillo - Flickr - -Gabriel-.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:093-365_-_Maitencillo_-_Flickr_-_-Gabriel-.jpg",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/9/90/093-365_-_Maitencillo_-_Flickr_-_-Gabriel-.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "author": "Gabriel Urrutia Galaz",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "description": "V Region",
+    "modifications": "Recorte 3:2, redimensionado y optimización WebP para uso web.",
+    "importedAt": "2026-08-11T16:56:28.934Z"
+  },
+  {
+    "slug": "curauma-valparaiso",
+    "filename": "curauma-valparaiso.webp",
+    "file": "/images/zonas/curauma-valparaiso.webp",
+    "landing": "/zona/curauma-valparaiso",
+    "commonsTitle": "File:20250216 Curauma 01.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:20250216_Curauma_01.jpg",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0a/20250216_Curauma_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "author": "Aeveraal",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "description": "Curauma, Chile",
+    "modifications": "Recorte 3:2, redimensionado y optimización WebP para uso web.",
+    "importedAt": "2026-08-11T16:56:30.379Z"
+  },
+  {
+    "slug": "placilla-valparaiso",
+    "filename": "placilla-valparaiso.webp",
+    "file": "/images/zonas/placilla-valparaiso.webp",
+    "landing": "/zona/placilla-valparaiso",
+    "commonsTitle": "File:Placilla, Valparaíso, Región de Valparaíso, Chile - panoramio.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Placilla,_Valpara%C3%ADso,_Regi%C3%B3n_de_Valpara%C3%ADso,_Chile_-_panoramio.jpg",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a2/Placilla%2C_Valpara%C3%ADso%2C_Regi%C3%B3n_de_Valpara%C3%ADso%2C_Chile_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "author": "GOLAN",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "description": "Placilla, Valparaíso, Región de Valparaíso, Chile",
+    "modifications": "Recorte 3:2, redimensionado y optimización WebP para uso web.",
+    "importedAt": "2026-08-11T16:56:31.677Z"
+  },
+  {
     "slug": "renaca-vina-del-mar",
+    "filename": "renaca-vina-del-mar.webp",
     "file": "/images/zonas/renaca-vina-del-mar.webp",
+    "landing": "/zona/renaca-vina-del-mar",
     "commonsTitle": "File:Playa Reñaca. Viña del Mar. Chile.jpg",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Playa_Re%C3%B1aca._Vi%C3%B1a_del_Mar._Chile.jpg",
     "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Playa_Re%C3%B1aca._Vi%C3%B1a_del_Mar._Chile.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
@@ -10,13 +72,13 @@
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
     "description": "Reñaca beach is the youth center of the Viña del Mar commune and the city of Valparaíso.",
     "modifications": "Recorte 3:2, redimensionado y optimización WebP para uso web.",
-    "importedAt": "2026-08-05T21:03:05.514Z",
-    "filename": "renaca-vina-del-mar.webp",
-    "landing": "/zona/renaca-vina-del-mar"
+    "importedAt": "2026-08-11T16:56:35.773Z"
   },
   {
     "slug": "recreo-vina-del-mar",
+    "filename": "recreo-vina-del-mar.webp",
     "file": "/images/zonas/recreo-vina-del-mar.webp",
+    "landing": "/zona/recreo-vina-del-mar",
     "commonsTitle": "File:Chile, Viña del Mar, Recreo (46836308154).jpg",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chile,_Vi%C3%B1a_del_Mar,_Recreo_(46836308154).jpg",
     "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0f/Chile%2C_Vi%C3%B1a_del_Mar%2C_Recreo_%2846836308154%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
@@ -25,13 +87,13 @@
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
     "description": "Panoramic of Recreo, neighbourhood in Viña del Mar, Valparaíso Region, Chile.",
     "modifications": "Recorte 3:2, redimensionado y optimización WebP para uso web.",
-    "importedAt": "2026-08-05T21:03:09.412Z",
-    "filename": "recreo-vina-del-mar.webp",
-    "landing": "/zona/recreo-vina-del-mar"
+    "importedAt": "2026-08-11T16:56:37.847Z"
   },
   {
     "slug": "achupallas-vina-del-mar",
+    "filename": "achupallas-vina-del-mar.webp",
     "file": "/images/zonas/achupallas-vina-del-mar.webp",
+    "landing": "/zona/achupallas-vina-del-mar",
     "commonsTitle": "File:Achupallas nocturna.jpg",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Achupallas_nocturna.jpg",
     "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Achupallas_nocturna.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
@@ -40,13 +102,13 @@
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
     "description": "vista nocturna sector poblacional de achupallas , viña del amar",
     "modifications": "Recorte 3:2, redimensionado y optimización WebP para uso web.",
-    "importedAt": "2026-08-05T21:03:11.590Z",
-    "filename": "achupallas-vina-del-mar.webp",
-    "landing": "/zona/achupallas-vina-del-mar"
+    "importedAt": "2026-08-11T16:56:38.733Z"
   },
   {
     "slug": "chorrillos-vina-del-mar",
+    "filename": "chorrillos-vina-del-mar.webp",
     "file": "/images/zonas/chorrillos-vina-del-mar.webp",
+    "landing": "/zona/chorrillos-vina-del-mar",
     "commonsTitle": "File:Estación Chorrillos, Viña del Mar 20231002 04.jpg",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Estaci%C3%B3n_Chorrillos,_Vi%C3%B1a_del_Mar_20231002_04.jpg",
     "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Estaci%C3%B3n_Chorrillos%2C_Vi%C3%B1a_del_Mar_20231002_04.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
@@ -55,13 +117,13 @@
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
     "description": "Estación Chorrillos, Viña del Mar, Región de Valparaíso, Chile",
     "modifications": "Recorte 3:2, redimensionado y optimización WebP para uso web.",
-    "importedAt": "2026-08-05T21:03:13.277Z",
-    "filename": "chorrillos-vina-del-mar.webp",
-    "landing": "/zona/chorrillos-vina-del-mar"
+    "importedAt": "2026-08-11T16:56:40.427Z"
   },
   {
     "slug": "forestal-vina-del-mar",
+    "filename": "forestal-vina-del-mar.webp",
     "file": "/images/zonas/forestal-vina-del-mar.webp",
+    "landing": "/zona/forestal-vina-del-mar",
     "commonsTitle": "File:Conjunción planetaria cerrada entre Venus y Júpiter sobre la Loma Latorre de Santa Julia en Viña del Mar. Close planetary conjunction between Venus and Jupiter above Loma Latorre de Santa Julia, Viña del Mar.jpg",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Conjunci%C3%B3n_planetaria_cerrada_entre_Venus_y_J%C3%BApiter_sobre_la_Loma_Latorre_de_Santa_Julia_en_Vi%C3%B1a_del_Mar._Close_planetary_conjunction_between_Venus_and_Jupiter_above_Loma_Latorre_de_Santa_Julia,_Vi%C3%B1a_del_Mar.jpg",
     "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7f/Conjunci%C3%B3n_planetaria_cerrada_entre_Venus_y_J%C3%BApiter_sobre_la_Loma_Latorre_de_Santa_Julia_en_Vi%C3%B1a_del_Mar._Close_planetary_conjunction_between_Venus_and_Jupiter_above_Loma_Latorre_de_Santa_Julia%2C_Vi%C3%B1a_del_Mar.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
@@ -70,13 +132,13 @@
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
     "description": "Close planetary conjunction between Venus and Jupiter above Loma Latorre de Santa Julia, Viña del Mar (August 11, 2025). This close approach was closely followed by the astronomical community, as it brought together two of the brightest celestial objects visible from Earth, only surpassed by the Sun and the Moon: Venus, with a magnitude of –3.9, and the gas giant Jupiter, with a magnitude of –1.8. The phenomenon unfolded between August 11 and 13, with the planets separated by 1° of angular distance on the 11th, and reaching their closest apparent approach of less than 1° on the 12th. In reality, this was only a visual effect: during those dates Venus was about 68 million miles from Earth, while Jupiter was nearly 565 million miles away. The actual distance between both planets was approximately 497 million miles. The submitted photograph was taken on August 11 from Loma Latorre de Santa Julia, in Viña del Mar, under clear sky conditions. It is a vertical panorama composed of three horizontal frames, each captured with a focal length of 400 mm, designed to expand the landscape beneath the sky’s horizon and include more foreground elements. The composition spans approximately 3.7 miles of terrain between the observation point and the water tower located at the top of Loma Latorre Hill, crossing a broad urban sector that includes the neighborhoods of Forestal, Miraflores Alto, Achupallas, and part of Villa Independencia. Viña del Mar, in addition to being a well-known coastal city in central Chile famous for its beaches and seaside resorts, has undergone significant urban growth that has expanded from the flat downtown area into the hillsides and ravines, reaching elevations of up to 1,300 feet (400 m). This process has created a landscape defined by ravines, slopes, and layered urban structures, which in the photograph visually interact with the astronomical phenomenon being documented.",
     "modifications": "Recorte 3:2, redimensionado y optimización WebP para uso web.",
-    "importedAt": "2026-08-05T21:03:14.632Z",
-    "filename": "forestal-vina-del-mar.webp",
-    "landing": "/zona/forestal-vina-del-mar"
+    "importedAt": "2026-08-11T16:56:54.627Z"
   },
   {
     "slug": "gomez-carreno-vina-del-mar",
+    "filename": "gomez-carreno-vina-del-mar.webp",
     "file": "/images/zonas/gomez-carreno-vina-del-mar.webp",
+    "landing": "/zona/gomez-carreno-vina-del-mar",
     "commonsTitle": "File:Parque Natural Gómez Carreño.jpg",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Parque_Natural_G%C3%B3mez_Carre%C3%B1o.jpg",
     "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/7/74/Parque_Natural_G%C3%B3mez_Carre%C3%B1o.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
@@ -85,13 +147,13 @@
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
     "description": "Estero de Reñaca, que fluye por las laderas rocosas en el Parque Natural Gómez Carreño, ubicado en Viña del Mar, Chile.",
     "modifications": "Recorte 3:2, redimensionado y optimización WebP para uso web.",
-    "importedAt": "2026-08-05T21:03:15.733Z",
-    "filename": "gomez-carreno-vina-del-mar.webp",
-    "landing": "/zona/gomez-carreno-vina-del-mar"
+    "importedAt": "2026-08-11T16:56:55.991Z"
   },
   {
     "slug": "miraflores-vina-del-mar",
+    "filename": "miraflores-vina-del-mar.webp",
     "file": "/images/zonas/miraflores-vina-del-mar.webp",
+    "landing": "/zona/miraflores-vina-del-mar",
     "commonsTitle": "File:Campus Miraflores UVM, Viña del Mar 20231002 02.jpg",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Campus_Miraflores_UVM,_Vi%C3%B1a_del_Mar_20231002_02.jpg",
     "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Campus_Miraflores_UVM%2C_Vi%C3%B1a_del_Mar_20231002_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
@@ -100,13 +162,13 @@
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
     "description": "Campus Miraflores UVM, Viña del Mar, Región de Valparaíso, Chile",
     "modifications": "Recorte 3:2, redimensionado y optimización WebP para uso web.",
-    "importedAt": "2026-08-05T21:03:17.046Z",
-    "filename": "miraflores-vina-del-mar.webp",
-    "landing": "/zona/miraflores-vina-del-mar"
+    "importedAt": "2026-08-11T16:57:02.364Z"
   },
   {
     "slug": "cerro-placeres-valparaiso",
+    "filename": "cerro-placeres-valparaiso.webp",
     "file": "/images/zonas/cerro-placeres-valparaiso.webp",
+    "landing": "/zona/cerro-placeres-valparaiso",
     "commonsTitle": "File:Vista de calle en Cerro Placeres de Valparaíso.jpg",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Vista_de_calle_en_Cerro_Placeres_de_Valpara%C3%ADso.jpg",
     "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/7/79/Vista_de_calle_en_Cerro_Placeres_de_Valpara%C3%ADso.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
@@ -115,13 +177,13 @@
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
     "description": "Barrio : Placeres Valparaíso",
     "modifications": "Recorte 3:2, redimensionado y optimización WebP para uso web.",
-    "importedAt": "2026-08-05T21:03:18.699Z",
-    "filename": "cerro-placeres-valparaiso.webp",
-    "landing": "/zona/cerro-placeres-valparaiso"
+    "importedAt": "2026-08-11T16:57:08.591Z"
   },
   {
     "slug": "cerro-baron-valparaiso",
+    "filename": "cerro-baron-valparaiso.webp",
     "file": "/images/zonas/cerro-baron-valparaiso.webp",
+    "landing": "/zona/cerro-baron-valparaiso",
     "commonsTitle": "File:Ascensor Barón y Valparaíso.JPG",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ascensor_Bar%C3%B3n_y_Valpara%C3%ADso.JPG",
     "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Ascensor_Bar%C3%B3n_y_Valpara%C3%ADso.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
@@ -130,13 +192,13 @@
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
     "description": "This is a photo of a national monument in Chile:",
     "modifications": "Recorte 3:2, redimensionado y optimización WebP para uso web.",
-    "importedAt": "2026-08-05T21:03:19.372Z",
-    "filename": "cerro-baron-valparaiso.webp",
-    "landing": "/zona/cerro-baron-valparaiso"
+    "importedAt": "2026-08-11T16:57:09.975Z"
   },
   {
     "slug": "cerro-alegre-valparaiso",
+    "filename": "cerro-alegre-valparaiso.webp",
     "file": "/images/zonas/cerro-alegre-valparaiso.webp",
+    "landing": "/zona/cerro-alegre-valparaiso",
     "commonsTitle": "File:Cerro Alegre Valparaiso.jpg",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cerro_Alegre_Valparaiso.jpg",
     "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/a/ab/Cerro_Alegre_Valparaiso.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
@@ -145,13 +207,13 @@
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
     "description": "Street Art in Lautaro Rosas Street, Cerro Alegre - Valparaiso.",
     "modifications": "Recorte 3:2, redimensionado y optimización WebP para uso web.",
-    "importedAt": "2026-08-05T21:03:20.616Z",
-    "filename": "cerro-alegre-valparaiso.webp",
-    "landing": "/zona/cerro-alegre-valparaiso"
+    "importedAt": "2026-08-11T16:57:11.250Z"
   },
   {
     "slug": "playa-ancha-valparaiso",
+    "filename": "playa-ancha-valparaiso.webp",
     "file": "/images/zonas/playa-ancha-valparaiso.webp",
+    "landing": "/zona/playa-ancha-valparaiso",
     "commonsTitle": "File:Acantilado, Playa Ancha , Valparaíso , Chile.jpg",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Acantilado,_Playa_Ancha_,_Valpara%C3%ADso_,_Chile.jpg",
     "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Acantilado%2C_Playa_Ancha_%2C_Valpara%C3%ADso_%2C_Chile.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
@@ -160,13 +222,13 @@
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
     "description": "View of Valparaíso, Chile.",
     "modifications": "Recorte 3:2, redimensionado y optimización WebP para uso web.",
-    "importedAt": "2026-08-05T21:03:23.423Z",
-    "filename": "playa-ancha-valparaiso.webp",
-    "landing": "/zona/playa-ancha-valparaiso"
+    "importedAt": "2026-08-11T16:57:12.840Z"
   },
   {
     "slug": "concon-centro",
+    "filename": "concon-centro.webp",
     "file": "/images/zonas/concon-centro.webp",
+    "landing": "/zona/concon-centro",
     "commonsTitle": "File:Rotonda de Concón, Concón 20211011 01.jpg",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rotonda_de_Conc%C3%B3n,_Conc%C3%B3n_20211011_01.jpg",
     "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fb/Rotonda_de_Conc%C3%B3n%2C_Conc%C3%B3n_20211011_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
@@ -175,13 +237,13 @@
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
     "description": "Rotonda de Concón, Concón, Región de Valparaíso, Chile",
     "modifications": "Recorte 3:2, redimensionado y optimización WebP para uso web.",
-    "importedAt": "2026-08-05T21:03:24.595Z",
-    "filename": "concon-centro.webp",
-    "landing": "/zona/concon-centro"
+    "importedAt": "2026-08-11T16:57:18.527Z"
   },
   {
     "slug": "bosques-de-montemar-concon",
+    "filename": "bosques-de-montemar-concon.webp",
     "file": "/images/zonas/bosques-de-montemar-concon.webp",
+    "landing": "/zona/bosques-de-montemar-concon",
     "commonsTitle": "File:Chile, Concón, Bosques de Montemar (43470659892).jpg",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chile,_Conc%C3%B3n,_Bosques_de_Montemar_(43470659892).jpg",
     "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/2/22/Chile%2C_Conc%C3%B3n%2C_Bosques_de_Montemar_%2843470659892%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
@@ -190,13 +252,13 @@
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
     "description": "Bosques de Montemar , neighbourhood in Concón Commune, Valparaíso Region, Chile.",
     "modifications": "Recorte 3:2, redimensionado y optimización WebP para uso web.",
-    "importedAt": "2026-08-05T21:03:26.281Z",
-    "filename": "bosques-de-montemar-concon.webp",
-    "landing": "/zona/bosques-de-montemar-concon"
+    "importedAt": "2026-08-11T16:57:19.684Z"
   },
   {
     "slug": "centro-quilpue",
+    "filename": "centro-quilpue.webp",
     "file": "/images/zonas/centro-quilpue.webp",
+    "landing": "/zona/centro-quilpue",
     "commonsTitle": "File:Centro de Quilpué.JPG",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Centro_de_Quilpu%C3%A9.JPG",
     "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Centro_de_Quilpu%C3%A9.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
@@ -205,13 +267,13 @@
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
     "description": "Centro de la ciudad de Quilpué, mirado desde el Condominio Sol Poniente en dirección al este.",
     "modifications": "Recorte 3:2, redimensionado y optimización WebP para uso web.",
-    "importedAt": "2026-08-05T21:03:27.559Z",
-    "filename": "centro-quilpue.webp",
-    "landing": "/zona/centro-quilpue"
+    "importedAt": "2026-08-11T16:57:20.984Z"
   },
   {
     "slug": "belloto-norte-quilpue",
+    "filename": "belloto-norte-quilpue.webp",
     "file": "/images/zonas/belloto-norte-quilpue.webp",
+    "landing": "/zona/belloto-norte-quilpue",
     "commonsTitle": "File:20250118 Belloto del norte.jpg",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:20250118_Belloto_del_norte.jpg",
     "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/61/20250118_Belloto_del_norte.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
@@ -220,13 +282,13 @@
     "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
     "description": "Belloto del norte en el jardín botánico Mapulemu del Parque Metropolitano de Santiago",
     "modifications": "Recorte 3:2, redimensionado y optimización WebP para uso web.",
-    "importedAt": "2026-08-05T21:03:29.900Z",
-    "filename": "belloto-norte-quilpue.webp",
-    "landing": "/zona/belloto-norte-quilpue"
+    "importedAt": "2026-08-11T16:57:23.590Z"
   },
   {
     "slug": "belloto-sur-quilpue",
+    "filename": "belloto-sur-quilpue.webp",
     "file": "/images/zonas/belloto-sur-quilpue.webp",
+    "landing": "/zona/belloto-sur-quilpue",
     "commonsTitle": "File:Vista de El Belloto.JPG",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Vista_de_El_Belloto.JPG",
     "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Vista_de_El_Belloto.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
@@ -235,13 +297,13 @@
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
     "description": "Vista desde el oeste de El Belloto.",
     "modifications": "Recorte 3:2, redimensionado y optimización WebP para uso web.",
-    "importedAt": "2026-08-05T21:03:30.936Z",
-    "filename": "belloto-sur-quilpue.webp",
-    "landing": "/zona/belloto-sur-quilpue"
+    "importedAt": "2026-08-11T16:57:25.174Z"
   },
   {
     "slug": "centro-villa-alemana",
+    "filename": "centro-villa-alemana.webp",
     "file": "/images/zonas/centro-villa-alemana.webp",
+    "landing": "/zona/centro-villa-alemana",
     "commonsTitle": "File:Paseo Latorre, Villa Alemana 20211107.jpg",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Paseo_Latorre,_Villa_Alemana_20211107.jpg",
     "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8c/Paseo_Latorre%2C_Villa_Alemana_20211107.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
@@ -250,13 +312,13 @@
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
     "description": "Paseo Latorre, Villa Alemana, Región de Valparaíso, Chile",
     "modifications": "Recorte 3:2, redimensionado y optimización WebP para uso web.",
-    "importedAt": "2026-08-05T21:03:32.397Z",
-    "filename": "centro-villa-alemana.webp",
-    "landing": "/zona/centro-villa-alemana"
+    "importedAt": "2026-08-11T16:57:27.388Z"
   },
   {
     "slug": "penablanca-villa-alemana",
+    "filename": "penablanca-villa-alemana.webp",
     "file": "/images/zonas/penablanca-villa-alemana.webp",
+    "landing": "/zona/penablanca-villa-alemana",
     "commonsTitle": "File:Atardecer en Peñablanca, Villa Alemana.jpg",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Atardecer_en_Pe%C3%B1ablanca,_Villa_Alemana.jpg",
     "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b0/Atardecer_en_Pe%C3%B1ablanca%2C_Villa_Alemana.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
@@ -265,8 +327,6 @@
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
     "description": "Sunset at Peñablanca",
     "modifications": "Recorte 3:2, redimensionado y optimización WebP para uso web.",
-    "importedAt": "2026-08-05T21:03:34.685Z",
-    "filename": "penablanca-villa-alemana.webp",
-    "landing": "/zona/penablanca-villa-alemana"
+    "importedAt": "2026-08-11T16:57:28.250Z"
   }
 ]

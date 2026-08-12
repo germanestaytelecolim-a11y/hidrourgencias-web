@@ -414,6 +414,7 @@ export const reservedRootSlugs = [
   "destape-alcantarillado-villa-alemana",
   "destape-alcantarillado-quilpue",
   "destape-alcantarillado-puchuncavi",
+  "destape-alcantarillado-maitencillo-puchuncavi",
   "destape-alcantarillado-quintero",
   "destape-alcantarillado-limache",
   "destape-alcantarillado-quillota",
@@ -462,9 +463,10 @@ function buildSeoRoute(comuna: ComunaSeo, service: ServicioSeo, sector: string):
   };
 }
 
-const allSeoRoutes = comunasSeo.flatMap((comuna) =>
-  comuna.sectores.flatMap((sector) => serviciosSeo.map((service) => buildSeoRoute(comuna, service, sector))),
-);
+const excludedSeoSlugs = new Set(["destape-alcantarillado-maitencillo-puchuncavi"]);
+const allSeoRoutes = comunasSeo
+  .flatMap((comuna) => comuna.sectores.flatMap((sector) => serviciosSeo.map((service) => buildSeoRoute(comuna, service, sector))))
+  .filter((route) => !excludedSeoSlugs.has(route.slug));
 
 const routeMap = new Map(allSeoRoutes.map((route) => [route.slug, route] as const));
 

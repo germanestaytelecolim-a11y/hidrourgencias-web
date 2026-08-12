@@ -23,6 +23,10 @@ type CommonsPage = {
 };
 
 const zoneSources: ZoneSource[] = [
+  { slug: "casablanca", title: "File:Casablanca - panoramio (2).jpg" },
+  { slug: "maitencillo-puchuncavi", title: "File:093-365 - Maitencillo - Flickr - -Gabriel-.jpg" },
+  { slug: "curauma-valparaiso", title: "File:20250216 Curauma 01.jpg" },
+  { slug: "placilla-valparaiso", title: "File:Placilla, Valparaíso, Región de Valparaíso, Chile - panoramio.jpg" },
   { slug: "renaca-vina-del-mar", title: "File:Playa Reñaca. Viña del Mar. Chile.jpg" },
   { slug: "recreo-vina-del-mar", title: "File:Chile, Viña del Mar, Recreo (46836308154).jpg" },
   { slug: "achupallas-vina-del-mar", title: "File:Achupallas nocturna.jpg" },

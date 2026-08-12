@@ -66,10 +66,25 @@ export type ComunaLandingData = {
   ctaMidMessage: string;
   ctaFinalMessage: string;
   presentation: ComunaLandingPresentation;
+  parentLandingSlug?: string;
   visual?: ComunaLandingVisual;
 };
 
 const territorialVisuals: Record<string, ComunaLandingVisual> = {
+  "destape-alcantarillado-casablanca": {
+    treatment: "residential",
+    image: "/images/zonas/casablanca.webp",
+    alt: "Panorama urbano y entorno de Casablanca en la Región de Valparaíso",
+    accent: "#d49a2a",
+    imagePosition: "center center",
+  },
+  "destape-alcantarillado-maitencillo-puchuncavi": {
+    treatment: "coastal",
+    image: "/images/zonas/maitencillo-puchuncavi.webp",
+    alt: "Costa rocosa y viviendas costeras de Maitencillo, Puchuncaví",
+    accent: "#13b8c4",
+    imagePosition: "center 58%",
+  },
   "destape-alcantarillado-valparaiso": {
     treatment: "port",
     image: "/images/servicios/heroes/destape-camaras-inspeccion.webp",
@@ -315,6 +330,48 @@ const comunaProfiles: ComunaProfile[] = [
     ],
     operationNote:
       "En Puchuncavi trabajamos con protocolos escalables para resolver urgencias y construir continuidad sanitaria sostenible.",
+  },
+  {
+    slug: "destape-alcantarillado-casablanca",
+    comuna: "Casablanca",
+    nearbyZones: ["Centro de Casablanca", "Lo Vásquez", "Las Dichas", "Lagunillas", "Quintay"],
+    localContext:
+      "un territorio urbano y rural con viviendas, comercio local, parcelas y redes privadas cuya operación cambia según el uso del inmueble",
+    riskDrivers: [
+      "sedimentos y residuos en cámaras de redes privadas",
+      "raíces que ingresan por uniones o tramos exteriores",
+      "variaciones de carga entre viviendas, comercio y parcelas",
+    ],
+    urgentScenarios: [
+      "rebalse en viviendas y recintos comerciales",
+      "drenaje lento en baños, cocinas y cámaras exteriores",
+      "retorno de aguas servidas en redes privadas",
+      "obstrucciones recurrentes que requieren videoinspección",
+    ],
+    clientFocus: ["viviendas", "parcelas", "comercios", "administradores de recintos privados"],
+    operationNote:
+      "En Casablanca la evaluación distingue redes domiciliarias, cámaras exteriores y tramos privados antes de definir destape mecánico, hidrojet o inspección.",
+  },
+  {
+    slug: "destape-alcantarillado-maitencillo-puchuncavi",
+    comuna: "Maitencillo",
+    nearbyZones: ["Puchuncaví", "Cachagua", "Zapallar", "Horcón", "Ventanas"],
+    localContext:
+      "un balneario residencial con viviendas costeras, condominios, restaurantes y ocupación estacional que modifica la carga sanitaria",
+    riskDrivers: [
+      "grasas y residuos en cocinas de restaurantes y casas de temporada",
+      "arena y sedimentos movilizados hacia cámaras y descargas exteriores",
+      "aumento de uso en fines de semana y periodos de alta ocupación",
+    ],
+    urgentScenarios: [
+      "rebalse en condominios y viviendas de temporada",
+      "drenaje lento en restaurantes y cocinas residenciales",
+      "olores sanitarios por estancamiento en redes horizontales",
+      "obstrucciones en cámaras que requieren coordinación con administración",
+    ],
+    clientFocus: ["viviendas costeras", "condominios", "restaurantes", "administraciones residenciales"],
+    operationNote:
+      "En Maitencillo la coordinación considera accesos, ocupación del inmueble y control del material removido para sostener la continuidad sanitaria.",
   },
   {
     slug: "destape-alcantarillado-quintero",
@@ -718,6 +775,9 @@ function buildLandingData(profile: ComunaProfile): ComunaLandingData {
 
 const landingData = comunaProfiles.map((profile) => ({
   ...buildLandingData(profile),
+  ...(profile.slug === "destape-alcantarillado-maitencillo-puchuncavi"
+    ? { parentLandingSlug: "destape-alcantarillado-puchuncavi" }
+    : {}),
   visual: territorialVisuals[profile.slug],
 }));
 const landingMap = new Map(landingData.map((item) => [item.slug, item]));
@@ -762,7 +822,7 @@ export function buildComunaMetadata(data: ComunaLandingData): Metadata {
       type: "article",
       images: [
         {
-          url: "/images/hero-urgencia.jpg",
+          url: data.visual?.image ?? "/images/hero-urgencia.jpg",
           width: 1200,
           height: 630,
           alt: `Servicio sanitario tecnico en ${data.comuna}`,
@@ -773,7 +833,7 @@ export function buildComunaMetadata(data: ComunaLandingData): Metadata {
       card: "summary_large_image",
       title: `${data.h1} | ${siteConfig.name}`,
       description: data.metaDescription,
-      images: ["/images/hero-urgencia.jpg"],
+      images: [data.visual?.image ?? "/images/hero-urgencia.jpg"],
     },
   };
 }

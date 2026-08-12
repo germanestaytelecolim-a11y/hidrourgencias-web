@@ -107,6 +107,14 @@ export function ComunaLandingPage({ landing, allLandings }: Props) {
         <ChevronRight className="h-4 w-4 text-slate-400" aria-hidden="true" />
         <span className="font-semibold text-slate-700">{presentation.serviceName}</span>
       </nav>
+      {landing.parentLandingSlug ? (
+        <p className="mb-5 text-sm text-slate-600">
+          Esta cobertura territorial forma parte de la comuna de Puchuncaví. {" "}
+          <Link href={`/${landing.parentLandingSlug}`} className="font-semibold text-sky-700 underline underline-offset-2">
+            Ver destape de alcantarillado en Puchuncaví
+          </Link>
+        </p>
+      ) : null}
 
       {landing.visual ? (
         <TerritorialLandingHero landing={landing} />

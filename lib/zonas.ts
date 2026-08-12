@@ -12,7 +12,9 @@ export const zonas = {
     "Cerro Placeres",
     "Cerro Barón",
     "Cerro Alegre",
-    "Playa Ancha"
+    "Playa Ancha",
+    "Curauma",
+    "Placilla"
   ],
   concon: [
     "Concón Centro",
