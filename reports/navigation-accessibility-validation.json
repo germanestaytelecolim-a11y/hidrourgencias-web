@@ -1,0 +1,65 @@
+{
+  "generatedAt": "2026-08-13T21:21:10.604Z",
+  "mobile": [
+    {
+      "state": "services-open",
+      "pass": true
+    },
+    {
+      "state": "destapes-e-hidrojet",
+      "pass": true
+    },
+    {
+      "state": "coverage-open",
+      "pass": true
+    },
+    {
+      "state": "single-comuna-open",
+      "pass": true,
+      "openCount": 1
+    },
+    {
+      "state": "resources-open",
+      "pass": true
+    },
+    {
+      "state": "escape-close",
+      "pass": true
+    },
+    {
+      "state": "outside-close",
+      "pass": true
+    }
+  ],
+  "desktop": [
+    {
+      "state": "services-open",
+      "pass": true
+    },
+    {
+      "state": "coverage-open",
+      "pass": true
+    },
+    {
+      "state": "resources-open",
+      "pass": true
+    },
+    {
+      "state": "escape-close",
+      "pass": true
+    }
+  ],
+  "checks": [
+    "botones reales",
+    "aria-expanded y aria-controls",
+    "foco visible mediante brand-focus-ring",
+    "areas tactiles min-h-11",
+    "Escape",
+    "click fuera",
+    "scroll lock",
+    "solo una comuna abierta"
+  ],
+  "summary": {
+    "allPass": true
+  }
+}

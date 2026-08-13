@@ -1,0 +1,110 @@
+{
+  "generatedAt": "2026-08-13T21:22:45.131Z",
+  "viewports": [
+    {
+      "width": 320,
+      "cls": 0,
+      "desktopVisible": false,
+      "lcp": null,
+      "mobileVisible": true,
+      "overflow": 0
+    },
+    {
+      "width": 390,
+      "cls": 0,
+      "desktopVisible": false,
+      "lcp": null,
+      "mobileVisible": true,
+      "overflow": 0
+    },
+    {
+      "width": 768,
+      "cls": 0,
+      "desktopVisible": false,
+      "lcp": null,
+      "mobileVisible": true,
+      "overflow": 0
+    },
+    {
+      "width": 1024,
+      "cls": 0,
+      "desktopVisible": true,
+      "lcp": null,
+      "mobileVisible": false,
+      "overflow": 0
+    },
+    {
+      "width": 1440,
+      "cls": 0,
+      "desktopVisible": true,
+      "lcp": null,
+      "mobileVisible": false,
+      "overflow": 0
+    }
+  ],
+  "screenshots": [
+    "C:\\Users\\Alumno\\Desktop\\hidrourgencias-next\\reports\\navigation-captures\\normal-320.png",
+    "C:\\Users\\Alumno\\Desktop\\hidrourgencias-next\\reports\\navigation-captures\\normal-390.png",
+    "C:\\Users\\Alumno\\Desktop\\hidrourgencias-next\\reports\\navigation-captures\\normal-768.png",
+    "C:\\Users\\Alumno\\Desktop\\hidrourgencias-next\\reports\\navigation-captures\\normal-1024.png",
+    "C:\\Users\\Alumno\\Desktop\\hidrourgencias-next\\reports\\navigation-captures\\normal-1440.png"
+  ],
+  "consoleErrors": [],
+  "summary": {
+    "viewports": 5,
+    "overflowFailures": 0,
+    "consoleErrors": 0,
+    "allPass": true
+  },
+  "interactions": {
+    "mobile": [
+      {
+        "state": "services-open",
+        "pass": true
+      },
+      {
+        "state": "destapes-e-hidrojet",
+        "pass": true
+      },
+      {
+        "state": "coverage-open",
+        "pass": true
+      },
+      {
+        "state": "single-comuna-open",
+        "pass": true,
+        "openCount": 1
+      },
+      {
+        "state": "resources-open",
+        "pass": true
+      },
+      {
+        "state": "escape-close",
+        "pass": true
+      },
+      {
+        "state": "outside-close",
+        "pass": true
+      }
+    ],
+    "desktop": [
+      {
+        "state": "services-open",
+        "pass": true
+      },
+      {
+        "state": "coverage-open",
+        "pass": true
+      },
+      {
+        "state": "resources-open",
+        "pass": true
+      },
+      {
+        "state": "escape-close",
+        "pass": true
+      }
+    ]
+  }
+}

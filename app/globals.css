@@ -936,6 +936,52 @@ html.dark [aria-label="Abrir WhatsApp de urgencias sanitarias"] .bg-white {
   background-color: #ffffff;
 }
 
+.site-header__desktop-panel {
+  position: absolute;
+  inset-inline: 0;
+  top: 100%;
+  border-bottom: 1px solid #dbeafe;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 24px 48px -32px rgba(8, 56, 95, 0.45);
+}
+
+.site-header__mobile-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(6, 24, 39, 0.42);
+}
+
+.site-header__mobile-panel {
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: min(100%, 28rem);
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: -24px 0 48px -32px rgba(6, 24, 39, 0.55);
+}
+
+.site-header__mobile-panel nav {
+  height: calc(100% - 4.25rem);
+  overscroll-behavior: contain;
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .site-header__admin-link,
+  .site-header__theme-toggle {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header__desktop-panel,
+  .site-header__mobile-layer,
+  .site-header__mobile-panel * {
+    scroll-behavior: auto;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 html.dark .bg-sky-50,
 html.dark .bg-sky-100,
 html.dark .bg-slate-50,

@@ -1,0 +1,17 @@
+{
+  "generatedAt": "2026-08-13T21:51:00.759Z",
+  "protectedFields": [
+    "URLs",
+    "canonical",
+    "titles",
+    "descriptions",
+    "H1",
+    "schema",
+    "sitemap",
+    "robots",
+    "redirections"
+  ],
+  "status": "PASS",
+  "notes": "La navegación solo reorganiza enlaces existentes; no modifica metadata ni contenido de las páginas destino.",
+  "auditSeo": "npm run audit:seo: 0 errores"
+}
