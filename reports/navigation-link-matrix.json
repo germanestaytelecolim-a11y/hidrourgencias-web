@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-13T21:51:00.759Z",
-  "baseUrl": "http://localhost:3140",
+  "generatedAt": "2026-08-14T04:30:14.217Z",
+  "baseUrl": "http://localhost:3160",
   "links": [
     {
       "text": "Inicio",
@@ -8,7 +8,7 @@
       "category": "principal",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/",
+      "finalUrl": "http://localhost:3160/",
       "canonical": "https://hidrourgencias.cl/",
       "status": "VALIDO"
     },
@@ -18,8 +18,8 @@
       "category": "principal",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/#contacto",
-      "canonical": "http://localhost:3140/",
+      "finalUrl": "http://localhost:3160/#contacto",
+      "canonical": "http://localhost:3160/",
       "status": "VALIDO"
     },
     {
@@ -28,7 +28,7 @@
       "category": "principal",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/acceso-administradores-empresas",
+      "finalUrl": "http://localhost:3160/acceso-administradores-empresas",
       "canonical": "https://hidrourgencias.cl/acceso-administradores-empresas",
       "status": "VALIDO"
     },
@@ -38,7 +38,7 @@
       "category": "Destapes e hidrojet",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/servicios/destape-alcantarillado",
+      "finalUrl": "http://localhost:3160/servicios/destape-alcantarillado",
       "canonical": "https://hidrourgencias.cl/servicios/destape-alcantarillado",
       "status": "VALIDO"
     },
@@ -48,7 +48,7 @@
       "category": "Destapes e hidrojet",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/servicios/hidrojet",
+      "finalUrl": "http://localhost:3160/servicios/hidrojet",
       "canonical": "https://hidrourgencias.cl/servicios/hidrojet",
       "status": "VALIDO"
     },
@@ -58,7 +58,7 @@
       "category": "Destapes e hidrojet",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/servicios/destape-artefactos-sanitarios",
+      "finalUrl": "http://localhost:3160/servicios/destape-artefactos-sanitarios",
       "canonical": "https://hidrourgencias.cl/servicios/destape-artefactos-sanitarios",
       "status": "VALIDO"
     },
@@ -68,7 +68,7 @@
       "category": "Destapes e hidrojet",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/servicios/destape-camaras-inspeccion",
+      "finalUrl": "http://localhost:3160/servicios/destape-camaras-inspeccion",
       "canonical": "https://hidrourgencias.cl/servicios/destape-camaras-inspeccion",
       "status": "VALIDO"
     },
@@ -78,7 +78,7 @@
       "category": "Destapes e hidrojet",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/servicios/destape-verticales",
+      "finalUrl": "http://localhost:3160/servicios/destape-verticales",
       "canonical": "https://hidrourgencias.cl/servicios/destape-verticales",
       "status": "VALIDO"
     },
@@ -88,7 +88,7 @@
       "category": "Destapes e hidrojet",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/servicios/destape-horizontales",
+      "finalUrl": "http://localhost:3160/servicios/destape-horizontales",
       "canonical": "https://hidrourgencias.cl/servicios/destape-horizontales",
       "status": "VALIDO"
     },
@@ -98,7 +98,7 @@
       "category": "Destapes e hidrojet",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/servicios/destape-edificios",
+      "finalUrl": "http://localhost:3160/servicios/destape-edificios",
       "canonical": "https://hidrourgencias.cl/servicios/destape-edificios",
       "status": "VALIDO"
     },
@@ -108,7 +108,7 @@
       "category": "Mantenimiento y prevencion",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/servicios/mantencion-preventiva-redes",
+      "finalUrl": "http://localhost:3160/servicios/mantencion-preventiva-redes",
       "canonical": "https://hidrourgencias.cl/servicios/mantencion-preventiva-redes",
       "status": "VALIDO"
     },
@@ -118,7 +118,7 @@
       "category": "Mantenimiento y prevencion",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/servicios/asesoria-mantenimiento-integral-redes-sanitarias",
+      "finalUrl": "http://localhost:3160/servicios/asesoria-mantenimiento-integral-redes-sanitarias",
       "canonical": "https://hidrourgencias.cl/servicios/asesoria-mantenimiento-integral-redes-sanitarias",
       "status": "VALIDO"
     },
@@ -128,7 +128,7 @@
       "category": "Mantenimiento y prevencion",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/servicios/limpieza-higienizacion-sanitizacion",
+      "finalUrl": "http://localhost:3160/servicios/limpieza-higienizacion-sanitizacion",
       "canonical": "https://hidrourgencias.cl/servicios/limpieza-higienizacion-sanitizacion",
       "status": "VALIDO"
     },
@@ -138,7 +138,7 @@
       "category": "Mantenimiento y prevencion",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/servicios/limpieza-domicilios-recuperacion-espacios",
+      "finalUrl": "http://localhost:3160/servicios/limpieza-domicilios-recuperacion-espacios",
       "canonical": "https://hidrourgencias.cl/servicios/limpieza-domicilios-recuperacion-espacios",
       "status": "VALIDO"
     },
@@ -148,7 +148,7 @@
       "category": "Mantenimiento y prevencion",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/servicios/limpieza-fachadas-hidrolavado-superficies",
+      "finalUrl": "http://localhost:3160/servicios/limpieza-fachadas-hidrolavado-superficies",
       "canonical": "https://hidrourgencias.cl/servicios/limpieza-fachadas-hidrolavado-superficies",
       "status": "VALIDO"
     },
@@ -158,7 +158,7 @@
       "category": "Diagnostico y apoyo tecnico",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/servicios/analisis-tecnico-propiedad-redes-sanitarias",
+      "finalUrl": "http://localhost:3160/servicios/analisis-tecnico-propiedad-redes-sanitarias",
       "canonical": "https://hidrourgencias.cl/servicios/analisis-tecnico-propiedad-redes-sanitarias",
       "status": "VALIDO"
     },
@@ -168,7 +168,7 @@
       "category": "Diagnostico y apoyo tecnico",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/servicios/motobombas-extraccion-aguas",
+      "finalUrl": "http://localhost:3160/servicios/motobombas-extraccion-aguas",
       "canonical": "https://hidrourgencias.cl/servicios/motobombas-extraccion-aguas",
       "status": "VALIDO"
     },
@@ -178,7 +178,7 @@
       "category": "Diagnostico y apoyo tecnico",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/servicios/extraccion-aguas-estanques-piscinas",
+      "finalUrl": "http://localhost:3160/servicios/extraccion-aguas-estanques-piscinas",
       "canonical": "https://hidrourgencias.cl/servicios/extraccion-aguas-estanques-piscinas",
       "status": "VALIDO"
     },
@@ -188,7 +188,7 @@
       "category": "Diagnostico y apoyo tecnico",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/servicios/reparacion-tuberias-hdpe",
+      "finalUrl": "http://localhost:3160/servicios/reparacion-tuberias-hdpe",
       "canonical": "https://hidrourgencias.cl/servicios/reparacion-tuberias-hdpe",
       "status": "VALIDO"
     },
@@ -198,8 +198,8 @@
       "category": "Recursos",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/#clientes",
-      "canonical": "http://localhost:3140/",
+      "finalUrl": "http://localhost:3160/#clientes",
+      "canonical": "http://localhost:3160/",
       "status": "VALIDO"
     },
     {
@@ -208,7 +208,7 @@
       "category": "Recursos",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/casos-de-exito",
+      "finalUrl": "http://localhost:3160/casos-de-exito",
       "canonical": "https://hidrourgencias.cl/casos-de-exito",
       "status": "VALIDO"
     },
@@ -218,7 +218,7 @@
       "category": "Recursos",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/blog",
+      "finalUrl": "http://localhost:3160/blog",
       "canonical": "https://hidrourgencias.cl/blog",
       "status": "VALIDO"
     },
@@ -228,7 +228,7 @@
       "category": "Comunas",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/destape-alcantarillado-vina-del-mar",
+      "finalUrl": "http://localhost:3160/destape-alcantarillado-vina-del-mar",
       "canonical": "https://hidrourgencias.cl/destape-alcantarillado-vina-del-mar",
       "status": "VALIDO"
     },
@@ -238,7 +238,7 @@
       "category": "Sectores de Vina del Mar",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/zona/renaca-vina-del-mar",
+      "finalUrl": "http://localhost:3160/zona/renaca-vina-del-mar",
       "canonical": "https://hidrourgencias.cl/zona/renaca-vina-del-mar",
       "status": "VALIDO"
     },
@@ -248,7 +248,7 @@
       "category": "Sectores de Vina del Mar",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/zona/gomez-carreno-vina-del-mar",
+      "finalUrl": "http://localhost:3160/zona/gomez-carreno-vina-del-mar",
       "canonical": "https://hidrourgencias.cl/zona/gomez-carreno-vina-del-mar",
       "status": "VALIDO"
     },
@@ -258,7 +258,7 @@
       "category": "Sectores de Vina del Mar",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/zona/forestal-vina-del-mar",
+      "finalUrl": "http://localhost:3160/zona/forestal-vina-del-mar",
       "canonical": "https://hidrourgencias.cl/zona/forestal-vina-del-mar",
       "status": "VALIDO"
     },
@@ -268,7 +268,7 @@
       "category": "Sectores de Vina del Mar",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/zona/recreo-vina-del-mar",
+      "finalUrl": "http://localhost:3160/zona/recreo-vina-del-mar",
       "canonical": "https://hidrourgencias.cl/zona/recreo-vina-del-mar",
       "status": "VALIDO"
     },
@@ -278,7 +278,7 @@
       "category": "Sectores de Vina del Mar",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/zona/chorrillos-vina-del-mar",
+      "finalUrl": "http://localhost:3160/zona/chorrillos-vina-del-mar",
       "canonical": "https://hidrourgencias.cl/zona/chorrillos-vina-del-mar",
       "status": "VALIDO"
     },
@@ -288,7 +288,7 @@
       "category": "Sectores de Vina del Mar",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/zona/miraflores-vina-del-mar",
+      "finalUrl": "http://localhost:3160/zona/miraflores-vina-del-mar",
       "canonical": "https://hidrourgencias.cl/zona/miraflores-vina-del-mar",
       "status": "VALIDO"
     },
@@ -298,7 +298,7 @@
       "category": "Sectores de Vina del Mar",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/zona/achupallas-vina-del-mar",
+      "finalUrl": "http://localhost:3160/zona/achupallas-vina-del-mar",
       "canonical": "https://hidrourgencias.cl/zona/achupallas-vina-del-mar",
       "status": "VALIDO"
     },
@@ -308,7 +308,7 @@
       "category": "Comunas",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/destape-alcantarillado-valparaiso",
+      "finalUrl": "http://localhost:3160/destape-alcantarillado-valparaiso",
       "canonical": "https://hidrourgencias.cl/destape-alcantarillado-valparaiso",
       "status": "VALIDO"
     },
@@ -318,7 +318,7 @@
       "category": "Sectores de Valparaíso",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/zona/cerro-placeres-valparaiso",
+      "finalUrl": "http://localhost:3160/zona/cerro-placeres-valparaiso",
       "canonical": "https://hidrourgencias.cl/zona/cerro-placeres-valparaiso",
       "status": "VALIDO"
     },
@@ -328,7 +328,7 @@
       "category": "Sectores de Valparaíso",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/zona/cerro-baron-valparaiso",
+      "finalUrl": "http://localhost:3160/zona/cerro-baron-valparaiso",
       "canonical": "https://hidrourgencias.cl/zona/cerro-baron-valparaiso",
       "status": "VALIDO"
     },
@@ -338,7 +338,7 @@
       "category": "Sectores de Valparaíso",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/zona/cerro-alegre-valparaiso",
+      "finalUrl": "http://localhost:3160/zona/cerro-alegre-valparaiso",
       "canonical": "https://hidrourgencias.cl/zona/cerro-alegre-valparaiso",
       "status": "VALIDO"
     },
@@ -348,7 +348,7 @@
       "category": "Sectores de Valparaíso",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/zona/playa-ancha-valparaiso",
+      "finalUrl": "http://localhost:3160/zona/playa-ancha-valparaiso",
       "canonical": "https://hidrourgencias.cl/zona/playa-ancha-valparaiso",
       "status": "VALIDO"
     },
@@ -358,7 +358,7 @@
       "category": "Sectores de Valparaíso",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/zona/curauma-valparaiso",
+      "finalUrl": "http://localhost:3160/zona/curauma-valparaiso",
       "canonical": "https://hidrourgencias.cl/zona/curauma-valparaiso",
       "status": "VALIDO"
     },
@@ -368,7 +368,7 @@
       "category": "Sectores de Valparaíso",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/zona/placilla-valparaiso",
+      "finalUrl": "http://localhost:3160/zona/placilla-valparaiso",
       "canonical": "https://hidrourgencias.cl/zona/placilla-valparaiso",
       "status": "VALIDO"
     },
@@ -378,7 +378,7 @@
       "category": "Comunas",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/hidrojet-concon",
+      "finalUrl": "http://localhost:3160/hidrojet-concon",
       "canonical": "https://hidrourgencias.cl/hidrojet-concon",
       "status": "VALIDO"
     },
@@ -388,7 +388,7 @@
       "category": "Sectores de Concón",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/zona/concon-centro",
+      "finalUrl": "http://localhost:3160/zona/concon-centro",
       "canonical": "https://hidrourgencias.cl/zona/concon-centro",
       "status": "VALIDO"
     },
@@ -398,7 +398,7 @@
       "category": "Sectores de Concón",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/zona/bosques-de-montemar-concon",
+      "finalUrl": "http://localhost:3160/zona/bosques-de-montemar-concon",
       "canonical": "https://hidrourgencias.cl/zona/bosques-de-montemar-concon",
       "status": "VALIDO"
     },
@@ -408,7 +408,7 @@
       "category": "Comunas",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/destape-alcantarillado-quilpue",
+      "finalUrl": "http://localhost:3160/destape-alcantarillado-quilpue",
       "canonical": "https://hidrourgencias.cl/destape-alcantarillado-quilpue",
       "status": "VALIDO"
     },
@@ -418,7 +418,7 @@
       "category": "Sectores de Quilpue",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/zona/centro-quilpue",
+      "finalUrl": "http://localhost:3160/zona/centro-quilpue",
       "canonical": "https://hidrourgencias.cl/zona/centro-quilpue",
       "status": "VALIDO"
     },
@@ -428,7 +428,7 @@
       "category": "Sectores de Quilpue",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/zona/belloto-norte-quilpue",
+      "finalUrl": "http://localhost:3160/zona/belloto-norte-quilpue",
       "canonical": "https://hidrourgencias.cl/zona/belloto-norte-quilpue",
       "status": "VALIDO"
     },
@@ -438,7 +438,7 @@
       "category": "Sectores de Quilpue",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/zona/belloto-sur-quilpue",
+      "finalUrl": "http://localhost:3160/zona/belloto-sur-quilpue",
       "canonical": "https://hidrourgencias.cl/zona/belloto-sur-quilpue",
       "status": "VALIDO"
     },
@@ -448,7 +448,7 @@
       "category": "Comunas",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/destape-alcantarillado-villa-alemana",
+      "finalUrl": "http://localhost:3160/destape-alcantarillado-villa-alemana",
       "canonical": "https://hidrourgencias.cl/destape-alcantarillado-villa-alemana",
       "status": "VALIDO"
     },
@@ -458,7 +458,7 @@
       "category": "Sectores de Villa Alemana",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/zona/centro-villa-alemana",
+      "finalUrl": "http://localhost:3160/zona/centro-villa-alemana",
       "canonical": "https://hidrourgencias.cl/zona/centro-villa-alemana",
       "status": "VALIDO"
     },
@@ -468,7 +468,7 @@
       "category": "Sectores de Villa Alemana",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/zona/penablanca-villa-alemana",
+      "finalUrl": "http://localhost:3160/zona/penablanca-villa-alemana",
       "canonical": "https://hidrourgencias.cl/zona/penablanca-villa-alemana",
       "status": "VALIDO"
     },
@@ -478,7 +478,7 @@
       "category": "Comunas",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/destape-alcantarillado-quintero",
+      "finalUrl": "http://localhost:3160/destape-alcantarillado-quintero",
       "canonical": "https://hidrourgencias.cl/destape-alcantarillado-quintero",
       "status": "VALIDO"
     },
@@ -488,7 +488,7 @@
       "category": "Comunas",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/destape-alcantarillado-puchuncavi",
+      "finalUrl": "http://localhost:3160/destape-alcantarillado-puchuncavi",
       "canonical": "https://hidrourgencias.cl/destape-alcantarillado-puchuncavi",
       "status": "VALIDO"
     },
@@ -498,7 +498,7 @@
       "category": "Comunas",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/destape-alcantarillado-limache",
+      "finalUrl": "http://localhost:3160/destape-alcantarillado-limache",
       "canonical": "https://hidrourgencias.cl/destape-alcantarillado-limache",
       "status": "VALIDO"
     },
@@ -508,7 +508,7 @@
       "category": "Comunas",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/destape-alcantarillado-quillota",
+      "finalUrl": "http://localhost:3160/destape-alcantarillado-quillota",
       "canonical": "https://hidrourgencias.cl/destape-alcantarillado-quillota",
       "status": "VALIDO"
     },
@@ -518,7 +518,7 @@
       "category": "Comunas",
       "httpStatus": 200,
       "redirects": 0,
-      "finalUrl": "http://localhost:3140/destape-alcantarillado-placilla-curauma",
+      "finalUrl": "http://localhost:3160/destape-alcantarillado-placilla-curauma",
       "canonical": "https://hidrourgencias.cl/destape-alcantarillado-placilla-curauma",
       "status": "VALIDO"
     }

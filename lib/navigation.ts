@@ -13,6 +13,7 @@ export type NavigationServiceGroup = {
 };
 
 export type NavigationCoverage = {
+  id: string;
   comuna: string;
   landingPath: string;
   sectors: Array<{ label: string; href: string }>;
@@ -85,6 +86,7 @@ const validComunaPaths = new Set(getComunaPaths().map((slug) => `/${slug}`));
 export const navigationCoverage: NavigationCoverage[] = comunasSeo
   .filter((comuna) => validComunaPaths.has(comuna.landingPath))
   .map((comuna) => ({
+    id: comuna.landingPath.slice(1),
     comuna: comuna.comuna,
     landingPath: comuna.landingPath,
     sectors: getZonasByLandingSlug(comuna.landingPath.slice(1)).map((zone) => ({

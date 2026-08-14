@@ -8,7 +8,7 @@ import { navigationCoverage, navigationPriorityServices, navigationResources, na
 
 const adminAccessHref = "/acceso-administradores-empresas";
 const whatsappHref = createWhatsAppUrl("Hola, necesito urgencia sanitaria 24/7 en Region de Valparaiso.");
-const firstCoveragePath = navigationCoverage[0]?.landingPath ?? "";
+const firstCoverageId = navigationCoverage[0]?.id ?? "";
 
 function linkClassName(extra = "") {
   return `brand-focus-ring rounded-lg px-3 py-2 text-sm font-bold text-slate-700 transition hover:bg-sky-50 hover:text-sky-900 ${extra}`;
@@ -70,7 +70,7 @@ function DesktopServicesPanel() {
 }
 
 function DesktopCoveragePanel() {
-  return <div id="desktop-coverage-panel" data-nav-panel="coverage" hidden className="site-header__desktop-panel"><div className="mx-auto grid max-w-7xl grid-cols-[minmax(13rem,0.7fr)_minmax(0,1.3fr)] gap-6 px-6 py-5"><section aria-labelledby="coverage-comunas-title"><h2 id="coverage-comunas-title" className="text-xs font-black uppercase tracking-[0.16em] text-sky-700">Comunas de cobertura</h2><div className="mt-3 grid gap-1">{navigationCoverage.map((item) => <button key={item.landingPath} type="button" data-coverage-select={item.landingPath} aria-pressed={item.landingPath === firstCoveragePath} className={linkClassName(`w-full text-left ${item.landingPath === firstCoveragePath ? "bg-sky-100 text-sky-950" : ""}`)}>{item.comuna}<ChevronRight className="float-right mt-0.5 h-4 w-4" aria-hidden="true" /></button>)}</div></section><section aria-labelledby="coverage-sectors-title"><h2 id="coverage-sectors-title" className="text-xs font-black uppercase tracking-[0.16em] text-sky-700">Sectores tecnicos</h2>{navigationCoverage.map((item) => <div key={item.landingPath} data-coverage-pane={item.landingPath} hidden={item.landingPath !== firstCoveragePath}><div className="flex items-start justify-between gap-4"><p className="mt-1 text-sm font-semibold text-slate-600">{item.comuna}</p><a href={item.landingPath} className="brand-focus-ring rounded-full border border-sky-200 px-3 py-2 text-xs font-black text-sky-900 hover:bg-sky-50">Ver cobertura</a></div><div className="mt-4 grid max-h-64 grid-cols-2 gap-1.5 overflow-y-auto pr-1">{item.sectors.length ? item.sectors.map((sector) => <a key={sector.href} href={sector.href} className={linkClassName("text-sm")}>{sector.label}</a>) : <p className="rounded-lg bg-slate-50 px-3 py-3 text-sm font-semibold text-slate-600">Sectores publicados en el registro comunal.</p>}</div></div>)}</section></div></div>;
+  return <div id="desktop-coverage-panel" data-nav-panel="coverage" hidden className="site-header__desktop-panel"><div className="mx-auto grid max-w-7xl grid-cols-[minmax(13rem,0.7fr)_minmax(0,1.3fr)] gap-6 px-6 py-5"><section aria-labelledby="coverage-comunas-title"><h2 id="coverage-comunas-title" className="text-xs font-black uppercase tracking-[0.16em] text-sky-700">Comunas de cobertura</h2><div className="mt-3 grid gap-1">{navigationCoverage.map((item) => <button key={item.id} type="button" data-coverage-select={item.id} aria-pressed={item.id === firstCoverageId} className={linkClassName(`w-full text-left ${item.id === firstCoverageId ? "bg-sky-100 text-sky-950" : ""}`)}>{item.comuna}<ChevronRight className="float-right mt-0.5 h-4 w-4" aria-hidden="true" /></button>)}</div></section><section aria-labelledby="coverage-sectors-title"><h2 id="coverage-sectors-title" className="text-xs font-black uppercase tracking-[0.16em] text-sky-700">Sectores tecnicos</h2>{navigationCoverage.map((item) => <div key={item.id} data-coverage-pane={item.id} hidden={item.id !== firstCoverageId}><div className="flex items-start justify-between gap-4"><p className="mt-1 text-sm font-semibold text-slate-600">{item.comuna}</p><a href={item.landingPath} className="brand-focus-ring rounded-full border border-sky-200 px-3 py-2 text-xs font-black text-sky-900 hover:bg-sky-50">Ver cobertura</a></div><div className="mt-4 grid max-h-64 grid-cols-2 gap-1.5 overflow-y-auto pr-1">{item.sectors.length ? item.sectors.map((sector) => <a key={sector.href} href={sector.href} className={linkClassName("text-sm")}>{sector.label}</a>) : <p className="rounded-lg bg-slate-50 px-3 py-3 text-sm font-semibold text-slate-600">Cobertura tecnica disponible a nivel comunal. Proximamente se incorporaran accesos especificos por sector.</p>}</div></div>)}</section></div></div>;
 }
 
 function DesktopResourcesPanel() {
@@ -96,6 +96,8 @@ const navigationScript = `
   header.setAttribute('data-navigation-ready', 'true');
   var desktopPanels = Array.prototype.slice.call(header.querySelectorAll('[data-nav-panel]'));
   var desktopToggles = Array.prototype.slice.call(header.querySelectorAll('[data-nav-toggle]'));
+  var coverageButtons = Array.prototype.slice.call(header.querySelectorAll('[data-coverage-select]'));
+  var coveragePanes = Array.prototype.slice.call(header.querySelectorAll('[data-coverage-pane]'));
   var mobilePanel = header.querySelector('[data-mobile-navigation]');
   var mobileToggle = header.querySelector('[data-mobile-menu-toggle]');
   var mobileClose = header.querySelector('[data-mobile-menu-close]');
@@ -103,7 +105,17 @@ const navigationScript = `
   function closeDesktop() { desktopPanels.forEach(function (panel) { setHidden(panel, true); }); desktopToggles.forEach(function (button) { button.setAttribute('aria-expanded', 'false'); }); }
   function closeMobile() { setHidden(mobilePanel, true); if (mobileToggle) { mobileToggle.setAttribute('aria-expanded', 'false'); mobileToggle.setAttribute('aria-label', 'Abrir menu principal'); } document.body.style.removeProperty('overflow'); header.querySelectorAll('[data-mobile-section]').forEach(function (section) { setHidden(section, true); }); header.querySelectorAll('[data-mobile-section-toggle]').forEach(function (button) { button.setAttribute('aria-expanded', 'false'); }); var openIcon = header.querySelector('[data-mobile-menu-open-icon]'); var closeIcon = header.querySelector('[data-mobile-menu-close-icon]'); if (openIcon) openIcon.classList.remove('hidden'); if (closeIcon) closeIcon.classList.add('hidden'); }
   function closeAll() { closeDesktop(); closeMobile(); }
+  function selectCoverage(id) {
+    coverageButtons.forEach(function (button) {
+      var selected = button.getAttribute('data-coverage-select') === id;
+      button.setAttribute('aria-pressed', selected ? 'true' : 'false');
+      button.classList.toggle('bg-sky-100', selected);
+      button.classList.toggle('text-sky-950', selected);
+    });
+    coveragePanes.forEach(function (pane) { setHidden(pane, pane.getAttribute('data-coverage-pane') !== id); });
+  }
   desktopToggles.forEach(function (button) { button.addEventListener('click', function () { var name = button.getAttribute('data-nav-toggle'); var panel = header.querySelector('[data-nav-panel="' + name + '"]'); var wasOpen = panel && !panel.hidden; closeDesktop(); closeMobile(); if (panel && !wasOpen) { setHidden(panel, false); button.setAttribute('aria-expanded', 'true'); } }); });
+  coverageButtons.forEach(function (button) { button.addEventListener('click', function () { selectCoverage(button.getAttribute('data-coverage-select')); }); });
   if (mobileToggle) mobileToggle.addEventListener('click', function () { var open = mobilePanel && !mobilePanel.hidden; closeDesktop(); if (open) closeMobile(); else { setHidden(mobilePanel, false); mobileToggle.setAttribute('aria-expanded', 'true'); mobileToggle.setAttribute('aria-label', 'Cerrar menu principal'); document.body.style.overflow = 'hidden'; var openIcon = header.querySelector('[data-mobile-menu-open-icon]'); var closeIcon = header.querySelector('[data-mobile-menu-close-icon]'); if (openIcon) openIcon.classList.add('hidden'); if (closeIcon) closeIcon.classList.remove('hidden'); } });
   if (mobileClose) mobileClose.addEventListener('click', closeMobile);
   header.querySelectorAll('[data-mobile-section-toggle]').forEach(function (button) { button.addEventListener('click', function () { var name = button.getAttribute('data-mobile-section-toggle'); var section = header.querySelector('[data-mobile-section="' + name + '"]'); var wasOpen = section && !section.hidden; header.querySelectorAll('[data-mobile-section]').forEach(function (item) { setHidden(item, true); }); header.querySelectorAll('[data-mobile-section-toggle]').forEach(function (item) { item.setAttribute('aria-expanded', 'false'); }); if (section && !wasOpen) { setHidden(section, false); button.setAttribute('aria-expanded', 'true'); } }); });

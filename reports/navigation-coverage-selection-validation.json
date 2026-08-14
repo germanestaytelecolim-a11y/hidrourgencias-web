@@ -1,0 +1,329 @@
+{
+  "generatedAt": "2026-08-14T04:30:19.557Z",
+  "baseUrl": "http://localhost:3160",
+  "communes": [
+    {
+      "id": "destape-alcantarillado-vina-del-mar",
+      "comuna": "Vina del Mar",
+      "landingPath": "/destape-alcantarillado-vina-del-mar",
+      "sectors": [
+        {
+          "label": "Reñaca",
+          "href": "/zona/renaca-vina-del-mar",
+          "audit": {
+            "path": "/zona/renaca-vina-del-mar",
+            "httpStatus": 200,
+            "redirects": 0,
+            "canonical": "https://hidrourgencias.cl/zona/renaca-vina-del-mar"
+          }
+        },
+        {
+          "label": "Gómez Carreño",
+          "href": "/zona/gomez-carreno-vina-del-mar",
+          "audit": {
+            "path": "/zona/gomez-carreno-vina-del-mar",
+            "httpStatus": 200,
+            "redirects": 0,
+            "canonical": "https://hidrourgencias.cl/zona/gomez-carreno-vina-del-mar"
+          }
+        },
+        {
+          "label": "Forestal",
+          "href": "/zona/forestal-vina-del-mar",
+          "audit": {
+            "path": "/zona/forestal-vina-del-mar",
+            "httpStatus": 200,
+            "redirects": 0,
+            "canonical": "https://hidrourgencias.cl/zona/forestal-vina-del-mar"
+          }
+        },
+        {
+          "label": "Recreo",
+          "href": "/zona/recreo-vina-del-mar",
+          "audit": {
+            "path": "/zona/recreo-vina-del-mar",
+            "httpStatus": 200,
+            "redirects": 0,
+            "canonical": "https://hidrourgencias.cl/zona/recreo-vina-del-mar"
+          }
+        },
+        {
+          "label": "Chorrillos",
+          "href": "/zona/chorrillos-vina-del-mar",
+          "audit": {
+            "path": "/zona/chorrillos-vina-del-mar",
+            "httpStatus": 200,
+            "redirects": 0,
+            "canonical": "https://hidrourgencias.cl/zona/chorrillos-vina-del-mar"
+          }
+        },
+        {
+          "label": "Miraflores",
+          "href": "/zona/miraflores-vina-del-mar",
+          "audit": {
+            "path": "/zona/miraflores-vina-del-mar",
+            "httpStatus": 200,
+            "redirects": 0,
+            "canonical": "https://hidrourgencias.cl/zona/miraflores-vina-del-mar"
+          }
+        },
+        {
+          "label": "Achupallas",
+          "href": "/zona/achupallas-vina-del-mar",
+          "audit": {
+            "path": "/zona/achupallas-vina-del-mar",
+            "httpStatus": 200,
+            "redirects": 0,
+            "canonical": "https://hidrourgencias.cl/zona/achupallas-vina-del-mar"
+          }
+        }
+      ],
+      "checks": {
+        "landingValid": true,
+        "sectorsBelongToOneCommune": true,
+        "sectorLinksValid": true
+      }
+    },
+    {
+      "id": "destape-alcantarillado-valparaiso",
+      "comuna": "Valparaíso",
+      "landingPath": "/destape-alcantarillado-valparaiso",
+      "sectors": [
+        {
+          "label": "Cerro Placeres",
+          "href": "/zona/cerro-placeres-valparaiso",
+          "audit": {
+            "path": "/zona/cerro-placeres-valparaiso",
+            "httpStatus": 200,
+            "redirects": 0,
+            "canonical": "https://hidrourgencias.cl/zona/cerro-placeres-valparaiso"
+          }
+        },
+        {
+          "label": "Cerro Barón",
+          "href": "/zona/cerro-baron-valparaiso",
+          "audit": {
+            "path": "/zona/cerro-baron-valparaiso",
+            "httpStatus": 200,
+            "redirects": 0,
+            "canonical": "https://hidrourgencias.cl/zona/cerro-baron-valparaiso"
+          }
+        },
+        {
+          "label": "Cerro Alegre",
+          "href": "/zona/cerro-alegre-valparaiso",
+          "audit": {
+            "path": "/zona/cerro-alegre-valparaiso",
+            "httpStatus": 200,
+            "redirects": 0,
+            "canonical": "https://hidrourgencias.cl/zona/cerro-alegre-valparaiso"
+          }
+        },
+        {
+          "label": "Playa Ancha",
+          "href": "/zona/playa-ancha-valparaiso",
+          "audit": {
+            "path": "/zona/playa-ancha-valparaiso",
+            "httpStatus": 200,
+            "redirects": 0,
+            "canonical": "https://hidrourgencias.cl/zona/playa-ancha-valparaiso"
+          }
+        },
+        {
+          "label": "Curauma",
+          "href": "/zona/curauma-valparaiso",
+          "audit": {
+            "path": "/zona/curauma-valparaiso",
+            "httpStatus": 200,
+            "redirects": 0,
+            "canonical": "https://hidrourgencias.cl/zona/curauma-valparaiso"
+          }
+        },
+        {
+          "label": "Placilla",
+          "href": "/zona/placilla-valparaiso",
+          "audit": {
+            "path": "/zona/placilla-valparaiso",
+            "httpStatus": 200,
+            "redirects": 0,
+            "canonical": "https://hidrourgencias.cl/zona/placilla-valparaiso"
+          }
+        }
+      ],
+      "checks": {
+        "landingValid": true,
+        "sectorsBelongToOneCommune": true,
+        "sectorLinksValid": true
+      }
+    },
+    {
+      "id": "hidrojet-concon",
+      "comuna": "Concón",
+      "landingPath": "/hidrojet-concon",
+      "sectors": [
+        {
+          "label": "Concón Centro",
+          "href": "/zona/concon-centro",
+          "audit": {
+            "path": "/zona/concon-centro",
+            "httpStatus": 200,
+            "redirects": 0,
+            "canonical": "https://hidrourgencias.cl/zona/concon-centro"
+          }
+        },
+        {
+          "label": "Bosques de Montemar",
+          "href": "/zona/bosques-de-montemar-concon",
+          "audit": {
+            "path": "/zona/bosques-de-montemar-concon",
+            "httpStatus": 200,
+            "redirects": 0,
+            "canonical": "https://hidrourgencias.cl/zona/bosques-de-montemar-concon"
+          }
+        }
+      ],
+      "checks": {
+        "landingValid": true,
+        "sectorsBelongToOneCommune": true,
+        "sectorLinksValid": true
+      }
+    },
+    {
+      "id": "destape-alcantarillado-quilpue",
+      "comuna": "Quilpue",
+      "landingPath": "/destape-alcantarillado-quilpue",
+      "sectors": [
+        {
+          "label": "Centro Quilpué",
+          "href": "/zona/centro-quilpue",
+          "audit": {
+            "path": "/zona/centro-quilpue",
+            "httpStatus": 200,
+            "redirects": 0,
+            "canonical": "https://hidrourgencias.cl/zona/centro-quilpue"
+          }
+        },
+        {
+          "label": "Belloto Norte",
+          "href": "/zona/belloto-norte-quilpue",
+          "audit": {
+            "path": "/zona/belloto-norte-quilpue",
+            "httpStatus": 200,
+            "redirects": 0,
+            "canonical": "https://hidrourgencias.cl/zona/belloto-norte-quilpue"
+          }
+        },
+        {
+          "label": "Belloto Sur",
+          "href": "/zona/belloto-sur-quilpue",
+          "audit": {
+            "path": "/zona/belloto-sur-quilpue",
+            "httpStatus": 200,
+            "redirects": 0,
+            "canonical": "https://hidrourgencias.cl/zona/belloto-sur-quilpue"
+          }
+        }
+      ],
+      "checks": {
+        "landingValid": true,
+        "sectorsBelongToOneCommune": true,
+        "sectorLinksValid": true
+      }
+    },
+    {
+      "id": "destape-alcantarillado-villa-alemana",
+      "comuna": "Villa Alemana",
+      "landingPath": "/destape-alcantarillado-villa-alemana",
+      "sectors": [
+        {
+          "label": "Centro Villa Alemana",
+          "href": "/zona/centro-villa-alemana",
+          "audit": {
+            "path": "/zona/centro-villa-alemana",
+            "httpStatus": 200,
+            "redirects": 0,
+            "canonical": "https://hidrourgencias.cl/zona/centro-villa-alemana"
+          }
+        },
+        {
+          "label": "Peñablanca",
+          "href": "/zona/penablanca-villa-alemana",
+          "audit": {
+            "path": "/zona/penablanca-villa-alemana",
+            "httpStatus": 200,
+            "redirects": 0,
+            "canonical": "https://hidrourgencias.cl/zona/penablanca-villa-alemana"
+          }
+        }
+      ],
+      "checks": {
+        "landingValid": true,
+        "sectorsBelongToOneCommune": true,
+        "sectorLinksValid": true
+      }
+    },
+    {
+      "id": "destape-alcantarillado-quintero",
+      "comuna": "Quintero",
+      "landingPath": "/destape-alcantarillado-quintero",
+      "sectors": [],
+      "checks": {
+        "landingValid": true,
+        "sectorsBelongToOneCommune": true,
+        "sectorLinksValid": true
+      }
+    },
+    {
+      "id": "destape-alcantarillado-puchuncavi",
+      "comuna": "Puchuncavi",
+      "landingPath": "/destape-alcantarillado-puchuncavi",
+      "sectors": [],
+      "checks": {
+        "landingValid": true,
+        "sectorsBelongToOneCommune": true,
+        "sectorLinksValid": true
+      }
+    },
+    {
+      "id": "destape-alcantarillado-limache",
+      "comuna": "Limache",
+      "landingPath": "/destape-alcantarillado-limache",
+      "sectors": [],
+      "checks": {
+        "landingValid": true,
+        "sectorsBelongToOneCommune": true,
+        "sectorLinksValid": true
+      }
+    },
+    {
+      "id": "destape-alcantarillado-quillota",
+      "comuna": "Quillota",
+      "landingPath": "/destape-alcantarillado-quillota",
+      "sectors": [],
+      "checks": {
+        "landingValid": true,
+        "sectorsBelongToOneCommune": true,
+        "sectorLinksValid": true
+      }
+    },
+    {
+      "id": "destape-alcantarillado-placilla-curauma",
+      "comuna": "Placilla Curauma",
+      "landingPath": "/destape-alcantarillado-placilla-curauma",
+      "sectors": [],
+      "checks": {
+        "landingValid": true,
+        "sectorsBelongToOneCommune": true,
+        "sectorLinksValid": true
+      }
+    }
+  ],
+  "summary": {
+    "communeCount": 10,
+    "uniqueIds": true,
+    "landingCount": 10,
+    "sectorCount": 20,
+    "validSectorLinks": true,
+    "independentSectors": true
+  }
+}
