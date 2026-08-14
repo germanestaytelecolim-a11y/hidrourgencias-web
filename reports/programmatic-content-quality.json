@@ -1,0 +1,134 @@
+{
+  "generatedAt": "2026-08-14T05:35:15.250Z",
+  "scope": "10 rutas piloto",
+  "classifications": [
+    "PRIORITARIA",
+    "UTIL",
+    "REQUIERE_MEJORA",
+    "POSIBLE_CONSOLIDACION",
+    "SIN_DATOS"
+  ],
+  "routes": [
+    {
+      "route": "/",
+      "classification": "UTIL",
+      "signals": {
+        "h1": "Destape de alcantarillado e hidrojet 24/7 en la Región de Valparaíso",
+        "description": "Hidrourgencias SpA: destape de alcantarillado y desagües, hidrojet 4000 PSI, videoinspección sanitaria, mantención preventiva, sanitización e higienización con atención 24/7 en la Región de Valparaíso.",
+        "technicalEvidence": 79,
+        "coverageSignals": 67,
+        "duplicateTextRisk": 34
+      },
+      "finding": "La página conserva intención, URL, metadata y cobertura; conviene seguir diferenciando prueba técnica y contexto local en iteraciones posteriores."
+    },
+    {
+      "route": "/servicios/destape-alcantarillado",
+      "classification": "UTIL",
+      "signals": {
+        "h1": "Destape de alcantarillado y desagues con respuesta 24/7",
+        "description": "Atendemos obstrucciones en redes domiciliarias, verticales, horizontales y colectores con protocolo tecnico de diagnostico, contencion sanitaria y restitucion de flujo para evitar rebalses reiterativos. Atención 24/7 en la Región de Valparaíso.",
+        "technicalEvidence": 128,
+        "coverageSignals": 101,
+        "duplicateTextRisk": 78
+      },
+      "finding": "La página conserva intención, URL, metadata y cobertura; conviene seguir diferenciando prueba técnica y contexto local en iteraciones posteriores."
+    },
+    {
+      "route": "/servicios/hidrojet",
+      "classification": "UTIL",
+      "signals": {
+        "h1": "Servicio de hidrojet para limpieza profunda de redes sanitarias",
+        "description": "Aplicamos hidrojet de alta presion para remover grasa, sarro, sedimentos y residuos adheridos en tuberias, camaras y colectores con perdida de capacidad hidraulica. Atención 24/7 en la Región de Valparaíso.",
+        "technicalEvidence": 141,
+        "coverageSignals": 101,
+        "duplicateTextRisk": 78
+      },
+      "finding": "La página conserva intención, URL, metadata y cobertura; conviene seguir diferenciando prueba técnica y contexto local en iteraciones posteriores."
+    },
+    {
+      "route": "/destape-alcantarillado-vina-del-mar",
+      "classification": "PRIORITARIA",
+      "signals": {
+        "h1": "Destape de Alcantarillado en Vina del Mar | Urgencias 24/7",
+        "description": "Servicio profesional de destape de alcantarillado en Vina del Mar, con diagnostico tecnico, equipos RIDGID, hidrojet cuando corresponde y atencion 24/7.",
+        "technicalEvidence": 245,
+        "coverageSignals": 189,
+        "duplicateTextRisk": 106
+      },
+      "finding": "La página conserva intención, URL, metadata y cobertura; conviene seguir diferenciando prueba técnica y contexto local en iteraciones posteriores."
+    },
+    {
+      "route": "/destape-alcantarillado-valparaiso",
+      "classification": "UTIL",
+      "signals": {
+        "h1": "Destape de Alcantarillado en Valparaíso | Urgencias 24/7",
+        "description": "Servicio profesional de destape de alcantarillado en Valparaíso, con diagnostico tecnico, equipos RIDGID, hidrojet cuando corresponde y atencion 24/7.",
+        "technicalEvidence": 250,
+        "coverageSignals": 193,
+        "duplicateTextRisk": 106
+      },
+      "finding": "La página conserva intención, URL, metadata y cobertura; conviene seguir diferenciando prueba técnica y contexto local en iteraciones posteriores."
+    },
+    {
+      "route": "/hidrojet-concon",
+      "classification": "PRIORITARIA",
+      "signals": {
+        "h1": "Hidrojet en Concón | Limpieza hidrodinamica de redes",
+        "description": "Servicio de hidrojet en Concón para limpieza hidrodinamica de redes con grasa, sarro y sedimentos. Evaluacion tecnica, agua a presion y control de flujo.",
+        "technicalEvidence": 246,
+        "coverageSignals": 124,
+        "duplicateTextRisk": 85
+      },
+      "finding": "La página conserva intención, URL, metadata y cobertura; conviene seguir diferenciando prueba técnica y contexto local en iteraciones posteriores."
+    },
+    {
+      "route": "/destape-alcantarillado-quilpue",
+      "classification": "UTIL",
+      "signals": {
+        "h1": "Destape de Alcantarillado en Quilpue | Urgencias 24/7",
+        "description": "Servicio profesional de destape de alcantarillado en Quilpue, con diagnostico tecnico, equipos RIDGID, hidrojet cuando corresponde y atencion 24/7.",
+        "technicalEvidence": 233,
+        "coverageSignals": 170,
+        "duplicateTextRisk": 106
+      },
+      "finding": "La página conserva intención, URL, metadata y cobertura; conviene seguir diferenciando prueba técnica y contexto local en iteraciones posteriores."
+    },
+    {
+      "route": "/destape-alcantarillado-villa-alemana",
+      "classification": "UTIL",
+      "signals": {
+        "h1": "Destape de Alcantarillado en Villa Alemana | Urgencias 24/7",
+        "description": "Servicio profesional de destape de alcantarillado en Villa Alemana, con diagnostico tecnico, equipos RIDGID, hidrojet cuando corresponde y atencion 24/7.",
+        "technicalEvidence": 219,
+        "coverageSignals": 162,
+        "duplicateTextRisk": 106
+      },
+      "finding": "La página conserva intención, URL, metadata y cobertura; conviene seguir diferenciando prueba técnica y contexto local en iteraciones posteriores."
+    },
+    {
+      "route": "/destape-alcantarillado-casablanca",
+      "classification": "UTIL",
+      "signals": {
+        "h1": "Destape de Alcantarillado en Casablanca | Urgencias 24/7",
+        "description": "Servicio profesional de destape de alcantarillado en Casablanca, con diagnostico tecnico, equipos RIDGID, hidrojet cuando corresponde y atencion 24/7.",
+        "technicalEvidence": 214,
+        "coverageSignals": 139,
+        "duplicateTextRisk": 102
+      },
+      "finding": "La página conserva intención, URL, metadata y cobertura; conviene seguir diferenciando prueba técnica y contexto local en iteraciones posteriores."
+    },
+    {
+      "route": "/destape-alcantarillado-maitencillo-puchuncavi",
+      "classification": "UTIL",
+      "signals": {
+        "h1": "Destape de Alcantarillado en Maitencillo | Urgencias 24/7",
+        "description": "Servicio profesional de destape de alcantarillado en Maitencillo, con diagnostico tecnico, equipos RIDGID, hidrojet cuando corresponde y atencion 24/7.",
+        "technicalEvidence": 206,
+        "coverageSignals": 143,
+        "duplicateTextRisk": 102
+      },
+      "finding": "La página conserva intención, URL, metadata y cobertura; conviene seguir diferenciando prueba técnica y contexto local en iteraciones posteriores."
+    }
+  ],
+  "consolidationPerformed": false
+}

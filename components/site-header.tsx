@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Script from "next/script";
 import { ChevronDown, ChevronRight, Menu, PhoneCall, X } from "lucide-react";
 
 import { StaticPicture } from "@/components/static-picture";
@@ -56,7 +57,7 @@ export function SiteHeader() {
       <DesktopCoveragePanel />
       <DesktopResourcesPanel />
       <MobileNavigation />
-      <script dangerouslySetInnerHTML={{ __html: navigationScript }} />
+      <Script id="site-navigation-script" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: navigationScript }} />
     </header>
   );
 }
@@ -92,8 +93,8 @@ function MobileSectionButton({ label, section }: { label: string; section: strin
 const navigationScript = `
 (function () {
   var header = document.querySelector('[data-site-header]');
-  if (!header || header.getAttribute('data-navigation-ready') === 'true') return;
-  header.setAttribute('data-navigation-ready', 'true');
+  if (!header || header.__navigationReady === true) return;
+  header.__navigationReady = true;
   var desktopPanels = Array.prototype.slice.call(header.querySelectorAll('[data-nav-panel]'));
   var desktopToggles = Array.prototype.slice.call(header.querySelectorAll('[data-nav-toggle]'));
   var coverageButtons = Array.prototype.slice.call(header.querySelectorAll('[data-coverage-select]'));

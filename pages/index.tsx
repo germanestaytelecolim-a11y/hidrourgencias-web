@@ -2,6 +2,7 @@ import Head from "next/head";
 import type { GetStaticProps } from "next";
 
 import HomePageContent, { type HomePageCmsContent } from "@/components/HomePageContent";
+import { ConversionExperience } from "@/components/conversion-experience";
 import { GoogleAdsConversionTracking } from "@/components/google-ads-conversion-tracking";
 import { ServiceTermsSection } from "@/components/service-terms";
 import { SiteHeader } from "@/components/site-header";
@@ -175,6 +176,7 @@ export default function HomePage({ cmsContent }: HomePageProps) {
       </Head>
       <SiteHeader />
       <HomePageContent cmsContent={cmsContent} />
+      <ConversionExperience context={{ sourcePath: "/" }} />
       <ServiceTermsSection />
       <div className="hu-floating-whatsapp fixed z-50 w-auto max-w-[calc(100vw-2rem)] sm:w-[17rem]">
         <a

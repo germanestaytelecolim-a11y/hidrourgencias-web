@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import Script from "next/script";
 import {
   AlarmClock,
   BadgeCheck,
@@ -15,6 +16,7 @@ import {
 } from "lucide-react";
 
 import { Galeria } from "@/components/Galeria";
+import { ConversionExperience } from "@/components/conversion-experience";
 import { ServiceTermsNotice } from "@/components/service-terms";
 import { TerritorialLandingHero } from "@/components/territorial-landing-hero";
 import type { ComunaLandingData } from "@/lib/comuna-landings";
@@ -46,6 +48,15 @@ export function ComunaLandingPage({ landing, allLandings }: Props) {
   const coverageZones = zoneCoverageTargets.length > 0 ? zoneCoverageTargets.map((zone) => zone.nombre) : landing.nearbyZones;
   const mainLandingHref = `/${landing.slug}`;
   const coverageServiceLabel = `${presentation.coverageServiceName.charAt(0).toUpperCase()}${presentation.coverageServiceName.slice(1)}`;
+  const isPilotLanding = [
+    "destape-alcantarillado-vina-del-mar",
+    "destape-alcantarillado-valparaiso",
+    "hidrojet-concon",
+    "destape-alcantarillado-quilpue",
+    "destape-alcantarillado-villa-alemana",
+    "destape-alcantarillado-casablanca",
+    "destape-alcantarillado-maitencillo-puchuncavi",
+  ].includes(landing.slug);
 
   const faqSchema = JSON.stringify({
     "@context": "https://schema.org",
@@ -96,9 +107,9 @@ export function ComunaLandingPage({ landing, allLandings }: Props) {
 
   return (
     <main className="mx-auto min-h-screen max-w-6xl px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: faqSchema }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serviceSchema }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbSchema }} />
+      <Script id={`${landing.slug}-faq-schema`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: faqSchema }} />
+      <Script id={`${landing.slug}-service-schema`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: serviceSchema }} />
+      <Script id={`${landing.slug}-breadcrumb-schema`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbSchema }} />
 
       <nav aria-label="Migas de pan" className="mb-6 flex items-center gap-2 text-sm">
         <Link href="/" className="inline-flex items-center text-sm font-semibold text-sky-700 hover:text-sky-800">
@@ -173,6 +184,16 @@ export function ComunaLandingPage({ landing, allLandings }: Props) {
         </div>
       </section>
       )}
+
+      {isPilotLanding ? (
+        <ConversionExperience
+          context={{
+            service: presentation.serviceName,
+            commune: landing.comuna,
+            sourcePath: mainLandingHref,
+          }}
+        />
+      ) : null}
 
       <section className="brand-card mt-9 rounded-3xl p-6 sm:p-8">
         <p className="text-xs font-semibold uppercase tracking-[0.22em] text-sky-700">Diagnostico del problema</p>

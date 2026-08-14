@@ -1,0 +1,76 @@
+{
+  "generatedAt": "2026-08-14T05:35:15.255Z",
+  "routes": [
+    {
+      "route": "/",
+      "classification": "UTIL",
+      "primaryIntent": "Destape de alcantarillado y urgencia sanitaria",
+      "risk": "Bajo en el piloto; revisar solapamiento con zonas antes de ampliar",
+      "action": "Mantener URL y canonical; diferenciar evidencia, síntoma y CTA contextual."
+    },
+    {
+      "route": "/servicios/destape-alcantarillado",
+      "classification": "UTIL",
+      "primaryIntent": "Destape de alcantarillado y urgencia sanitaria",
+      "risk": "Bajo en el piloto; revisar solapamiento con zonas antes de ampliar",
+      "action": "Mantener URL y canonical; diferenciar evidencia, síntoma y CTA contextual."
+    },
+    {
+      "route": "/servicios/hidrojet",
+      "classification": "PRIORITARIA",
+      "primaryIntent": "Hidrojet y limpieza hidrodinámica",
+      "risk": "Bajo en el piloto; revisar solapamiento con zonas antes de ampliar",
+      "action": "Mantener URL y canonical; diferenciar evidencia, síntoma y CTA contextual."
+    },
+    {
+      "route": "/destape-alcantarillado-vina-del-mar",
+      "classification": "UTIL",
+      "primaryIntent": "Destape de alcantarillado y urgencia sanitaria",
+      "risk": "Bajo en el piloto; revisar solapamiento con zonas antes de ampliar",
+      "action": "Mantener URL y canonical; diferenciar evidencia, síntoma y CTA contextual."
+    },
+    {
+      "route": "/destape-alcantarillado-valparaiso",
+      "classification": "UTIL",
+      "primaryIntent": "Destape de alcantarillado y urgencia sanitaria",
+      "risk": "Bajo en el piloto; revisar solapamiento con zonas antes de ampliar",
+      "action": "Mantener URL y canonical; diferenciar evidencia, síntoma y CTA contextual."
+    },
+    {
+      "route": "/hidrojet-concon",
+      "classification": "PRIORITARIA",
+      "primaryIntent": "Hidrojet y limpieza hidrodinámica",
+      "risk": "Controlado: servicio y comuna explícitos",
+      "action": "Mantener URL y canonical; diferenciar evidencia, síntoma y CTA contextual."
+    },
+    {
+      "route": "/destape-alcantarillado-quilpue",
+      "classification": "UTIL",
+      "primaryIntent": "Destape de alcantarillado y urgencia sanitaria",
+      "risk": "Bajo en el piloto; revisar solapamiento con zonas antes de ampliar",
+      "action": "Mantener URL y canonical; diferenciar evidencia, síntoma y CTA contextual."
+    },
+    {
+      "route": "/destape-alcantarillado-villa-alemana",
+      "classification": "UTIL",
+      "primaryIntent": "Destape de alcantarillado y urgencia sanitaria",
+      "risk": "Bajo en el piloto; revisar solapamiento con zonas antes de ampliar",
+      "action": "Mantener URL y canonical; diferenciar evidencia, síntoma y CTA contextual."
+    },
+    {
+      "route": "/destape-alcantarillado-casablanca",
+      "classification": "UTIL",
+      "primaryIntent": "Destape de alcantarillado y urgencia sanitaria",
+      "risk": "Bajo en el piloto; revisar solapamiento con zonas antes de ampliar",
+      "action": "Mantener URL y canonical; diferenciar evidencia, síntoma y CTA contextual."
+    },
+    {
+      "route": "/destape-alcantarillado-maitencillo-puchuncavi",
+      "classification": "UTIL",
+      "primaryIntent": "Destape de alcantarillado y urgencia sanitaria",
+      "risk": "Bajo en el piloto; revisar solapamiento con zonas antes de ampliar",
+      "action": "Mantener URL y canonical; diferenciar evidencia, síntoma y CTA contextual."
+    }
+  ],
+  "redirectsOrConsolidationsPerformed": false
+}

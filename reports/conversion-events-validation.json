@@ -1,0 +1,34 @@
+{
+  "generatedAt": "2026-08-14T05:35:15.239Z",
+  "analyticsDetected": "Google Ads gtag loader exists; no GA4, GTM or Meta Pixel ID detected.",
+  "implementedEvents": [
+    "click_whatsapp",
+    "click_call",
+    "select_emergency",
+    "select_maintenance",
+    "select_diagnostic",
+    "generate_lead",
+    "expand_evidence"
+  ],
+  "plannedCompatibleEvents": [
+    "view_reviews",
+    "select_coverage"
+  ],
+  "allowedProperties": [
+    "service",
+    "commune",
+    "sector",
+    "page_path",
+    "cta_location",
+    "lead_type",
+    "utm_source",
+    "utm_medium",
+    "utm_campaign"
+  ],
+  "personalDataSent": false,
+  "notes": [
+    "Events use dataLayer and gtag when available.",
+    "WhatsApp text contains blank customer fields for manual completion, but no customer values are read or sent by the site.",
+    "No analytics provider was added."
+  ]
+}

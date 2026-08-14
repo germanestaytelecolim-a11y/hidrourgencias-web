@@ -1,0 +1,115 @@
+{
+  "generatedAt": "2026-08-14T05:35:15.237Z",
+  "protectedFields": [
+    "title",
+    "description",
+    "canonical",
+    "H1",
+    "robots",
+    "schema",
+    "URLs"
+  ],
+  "routes": [
+    {
+      "route": "/",
+      "titleUnchanged": true,
+      "descriptionUnchanged": true,
+      "canonicalUnchanged": true,
+      "h1Unchanged": true,
+      "robotsProtected": true,
+      "urlsProtected": true,
+      "metadataProtected": true
+    },
+    {
+      "route": "/servicios/destape-alcantarillado",
+      "titleUnchanged": true,
+      "descriptionUnchanged": true,
+      "canonicalUnchanged": true,
+      "h1Unchanged": true,
+      "robotsProtected": true,
+      "urlsProtected": true,
+      "metadataProtected": true
+    },
+    {
+      "route": "/servicios/hidrojet",
+      "titleUnchanged": true,
+      "descriptionUnchanged": true,
+      "canonicalUnchanged": true,
+      "h1Unchanged": true,
+      "robotsProtected": true,
+      "urlsProtected": true,
+      "metadataProtected": true
+    },
+    {
+      "route": "/destape-alcantarillado-vina-del-mar",
+      "titleUnchanged": true,
+      "descriptionUnchanged": true,
+      "canonicalUnchanged": true,
+      "h1Unchanged": true,
+      "robotsProtected": true,
+      "urlsProtected": true,
+      "metadataProtected": true
+    },
+    {
+      "route": "/destape-alcantarillado-valparaiso",
+      "titleUnchanged": true,
+      "descriptionUnchanged": true,
+      "canonicalUnchanged": true,
+      "h1Unchanged": true,
+      "robotsProtected": true,
+      "urlsProtected": true,
+      "metadataProtected": true
+    },
+    {
+      "route": "/hidrojet-concon",
+      "titleUnchanged": true,
+      "descriptionUnchanged": true,
+      "canonicalUnchanged": true,
+      "h1Unchanged": true,
+      "robotsProtected": true,
+      "urlsProtected": true,
+      "metadataProtected": true
+    },
+    {
+      "route": "/destape-alcantarillado-quilpue",
+      "titleUnchanged": true,
+      "descriptionUnchanged": true,
+      "canonicalUnchanged": true,
+      "h1Unchanged": true,
+      "robotsProtected": true,
+      "urlsProtected": true,
+      "metadataProtected": true
+    },
+    {
+      "route": "/destape-alcantarillado-villa-alemana",
+      "titleUnchanged": true,
+      "descriptionUnchanged": true,
+      "canonicalUnchanged": true,
+      "h1Unchanged": true,
+      "robotsProtected": true,
+      "urlsProtected": true,
+      "metadataProtected": true
+    },
+    {
+      "route": "/destape-alcantarillado-casablanca",
+      "titleUnchanged": true,
+      "descriptionUnchanged": true,
+      "canonicalUnchanged": true,
+      "h1Unchanged": true,
+      "robotsProtected": true,
+      "urlsProtected": true,
+      "metadataProtected": true
+    },
+    {
+      "route": "/destape-alcantarillado-maitencillo-puchuncavi",
+      "titleUnchanged": true,
+      "descriptionUnchanged": true,
+      "canonicalUnchanged": true,
+      "h1Unchanged": true,
+      "robotsProtected": true,
+      "urlsProtected": true,
+      "metadataProtected": true
+    }
+  ],
+  "pass": true
+}

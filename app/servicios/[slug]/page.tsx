@@ -4,6 +4,7 @@ import { ExternalLink, PhoneCall } from "lucide-react";
 import { notFound } from "next/navigation";
 
 import { LandingVisualHero } from "@/components/landing-visual-hero";
+import { ConversionExperience } from "@/components/conversion-experience";
 import { ServiceTermsNotice } from "@/components/service-terms";
 import { getAllBlogPosts } from "@/lib/blog-data";
 import { getAllComunaLandings } from "@/lib/comuna-landings";
@@ -62,6 +63,7 @@ export default async function ServicioPage({ params }: Props) {
   const serviceMessage = createWhatsAppUrl(`Necesito ${servicio.navLabel.toLowerCase()} en la Region de Valparaiso.`);
   const callHref = siteConfig.phoneHref;
   const visualProfile = getServiceVisualProfile(servicio.slug);
+  const isPilotService = ["destape-alcantarillado", "hidrojet"].includes(servicio.slug);
 
   if (!visualProfile) {
     throw new Error(`Falta perfil visual para el servicio ${servicio.slug}.`);
@@ -117,6 +119,10 @@ export default async function ServicioPage({ params }: Props) {
         <p>{servicio.summary}</p>
         <ServiceTermsNotice tone="dark" className="mt-7 max-w-4xl" />
       </LandingVisualHero>
+
+      {isPilotService ? (
+        <ConversionExperience context={{ service: servicio.navLabel, sourcePath: `/servicios/${servicio.slug}` }} />
+      ) : null}
 
       <section className="mt-9 grid gap-6 lg:grid-cols-2">
         <article className="brand-card rounded-3xl p-6 sm:p-8">

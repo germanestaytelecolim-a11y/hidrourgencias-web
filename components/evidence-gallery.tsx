@@ -1,0 +1,64 @@
+"use client";
+
+import { useState } from "react";
+import Image from "next/image";
+
+import { trackCommercialEvent } from "@/lib/conversion";
+import { createContextualWhatsAppUrl } from "@/lib/conversion";
+
+type EvidenceGalleryProps = {
+  images: string[];
+  commune: string;
+};
+
+export function EvidenceGallery({ images, commune }: EvidenceGalleryProps) {
+  const [expanded, setExpanded] = useState(false);
+  const visibleImages = expanded ? images : images.slice(0, 6);
+
+  const renderImage = (imageName: string, index: number) => (
+    <article key={imageName} className="group relative overflow-hidden rounded-xl border border-slate-800 bg-slate-900">
+      <div className="relative aspect-[4/3]">
+        <Image
+          src={`/galeria/${encodeURIComponent(imageName)}`}
+          alt={`destape de alcantarillado con hidrojet en ${commune} - evidencia ${index + 1}`}
+          fill
+          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+          loading={index < 3 ? "eager" : "lazy"}
+          className="object-cover transition duration-500 group-hover:scale-105"
+        />
+      </div>
+      <div className="p-3">
+        <a
+          href={createContextualWhatsAppUrl("emergency", { commune, sourcePath: "evidence-gallery" })}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => trackCommercialEvent("click_whatsapp", { commune, lead_type: "emergency", cta_location: "evidence_gallery" })}
+          className="inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-emerald-500 px-3 py-2 text-center text-sm font-black text-white focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-200"
+        >
+          Solicitar evaluación
+        </a>
+      </div>
+    </article>
+  );
+
+  return (
+    <>
+      <div className="mt-7 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {visibleImages.map(renderImage)}
+      </div>
+      {images.length > 6 ? (
+        <button
+          type="button"
+          aria-expanded={expanded}
+          onClick={() => {
+            setExpanded((value) => !value);
+            trackCommercialEvent("expand_evidence", { commune, cta_location: "evidence_gallery" });
+          }}
+          className="mt-6 inline-flex min-h-11 items-center justify-center rounded-lg border border-sky-300 bg-white px-5 py-3 text-sm font-black text-sky-950 transition hover:bg-sky-50 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-300"
+        >
+          {expanded ? "Mostrar menos trabajos" : "Ver más trabajos"}
+        </button>
+      ) : null}
+    </>
+  );
+}

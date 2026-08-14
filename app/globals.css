@@ -140,6 +140,15 @@ body:has(.landing-visual-hero) .hu-floating-whatsapp {
   display: none;
 }
 
+body:has(.conversion-experience) .hu-floating-whatsapp {
+  display: none;
+}
+
+.conversion-mobile-bar {
+  padding-left: max(0.5rem, env(safe-area-inset-left));
+  padding-right: max(0.5rem, env(safe-area-inset-right));
+}
+
 .hu-floating-whatsapp {
   right: max(0.75rem, env(safe-area-inset-right));
   bottom: max(0.75rem, env(safe-area-inset-bottom));
