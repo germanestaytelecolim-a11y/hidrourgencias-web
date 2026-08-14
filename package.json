@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "prebuild": "node scripts/ensure-build-directories.mjs",
-    "build": "next build",
+    "build": "node scripts/ensure-build-directories.mjs && next build",
     "start": "next start",
     "lint": "eslint",
     "audit:seo": "tsx scripts/audit-seo-routes.ts",
