@@ -967,7 +967,7 @@ const newServiceGuideBlueprints: NewServiceGuideBlueprint[] = [
     keywords: ["alcantarillado antes de comprar propiedad", "análisis técnico de propiedad", "redes sanitarias"],
     serviceName: "análisis técnico de propiedad y redes sanitarias",
     serviceHref: "/servicios/analisis-tecnico-propiedad-redes-sanitarias",
-    serviceLabel: "análisis técnico de propiedad y redes sanitarias",
+    serviceLabel: "revisión sanitaria antes de comprar una propiedad",
     focus:
       "Antes de comprar, arrendar o recibir una propiedad conviene revisar si la red de alcantarillado funciona correctamente, si las cámaras están operativas y si existen señales de obstrucción, retorno o falta de mantención.",
     risks: [
@@ -1004,7 +1004,7 @@ const newServiceGuideBlueprints: NewServiceGuideBlueprint[] = [
     keywords: ["vicios ocultos sanitarios", "alcantarillado", "desagües"],
     serviceName: "análisis técnico de propiedad y redes sanitarias",
     serviceHref: "/servicios/analisis-tecnico-propiedad-redes-sanitarias",
-    serviceLabel: "detección de vicios ocultos sanitarios",
+    serviceLabel: "revisión sanitaria precompra para detectar vicios ocultos",
     focus:
       "Un vicio oculto sanitario no siempre se ve durante una visita comercial. Puede esconderse en cámaras deficientes, redes sin mantención, ductos con raíces o tramos con pendiente incorrecta.",
     risks: [
@@ -1041,7 +1041,7 @@ const newServiceGuideBlueprints: NewServiceGuideBlueprint[] = [
     keywords: ["videoinspección sanitaria", "invertir en propiedad", "redes sanitarias"],
     serviceName: "análisis técnico de propiedad y redes sanitarias",
     serviceHref: "/servicios/analisis-tecnico-propiedad-redes-sanitarias",
-    serviceLabel: "análisis técnico con videoinspección sanitaria",
+    serviceLabel: "videoinspección sanitaria para propiedades",
     focus:
       "Cuando una propiedad representa una inversión relevante, la videoinspección sanitaria puede entregar evidencia técnica sobre el estado de ductos, colectores y tramos no visibles.",
     risks: [

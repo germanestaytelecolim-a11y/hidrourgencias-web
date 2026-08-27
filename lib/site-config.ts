@@ -206,13 +206,13 @@ export const serviceCatalog: ServiceCatalogItem[] = [
     ),
   },
   {
-    title: "Análisis técnico de propiedad y redes sanitarias",
+    title: "Revisión sanitaria precompra, preventa y arriendo",
     description:
-      "Análisis técnico exhaustivo de redes de alcantarillado y desagües para detectar vicios ocultos, obstrucciones, contrapendientes, raíces, fisuras, colapsos, filtraciones sanitarias visibles, cámaras deficientes o condiciones que puedan generar gastos imprevistos antes de comprar, arrendar o recibir una propiedad.",
+      "Revisión de alcantarillado, desagües, cámaras y redes sanitarias antes de comprar, vender, arrendar o recibir una propiedad, con videoinspección sanitaria cuando corresponde.",
     href: "/servicios/analisis-tecnico-propiedad-redes-sanitarias",
-    ctaLabel: "Solicitar análisis sanitario",
+    ctaLabel: "Solicitar revisión sanitaria precompra",
     ctaHref: createWhatsAppUrl(
-      "Hola, necesito solicitar información por el servicio de análisis técnico de propiedad y redes sanitarias de Hidrourgencias SpA. Indico comuna, tipo de propiedad y antecedentes de la evaluación que necesito realizar.",
+      "Hola, necesito solicitar revisión sanitaria precompra, preventa o arriendo con Hidrourgencias SpA. Indico comuna, tipo de propiedad y antecedentes de la evaluación que necesito realizar.",
     ),
   },
   {
@@ -230,7 +230,7 @@ export const serviceCatalog: ServiceCatalogItem[] = [
       "WC, cámaras, verticales y horizontales colapsadas",
       "Extracción de aguas acumuladas con motobombas",
       "Limpieza post emergencia sanitaria y control de olores",
-      "Análisis técnico de propiedad y redes sanitarias",
+      "Revisión sanitaria antes de comprar, vender o arrendar una propiedad",
       "Coordinación para edificios, comunidades, empresas y domicilios",
     ],
   },

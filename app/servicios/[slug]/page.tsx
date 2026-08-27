@@ -46,8 +46,23 @@ export default async function ServicioPage({ params }: Props) {
     notFound();
   }
 
-  const relatedServices =
-    servicio.slug === "limpieza-higienizacion-sanitizacion"
+  const isPrepurchaseService = servicio.slug === "analisis-tecnico-propiedad-redes-sanitarias";
+  const prepurchaseRelatedServiceSlugs = [
+    "destape-camaras-inspeccion",
+    "destape-alcantarillado",
+    "hidrojet",
+    "mantencion-preventiva-redes",
+  ];
+  const prepurchaseRelatedPostSlugs = [
+    "que-revisar-alcantarillado-antes-comprar-propiedad",
+    "vicios-ocultos-sanitarios-alcantarillado-desagues",
+    "videoinspeccion-sanitaria-antes-invertir-propiedad",
+  ];
+  const relatedServices = isPrepurchaseService
+    ? prepurchaseRelatedServiceSlugs
+        .map((serviceSlug) => getServicioBySlug(serviceSlug))
+        .filter((item): item is NonNullable<ReturnType<typeof getServicioBySlug>> => item !== undefined)
+    : servicio.slug === "limpieza-higienizacion-sanitizacion"
       ? getAllServicios().filter((item) =>
           ["destape-alcantarillado", "hidrojet", "mantencion-preventiva-redes", "destape-camaras-inspeccion"].includes(
             item.slug,
@@ -55,7 +70,11 @@ export default async function ServicioPage({ params }: Props) {
         )
       : getAllServicios().filter((item) => item.slug !== servicio.slug).slice(0, 4);
   const relatedComunas = getAllComunaLandings().slice(0, 8);
-  const relatedPosts = getAllBlogPosts().slice(0, 4);
+  const relatedPosts = isPrepurchaseService
+    ? prepurchaseRelatedPostSlugs
+        .map((postSlug) => getAllBlogPosts().find((post) => post.slug === postSlug))
+        .filter((post): post is NonNullable<ReturnType<typeof getAllBlogPosts>[number]> => post !== undefined)
+    : getAllBlogPosts().slice(0, 4);
   const relatedZones = getZonaSlugs()
     .slice(0, 7)
     .map((zoneSlug) => getZonaBySlug(zoneSlug))
@@ -64,6 +83,32 @@ export default async function ServicioPage({ params }: Props) {
   const callHref = siteConfig.phoneHref;
   const visualProfile = getServiceVisualProfile(servicio.slug);
   const isPilotService = ["destape-alcantarillado", "hidrojet"].includes(servicio.slug);
+  const serviceSchema = isPrepurchaseService
+    ? JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name: "Revisión sanitaria precompra, preventa y arriendo",
+        serviceType: "Videoinspección sanitaria y análisis técnico de redes de alcantarillado y desagües",
+        description:
+          "Servicio de revisión sanitaria para evaluar redes de alcantarillado, cámaras, desagües y condiciones críticas antes de comprar, vender o arrendar una propiedad.",
+        provider: {
+          "@type": "LocalBusiness",
+          name: "Hidrourgencias SpA",
+          url: "https://hidrourgencias.cl",
+        },
+        areaServed: [
+          "Viña del Mar",
+          "Valparaíso",
+          "Concón",
+          "Quilpué",
+          "Villa Alemana",
+          "Limache",
+          "Quillota",
+          "Región de Valparaíso",
+        ],
+        url: "https://hidrourgencias.cl/servicios/analisis-tecnico-propiedad-redes-sanitarias",
+      }).replace(/</g, "\\u003c")
+    : "";
 
   if (!visualProfile) {
     throw new Error(`Falta perfil visual para el servicio ${servicio.slug}.`);
@@ -71,6 +116,7 @@ export default async function ServicioPage({ params }: Props) {
 
   return (
     <main className="mx-auto min-h-screen max-w-6xl px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
+      {serviceSchema ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serviceSchema }} /> : null}
       <div className="mb-6">
         <Link href="/" className="inline-flex items-center text-sm font-semibold text-sky-700 hover:text-sky-800">
           {"\u2190"} Volver al inicio
@@ -126,7 +172,9 @@ export default async function ServicioPage({ params }: Props) {
 
       <section className="mt-9 grid gap-6 lg:grid-cols-2">
         <article className="brand-card rounded-3xl p-6 sm:p-8">
-          <h2 className="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">Metodologia de trabajo</h2>
+          <h2 className="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
+            {isPrepurchaseService ? "Qué entrega Hidrourgencias" : "Metodologia de trabajo"}
+          </h2>
           <div className="mt-5 space-y-3">
             {servicio.methodology.map((step) => (
               <p key={step} className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm leading-7 text-slate-700">
@@ -137,7 +185,9 @@ export default async function ServicioPage({ params }: Props) {
         </article>
 
         <article className="brand-card rounded-3xl p-6 sm:p-8">
-          <h2 className="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">Equipos utilizados</h2>
+          <h2 className="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
+            {isPrepurchaseService ? "Herramientas de revisión sanitaria" : "Equipos utilizados"}
+          </h2>
           <div className="mt-5 space-y-3">
             {servicio.equipment.map((equipment) => (
               <p key={equipment} className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm leading-7 text-slate-700">
@@ -149,7 +199,9 @@ export default async function ServicioPage({ params }: Props) {
       </section>
 
       <section className="brand-card mt-9 rounded-3xl p-6 sm:p-8">
-        <h2 className="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">Tipos de obstruccion y fallas atendidas</h2>
+        <h2 className="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
+          {isPrepurchaseService ? "Qué evaluamos en la revisión sanitaria" : "Tipos de obstruccion y fallas atendidas"}
+        </h2>
         <div className="mt-5 grid gap-3 sm:grid-cols-2">
           {servicio.obstructionTypes.map((issue) => (
             <p key={issue} className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold leading-7 text-slate-700">
@@ -161,7 +213,9 @@ export default async function ServicioPage({ params }: Props) {
 
       <section className="mt-9 grid gap-6 lg:grid-cols-2">
         <article className="brand-card rounded-3xl p-6 sm:p-8">
-          <h2 className="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">Beneficios del servicio</h2>
+          <h2 className="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
+            {isPrepurchaseService ? "Para quién sirve esta evaluación" : "Beneficios del servicio"}
+          </h2>
           <div className="mt-5 space-y-3">
             {servicio.benefits.map((benefit) => (
               <p key={benefit} className="rounded-xl border border-emerald-100 bg-emerald-50 px-4 py-3 text-sm font-semibold leading-7 text-slate-800">
@@ -172,7 +226,9 @@ export default async function ServicioPage({ params }: Props) {
         </article>
 
         <article className="brand-card rounded-3xl p-6 sm:p-8">
-          <h2 className="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">Cuando solicitarlo</h2>
+          <h2 className="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
+            {isPrepurchaseService ? "Cuándo conviene solicitar este servicio" : "Cuando solicitarlo"}
+          </h2>
           <div className="mt-5 space-y-3">
             {servicio.whenToRequest.map((item) => (
               <p key={item} className="rounded-xl border border-sky-100 bg-sky-50 px-4 py-3 text-sm font-semibold leading-7 text-slate-800">

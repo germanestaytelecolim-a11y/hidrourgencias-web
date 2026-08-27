@@ -132,10 +132,10 @@ const groupedServiceAreas = [
       "Videoinspección sanitaria CCTV",
       "Informes técnicos formales",
       "Asesoría técnica especializada",
-      "Asesoramiento precompra, preventa y arriendo mediante videoinspección sanitaria CCTV",
+      "Revisión sanitaria precompra, preventa y arriendo con videoinspección sanitaria CCTV",
     ],
     note:
-      "Antes de comprar, vender o arrendar una propiedad, revise lo que no se ve. Evaluamos redes de alcantarillado y desagüe para detectar obstrucciones, raíces, roturas, contrapedientes, grasa adherida, sedimentos o fallas de evacuación.",
+      "Antes de comprar, vender o arrendar una propiedad, revise lo que no se ve. Evaluamos redes de alcantarillado y desagüe para detectar obstrucciones, raíces, roturas, contrapendientes, grasa adherida, sedimentos o fallas de evacuación.",
   },
   {
     title: "Recuperación de Espacios e Higienización",
