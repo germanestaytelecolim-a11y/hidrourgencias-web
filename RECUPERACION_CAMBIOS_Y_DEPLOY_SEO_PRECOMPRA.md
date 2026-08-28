@@ -13,6 +13,15 @@ Ese worktree no contenia el bloque de cambios locales sin commit que seguia pres
 - Alias: `https://hidrourgencias.cl`
 - Estado: `READY`
 
+## Deployment final recuperado
+
+- Preview: `dpl_FPdwyydbhCKikmwQ8xi7KRCk4xzc`
+- Preview URL: `https://hidrourgencias-krti1gn2f-germanestaytelecolim-9238s-projects.vercel.app`
+- Production: `dpl_ANZS7nEih8vN1gaJ9ANjehy9DhdK`
+- Production URL: `https://hidrourgencias-7n9gx9vql-germanestaytelecolim-9238s-projects.vercel.app`
+- Alias: `https://hidrourgencias.cl`
+- Estado: `READY`
+
 ## Referencia historica
 
 - Deployment con mejoras recientes: `dpl_BVq1A5aoZxrz1JqgSc3inms6Z2PQ`
