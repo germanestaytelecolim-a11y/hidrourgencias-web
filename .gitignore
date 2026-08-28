@@ -35,6 +35,10 @@ yarn-error.log*
 /reports/*
 !/reports/.gitkeep
 
+# local admin development data and isolated npm cache
+/.admin-data/
+/.npm-cache/
+
 # env files (can opt-in for committing if needed)
 .env*
 
@@ -46,3 +50,4 @@ yarn-error.log*
 next-env.d.ts
 
 .vercel
+.env*

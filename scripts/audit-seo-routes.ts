@@ -27,7 +27,19 @@ type AuditRouteKind = SitemapRouteKind;
 type AuditRouteSpec = {
   path: string;
   kind: AuditRouteKind;
-  source: "home" | "blog-index" | "case-study-index" | "landing" | "blog-post" | "case-study" | "service" | "zone" | "programmatic";
+  source:
+    | "home"
+    | "service-index"
+    | "coverage-index"
+    | "contact"
+    | "blog-index"
+    | "case-study-index"
+    | "landing"
+    | "blog-post"
+    | "case-study"
+    | "service"
+    | "zone"
+    | "programmatic";
 };
 
 type DuplicateEntry = {
@@ -450,6 +462,9 @@ function uniqueByPath(routes: AuditRouteSpec[]): AuditRouteSpec[] {
 function getKnownRouteSpecs(): AuditRouteSpec[] {
   return uniqueByPath([
     { path: "/", kind: "home", source: "home" },
+    { path: "/servicios", kind: "service-index", source: "service-index" },
+    { path: "/cobertura", kind: "coverage-index", source: "coverage-index" },
+    { path: "/contacto", kind: "contact", source: "contact" },
     { path: "/blog", kind: "blog-index", source: "blog-index" },
     { path: "/casos-de-exito", kind: "case-study-index", source: "case-study-index" },
     ...getComunaPaths().map((slug) => ({ path: `/${slug}`, kind: "landing" as const, source: "landing" as const })),

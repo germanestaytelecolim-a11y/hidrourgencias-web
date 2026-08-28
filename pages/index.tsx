@@ -1,13 +1,13 @@
 import Head from "next/head";
-import type { GetStaticProps } from "next";
+import type { GetServerSideProps } from "next";
 
 import HomePageContent, { type HomePageCmsContent } from "@/components/HomePageContent";
-import { ConversionExperience } from "@/components/conversion-experience";
 import { GoogleAdsConversionTracking } from "@/components/google-ads-conversion-tracking";
 import { ServiceTermsSection } from "@/components/service-terms";
 import { SiteHeader } from "@/components/site-header";
-import { getAllBlogPosts } from "@/lib/blog-data";
 import { getAllCaseStudies } from "@/lib/case-studies";
+import { getPublicBlogPosts } from "@/lib/admin/public-blog-posts";
+import { getPublicWorkCasesForPath } from "@/lib/admin/public-work-cases";
 import {
   getCmsClients,
   getCmsCommercialBlocks,
@@ -19,11 +19,6 @@ import {
   getCmsVideoEntries,
 } from "@/lib/cms-content";
 import { createWhatsAppUrl } from "@/lib/site-config";
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const config: any = {
-  unstable_runtimeJS: false,
-};
 
 const siteUrl = "https://hidrourgencias.cl";
 const ogImage = "/images/hero-urgencia.jpg";
@@ -112,7 +107,7 @@ type HomePageProps = {
   cmsContent: HomePageCmsContent;
 };
 
-export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
+export const getServerSideProps: GetServerSideProps<HomePageProps> = async () => {
   const clients = Array.from(
     new Map([...getCmsClients(), ...getCmsHighlightedClients()].map((client) => [client.name, client] as const)).values(),
   );
@@ -128,7 +123,8 @@ export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
         galleryItems: getCmsGalleryEntries(),
         videos: getCmsVideoEntries(),
         cases: getAllCaseStudies(),
-        blogPosts: getAllBlogPosts(),
+        adminCases: await getPublicWorkCasesForPath("/", 6),
+        blogPosts: await getPublicBlogPosts(),
       },
     },
   };
@@ -176,7 +172,6 @@ export default function HomePage({ cmsContent }: HomePageProps) {
       </Head>
       <SiteHeader />
       <HomePageContent cmsContent={cmsContent} />
-      <ConversionExperience context={{ sourcePath: "/" }} />
       <ServiceTermsSection />
       <div className="hu-floating-whatsapp fixed z-50 w-auto max-w-[calc(100vw-2rem)] sm:w-[17rem]">
         <a

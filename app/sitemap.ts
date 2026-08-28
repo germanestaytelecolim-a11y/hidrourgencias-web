@@ -17,6 +17,9 @@ export type SitemapRouteKind =
   | "home"
   | "blog-index"
   | "case-study-index"
+  | "service-index"
+  | "coverage-index"
+  | "contact"
   | "landing"
   | "blog-post"
   | "case-study"
@@ -46,8 +49,12 @@ export function getSitemapPriority(kind: SitemapRouteKind): number {
     return 0.9;
   }
 
-  if (kind === "blog-index" || kind === "case-study-index") {
+  if (kind === "blog-index" || kind === "case-study-index" || kind === "service-index" || kind === "coverage-index") {
     return 0.85;
+  }
+
+  if (kind === "contact") {
+    return 0.78;
   }
 
   if (kind === "service") {
@@ -68,6 +75,9 @@ export function getSitemapPriority(kind: SitemapRouteKind): number {
 export function getSitemapRouteSpecs(): SitemapRouteSpec[] {
   const routeSpecs: SitemapRouteSpec[] = [
     { path: "/", kind: "home" },
+    { path: "/servicios", kind: "service-index" },
+    { path: "/cobertura", kind: "coverage-index" },
+    { path: "/contacto", kind: "contact" },
     { path: "/blog", kind: "blog-index" },
     { path: "/casos-de-exito", kind: "case-study-index" },
     ...getComunaPaths().map((slug) => ({ path: `/${slug}`, kind: "landing" as const })),

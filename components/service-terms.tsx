@@ -1,10 +1,10 @@
 export const serviceTermsNotice =
   "Importante: el servicio contratado corresponde a una intervención técnica especializada. Existen fallas estructurales, colapsos, raíces, pérdidas de pendiente y daños internos de tuberías que pueden impedir una desobstrucción total. En tales casos, Hidrourgencias SpA entregará diagnóstico técnico y alternativas de solución. Los recursos técnicos, maquinaria, movilización, horas hombre y servicios ejecutados en terreno constituyen prestaciones efectivamente realizadas y sujetas a cobro.";
 
-const serviceTermsNoticeSummary =
+export const serviceTermsNoticeSummary =
   "Servicio sujeto a diagnóstico técnico, condiciones reales de la red, accesibilidad, nivel de obstrucción y recursos requeridos.";
 
-const serviceTerms = [
+export const serviceTerms = [
   "Hidrourgencias SpA presta servicios especializados de diagnóstico, limpieza, mantenimiento y desobstrucción de redes de alcantarillado y desagües mediante maquinaria eléctrica, sistema hidrojet, videoinspección sanitaria y otros procedimientos técnicos aplicables según cada caso.",
   "La contratación de nuestros servicios corresponde a una intervención técnica especializada destinada a identificar, diagnosticar y solucionar obstrucciones o anomalías presentes en redes sanitarias.",
   "Debido a que cada instalación posee condiciones particulares, Hidrourgencias SpA no puede garantizar resultados absolutos cuando existan daños estructurales, fallas constructivas, colapsos, roturas, raíces invasivas, pérdidas de pendiente, deformaciones, obstrucciones externas o cualquier otra condición que impida técnicamente la normal operación del sistema.",

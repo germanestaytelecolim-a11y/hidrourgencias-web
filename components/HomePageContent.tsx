@@ -7,6 +7,7 @@ import {
   Building2,
   ExternalLink,
   FileText,
+  ClipboardCheck,
   Mail,
   MapPin,
   PhoneCall,
@@ -16,12 +17,14 @@ import {
 } from "@/components/icons";
 
 import { CasosReales } from "@/components/CasosReales";
+import { PublicAdminCases } from "@/components/admin/PublicAdminCases";
 import { CTAUrgente } from "@/components/CTAUrgente";
-import { GaleriaOperativa } from "@/components/GaleriaOperativa";
+import { ConversionExperience } from "@/components/conversion-experience";
 import { HeroUrgencias } from "@/components/HeroUrgencias";
 import { ProcesoOperativo } from "@/components/ProcesoOperativo";
 import { ServiceTermsNotice } from "@/components/service-terms";
 import { ServiciosGrid } from "@/components/ServiciosGrid";
+import { SocialProofLinksSection } from "@/components/SocialProofLinksSection";
 import { StaticPicture } from "@/components/static-picture";
 import { VideosTecnicos } from "@/components/VideosTecnicos";
 import type { BlogPost } from "@/lib/blog-data";
@@ -36,6 +39,7 @@ import type {
   CmsVideoEntry,
 } from "@/lib/cms-content";
 import type { CaseStudy } from "@/lib/case-studies";
+import type { PublicWorkCaseDto } from "@/lib/admin/public-work-cases";
 import { comunasSeo, createSeoSlug } from "@/lib/seo-territorial";
 import { GOOGLE_REVIEWS_URL, buildCanonicalUrl, createMailToUrl, createWhatsAppUrl, serviceCatalog, siteConfig } from "@/lib/site-config";
 
@@ -180,6 +184,7 @@ export type HomePageCmsContent = {
   galleryItems: CmsGalleryEntry[];
   videos: CmsVideoEntry[];
   cases: CaseStudy[];
+  adminCases: PublicWorkCaseDto[];
   blogPosts: BlogPost[];
 };
 
@@ -318,8 +323,8 @@ function AntiPortfolioSection() {
       <div className="hu-section-dark grid gap-6 rounded-[2rem] px-6 py-8 shadow-[0_28px_80px_-44px_rgba(8,56,95,0.88)] sm:px-10 lg:grid-cols-[0.95fr_1.05fr] lg:py-10">
         <div className="relative z-10">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-sky-200">Especialización operativa</p>
-          <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-            Nuestra especialidad es la red sanitaria de alto impacto
+          <h2 className="mt-4 max-w-3xl text-4xl font-black uppercase leading-[0.98] tracking-tight text-white sm:text-6xl lg:text-7xl">
+            Nuestra especialidad es la <span className="hu-text-gradient">red sanitaria</span> de alto impacto
           </h2>
           <p className="mt-4 text-sm leading-8 text-slate-300 sm:text-base">
             Para garantizar tiempos de respuesta rápidos, criterio técnico y calidad operativa, Hidrourgencias SpA
@@ -342,6 +347,120 @@ function AntiPortfolioSection() {
             ))}
           </div>
         </div>
+      </div>
+    </section>
+  );
+}
+
+const prepurchaseBenefits = [
+  "Detectar obstrucciones ocultas",
+  "Identificar raíces y deformaciones",
+  "Revisar contrapendientes",
+  "Detectar acumulaciones de grasa y sedimentos",
+  "Conocer el estado sanitario antes de asumir el inmueble",
+  "Tomar decisiones con evidencia técnica",
+];
+
+const prepurchaseBlogSlugs = [
+  "que-revisar-alcantarillado-antes-comprar-propiedad",
+  "vicios-ocultos-sanitarios-alcantarillado-desagues",
+  "videoinspeccion-sanitaria-antes-invertir-propiedad",
+];
+
+function PrepurchaseServiceSection({ posts }: { posts: BlogPost[] }) {
+  const relatedPosts = prepurchaseBlogSlugs
+    .map((slug) => posts.find((post) => post.slug === slug))
+    .filter((post): post is BlogPost => Boolean(post));
+  const whatsappMessage = `Hola Hidrourgencias. Necesito evaluar la red sanitaria de una propiedad antes de:
+
+- Comprar
+- Vender
+- Arrendar
+- Recibir una propiedad
+- Otro
+
+Comuna:
+Tipo de propiedad:
+Fecha aproximada:`;
+
+  return (
+    <section id="revision-sanitaria-precompra" className="hu-section-blue py-14 text-slate-950 sm:py-18">
+      <div className="relative z-10 mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:px-8">
+        <div>
+          <p className="hu-kicker text-xs font-black uppercase tracking-[0.22em] text-sky-800">Revisión sanitaria antes de decidir</p>
+          <h2 className="mt-4 text-3xl font-black tracking-tight text-slate-950 sm:text-5xl">
+            Asesoramiento precompra, preventa y arriendo mediante <span className="hu-underline-accent">videoinspección sanitaria</span>
+          </h2>
+          <p className="mt-5 text-xl font-black text-[#08385f]">Antes de firmar, revise la red sanitaria.</p>
+          <p className="mt-4 max-w-3xl text-base leading-8 text-slate-700 sm:text-lg">
+            Evaluamos redes de alcantarillado y desagüe para detectar obstrucciones, raíces, roturas, contrapendientes,
+            grasa adherida, sedimentos o fallas de evacuación que pueden transformarse en gastos posteriores.
+          </p>
+          <div className="mt-6 grid gap-3 sm:grid-cols-2">
+            {prepurchaseBenefits.map((benefit) => (
+              <p key={benefit} className="rounded-2xl border border-sky-200 bg-white/85 px-4 py-3 text-sm font-extrabold leading-6 text-slate-800 shadow-sm">
+                <ClipboardCheck className="mr-2 inline h-4 w-4 text-sky-700" aria-hidden="true" />
+                {benefit}
+              </p>
+            ))}
+          </div>
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <a
+              href={createWhatsAppUrl(whatsappMessage)}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-event="prepurchase_whatsapp_click"
+              className="inline-flex items-center justify-center rounded-full bg-emerald-500 px-6 py-3 text-sm font-black text-white shadow-lg shadow-emerald-500/25 transition hover:-translate-y-1 hover:bg-emerald-600"
+            >
+              Solicitar revisión sanitaria de una propiedad
+            </a>
+            <a
+              href="/servicios/analisis-tecnico-propiedad-redes-sanitarias"
+              data-event="prepurchase_service_click"
+              className="brand-blue-cta inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-black transition hover:-translate-y-1"
+            >
+              Conocer el servicio
+            </a>
+          </div>
+        </div>
+        <aside className="grid gap-4">
+          <div className="hu-gradient-border overflow-hidden rounded-[2rem] bg-white [--hu-card-bg:#fff]">
+            <div className="relative aspect-[4/3] overflow-hidden bg-slate-900">
+              <StaticPicture
+                src="/images/servicios/heroes/analisis-tecnico-propiedad-redes-sanitarias.webp"
+                alt="Equipo de videoinspección sanitaria para revisar redes de una propiedad"
+                width={900}
+                height={675}
+                loading="lazy"
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <div className="p-5">
+              <p className="text-xs font-black uppercase tracking-[0.18em] text-sky-700">Evidencia técnica antes de asumir riesgo</p>
+              <p className="mt-3 text-sm leading-7 text-slate-700">
+                Orientado a compradores, corredores, administradores, inversionistas y propietarios que necesitan decidir
+                con información sanitaria concreta.
+              </p>
+            </div>
+          </div>
+          {relatedPosts.length ? (
+            <div className="rounded-[1.5rem] border border-white/80 bg-white/75 p-5 shadow-lg shadow-sky-900/10">
+              <h3 className="text-xl font-black tracking-tight text-slate-950">Aprende antes de decidir</h3>
+              <div className="mt-4 grid gap-3">
+                {relatedPosts.map((post) => (
+                  <a
+                    key={post.slug}
+                    href={`/blog/${post.slug}`}
+                    data-event="prepurchase_blog_click"
+                    className="rounded-2xl border border-sky-100 bg-white px-4 py-3 text-sm font-bold leading-6 text-slate-800 transition hover:-translate-y-0.5 hover:border-sky-300"
+                  >
+                    {post.h1}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ) : null}
+        </aside>
       </div>
     </section>
   );
@@ -389,6 +508,7 @@ export default function HomePage({ cmsContent }: HomePageContentProps) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: schema }} />
 
       <HeroUrgencias settings={cmsContent?.homeSettings} />
+      <ConversionExperience context={{ sourcePath: "/" }} />
       <SymptomsSection />
       <ServiciosGrid services={cmsContent?.featuredServices} />
       <AntiPortfolioSection />
@@ -414,25 +534,21 @@ export default function HomePage({ cmsContent }: HomePageContentProps) {
           </div>
 
           <div className="relative mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {coverageComunas.map((page, index) => (
+            {coverageComunas.map((page) => (
               <a
                 key={page.name}
                 href={page.href}
-                className={`group rounded-2xl border px-4 py-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md ${
-                  index % 4 === 0
-                    ? "border-[#08385f]/20 bg-[#08385f] text-white"
-                    : "border-sky-200 bg-white text-slate-800 hover:border-sky-300"
-                }`}
+                className="group rounded-2xl border border-sky-200 bg-white px-4 py-4 text-slate-900 shadow-sm transition hover:-translate-y-0.5 hover:border-sky-300 hover:shadow-md"
               >
                 <span className="flex items-start gap-3">
-                  <MapPin className={`mt-0.5 h-5 w-5 flex-none ${index % 4 === 0 ? "text-sky-100" : "text-sky-700"}`} />
+                  <MapPin className="mt-0.5 h-5 w-5 flex-none text-sky-700 transition group-hover:text-sky-800" />
                   <span>
                     <span className="block text-base font-extrabold">{page.name}</span>
-                    <span className={`mt-1 block text-sm leading-6 ${index % 4 === 0 ? "text-slate-100" : "text-slate-600"}`}>
+                    <span className="mt-1 block text-sm leading-6 text-slate-600">
                       {page.detail}
                     </span>
                   </span>
-                  <ArrowRight className="ml-auto mt-1 h-4 w-4 flex-none transition group-hover:translate-x-1" />
+                  <ArrowRight className="ml-auto mt-1 h-4 w-4 flex-none text-slate-800 transition group-hover:translate-x-1 group-hover:text-sky-800" />
                 </span>
               </a>
             ))}
@@ -441,19 +557,13 @@ export default function HomePage({ cmsContent }: HomePageContentProps) {
           <div className="relative mt-8 border-t border-slate-200 pt-7">
             <h3 className="text-xl font-extrabold tracking-tight text-slate-950">Cobertura por zonas destacadas</h3>
             <div className="mt-5 flex flex-wrap gap-2">
-              {highlightedZones.map((zone, index) => (
+              {highlightedZones.map((zone) => (
                 <a
                   key={zone.href}
                   href={zone.href}
-                  className={`inline-flex items-center gap-2 rounded-full border px-3 py-2 text-sm font-bold shadow-sm transition hover:-translate-y-0.5 hover:shadow-md ${
-                    index % 3 === 0
-                      ? "border-[#08385f]/20 bg-[#08385f] text-white"
-                      : index % 3 === 1
-                        ? "border-sky-200 bg-sky-50 text-[#08385f]"
-                        : "border-sky-200 bg-white text-slate-800"
-                  }`}
+                  className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-white px-3 py-2 text-sm font-bold text-slate-800 shadow-sm transition hover:-translate-y-0.5 hover:border-sky-300 hover:text-sky-900 hover:shadow-md"
                 >
-                  <MapPin className="h-4 w-4 flex-none" />
+                  <MapPin className="h-4 w-4 flex-none text-sky-700" />
                   {zone.label}
                 </a>
               ))}
@@ -536,7 +646,7 @@ export default function HomePage({ cmsContent }: HomePageContentProps) {
         </div>
       </section>
 
-      <GaleriaOperativa equipmentItems={cmsContent?.equipmentItems} galleryItems={cmsContent?.galleryItems} />
+      <PrepurchaseServiceSection posts={cmsContent?.blogPosts ?? []} />
       <VideosTecnicos videos={cmsContent?.videos} />
 
       <section id="clientes" className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:py-20">
@@ -622,6 +732,13 @@ export default function HomePage({ cmsContent }: HomePageContentProps) {
       </section>
 
       <CasosReales cases={cmsContent?.cases} />
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <PublicAdminCases cases={cmsContent?.adminCases ?? []} title="Evidencia destacada reciente" />
+      </div>
+
+      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:py-14">
+        <SocialProofLinksSection context="inicio" />
+      </div>
 
       <section id="autoridad-tecnica" className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:py-16">
         <div className="relative overflow-hidden rounded-[2rem] border border-sky-200/70 bg-white px-6 py-9 shadow-[0_24px_70px_-44px_rgba(8,56,95,0.55)] sm:px-10 sm:py-11">
@@ -658,7 +775,7 @@ export default function HomePage({ cmsContent }: HomePageContentProps) {
             </div>
             <a
               href="/blog"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#08385f] px-5 py-3 text-sm font-bold text-white shadow-lg shadow-sky-950/20 transition hover:-translate-y-1 hover:bg-[#0e5f86]"
+              className="brand-blue-cta inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-black transition hover:-translate-y-1"
             >
               Ver todos los artículos
               <ArrowRight className="h-4 w-4" />
@@ -692,7 +809,7 @@ export default function HomePage({ cmsContent }: HomePageContentProps) {
                     <p className="mt-3 text-sm leading-7 text-slate-600">{post.description}</p>
                     <a
                       href={`/blog/${post.slug}`}
-                      className="mt-5 inline-flex items-center gap-2 rounded-full bg-sky-50 px-4 py-2 text-sm font-bold text-sky-800 transition hover:bg-sky-100"
+                      className="brand-blue-soft-cta mt-5 inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-black transition hover:-translate-y-0.5"
                     >
                       Leer guía técnica
                       <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />

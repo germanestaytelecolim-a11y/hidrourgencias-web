@@ -10,48 +10,27 @@ export type ConversionContext = {
 export const leadTypeLabels: Record<LeadType, string> = {
   emergency: "Emergencia sanitaria",
   maintenance: "Mantención preventiva",
-  diagnostic: "Diagnóstico y videoinspección",
+  diagnostic: "Diagnóstico o videoinspección",
 };
 
 const leadMessages: Record<LeadType, string> = {
-  emergency: `Hola, necesito asistencia de Hidrourgencias.
-
-Servicio o problema:
-Comuna:
-Dirección:
-Tipo de inmueble:
-Síntoma observado:
-¿Existe rebalse o riesgo de inundación?:
-Adjuntaré fotos o video:`,
-  maintenance: `Hola, solicito evaluación para mantenimiento preventivo.
-
-Comuna:
-Dirección:
-Tipo de inmueble:
-Cantidad aproximada de cámaras, verticales o tramos:
-Frecuencia de problemas:
-Persona de contacto:`,
-  diagnostic: `Hola, solicito evaluación de videoinspección o diagnóstico sanitario.
-
-Comuna:
-Dirección:
-Tipo de inmueble:
-Problema recurrente:
-Tramo o artefacto afectado:
-Adjuntaré antecedentes disponibles:`,
+  emergency: "Hola, necesito atención de Hidrourgencias por una emergencia sanitaria.",
+  maintenance: "Hola, necesito solicitar una evaluación de mantención preventiva.",
+  diagnostic: "Hola, necesito solicitar una evaluación de diagnóstico o videoinspección sanitaria.",
 };
 
-function contextLines(context: ConversionContext) {
+function contextLines(type: LeadType, context: ConversionContext) {
   return [
-    context.service ? `Servicio consultado: ${context.service}` : "",
+    `Tipo de solicitud: ${leadTypeLabels[type]}`,
+    context.service ? `Servicio: ${context.service}` : "",
     context.commune ? `Comuna: ${context.commune}` : "",
     context.sector ? `Sector: ${context.sector}` : "",
-    context.sourcePath ? `Página de origen: ${context.sourcePath}` : "",
+    context.sourcePath ? `URL: https://hidrourgencias.cl${context.sourcePath}` : "",
   ].filter(Boolean);
 }
 
 export function buildConversionMessage(type: LeadType, context: ConversionContext = {}) {
-  const lines = contextLines(context);
+  const lines = contextLines(type, context);
   return lines.length ? `${leadMessages[type]}\n\n${lines.join("\n")}` : leadMessages[type];
 }
 

@@ -122,6 +122,54 @@ a {
   transform: translateY(-3px);
 }
 
+.hu-section-blue {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 12% 12%, rgba(25, 199, 255, 0.28), transparent 32%),
+    radial-gradient(circle at 82% 18%, rgba(14, 95, 134, 0.16), transparent 34%),
+    linear-gradient(135deg, #eef8ff 0%, #ffffff 46%, #e5f6ff 100%);
+}
+
+.hu-section-blue::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(8, 56, 95, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(8, 56, 95, 0.05) 1px, transparent 1px);
+  background-size: 42px 42px;
+  content: "";
+}
+
+.hu-text-gradient {
+  background: linear-gradient(95deg, #7dd3fc 0%, #22d3ee 45%, #ffffff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hu-underline-accent {
+  background-image: linear-gradient(90deg, rgba(25, 199, 255, 0.35), rgba(8, 56, 95, 0.12));
+  background-position: 0 88%;
+  background-repeat: no-repeat;
+  background-size: 100% 0.3em;
+}
+
+.hu-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hu-kicker::before {
+  width: 2.5rem;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  content: "";
+}
+
 .landing-visual-hero {
   --landing-accent: #22d3ee;
   position: relative;
@@ -147,6 +195,17 @@ body:has(.conversion-experience) .hu-floating-whatsapp {
 .conversion-mobile-bar {
   padding-left: max(0.5rem, env(safe-area-inset-left));
   padding-right: max(0.5rem, env(safe-area-inset-right));
+}
+
+.conversion-mobile-bar a[data-conversion-event="click_whatsapp"],
+.conversion-mobile-bar a[href^="tel:"] {
+  color: #ffffff;
+}
+
+@media (max-width: 1023px) {
+  body:has(.conversion-experience) {
+    padding-bottom: calc(4.75rem + env(safe-area-inset-bottom));
+  }
 }
 
 .hu-floating-whatsapp {
@@ -843,6 +902,43 @@ body:has(.conversion-experience) .hu-floating-whatsapp {
   transform: translateY(-2px);
 }
 
+.brand-blue-cta {
+  color: #ffffff;
+  background: linear-gradient(135deg, #052d4d 0%, #07527d 54%, #0b74a5 100%);
+  border: 1px solid rgba(125, 211, 252, 0.42);
+  box-shadow:
+    0 18px 42px -24px rgba(8, 56, 95, 0.92),
+    inset 0 1px 0 rgba(255, 255, 255, 0.24);
+}
+
+.brand-blue-cta:hover {
+  color: #ffffff;
+  background: linear-gradient(135deg, #06385f 0%, #0b6798 54%, #1187be 100%);
+  border-color: rgba(186, 230, 253, 0.72);
+  box-shadow:
+    0 22px 52px -24px rgba(8, 56, 95, 1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+}
+
+.brand-blue-cta:focus-visible {
+  outline: 4px solid rgba(125, 211, 252, 0.62);
+  outline-offset: 3px;
+}
+
+.brand-blue-soft-cta {
+  color: #06344f;
+  background: linear-gradient(135deg, #ffffff 0%, #e0f2fe 100%);
+  border: 1px solid rgba(14, 116, 165, 0.34);
+  box-shadow: 0 12px 28px -22px rgba(8, 56, 95, 0.74);
+}
+
+.brand-blue-soft-cta:hover {
+  color: #052d4d;
+  background: #ffffff;
+  border-color: rgba(14, 116, 165, 0.62);
+  box-shadow: 0 18px 36px -24px rgba(8, 56, 95, 0.82);
+}
+
 .brand-focus-ring:focus-visible {
   outline: 3px solid rgba(14, 165, 233, 0.42);
   outline-offset: 3px;
@@ -957,6 +1053,9 @@ html.dark [aria-label="Abrir WhatsApp de urgencias sanitarias"] .bg-white {
 .site-header__mobile-layer {
   position: fixed;
   inset: 0;
+  height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
   z-index: 60;
   background: rgba(6, 24, 39, 0.42);
 }
@@ -965,14 +1064,21 @@ html.dark [aria-label="Abrir WhatsApp de urgencias sanitarias"] .bg-white {
   position: absolute;
   inset: 0 0 0 auto;
   width: min(100%, 28rem);
+  height: 100%;
+  max-height: 100%;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
   overflow: hidden;
+  padding-top: env(safe-area-inset-top, 0px);
   background: #ffffff;
   box-shadow: -24px 0 48px -32px rgba(6, 24, 39, 0.55);
 }
 
 .site-header__mobile-panel nav {
-  height: calc(100% - 4.25rem);
+  min-height: 0;
+  overflow-y: auto;
   overscroll-behavior: contain;
+  padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
 }
 
 @media (min-width: 1024px) and (max-width: 1279px) {

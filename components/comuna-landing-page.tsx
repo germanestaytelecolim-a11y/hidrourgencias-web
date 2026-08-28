@@ -4,6 +4,7 @@ import Script from "next/script";
 import {
   AlarmClock,
   BadgeCheck,
+  ChevronDown,
   Camera,
   ChevronRight,
   Droplets,
@@ -16,11 +17,19 @@ import {
 } from "lucide-react";
 
 import { Galeria } from "@/components/Galeria";
+import { PublicAdminCasesForPath } from "@/components/admin/PublicAdminCasesForPath";
 import { ConversionExperience } from "@/components/conversion-experience";
 import { ServiceTermsNotice } from "@/components/service-terms";
 import { TerritorialLandingHero } from "@/components/territorial-landing-hero";
 import type { ComunaLandingData } from "@/lib/comuna-landings";
-import { GOOGLE_REVIEWS_URL, createMailToUrl, createWhatsAppUrl, serviceCatalog, siteConfig } from "@/lib/site-config";
+import {
+  GOOGLE_REVIEWS_URL,
+  createMailToUrl,
+  createWhatsAppUrl,
+  serviceCatalog,
+  siteConfig,
+  type ServiceCatalogItem,
+} from "@/lib/site-config";
 import { getAllServicios } from "@/lib/servicios";
 import { getZonasByLandingSlug as getZonasDetalleByLandingSlug } from "@/lib/zonas-detalle";
 
@@ -32,6 +41,93 @@ type Props = {
 const serviceIcons: LucideIcon[] = [Droplets, Gauge, ShieldCheck, Camera, AlarmClock, Wrench];
 const mailButtonClass =
   "inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-bold text-black shadow-sm shadow-slate-900/10 transition hover:border-slate-400 hover:bg-slate-50";
+const groupedServiceLandingSlugs = new Set([
+  "destape-alcantarillado-vina-del-mar",
+  "destape-alcantarillado-valparaiso",
+  "destape-alcantarillado-quilpue",
+  "destape-alcantarillado-villa-alemana",
+  "destape-alcantarillado-quintero",
+  "destape-alcantarillado-puchuncavi",
+  "destape-alcantarillado-limache",
+  "destape-alcantarillado-placilla-curauma",
+]);
+
+const compactServiceGroups = [
+  {
+    title: "Destapes e hidrojet",
+    hrefs: [
+      "/servicios/destape-alcantarillado",
+      "/servicios/hidrojet",
+      "/servicios/destape-artefactos-sanitarios",
+      "/servicios/destape-camaras-inspeccion",
+      "/servicios/destape-verticales",
+      "/servicios/destape-horizontales",
+      "/servicios/destape-edificios",
+    ],
+  },
+  {
+    title: "Mantenimiento y prevención",
+    hrefs: [
+      "/servicios/mantencion-preventiva-redes",
+      "/servicios/asesoria-mantenimiento-integral-redes-sanitarias",
+      "/servicios/limpieza-higienizacion-sanitizacion",
+      "/servicios/limpieza-domicilios-recuperacion-espacios",
+      "/servicios/limpieza-fachadas-hidrolavado-superficies",
+    ],
+  },
+  {
+    title: "Diagnóstico y apoyo técnico",
+    hrefs: [
+      "/servicios/analisis-tecnico-propiedad-redes-sanitarias",
+      "/servicios/motobombas-extraccion-aguas",
+      "/servicios/extraccion-aguas-estanques-piscinas",
+      "/servicios/reparacion-tuberias-hdpe",
+    ],
+  },
+] as const;
+
+function CompactServiceGroups({ services }: { services: ServiceCatalogItem[] }) {
+  const servicesByHref = new Map(services.filter((service) => service.href).map((service) => [service.href, service]));
+
+  return (
+    <div className="mt-6 grid gap-3">
+      {compactServiceGroups.map((group, index) => {
+        const groupServices = group.hrefs.map((href) => servicesByHref.get(href)).filter(Boolean) as ServiceCatalogItem[];
+
+        return (
+          <details
+            key={group.title}
+            open={index === 0}
+            className="group rounded-2xl border border-sky-100 bg-white shadow-sm shadow-slate-900/5"
+          >
+            <summary className="brand-focus-ring flex cursor-pointer list-none items-center justify-between gap-4 rounded-2xl px-4 py-4 text-left [&::-webkit-details-marker]:hidden">
+              <span>
+                <span className="block text-lg font-extrabold text-slate-950">{group.title}</span>
+                <span className="mt-1 block text-sm font-semibold text-slate-600">{groupServices.length} servicios</span>
+              </span>
+              <ChevronDown className="h-5 w-5 flex-none text-sky-800 transition group-open:rotate-180" aria-hidden="true" />
+            </summary>
+            <div className="border-t border-sky-100 px-4 pb-4 pt-3">
+              <ul className="grid gap-2 sm:grid-cols-2">
+                {groupServices.map((service) => (
+                  <li key={service.href}>
+                    <Link
+                      href={service.href ?? "#"}
+                      className="brand-focus-ring flex min-h-11 items-center justify-between gap-3 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-bold text-slate-900 transition hover:border-sky-300 hover:bg-white hover:text-sky-900"
+                    >
+                      <span>{service.title}</span>
+                      <ChevronRight className="h-4 w-4 flex-none text-sky-800" aria-hidden="true" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </details>
+        );
+      })}
+    </div>
+  );
+}
 
 export function ComunaLandingPage({ landing, allLandings }: Props) {
   const { presentation } = landing;
@@ -41,6 +137,7 @@ export function ComunaLandingPage({ landing, allLandings }: Props) {
     landing.slug === "hidrojet-concon"
       ? serviceCatalog.filter((service) => service.href === "/servicios/hidrojet")
       : serviceCatalog;
+  const shouldGroupServices = groupedServiceLandingSlugs.has(landing.slug);
   const showSeoGallery =
     landing.slug === "destape-alcantarillado-vina-del-mar" || landing.slug === "destape-alcantarillado-valparaiso";
   const zoneCoverageTargets = getZonasDetalleByLandingSlug(landing.slug);
@@ -71,20 +168,42 @@ export function ComunaLandingPage({ landing, allLandings }: Props) {
     })),
   }).replace(/</g, "\\u003c");
 
-  const serviceSchema = JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "Service",
-    serviceType: presentation.schemaServiceType,
-    areaServed: [landing.comuna, ...coverageZones],
-    provider: {
-      "@type": "LocalBusiness",
-      name: siteConfig.name,
-      areaServed: landing.comuna,
-      telephone: siteConfig.phoneDisplay,
-      url: `${siteConfig.siteUrl}/${landing.slug}`,
-    },
-    description: landing.metaDescription,
-  }).replace(/</g, "\\u003c");
+  const serviceSchemaPayload =
+    landing.slug === "hidrojet-concon"
+      ? {
+          "@context": "https://schema.org",
+          "@type": "Service",
+          name: "Hidrojet en Concón",
+          serviceType: "Limpieza hidrodinámica de redes sanitarias",
+          areaServed: {
+            "@type": "City",
+            name: "Concón",
+          },
+          provider: {
+            "@type": "LocalBusiness",
+            name: siteConfig.name,
+            telephone: siteConfig.phoneDisplay,
+            url: siteConfig.siteUrl,
+          },
+          url: `${siteConfig.siteUrl}/${landing.slug}`,
+          description: landing.metaDescription,
+        }
+      : {
+          "@context": "https://schema.org",
+          "@type": "Service",
+          serviceType: presentation.schemaServiceType,
+          areaServed: [landing.comuna, ...coverageZones],
+          provider: {
+            "@type": "LocalBusiness",
+            name: siteConfig.name,
+            areaServed: landing.comuna,
+            telephone: siteConfig.phoneDisplay,
+            url: `${siteConfig.siteUrl}/${landing.slug}`,
+          },
+          description: landing.metaDescription,
+        };
+
+  const serviceSchema = JSON.stringify(serviceSchemaPayload).replace(/</g, "\\u003c");
 
   const breadcrumbSchema = JSON.stringify({
     "@context": "https://schema.org",
@@ -218,40 +337,44 @@ export function ComunaLandingPage({ landing, allLandings }: Props) {
         <p className="mt-5 text-base leading-8 text-slate-700 sm:text-lg">
           {presentation.servicesIntro}
         </p>
-        <div className="mt-6 grid gap-4 md:grid-cols-2">
-          {displayedServices.map((service, index) => {
-            const Icon = serviceIcons[index % serviceIcons.length];
-            return (
-              <article key={service.title} className="rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4 transition hover:border-sky-300 hover:bg-white">
-                <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-sky-50 text-sky-700">
-                  <Icon className="h-5 w-5" />
-                </div>
-                <h3 className="mt-3 text-lg font-bold text-slate-950">{service.title}</h3>
-                <p className="mt-2 text-sm leading-7 text-slate-700">{service.description}</p>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {service.href ? (
-                    <Link
-                      href={service.href}
-                      className="inline-flex rounded-full border border-sky-200 bg-white px-4 py-2 text-sm font-bold text-sky-800 transition hover:border-sky-300"
-                    >
-                      Ver servicio
-                    </Link>
-                  ) : null}
-                  {service.ctaHref && service.ctaLabel ? (
-                    <a
-                      href={service.ctaHref}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex rounded-full bg-emerald-500 px-4 py-2 text-sm font-bold text-white transition hover:bg-emerald-600"
-                    >
-                      {service.ctaLabel}
-                    </a>
-                  ) : null}
-                </div>
-              </article>
-            );
-          })}
-        </div>
+        {shouldGroupServices ? (
+          <CompactServiceGroups services={displayedServices} />
+        ) : (
+          <div className="mt-6 grid gap-4 md:grid-cols-2">
+            {displayedServices.map((service, index) => {
+              const Icon = serviceIcons[index % serviceIcons.length];
+              return (
+                <article key={service.title} className="rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4 transition hover:border-sky-300 hover:bg-white">
+                  <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-sky-50 text-sky-700">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="mt-3 text-lg font-bold text-slate-950">{service.title}</h3>
+                  <p className="mt-2 text-sm leading-7 text-slate-700">{service.description}</p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {service.href ? (
+                      <Link
+                        href={service.href}
+                        className="inline-flex rounded-full border border-sky-200 bg-white px-4 py-2 text-sm font-bold text-sky-800 transition hover:border-sky-300"
+                      >
+                        Ver servicio
+                      </Link>
+                    ) : null}
+                    {service.ctaHref && service.ctaLabel ? (
+                      <a
+                        href={service.ctaHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex rounded-full bg-emerald-500 px-4 py-2 text-sm font-bold text-white transition hover:bg-emerald-600"
+                      >
+                        {service.ctaLabel}
+                      </a>
+                    ) : null}
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        )}
       </section>
 
       <section className="brand-card mt-9 rounded-3xl p-6 sm:p-8">
@@ -300,6 +423,14 @@ export function ComunaLandingPage({ landing, allLandings }: Props) {
       </section>
 
       {showSeoGallery && <Galeria comuna={landing.comuna} className="mt-9" />}
+
+      <div className="mt-9">
+        <PublicAdminCasesForPath
+          path={mainLandingHref}
+          title={`Evidencia reciente en ${landing.comuna}`}
+          limit={6}
+        />
+      </div>
 
       <section className="mt-9 grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
         <article className="rounded-3xl border border-slate-200 bg-slate-950 p-6 text-white shadow-md sm:p-8">

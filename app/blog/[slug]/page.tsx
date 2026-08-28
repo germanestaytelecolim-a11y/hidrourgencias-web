@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 import { notFound } from "next/navigation";
 
 import { ServiceTermsNotice } from "@/components/service-terms";
-import { buildBlogPostMetadata, getAllBlogPosts, getBlogPostBySlug, getBlogPostFaq, getBlogSlugs } from "@/lib/blog-data";
+import { buildBlogPostMetadata, getBlogPostBySlug, getBlogPostFaq, getBlogSlugs } from "@/lib/blog-data";
+import { getPublicBlogPostBySlug, getPublicBlogPosts } from "@/lib/admin/public-blog-posts";
 import { getAllComunaLandings } from "@/lib/comuna-landings";
 import { GOOGLE_REVIEWS_URL, createWhatsAppUrl } from "@/lib/site-config";
 import { getZonaBySlug, getZonaSlugs } from "@/lib/zonas-detalle";
@@ -14,13 +16,15 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
+export const dynamic = "force-dynamic";
+
 export async function generateStaticParams() {
   return getBlogSlugs().map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = getBlogPostBySlug(slug);
+  const post = (await getPublicBlogPostBySlug(slug)) ?? getBlogPostBySlug(slug);
 
   if (!post) {
     return {
@@ -37,13 +41,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const post = getBlogPostBySlug(slug);
+  const post = await getPublicBlogPostBySlug(slug);
 
   if (!post) {
     notFound();
   }
 
-  const relatedPosts = getAllBlogPosts().filter((item) => item.slug !== post.slug).slice(0, 3);
+  const relatedPosts = (await getPublicBlogPosts()).filter((item) => item.slug !== post.slug).slice(0, 3);
   const fallbackComunaLinks = getAllComunaLandings().slice(0, 4).map((item) => ({
     href: `/${item.slug}`,
     label: `destape de alcantarillado en ${item.comuna}`,
@@ -153,7 +157,7 @@ export default async function BlogPostPage({ params }: Props) {
               <h2 className="text-3xl font-extrabold tracking-tight text-slate-950">{section.heading}</h2>
               {section.paragraphs.map((paragraph) => (
                 <p key={paragraph} className="text-base leading-8 text-slate-700 sm:text-lg">
-                  {paragraph}
+                  <InlineMarkdown text={paragraph} />
                 </p>
               ))}
               {section.bullets && (
@@ -163,7 +167,7 @@ export default async function BlogPostPage({ params }: Props) {
                       key={bullet}
                       className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold leading-7 text-slate-700"
                     >
-                      {bullet}
+                      <InlineMarkdown text={bullet} />
                     </li>
                   ))}
                 </ul>
@@ -302,4 +306,28 @@ export default async function BlogPostPage({ params }: Props) {
       </div>
     </main>
   );
+}
+
+function InlineMarkdown({ text }: { text: string }) {
+  const nodes: ReactNode[] = [];
+  const pattern = /(\*\*([^*]+)\*\*|\[([^\]]+)\]\((https?:\/\/[^)\s]+|\/[^)\s]+)\))/g;
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+
+  while ((match = pattern.exec(text))) {
+    if (match.index > lastIndex) nodes.push(text.slice(lastIndex, match.index));
+    if (match[2]) {
+      nodes.push(<strong key={match.index} className="font-extrabold text-slate-950">{match[2]}</strong>);
+    } else if (match[3] && match[4]) {
+      nodes.push(
+        <Link key={match.index} href={match[4]} className="font-extrabold text-sky-700 underline decoration-sky-300 underline-offset-4">
+          {match[3]}
+        </Link>,
+      );
+    }
+    lastIndex = pattern.lastIndex;
+  }
+
+  if (lastIndex < text.length) nodes.push(text.slice(lastIndex));
+  return <>{nodes}</>;
 }

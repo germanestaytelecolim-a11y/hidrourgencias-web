@@ -157,14 +157,14 @@ const serviceLinks = [
   { href: "/servicios/destape-alcantarillado", label: "Destape de alcantarillado" },
   { href: "/servicios/hidrojet", label: "Hidrojet" },
   { href: "/servicios/destape-edificios", label: "Destape de edificios" },
-  { href: "/servicios/videoinspeccion", label: "Videoinspección sanitaria" },
-  { href: "/servicios/mantencion-preventiva", label: "Mantención preventiva" },
+  { href: "/servicios/destape-camaras-inspeccion", label: "Videoinspección sanitaria" },
+  { href: "/servicios/mantencion-preventiva-redes", label: "Mantención preventiva" },
 ];
 
 const blogLinks = [
   { href: "/blog/rebalse-alcantarillado-edificio", label: "Rebalse de alcantarillado en edificio" },
   { href: "/blog/desague-lento-cocina", label: "Desagüe lento en cocina" },
-  { href: "/blog/mantencion-preventiva", label: "Mantención preventiva sanitaria" },
+  { href: "/blog/mantencion-preventiva-clave-redes-sanitarias", label: "Mantención preventiva sanitaria" },
 ];
 
 export const caseStudyServiceLinks = serviceLinks;

@@ -7,11 +7,6 @@ import type { NextConfig } from "next";
 // - encodedAccentRedirects normalize accented legacy URLs to ASCII canonicals.
 const legacyLandingRedirects = [
   {
-    source: "/servicios",
-    destination: "https://hidrourgencias.cl/destape-alcantarillado-vina-del-mar",
-    permanent: true,
-  },
-  {
     source: "/servicios/hidrourgencias",
     destination: "https://hidrourgencias.cl/destape-alcantarillado-vina-del-mar",
     permanent: true,
@@ -119,6 +114,24 @@ const encodedAccentRedirects = [
   },
 ];
 
+const legacyZoneRedirects = [
+  {
+    source: "/zona/centro-concon",
+    destination: "https://hidrourgencias.cl/zona/concon-centro",
+    permanent: true,
+  },
+  {
+    source: "/zona/costa-de-montemar-concon",
+    destination: "https://hidrourgencias.cl/zona/bosques-de-montemar-concon",
+    permanent: true,
+  },
+  {
+    source: "/zona/belloto-quilpue",
+    destination: "https://hidrourgencias.cl/zona/belloto-sur-quilpue",
+    permanent: true,
+  },
+];
+
 const hostRedirect = {
   source: "/:path*",
   has: [
@@ -151,6 +164,12 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 31536000,
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "*.public.blob.vercel-storage.com",
+      },
+    ],
     deviceSizes: [360, 414, 640, 750, 828, 1080, 1200, 1920],
     imageSizes: [32, 48, 64, 96, 128, 256, 384],
     qualities: [60, 75, 85],
@@ -190,6 +209,34 @@ const nextConfig: NextConfig = {
         source: "/api/auth/:path*",
         headers: [adminNoStoreHeader],
       },
+      {
+        source: "/api/admin/login",
+        headers: [adminNoStoreHeader],
+      },
+      {
+        source: "/api/admin/logout",
+        headers: [adminNoStoreHeader],
+      },
+      {
+        source: "/api/admin/media",
+        headers: [adminNoStoreHeader],
+      },
+      {
+        source: "/api/admin/media/:path*",
+        headers: [adminNoStoreHeader],
+      },
+      {
+        source: "/api/admin/password",
+        headers: [adminNoStoreHeader],
+      },
+      {
+        source: "/api/admin/work-cases",
+        headers: [adminNoStoreHeader],
+      },
+      {
+        source: "/api/admin/work-cases/:path*",
+        headers: [adminNoStoreHeader],
+      },
     ];
   },
   async redirects() {
@@ -197,16 +244,12 @@ const nextConfig: NextConfig = {
       ...legacyLandingRedirects,
       ...legacyServiceRedirects,
       ...encodedAccentRedirects,
+      ...legacyZoneRedirects,
       hostRedirect,
     ];
   },
   async rewrites() {
-    return [
-      {
-        source: "/admin",
-        destination: "/admin/index.html",
-      },
-    ];
+    return [];
   },
 };
 

@@ -132,10 +132,10 @@ const groupedServiceAreas = [
       "Videoinspección sanitaria CCTV",
       "Informes técnicos formales",
       "Asesoría técnica especializada",
-      "Asesoramiento precompra, preventa y arriendo mediante videoinspección sanitaria CCTV",
+      "Revisión sanitaria precompra, preventa y arriendo con videoinspección sanitaria CCTV",
     ],
     note:
-      "Antes de comprar, vender o arrendar una propiedad, revise lo que no se ve. Evaluamos redes de alcantarillado y desagüe para detectar obstrucciones, raíces, roturas, contrapedientes, grasa adherida, sedimentos o fallas de evacuación.",
+      "Antes de comprar, vender o arrendar una propiedad, revise lo que no se ve. Evaluamos redes de alcantarillado y desagüe para detectar obstrucciones, raíces, roturas, contrapendientes, grasa adherida, sedimentos o fallas de evacuación.",
   },
   {
     title: "Recuperación de Espacios e Higienización",
@@ -267,7 +267,7 @@ export function ServiciosGrid({ services }: ServiciosGridProps) {
                       <a
                         key={`${area.title}-${href}`}
                         href={href}
-                        className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-4 py-2 text-sm font-bold text-sky-800 shadow-sm transition hover:-translate-y-0.5 hover:border-sky-300 hover:bg-white hover:shadow-md"
+                        className="brand-blue-soft-cta inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-black transition hover:-translate-y-0.5"
                       >
                         {servicio.title}
                         <ArrowRight className="h-4 w-4" />

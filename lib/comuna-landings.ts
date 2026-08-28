@@ -483,18 +483,18 @@ function buildPresentation(profile: ComunaProfile): ComunaLandingPresentation {
   if (profile.slug === "hidrojet-concon") {
     return {
       serviceName: "Hidrojet en Conc\u00f3n",
-      schemaServiceType: "Limpieza hidrodinamica de redes con hidrojet",
-      problemHeading: "Cuando una red de Conc\u00f3n necesita limpieza hidrodinamica",
+      schemaServiceType: "Limpieza hidrodinámica de redes sanitarias",
+      problemHeading: "Cuando una red de Conc\u00f3n necesita limpieza hidrodinámica",
       servicesHeading: "Hidrojet para redes sanitarias de Conc\u00f3n",
       servicesIntro:
-        "La atencion se concentra en limpieza interna con agua a presion, seleccion de boquilla, control del residuo removido y verificacion de caudal en redes compatibles.",
-      technicalHeading: "Agua a presion, boquillas y control de flujo",
+        "La atencion se concentra en limpieza interna con agua a presión, selección de boquilla, control del residuo removido y verificación de caudal en redes compatibles.",
+      technicalHeading: "Agua a presión, boquillas y control de flujo",
       coverageServiceName: "hidrojet",
       closingHeading: "Solicita servicio hidrojet en Conc\u00f3n",
       closingParagraph:
-        "Indica el tipo de red, el acceso disponible y el material que se ha acumulado. Con esos antecedentes evaluamos la factibilidad y preparamos la limpieza hidrodinamica.",
+        "Indica el tipo de red, el acceso disponible y el material que se ha acumulado. Con esos antecedentes evaluamos la factibilidad y preparamos la limpieza hidrodinámica.",
       primaryCtaLabel: "Solicitar servicio hidrojet en Conc\u00f3n",
-      secondaryCtaLabel: "Coordinar limpieza hidrodinamica",
+      secondaryCtaLabel: "Coordinar limpieza hidrodinámica",
       finalCtaLabel: "Solicitar servicio hidrojet",
     };
   }
@@ -617,21 +617,21 @@ function buildLandingData(profile: ComunaProfile): ComunaLandingData {
   const isMaintenanceQuilpue = profile.slug === "mantencion-desagues-quilpue";
   const isUrgencyVillaAlemana = profile.slug === "urgencias-sanitarias-villa-alemana";
   const h1 = isHidrojetConcon
-    ? "Hidrojet en Conc\u00f3n | Limpieza hidrodinamica de redes"
+    ? "Hidrojet en Conc\u00f3n | Limpieza hidrodinámica de redes"
     : isMaintenanceQuilpue
       ? "Mantencion de desagues en Quilpue | Plan preventivo"
       : isUrgencyVillaAlemana
         ? "Urgencias sanitarias en Villa Alemana | Atencion 24/7"
         : `Destape de Alcantarillado en ${profile.comuna} | Urgencias 24/7`;
   const metaTitle = isHidrojetConcon
-    ? "Hidrojet en Conc\u00f3n | Limpieza hidrodinamica de redes"
+    ? "Hidrojet en Conc\u00f3n | Limpieza hidrodinámica de redes | Hidrourgencias SpA"
     : isMaintenanceQuilpue
       ? "Mantencion de desagues en Quilpue | Plan preventivo"
       : isUrgencyVillaAlemana
         ? "Urgencias sanitarias en Villa Alemana | Atencion 24/7"
         : `Destape de Alcantarillado en ${profile.comuna} | Urgencias 24/7`;
   const metaDescription = isHidrojetConcon
-    ? "Servicio de hidrojet en Conc\u00f3n para limpieza hidrodinamica de redes con grasa, sarro y sedimentos. Evaluacion tecnica, agua a presion y control de flujo."
+    ? "Servicio profesional de hidrojet en Conc\u00f3n para limpieza hidrodinámica de redes sanitarias, eliminación de grasa, sarro, sedimentos y obstrucciones complejas. Atención técnica en Conc\u00f3n y sectores cercanos."
     : isMaintenanceQuilpue
       ? "Mantencion de desagues en Quilpue para comunidades, empresas y comercios. Revision de puntos criticos, limpieza programada y pauta preventiva."
       : isUrgencyVillaAlemana
@@ -650,7 +650,7 @@ function buildLandingData(profile: ComunaProfile): ComunaLandingData {
       metaTitle,
       metaDescription,
       heroParagraphs: [
-        "El servicio de hidrojet en Conc\u00f3n ejecuta limpieza hidrodinamica en redes que han perdido seccion util por grasa, sarro o sedimentos adheridos. La maniobra utiliza agua a presion y una boquilla seleccionada despues de revisar acceso, diametro y material del conducto.",
+        "El servicio de hidrojet en Conc\u00f3n ejecuta limpieza hidrodinámica en redes que han perdido sección útil por grasa, sarro o sedimentos adheridos. La maniobra utiliza agua a presión y una boquilla seleccionada después de revisar acceso, diámetro y material del conducto.",
         "Condominios, restaurantes y comercios de Conc\u00f3n necesitan controlar tanto el desprendimiento como el destino del residuo removido. Por eso la faena delimita el tramo, protege el punto de descarga y comprueba el caudal entre accesos al finalizar.",
         "El hidrojet no reemplaza una reparacion estructural ni se aplica automaticamente a toda obstruccion. Si la red presenta una condicion incompatible con agua a presion, el diagnostico orienta otra tecnica o una inspeccion adicional.",
       ],
@@ -663,16 +663,16 @@ function buildLandingData(profile: ComunaProfile): ComunaLandingData {
         "necesidad de preparar la red antes de periodos de alta carga",
       ],
       problemSummary:
-        "La indicacion principal para hidrojet es una acumulacion adherida o distribuida que puede movilizarse con limpieza hidrodinamica. La evaluacion en Conc\u00f3n verifica que el conducto, el acceso y el punto de descarga permitan trabajar con control.",
+        "La indicación principal para hidrojet es una acumulación adherida o distribuida que puede movilizarse con limpieza hidrodinámica. La evaluación en Conc\u00f3n verifica que el conducto, el acceso y el punto de descarga permitan trabajar con control.",
       technicalParagraphs: [
-        "La configuracion del hidrojet en Conc\u00f3n combina presion, caudal, boquilla y velocidad de avance. Esas variables se ajustan al diametro y al residuo; una cifra de presion por si sola no describe la calidad ni la seguridad de la limpieza.",
+        "La configuración del hidrojet en Conc\u00f3n combina presión, caudal, boquilla y velocidad de avance. Esas variables se ajustan al diámetro y al residuo; una cifra de presión por si sola no describe la calidad ni la seguridad de la limpieza.",
         "Cuando aporta evidencia, la videoinspeccion permite comparar la condicion interna y detectar fisuras, deformaciones o contrapendientes que la limpieza no corrige. El cierre se apoya en una prueba de flujo y en el registro del tramo atendido.",
       ],
       procedureSteps: [
         {
           title: "1. Revision de acceso y factibilidad",
           description:
-            "En Conc\u00f3n se identifica el tramo, su material, diametro y capacidad para recibir una maniobra hidrodinamica controlada.",
+            "En Conc\u00f3n se identifica el tramo, su material, diámetro y capacidad para recibir una maniobra hidrodinámica controlada.",
         },
         {
           title: "2. Seleccion de boquilla y punto de descarga",
@@ -682,7 +682,7 @@ function buildLandingData(profile: ComunaProfile): ComunaLandingData {
         {
           title: "3. Pasadas de limpieza hidrodinamica",
           description:
-            "El avance del hidrojet desprende adherencias y arrastra residuos sin tratar todos los tramos con una unica configuracion.",
+            "El avance del hidrojet desprende adherencias y arrastra residuos sin tratar todos los tramos con una única configuración.",
         },
         {
           title: "4. Control del material removido",
@@ -733,7 +733,7 @@ function buildLandingData(profile: ComunaProfile): ComunaLandingData {
       ctaPrimaryMessage:
         "Hola, necesito solicitar servicio de hidrojet en Conc\u00f3n. Puedo indicar tipo de red, acceso y material acumulado.",
       ctaMidMessage:
-        "Hola, quiero coordinar una limpieza hidrodinamica con hidrojet en Conc\u00f3n.",
+        "Hola, quiero coordinar una limpieza hidrodinámica con hidrojet en Conc\u00f3n.",
       ctaFinalMessage:
         "Hola, solicito evaluar la factibilidad de hidrojet para una red sanitaria en Conc\u00f3n.",
       presentation,
@@ -803,8 +803,14 @@ export function getComunaPaths() {
 }
 
 export function buildComunaMetadata(data: ComunaLandingData): Metadata {
+  const isHidrojetConcon = data.slug === "hidrojet-concon";
+  const socialTitle = data.metaTitle;
+  const socialDescription = isHidrojetConcon
+    ? "Servicio profesional de hidrojet en Conc\u00f3n para limpieza de redes sanitarias, eliminación de grasa, sarro, sedimentos y obstrucciones complejas."
+    : data.metaDescription;
+
   return {
-    title: data.metaTitle,
+    title: isHidrojetConcon ? { absolute: data.metaTitle } : data.metaTitle,
     description: data.metaDescription,
     alternates: {
       canonical: buildCanonicalUrl(`/${data.slug}`),
@@ -814,8 +820,8 @@ export function buildComunaMetadata(data: ComunaLandingData): Metadata {
       follow: true,
     },
     openGraph: {
-      title: `${data.h1} | ${siteConfig.name}`,
-      description: data.metaDescription,
+      title: socialTitle,
+      description: socialDescription,
       url: `${siteConfig.siteUrl}/${data.slug}`,
       siteName: siteConfig.name,
       locale: "es_CL",
@@ -831,8 +837,8 @@ export function buildComunaMetadata(data: ComunaLandingData): Metadata {
     },
     twitter: {
       card: "summary_large_image",
-      title: `${data.h1} | ${siteConfig.name}`,
-      description: data.metaDescription,
+      title: socialTitle,
+      description: socialDescription,
       images: [data.visual?.image ?? "/images/hero-urgencia.jpg"],
     },
   };

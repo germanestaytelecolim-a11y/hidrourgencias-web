@@ -43,7 +43,7 @@ export const blogProblemas: BlogProblemaPost[] = [
     relatedZonaLinks: [
       { href: "/zona/recreo-vina-del-mar", label: "destape en Recreo, Vina del Mar" },
       { href: "/zona/cerro-alegre-valparaiso", label: "destape en Cerro Alegre, Valparaiso" },
-      { href: "/zona/belloto-quilpue", label: "destape en El Belloto, Quilpue" },
+      { href: "/zona/belloto-sur-quilpue", label: "destape en El Belloto, Quilpue" },
     ],
     sections: [
       {
@@ -156,13 +156,13 @@ export const blogProblemas: BlogProblemaPost[] = [
       { href: "/servicios/motobombas-extraccion-aguas", label: "motobombas para inundaciones y extraccion" },
     ],
     relatedComunaLinks: [
-      { href: "/hidrojet-concon", label: "servicio hidrojet en Concon" },
+      { href: "/hidrojet-concon", label: "servicio de hidrojet en Concón" },
       { href: "/destape-alcantarillado-valparaiso", label: "destape de alcantarillado en Valparaiso" },
       { href: "/destape-alcantarillado-quintero", label: "destape de alcantarillado en Quintero" },
     ],
     relatedZonaLinks: [
-      { href: "/zona/costa-de-montemar-concon", label: "destape en Costa de Montemar, Concon" },
-      { href: "/zona/centro-concon", label: "destape en Centro Concon" },
+      { href: "/zona/bosques-de-montemar-concon", label: "destape en Bosques de Montemar, Concon" },
+      { href: "/zona/concon-centro", label: "destape en Centro Concon" },
       { href: "/zona/cerro-placeres-valparaiso", label: "destape en Cerro Placeres, Valparaiso" },
     ],
     sections: [
@@ -224,9 +224,9 @@ export const blogProblemas: BlogProblemaPost[] = [
       { href: "/destape-alcantarillado-placilla-curauma", label: "destape de alcantarillado en Placilla de Curauma" },
     ],
     relatedZonaLinks: [
-      { href: "/zona/colmo-concon", label: "destape en Colmo, Concon" },
+      { href: "/zona/concon-centro", label: "destape en Centro Concon" },
       { href: "/zona/centro-villa-alemana", label: "destape en Centro Villa Alemana" },
-      { href: "/zona/paso-hondo-quilpue", label: "destape en Paso Hondo, Quilpue" },
+      { href: "/zona/belloto-sur-quilpue", label: "destape en El Belloto, Quilpue" },
     ],
     sections: [
       {
@@ -338,7 +338,7 @@ export const blogProblemas: BlogProblemaPost[] = [
       { href: "/servicios/destape-camaras-inspeccion", label: "destape de camaras" },
     ],
     relatedComunaLinks: [
-      { href: "/hidrojet-concon", label: "hidrojet en Concon" },
+      { href: "/hidrojet-concon", label: "Hidrojet en Concón" },
       { href: "/destape-alcantarillado-valparaiso", label: "destape en Valparaiso" },
       { href: "/destape-alcantarillado-puchuncavi", label: "destape en Puchuncavi" },
     ],

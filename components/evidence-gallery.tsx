@@ -4,7 +4,6 @@ import { useState } from "react";
 import Image from "next/image";
 
 import { trackCommercialEvent } from "@/lib/conversion";
-import { createContextualWhatsAppUrl } from "@/lib/conversion";
 
 type EvidenceGalleryProps = {
   images: string[];
@@ -16,7 +15,11 @@ export function EvidenceGallery({ images, commune }: EvidenceGalleryProps) {
   const visibleImages = expanded ? images : images.slice(0, 6);
 
   const renderImage = (imageName: string, index: number) => (
-    <article key={imageName} className="group relative overflow-hidden rounded-xl border border-slate-800 bg-slate-900">
+    <article
+      key={imageName}
+      className="group relative overflow-hidden rounded-xl border border-slate-800 bg-slate-900"
+      data-evidence-item
+    >
       <div className="relative aspect-[4/3]">
         <Image
           src={`/galeria/${encodeURIComponent(imageName)}`}
@@ -27,29 +30,24 @@ export function EvidenceGallery({ images, commune }: EvidenceGalleryProps) {
           className="object-cover transition duration-500 group-hover:scale-105"
         />
       </div>
-      <div className="p-3">
-        <a
-          href={createContextualWhatsAppUrl("emergency", { commune, sourcePath: "evidence-gallery" })}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={() => trackCommercialEvent("click_whatsapp", { commune, lead_type: "emergency", cta_location: "evidence_gallery" })}
-          className="inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-emerald-500 px-3 py-2 text-center text-sm font-black text-white focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-200"
-        >
-          Solicitar evaluación
-        </a>
+      <div className="border-t border-slate-800 px-4 py-3">
+        <p className="text-xs font-bold uppercase text-sky-100">
+          Evidencia técnica {String(index + 1).padStart(2, "0")}
+        </p>
       </div>
     </article>
   );
 
   return (
     <>
-      <div className="mt-7 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-7 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3" data-evidence-gallery>
         {visibleImages.map(renderImage)}
       </div>
       {images.length > 6 ? (
         <button
           type="button"
           aria-expanded={expanded}
+          data-evidence-toggle
           onClick={() => {
             setExpanded((value) => !value);
             trackCommercialEvent("expand_evidence", { commune, cta_location: "evidence_gallery" });

@@ -454,64 +454,75 @@ const servicios: ServicioPageData[] = [
   },
   {
     slug: "analisis-tecnico-propiedad-redes-sanitarias",
-    navLabel: "Análisis técnico de propiedad y redes sanitarias",
-    h1: "Análisis técnico de propiedad y redes sanitarias",
+    navLabel: "Revisión sanitaria precompra, preventa y arriendo",
+    h1: "Revisión sanitaria precompra, preventa y arriendo",
     summary:
-      "Hidrourgencias SpA realiza análisis técnico de redes sanitarias en propiedades residenciales, comerciales, edificios, locales, oficinas y comunidades para detectar oportunamente condiciones ocultas que puedan transformarse en gastos imprevistos antes de comprar, arrendar, vender, recibir o evaluar una propiedad.",
-    image: "/images/hero-mantencion.jpg",
+      "Análisis técnico de redes sanitarias mediante videoinspección, revisión de desagües y diagnóstico preventivo antes de comprar, vender o arrendar una propiedad.",
+    image: "/images/servicios/heroes/analisis-tecnico-propiedad-redes-sanitarias.webp",
     methodology: [
-      "Levantamiento de antecedentes de la propiedad, tipo de uso, puntos sanitarios y motivo de la evaluación.",
+      "Levantamiento de antecedentes de la propiedad, tipo de operación, puntos sanitarios y motivo de la evaluación: compra, venta, arriendo, recepción o inversión.",
       "Revisión técnica de cámaras, desagües, artefactos, olores, retorno de aguas servidas y síntomas operativos visibles.",
       "Pruebas operativas de descarga y evaluación de continuidad hidráulica en puntos críticos de la red.",
-      "Videoinspección sanitaria cuando corresponde para detectar raíces, fisuras, colapsos, deformaciones o pérdida de pendiente.",
-      "Recomendación técnica de acciones preventivas, destape, hidrojet, reparación o mantención según hallazgos.",
+      "Videoinspección sanitaria cuando corresponde para detectar raíces, fisuras, colapsos, deformaciones, grasa adherida, sedimentos o pérdida de pendiente.",
+      "Registro fotográfico o audiovisual, diagnóstico técnico, recomendaciones operativas e informe técnico cuando corresponde.",
+      "Propuesta de corrección, destape, hidrojet o mantención preventiva si se detectan riesgos relevantes.",
     ],
     equipment: [
       "Criterio técnico sanitario",
       "Videoinspección sanitaria cuando corresponde",
       "Revisión de cámaras de inspección",
+      "Inspección visual de cámaras domiciliarias",
       "Pruebas operativas de desagües",
       "Equipos RIDGID de apoyo diagnóstico",
     ],
     benefits: [
-      "Permite tomar decisiones con respaldo técnico antes de comprar o arrendar",
-      "Ayuda a detectar vicios ocultos sanitarios y gastos imprevistos",
+      "Permite tomar decisiones con respaldo técnico antes de comprar, vender, arrendar o recibir",
+      "Ayuda a detectar vicios ocultos sanitarios, obstrucciones ocultas y gastos imprevistos",
       "Orienta acciones preventivas antes de asumir responsabilidad económica",
-      "Aplica para viviendas, oficinas, locales, comunidades y edificios",
+      "Aplica para compradores, vendedores, arrendadores, corredores, inmobiliarias, administradores, empresas y propietarios",
     ],
     whenToRequest: [
-      "Antes de comprar una vivienda o local comercial",
+      "Antes de comprar una vivienda, oficina o local comercial",
+      "Antes de vender una propiedad con antecedentes sanitarios dudosos",
       "Antes de arrendar una propiedad de alto uso sanitario",
       "Antes de recibir una propiedad nueva o usada",
-      "Cuando existen malos olores, desagües lentos o antecedentes sanitarios dudosos",
-      "Cuando un inversionista, corredor o administrador necesita respaldo técnico previo",
+      "Antes de firmar promesa o escritura cuando hay dudas sobre la red",
+      "Cuando existen malos olores, cámaras ocultas, drenaje lento o antecedentes de rebalses",
+      "Cuando un corredor, inversionista, administrador o propietario necesita respaldo técnico previo",
     ],
     obstructionTypes: [
       "Obstrucciones parciales",
+      "Sarro, grasa adherida y sedimentos",
       "Desagües lentos",
       "Cámaras de inspección saturadas",
+      "Cámaras domiciliarias sin mantención",
       "Retorno de aguas servidas",
       "Raíces en la red",
+      "Ventilaciones sanitarias con síntomas de mal olor",
+      "Evidencia de reparaciones anteriores",
       "Tuberías fisuradas o deformadas",
       "Pérdida de pendiente y contrapendientes",
       "Conexiones deficientes",
       "Redes sin mantención",
       "Riesgo de rebalse sanitario",
       "Malos olores asociados a red sanitaria",
-      "Condiciones que podrían requerir hidrojet, destape, reparación o mantenimiento preventivo",
+      "Condiciones que podrían requerir hidrojet, destape, reparación, limpieza o mantenimiento preventivo",
     ],
     ctaMessage:
-      "Hola, necesito solicitar información por el servicio de análisis técnico de propiedad y redes sanitarias de Hidrourgencias SpA. Indico comuna, tipo de propiedad y antecedentes de la evaluación que necesito realizar.",
-    metadataTitle: "Análisis técnico de propiedad y redes sanitarias",
+      "Hola Hidrourgencias. Necesito evaluar la red sanitaria de una propiedad antes de comprar, vender, arrendar o recibir. Indico comuna, tipo de propiedad y fecha aproximada.",
+    metadataTitle: "Revisión sanitaria precompra, preventa y arriendo | Hidrourgencias SpA",
     metadataDescription:
-      "Servicio de inspección técnica para detectar vicios ocultos en redes de alcantarillado y desagües antes de comprar, arrendar o recibir una propiedad.",
+      "Servicio técnico de revisión sanitaria precompra, preventa y arriendo mediante videoinspección de alcantarillado, revisión de desagües, detección de obstrucciones, malos olores, cámaras, pendientes y condiciones críticas de redes sanitarias. Incluye diagnóstico e informe técnico cuando corresponde.",
     keywords: [
       "análisis técnico de propiedad",
+      "revisión sanitaria antes de comprar propiedad",
+      "inspección de alcantarillado antes de comprar casa",
       "vicios ocultos sanitarios",
       "inspección sanitaria preventiva",
       "videoinspección sanitaria",
       "redes sanitarias propiedad",
       "alcantarillado antes de comprar propiedad",
+      "revisión de desagües antes de arrendar",
       "desagües lentos",
       "cámaras de inspección",
     ],
@@ -534,13 +545,23 @@ export function getServicioSlugs() {
 
 export function buildServicioMetadata(servicio: ServicioPageData): Metadata {
   const title = servicio.metadataTitle ?? `${servicio.h1} | Hidrourgencias`;
+  const metadataTitle =
+    servicio.slug === "analisis-tecnico-propiedad-redes-sanitarias" ? { absolute: title } : title;
   const description =
     servicio.metadataDescription ?? `${servicio.summary} Atención 24/7 en la Región de Valparaíso.`;
   const canonicalPath = `/servicios/${servicio.slug}`;
   const canonicalUrl = buildCanonicalUrl(canonicalPath);
+  const openGraphDescription =
+    servicio.slug === "analisis-tecnico-propiedad-redes-sanitarias"
+      ? "Evaluación técnica de redes sanitarias, alcantarillado y desagües antes de comprar, vender o arrendar una propiedad."
+      : description;
+  const twitterDescription =
+    servicio.slug === "analisis-tecnico-propiedad-redes-sanitarias"
+      ? "Videoinspección sanitaria, revisión de alcantarillado, desagües y diagnóstico técnico antes de operaciones inmobiliarias."
+      : description;
 
   return {
-    title,
+    title: metadataTitle,
     description,
     keywords: servicio.keywords,
     alternates: {
@@ -552,7 +573,7 @@ export function buildServicioMetadata(servicio: ServicioPageData): Metadata {
     },
     openGraph: {
       title,
-      description,
+      description: openGraphDescription,
       url: canonicalUrl,
       siteName: siteConfig.name,
       locale: "es_CL",
@@ -569,7 +590,7 @@ export function buildServicioMetadata(servicio: ServicioPageData): Metadata {
     twitter: {
       card: "summary_large_image",
       title,
-      description,
+      description: twitterDescription,
       images: [servicio.image],
     },
   };

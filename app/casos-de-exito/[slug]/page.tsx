@@ -7,6 +7,7 @@ import { notFound } from "next/navigation";
 import { CaseStudyTrustLogos } from "@/components/CaseStudyTrustLogos";
 import { ClientLogoCaseStudy } from "@/components/ClientLogoCaseStudy";
 import { ServiceTermsNotice } from "@/components/service-terms";
+import { getPublicWorkCaseBySlug, type PublicWorkCaseDto } from "@/lib/admin/public-work-cases";
 import {
   buildCaseStudyMetadata,
   buildCaseStudySchemas,
@@ -17,7 +18,7 @@ import {
   getCaseStudyWhatsAppUrl,
   getRelatedCaseStudies,
 } from "@/lib/case-studies";
-import { GOOGLE_REVIEWS_URL, createWhatsAppUrl, siteConfig } from "@/lib/site-config";
+import { GOOGLE_REVIEWS_URL, buildCanonicalUrl, createWhatsAppUrl, siteConfig } from "@/lib/site-config";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -27,8 +28,25 @@ export function generateStaticParams() {
   return getCaseStudySlugs().map((slug) => ({ slug }));
 }
 
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
+  const adminCase = await getPublicWorkCaseBySlug(slug);
+  if (adminCase) {
+    return {
+      title: `${adminCase.title} | Hidrourgencias SpA`,
+      description: adminCase.result || adminCase.problem,
+      alternates: {
+        canonical: buildCanonicalUrl(`/casos-de-exito/${adminCase.slug}`),
+      },
+      robots: {
+        index: true,
+        follow: true,
+      },
+    };
+  }
+
   const caseStudy = getCaseStudyBySlug(slug);
 
   if (!caseStudy) {
@@ -46,6 +64,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CaseStudyPage({ params }: Props) {
   const { slug } = await params;
+  const adminCase = await getPublicWorkCaseBySlug(slug);
+
+  if (adminCase) {
+    return <AdminWorkCasePage workCase={adminCase} />;
+  }
+
   const caseStudy = getCaseStudyBySlug(slug);
 
   if (!caseStudy) {
@@ -335,4 +359,117 @@ export default async function CaseStudyPage({ params }: Props) {
       </section>
     </main>
   );
+}
+
+function AdminWorkCasePage({ workCase }: { workCase: PublicWorkCaseDto }) {
+  const cover = workCase.media.find((asset) => asset.isCover) ?? workCase.media[0];
+  const whatsappUrl = createWhatsAppUrl(`Hola Hidrourgencias. Vi el caso "${workCase.title}" en su sitio web y necesito orientación para un problema similar.
+
+Comuna:
+Tipo de propiedad:
+Descripción:`);
+  const schema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: workCase.title,
+    image: cover?.url ? [cover.url] : undefined,
+    datePublished: workCase.publishedAt || workCase.createdAt,
+    mainEntityOfPage: buildCanonicalUrl(`/casos-de-exito/${workCase.slug}`),
+    author: { "@type": "Organization", name: siteConfig.name },
+    publisher: { "@type": "Organization", name: siteConfig.name },
+  }).replace(/</g, "\\u003c");
+
+  return (
+    <main className="mx-auto min-h-screen max-w-5xl px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: schema }} />
+      <nav className="mb-6 flex flex-wrap gap-2 text-sm font-semibold text-slate-600">
+        <Link href="/" className="text-sky-700 hover:text-sky-800">
+          Inicio
+        </Link>
+        <span>/</span>
+        <Link href="/casos-de-exito" className="text-sky-700 hover:text-sky-800">
+          Casos de éxito
+        </Link>
+        <span>/</span>
+        <span>{workCase.title}</span>
+      </nav>
+
+      <article className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm">
+        {cover ? (
+          <div className="relative aspect-[4/3] bg-slate-100 sm:aspect-[16/7]">
+            <Image
+              src={cover.url}
+              alt={cover.altText || `Evidencia fotografica de ${workCase.title}`}
+              fill
+              priority
+              sizes="(min-width: 1024px) 960px, 100vw"
+              className="object-cover"
+            />
+          </div>
+        ) : (
+          <div className="grid aspect-[4/3] place-items-center bg-slate-100 p-8 text-center text-lg font-black text-slate-600 sm:aspect-[16/7]">
+            Evidencia fotográfica no publicada
+          </div>
+        )}
+        <div className="p-6 sm:p-8">
+          <p className="text-sm font-black uppercase tracking-[0.16em] text-sky-700">{workCase.services.join(" · ")}</p>
+          <h1 className="mt-3 text-3xl font-black tracking-tight text-slate-950 sm:text-5xl">{workCase.title}</h1>
+          <p className="mt-3 text-sm font-bold text-slate-600">
+            {workCase.publicLocation} · {formatAdminCaseDate(workCase.date)}
+          </p>
+          <div className="mt-7 grid gap-5">
+            <CaseDetailBlock title="Situación encontrada" text={workCase.problem} />
+            {workCase.diagnosis ? <CaseDetailBlock title="Diagnóstico técnico" text={workCase.diagnosis} /> : null}
+            <CaseDetailBlock title="Intervención realizada" text={workCase.intervention} />
+            {workCase.equipment ? <CaseDetailBlock title="Equipos utilizados" text={workCase.equipment} /> : null}
+            <CaseDetailBlock title="Resultado observado" text={workCase.result} highlight />
+            {workCase.recommendation ? <CaseDetailBlock title="Recomendación preventiva" text={workCase.recommendation} /> : null}
+          </div>
+          {workCase.media.length > 1 ? (
+            <section className="mt-9">
+              <h2 className="text-2xl font-black tracking-tight text-slate-950">Galería fotográfica</h2>
+              <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                {workCase.media.map((asset) => (
+                  <div key={asset.id} className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-slate-100">
+                    <Image src={asset.url} alt={asset.altText} fill sizes="(min-width: 640px) 45vw, 100vw" className="object-cover" />
+                  </div>
+                ))}
+              </div>
+            </section>
+          ) : null}
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-12 items-center justify-center rounded-xl bg-emerald-500 px-5 py-3 text-sm font-black text-white hover:bg-emerald-600"
+            >
+              Solicitar servicio similar
+            </a>
+            <Link
+              href="/casos-de-exito"
+              className="inline-flex min-h-12 items-center justify-center rounded-xl border border-slate-200 px-5 py-3 text-sm font-black text-slate-950 hover:bg-slate-50"
+            >
+              Ver todos los casos
+            </Link>
+          </div>
+        </div>
+      </article>
+    </main>
+  );
+}
+
+function CaseDetailBlock({ title, text, highlight }: { title: string; text: string; highlight?: boolean }) {
+  return (
+    <section className={highlight ? "rounded-2xl border border-emerald-200 bg-emerald-50 p-5" : "rounded-2xl border border-slate-200 bg-slate-50 p-5"}>
+      <h2 className={`text-xl font-black tracking-tight ${highlight ? "text-emerald-950" : "text-slate-950"}`}>{title}</h2>
+      <p className={`mt-3 whitespace-pre-line text-sm leading-7 ${highlight ? "font-bold text-emerald-950" : "text-slate-700"}`}>{text}</p>
+    </section>
+  );
+}
+
+function formatAdminCaseDate(value: string) {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "Fecha no publicada";
+  return new Intl.DateTimeFormat("es-CL", { day: "numeric", month: "long", year: "numeric" }).format(date);
 }

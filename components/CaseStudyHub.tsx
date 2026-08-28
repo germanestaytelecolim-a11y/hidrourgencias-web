@@ -137,7 +137,7 @@ export function CaseStudyHub({ cases, categories, services }: CaseStudyHubProps)
 
               <Link
                 href={`/casos-de-exito/${caseStudy.slug}`}
-                className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#08385f] px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-sky-950/15 transition hover:-translate-y-1 hover:bg-[#0e5f86]"
+                className="brand-blue-cta mt-6 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-black transition hover:-translate-y-1"
               >
                 Ver Caso
                 <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />

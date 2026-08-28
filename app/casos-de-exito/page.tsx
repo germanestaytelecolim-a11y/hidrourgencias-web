@@ -4,8 +4,11 @@ import Link from "next/link";
 import { ArrowRight, PhoneCall } from "lucide-react";
 
 import { CaseStudyHub } from "@/components/CaseStudyHub";
+import { SocialProofLinksSection } from "@/components/SocialProofLinksSection";
 import { CaseStudyTrustLogos } from "@/components/CaseStudyTrustLogos";
+import { PublicAdminCases } from "@/components/admin/PublicAdminCases";
 import { ServiceTermsNotice } from "@/components/service-terms";
+import { getPublicWorkCasesForPath } from "@/lib/admin/public-work-cases";
 import { caseStudyCategoryFilters, caseStudyServiceFilters, getAllCaseStudies } from "@/lib/case-studies";
 import { buildCanonicalUrl, createWhatsAppUrl, siteConfig } from "@/lib/site-config";
 
@@ -22,8 +25,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function CasosDeExitoPage() {
+export const dynamic = "force-dynamic";
+
+export default async function CasosDeExitoPage() {
   const cases = getAllCaseStudies();
+  const adminCases = await getPublicWorkCasesForPath("/casos-de-exito", 6);
   const collectionSchema = JSON.stringify({
     "@context": "https://schema.org",
     "@type": "CollectionPage",
@@ -100,6 +106,25 @@ export default function CasosDeExitoPage() {
         </div>
       </section>
 
+      <PublicAdminCases cases={adminCases} />
+
+      <section className="mt-9 rounded-3xl border border-emerald-200 bg-emerald-50 p-5 sm:p-6">
+        <h2 className="text-2xl font-black tracking-tight text-emerald-950">¿Tienes un problema similar?</h2>
+        <p className="mt-2 max-w-3xl text-sm font-bold leading-6 text-emerald-900">
+          Envíanos antecedentes de tu red sanitaria y evaluaremos la alternativa técnica más adecuada.
+        </p>
+        <a
+          href={createWhatsAppUrl("Hola, necesito solicitar atención por un problema similar a un caso de éxito de Hidrourgencias.")}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-4 inline-flex min-h-11 items-center justify-center rounded-xl bg-emerald-500 px-5 py-3 text-sm font-black text-white hover:bg-emerald-600"
+        >
+          WhatsApp — Solicitar atención
+        </a>
+      </section>
+
+      <SocialProofLinksSection context="casos-de-exito" />
+
       <section className="mt-9">
         <CaseStudyHub cases={cases} categories={caseStudyCategoryFilters} services={caseStudyServiceFilters} />
       </section>
@@ -119,7 +144,7 @@ export default function CasosDeExitoPage() {
         <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <Link
             href="/#servicios"
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-[#08385f] px-6 py-3 text-sm font-bold text-white transition hover:bg-[#0e5f86]"
+            className="brand-blue-cta inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-black transition hover:-translate-y-0.5"
           >
             Ver servicios
             <ArrowRight className="h-4 w-4" />

@@ -36,7 +36,7 @@ export function CasosReales({ cases = [] }: CasosRealesProps) {
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <a
                 href="/casos-de-exito"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#08385f] px-5 py-3 text-sm font-bold text-white shadow-lg shadow-sky-950/20 transition hover:-translate-y-1 hover:bg-[#0e5f86]"
+                className="brand-blue-cta inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-black transition hover:-translate-y-1"
               >
                 Ver biblioteca de casos
                 <ArrowRight className="h-4 w-4" />
@@ -92,7 +92,7 @@ export function CasosReales({ cases = [] }: CasosRealesProps) {
 
                   <a
                     href={`/casos-de-exito/${caso.slug}`}
-                    className="mt-6 inline-flex items-center gap-2 rounded-full bg-sky-50 px-4 py-2 text-sm font-bold text-sky-800 transition hover:bg-sky-100"
+                    className="brand-blue-soft-cta mt-6 inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-black transition hover:-translate-y-0.5"
                   >
                     Ver caso técnico
                     <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />

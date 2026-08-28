@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowRight, ExternalLink } from "lucide-react";
 
 import { ServiceTermsNotice } from "@/components/service-terms";
-import { getAllBlogPosts } from "@/lib/blog-data";
+import { getPublicBlogPosts } from "@/lib/admin/public-blog-posts";
 import { getBlogGuideImage } from "@/lib/blog-guide-images";
 import { GOOGLE_REVIEWS_URL, buildCanonicalUrl, createWhatsAppUrl } from "@/lib/site-config";
 
@@ -21,8 +21,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default function BlogPage() {
-  const posts = getAllBlogPosts();
+export const dynamic = "force-dynamic";
+
+export default async function BlogPage() {
+  const posts = await getPublicBlogPosts();
 
   return (
     <main className="mx-auto min-h-screen max-w-6xl px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
@@ -97,7 +99,7 @@ export default function BlogPage() {
               </div>
               <Link
                 href={`/blog/${post.slug}`}
-                className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#08385f] px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-sky-950/15 transition hover:-translate-y-1 hover:bg-[#0e5f86]"
+                className="brand-blue-cta mt-6 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-black transition hover:-translate-y-1"
               >
                 Leer guia completa
                 <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />

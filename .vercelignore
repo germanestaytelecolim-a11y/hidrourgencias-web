@@ -1,0 +1,6 @@
+public/guia tecnica/
+public/images/PRINCIPAL/hidro/
+.admin-data/
+.npm-cache/
+reports/
+*.log
