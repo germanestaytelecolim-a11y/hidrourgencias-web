@@ -77,3 +77,37 @@ No se cambiaron URLs, rutas, sitemap, redirects, metadata estabilizada ni compon
 ## Recomendacion
 
 Como el build esta aprobado y no se tocaron redirects ni URLs, el cambio esta listo en Git. El siguiente paso operativo es entrar a Vercel con permisos del proyecto `hidrourgencias-web`, confirmar o reintentar el production deployment de `aa74f56`, y luego pedir reindexacion en Search Console para las rutas prioritarias.
+
+## Actualizacion sitemap hiperlocal estrategico
+
+Fecha: 2026-09-03
+
+- Commit hiperlocal productivo confirmado: `0c7ac4c`.
+- Commit de sitemap: `a1a9e85` (`Incluye landings estrategicas hiperlocales en sitemap`).
+- Deployment Vercel: `hidrourgencias-aogi2t23r-germanestaytelecolim-9238s-projects.vercel.app`.
+- Estado Vercel: `READY`, target `production`, rama `main`.
+- Sitemap final en produccion: `https://hidrourgencias.cl/sitemap.xml`.
+- Cantidad final de URLs en sitemap: 424.
+
+### URLs agregadas al sitemap
+
+- `https://hidrourgencias.cl/destape-alcantarillado-loncura-quintero`
+- `https://hidrourgencias.cl/destape-alcantarillado-centro-quintero-quintero`
+- `https://hidrourgencias.cl/destape-alcantarillado-villa-olimpica-quilpue`
+
+### Validaciones de produccion
+
+- `curl.exe -sI https://hidrourgencias.cl/sitemap.xml`: `200 OK`.
+- Las tres URLs agregadas aparecen una sola vez en las etiquetas `<loc>`.
+- URLs con `www` en `<loc>`: 0.
+- URLs con `http://` en `<loc>`: 0.
+- URLs con parametros en `<loc>`: 0.
+- `https://www.hidrourgencias.cl/`: `308` hacia `https://hidrourgencias.cl/`.
+- `https://hidrourgencias.cl/?page_id=12`: `301` hacia `https://hidrourgencias.cl/`.
+- `https://hidrourgencias.cl/hidrojet-concon`: `200 OK`.
+- `https://hidrourgencias.cl/servicios/analisis-tecnico-propiedad-redes-sanitarias`: `200 OK`.
+- Textos antiguos revisados en produccion: no reaparecen `fuera del sitemap`, `en Maitencillo en Maitencillo` ni `Sin sectores con landing propia publicados`.
+
+### Recomendacion Search Console
+
+Corresponde solicitar indexacion para las tres URLs estrategicas agregadas y probar la URL publicada en Search Console, usando el sitemap actualizado como respaldo de descubrimiento.
