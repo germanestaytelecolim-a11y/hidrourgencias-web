@@ -3,7 +3,7 @@ import type { MetadataRoute } from "next";
 import { getBlogSlugs } from "@/lib/blog-data";
 import { getCaseStudySlugs } from "@/lib/case-studies";
 import { getComunaPaths } from "@/lib/comuna-landings";
-import { MAX_PROGRAMMATIC_ROUTES, getPrioritySeoRoutes } from "@/lib/seo-territorial";
+import { MAX_PROGRAMMATIC_ROUTES, getPrioritySeoRoutes, getSeoRouteBySlug } from "@/lib/seo-territorial";
 import { buildCanonicalUrl, normalizeCanonicalPath } from "@/lib/site-config";
 import { getServicioSlugs } from "@/lib/servicios";
 import { getZonaSlugs } from "@/lib/zonas-detalle";
@@ -31,6 +31,12 @@ export type SitemapRouteSpec = {
   path: string;
   kind: SitemapRouteKind;
 };
+
+const strategicProgrammaticSitemapSlugs = [
+  "destape-alcantarillado-loncura-quintero",
+  "destape-alcantarillado-centro-quintero-quintero",
+  "destape-alcantarillado-villa-olimpica-quilpue",
+] as const;
 
 function getChangeFrequency(kind: SitemapRouteKind): MetadataRoute.Sitemap[number]["changeFrequency"] {
   if (kind === "blog-post" || kind === "case-study") {
@@ -85,6 +91,9 @@ export function getSitemapRouteSpecs(): SitemapRouteSpec[] {
     ...getServicioSlugs().map((slug) => ({ path: `/servicios/${slug}`, kind: "service" as const })),
     ...getBlogSlugs().map((slug) => ({ path: `/blog/${slug}`, kind: "blog-post" as const })),
     ...getCaseStudySlugs().map((slug) => ({ path: `/casos-de-exito/${slug}`, kind: "case-study" as const })),
+    ...strategicProgrammaticSitemapSlugs
+      .filter((slug) => getSeoRouteBySlug(slug))
+      .map((slug) => ({ path: `/${slug}`, kind: "programmatic" as const })),
     // Keep the programmatic sitemap capped to avoid abrupt expansion and protect crawl budget.
     ...getPrioritySeoRoutes(MAX_PROGRAMMATIC_ROUTES).map((route) => ({ path: `/${route.slug}`, kind: "programmatic" as const })),
   ];
