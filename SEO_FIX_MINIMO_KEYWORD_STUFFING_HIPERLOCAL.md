@@ -56,10 +56,12 @@ No se cambiaron URLs, rutas, sitemap, redirects, metadata estabilizada ni compon
 
 ## Commit y deployment
 
-- Commit: pendiente al momento de redactar este reporte; se generara con mensaje `Reduce keyword stuffing hiperlocal con fix minimo`.
-- Deployment Vercel: la ejecucion manual `npx vercel --prod --yes` respondio `Not authorized` en esta sesion local.
-- Estrategia de despliegue: usar `git push` sobre la rama actual para activar la integracion Git/Vercel ya conectada al proyecto `hidrourgencias-web`.
-- URL de produccion esperada: `https://hidrourgencias.cl/`
+- Commit del fix: `aa74f56` (`Reduce keyword stuffing hiperlocal con fix minimo`).
+- Push: `codex/landing-visual-redesign` y `main` quedaron apuntando a `aa74f56` en `origin`.
+- Deployment Vercel manual: la ejecucion `npx vercel --prod --yes` respondio `Not authorized` en esta sesion local.
+- Deployment Vercel por Git: no confirmado desde esta sesion. Tras empujar `main`, `https://hidrourgencias.cl/` siguio sirviendo contenido anterior en rutas programaticas cacheadas.
+- URL de produccion validada: `https://hidrourgencias.cl/`
+- Estado de produccion al cierre de esta revision: redirecciones criticas OK, pero nuevo contenido del fix todavia no promovido/visible en las rutas programaticas revisadas.
 
 ## Cantidad final de paginas generadas
 
@@ -70,7 +72,8 @@ No se cambiaron URLs, rutas, sitemap, redirects, metadata estabilizada ni compon
 
 - `npm run audit:seo` mantiene salida 1 por reglas amplias de duplicidad editorial (`exactSeoParagraphs`, `repeatedSeoSentences`, `duplicateSeoFaqQuestions`, `duplicateSeoFaqAnswers`). Corregirlo completo requiere una revision editorial mayor de la matriz programatica y no corresponde al alcance minimo solicitado.
 - Las landings estaticas de comuna redujeron la repeticion exacta principal, pero conservan la keyword en posiciones SEO visibles para mantener intencion de busqueda.
+- Produccion requiere revisar Vercel con una sesion autorizada o el panel del proyecto, porque la CLI local no pudo promover el deploy y el sitio siguio mostrando contenido anterior despues del push a `main`.
 
 ## Recomendacion
 
-Como el build esta aprobado y no se tocaron redirects ni URLs, el cambio es candidato a commit, push y deploy. El audit SEO debe documentarse como warning editorial pendiente, no como bloqueo tecnico de este fix minimo.
+Como el build esta aprobado y no se tocaron redirects ni URLs, el cambio esta listo en Git. El siguiente paso operativo es entrar a Vercel con permisos del proyecto `hidrourgencias-web`, confirmar o reintentar el production deployment de `aa74f56`, y luego pedir reindexacion en Search Console para las rutas prioritarias.
