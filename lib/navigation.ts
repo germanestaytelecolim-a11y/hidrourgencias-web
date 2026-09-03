@@ -1,6 +1,6 @@
-import { getComunaPaths } from "@/lib/comuna-landings";
+import { getAllComunaLandings, getComunaPaths } from "@/lib/comuna-landings";
 import { getAllServicios, type ServicioPageData } from "@/lib/servicios";
-import { comunasSeo } from "@/lib/seo-territorial";
+import { comunasSeo, getAllSeoRoutes } from "@/lib/seo-territorial";
 import { getZonasByLandingSlug } from "@/lib/zonas-detalle";
 
 export type NavigationService = Pick<ServicioPageData, "slug" | "navLabel"> & {
@@ -82,6 +82,22 @@ export const navigationPriorityServices = priorityServiceSlugs
   .map((service) => ({ slug: service.slug, navLabel: service.navLabel, priority: true }));
 
 const validComunaPaths = new Set(getComunaPaths().map((slug) => `/${slug}`));
+const comunaChildLandings = getAllComunaLandings().filter((landing) => landing.parentLandingSlug);
+const destapeSectorRoutes = getAllSeoRoutes().filter((route) => route.service.slug === "destape-alcantarillado");
+
+function uniqueSectors(sectors: Array<{ label: string; href: string }>) {
+  return Array.from(
+    new Map(
+      sectors.map((sector) => [
+        sector.label
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .toLowerCase(),
+        sector,
+      ] as const),
+    ).values(),
+  );
+}
 
 export const navigationCoverage: NavigationCoverage[] = comunasSeo
   .filter((comuna) => validComunaPaths.has(comuna.landingPath))
@@ -89,10 +105,24 @@ export const navigationCoverage: NavigationCoverage[] = comunasSeo
     id: comuna.landingPath.slice(1),
     comuna: comuna.comuna,
     landingPath: comuna.landingPath,
-    sectors: getZonasByLandingSlug(comuna.landingPath.slice(1)).map((zone) => ({
-      label: zone.nombre,
-      href: `/zona/${zone.slug}`,
-    })),
+    sectors: uniqueSectors([
+      ...getZonasByLandingSlug(comuna.landingPath.slice(1)).map((zone) => ({
+        label: zone.nombre,
+        href: `/zona/${zone.slug}`,
+      })),
+      ...comunaChildLandings
+        .filter((landing) => landing.parentLandingSlug === comuna.landingPath.slice(1))
+        .map((landing) => ({
+          label: landing.comuna,
+          href: `/${landing.slug}`,
+        })),
+      ...destapeSectorRoutes
+        .filter((route) => route.comuna.landingPath === comuna.landingPath)
+        .map((route) => ({
+          label: route.sector,
+          href: `/${route.slug}`,
+        })),
+    ]),
   }));
 
 export const navigationResources = [

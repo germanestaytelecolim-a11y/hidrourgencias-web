@@ -46,6 +46,22 @@ function sentenceCase(value: string) {
   return `${value.charAt(0).toUpperCase()}${value.slice(1)}`;
 }
 
+function normalizeText(value: string) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim();
+}
+
+function formatUbicacionPrincipal(sector?: string, comuna?: string) {
+  if (sector && comuna && normalizeText(sector) !== normalizeText(comuna)) {
+    return `${sector}, ${comuna}`;
+  }
+
+  return sector || comuna || "";
+}
+
 const incidentNames = [
   "obstruccion sanitaria",
   "colapso de red",
@@ -98,6 +114,37 @@ const equipmentRecommendationVariants = [
   "La maniobra se ajusta al estado real de la red para evitar danos por presion o herramientas mal elegidas.",
   "El criterio operativo considera continuidad del cliente, trazabilidad y prueba de flujo antes de cerrar el caso.",
 ] as const;
+
+const servicePhraseVariants = {
+  "destape-alcantarillado": [
+    "servicio sanitario de urgencia",
+    "liberacion de redes obstruidas",
+    "normalizacion del escurrimiento",
+    "recuperacion del flujo sanitario",
+    "intervencion de camaras y colectores",
+    "atencion de rebalses y obstrucciones",
+  ],
+  hidrojet: [
+    "limpieza hidrodinamica de redes",
+    "lavado tecnico de tuberias",
+    "remocion de grasa, sarro y sedimentos",
+    "recuperacion de capacidad hidraulica",
+    "intervencion con alta presion",
+  ],
+  "mantencion-preventiva-redes": [
+    "limpieza programada de redes",
+    "control preventivo de obstrucciones",
+    "reduccion de riesgo de rebalses",
+    "mantenimiento sanitario periodico",
+    "continuidad operativa de la red",
+  ],
+} as const;
+
+function getServicePhrase(route: SeoRoute, seed: number) {
+  const variants = servicePhraseVariants[route.service.slug as keyof typeof servicePhraseVariants];
+
+  return variants ? pick(variants, seed) : route.service.nombre.toLowerCase();
+}
 
 function applyExclusiveContent(route: SeoRoute, content: SeoLandingContent): SeoLandingContent {
   switch (route.slug) {
@@ -378,6 +425,7 @@ export function createSeoLandingContent(route: SeoRoute): SeoLandingContent {
   const seed = stableHash(route.slug);
   const servicio = route.service.nombre.toLowerCase();
   const servicioCapitalizado = sentenceCase(route.service.nombre);
+  const ubicacion = formatUbicacionPrincipal(route.sector, route.comuna.comuna);
   const incident = pick(incidentNames, seed);
   const tone = pick(toneVariants, seed + 3);
   const diagnosis = pick(diagnosisVariants, seed + 5);
@@ -388,65 +436,69 @@ export function createSeoLandingContent(route: SeoRoute): SeoLandingContent {
   const firstUrgencyTrigger = pick(urgencyTriggers, seed + 19);
   const secondUrgencyTrigger = pick(urgencyTriggers, seed + 23);
   const equipmentRecommendation = pick(equipmentRecommendationVariants, seed + 29);
-  const routeContext = `${servicio} en ${route.sector}, ${route.comuna.comuna}`;
-  const routeContextCapitalized = sentenceCase(routeContext);
+  const routeContext = `${servicio} en ${ubicacion}`;
+  const supportContext = `${getServicePhrase(route, seed + 31)} en ${ubicacion}`;
+  const localAction = getServicePhrase(route, seed + 37);
+  const diagnosticContext = `${getServicePhrase(route, seed + 41)} para ${route.sector}`;
+  const operationalContext = `${getServicePhrase(route, seed + 43)} en ${route.comuna.comuna}`;
+  const preventiveContext = `${getServicePhrase(route, seed + 47)} segun el tramo revisado`;
 
   const content: SeoLandingContent = {
     introParagraphs: [
-      `En ${route.sector}, ${route.comuna.comuna}, Hidrourgencias SpA atiende ${servicio} 24/7 para redes sanitarias que presentan ${incident}, descarga irregular, olor persistente o perdida de rendimiento hidraulico. El trabajo de ${routeContext} se aborda con diagnostico inicial, seleccion de equipo profesional y verificacion de flujo segun el inmueble afectado.`,
-      `Cada solicitud de ${routeContext} tiene una condicion operativa propia. En ${routeContext}, la atencion considera ${route.networkType}, tipo de cliente ${route.clientType} y sintomas probables como ${route.probableIssue}. Con la lectura tecnica de ${routeContext} definimos si corresponde destape mecanico RIDGID, hidrojet de alta presion, limpieza de camara o apoyo con videoinspeccion.`,
-      `La meta de ${routeContext} no se limita a liberar una obstruccion. Para ${routeContext} buscamos restituir capacidad de evacuacion, bajar el riesgo sanitario y entregar una recomendacion tecnica estable. La pauta para ${routeContext} combina el contexto local con una decision practica sobre la maniobra y el control posterior.`,
+      `En ${ubicacion}, Hidrourgencias SpA atiende ${servicio} 24/7 para redes sanitarias que presentan ${incident}, descarga irregular, olor persistente o perdida de rendimiento hidraulico. El trabajo de ${routeContext} se aborda con diagnostico inicial, seleccion de equipo profesional y verificacion de flujo segun el inmueble afectado.`,
+      `Cada solicitud de ${supportContext} tiene una condicion operativa propia. La atencion en ${route.sector} considera ${route.networkType}, tipo de cliente ${route.clientType} y sintomas probables como ${route.probableIssue}. Con una lectura tecnica del tramo de ${route.comuna.comuna} definimos si corresponde destape mecanico RIDGID, hidrojet de alta presion, limpieza de camara o apoyo con videoinspeccion.`,
+      `La meta de esta intervencion en ${route.sector} no se limita a liberar una obstruccion. En ${route.comuna.comuna} buscamos restituir capacidad de evacuacion, bajar el riesgo sanitario y entregar una recomendacion tecnica estable. La pauta combina el contexto local de ${ubicacion} con una decision practica sobre la maniobra y el control posterior.`,
     ],
-    localHeading: `${servicioCapitalizado} en ${route.sector}: diagnostico local y criterio tecnico`,
+    localHeading: `${servicioCapitalizado}: diagnostico local en ${route.sector}`,
     localParagraphs: [
-      `Cuando se solicita ${routeContext}, normalmente ya existe una senal clara en la descarga, los artefactos o las camaras. Para diagnosticar ${routeContext}, ${diagnosis}. El filtro inicial de ${routeContext} permite movilizar equipos adecuados y acotar la exposicion al problema sanitario.`,
-      `El contexto de ${routeContext} exige una respuesta proporcional al riesgo y al uso del inmueble. En ${routeContext}, un comercio, una vivienda y una comunidad requieren tolerancias operativas distintas. Por eso ${routeContext} se ajusta a ${network}, severidad de la obstruccion y puntos de acceso disponibles.`,
-      `La recomendacion para ${routeContext} es ${route.recommendation}. Si ${routeContext} muestra signos de ${secondaryIncident}, la evaluacion local debe adelantarse a una descarga fuera de control. Una decision temprana para ${routeContext} reduce costos de limpieza, reclamos y danos sanitarios asociados.`,
+      `Cuando se solicita ${supportContext}, normalmente ya existe una senal clara en la descarga, los artefactos o las camaras. Para diagnosticar el caso en ${route.sector}, ${diagnosis}. El filtro inicial de ${route.comuna.comuna} permite movilizar equipos adecuados y acotar la exposicion al problema sanitario.`,
+      `El contexto de ${diagnosticContext} exige una respuesta proporcional al riesgo y al uso del inmueble. Un comercio, una vivienda y una comunidad de ${ubicacion} requieren tolerancias operativas distintas. Por eso la maniobra se ajusta a ${network}, severidad de la obstruccion y puntos de acceso disponibles.`,
+      `La recomendacion tecnica para ${route.sector} es ${route.recommendation}. Si la red muestra signos de ${secondaryIncident}, la evaluacion local debe adelantarse a una descarga fuera de control. Una decision temprana en ${route.comuna.comuna} reduce costos de limpieza, reclamos y danos sanitarios asociados.`,
     ],
     problemHeading: `Problemas frecuentes en ${route.sector} para ${servicio}`,
-    problemIntro: `Los sintomas asociados a ${routeContext} se relacionan con ${route.service.enfoque}. En ${routeContext} tambien se revisan grasa, sarro, sedimentos, residuos solidos y mantencion postergada. Si fallan varios puntos durante ${routeContext}, el diagnostico debe ampliar la revision hacia el tramo comun de la red.`,
-    whenToRequestHeading: `Cuando solicitar ${servicio} en ${route.sector}`,
+    problemIntro: `Los sintomas asociados a ${localAction} se relacionan con ${route.service.enfoque}. En ${route.sector} tambien se revisan grasa, sarro, sedimentos, residuos solidos y mantencion postergada. Si fallan varios puntos durante la visita en ${route.comuna.comuna}, el diagnostico debe ampliar la revision hacia el tramo comun de la red.`,
+    whenToRequestHeading: `Cuando solicitar soporte sanitario en ${route.sector}`,
     whenToRequestItems: [
-      `Solicita evaluacion de ${routeContext} ${firstUrgencyTrigger}, especialmente si el inmueble depende de banos, cocina o areas comunes operativas.`,
-      `Activa atencion para ${routeContext} si aparece ${route.probableIssue} o se pierde el uso de varios puntos sanitarios.`,
-      `Pide diagnostico preventivo de ${routeContext} ${secondUrgencyTrigger}, porque ese patron puede anticipar una obstruccion mayor.`,
-      `Coordina soporte de ${routeContext} cuando el cliente es ${route.clientType} y la continuidad sanitaria condiciona su operacion.`,
+      `Solicita evaluacion de ${supportContext} ${firstUrgencyTrigger}, especialmente si el inmueble depende de banos, cocina o areas comunes operativas.`,
+      `Activa atencion para ${operationalContext} si aparece ${route.probableIssue} o se pierde el uso de varios puntos sanitarios.`,
+      `Pide diagnostico preventivo en ${route.sector} ${secondUrgencyTrigger}, porque ese patron puede anticipar una obstruccion mayor.`,
+      `Coordina soporte tecnico de ${localAction} cuando el cliente es ${route.clientType} y la continuidad sanitaria condiciona su operacion.`,
     ],
     procedureHeading: `Procedimiento tecnico para ${servicio} en ${route.comuna.comuna}`,
-    procedureIntro: `El procedimiento de ${routeContext} sigue una secuencia ordenada hasta verificar el resultado. Para ${routeContext} se combinan diagnostico, acceso sanitario, equipo RIDGID o hidrojet segun servicio, prueba hidraulica y recomendacion documentada.`,
+    procedureIntro: `El procedimiento en ${route.sector} sigue una secuencia ordenada hasta verificar el resultado. Para ${route.comuna.comuna} se combinan diagnostico, acceso sanitario, equipo RIDGID o hidrojet segun servicio, prueba hidraulica y recomendacion documentada.`,
     equipmentHeading: `Equipos utilizados para ${servicioCapitalizado}`,
-    equipmentIntro: `La seleccion de equipos para ${routeContext} depende del diametro, material, accesibilidad y tipo de residuo. En ${routeContext} usamos ${route.service.equipo} y, cuando corresponde, videoinspeccion RIDGID para revisar fisuras, contrapendientes, raices, sedimento o deformaciones.`,
-    equipmentRecommendation: `${routeContextCapitalized}: ${equipmentRecommendation.charAt(0).toLowerCase()}${equipmentRecommendation.slice(1)}`,
+    equipmentIntro: `La seleccion de equipos para ${supportContext} depende del diametro, material, accesibilidad y tipo de residuo. Usamos ${route.service.equipo} y, cuando corresponde, videoinspeccion RIDGID para revisar fisuras, contrapendientes, raices, sedimento o deformaciones.`,
+    equipmentRecommendation: `${sentenceCase(supportContext)}: ${equipmentRecommendation.charAt(0).toLowerCase()}${equipmentRecommendation.slice(1)}`,
     nearbyCoverageHeading: `Sectores cercanos con cobertura para ${servicio} en ${route.comuna.comuna}`,
-    nearbyCoverageParagraph: `Desde ${routeContext} se enlazan sectores cercanos para mantener continuidad de cobertura, derivar al tecnico correcto y ofrecer rutas territoriales utiles fuera del sitemap.`,
+    nearbyCoverageParagraph: `Desde ${route.sector} se enlazan sectores cercanos para mantener continuidad de cobertura, derivar al tecnico correcto y mostrar zonas proximas con servicio disponible.`,
     preventionHeading: `Recomendacion preventiva para ${route.sector}, ${route.comuna.comuna}`,
     preventionParagraphs: [
-      `Despues de ${routeContext}, conviene establecer por que la red llego a esa condicion. Si ${routeContext} presenta reincidencia, grasa u olor constante, la recomendacion es ${prevention}. La lectura preventiva de ${routeContext} transforma el evento en un antecedente util para gestionar la red sanitaria.`,
-      `En ${tertiaryNetwork}, ${routeContext} requiere considerar carga de uso, limpieza profunda y correcciones previas. Un plan asociado a ${routeContext} permite definir frecuencia, puntos de control y tecnologia apropiada. Para edificios o comercios que solicitan ${routeContext}, este enfoque reduce cierres, reclamos y limpiezas de emergencia.`,
-      `Para ${route.clientType}, ${routeContext} tambien protege la continuidad frente a usuarios y residentes. Durante ${routeContext}, un artefacto fuera de servicio o una camara saturada cambia la operacion diaria. La pauta posterior de ${routeContext} evita que el cliente gestione la misma red solo mediante urgencias.`,
+      `Despues del servicio en ${route.sector}, conviene establecer por que la red llego a esa condicion. Si aparecen reincidencia, grasa u olor constante en ${route.comuna.comuna}, la recomendacion es ${prevention}. La lectura preventiva transforma el evento de ${ubicacion} en un antecedente util para gestionar la red sanitaria.`,
+      `En ${tertiaryNetwork}, ${preventiveContext} requiere considerar carga de uso, limpieza profunda y correcciones previas. Un plan asociado a ${supportContext} permite definir frecuencia, puntos de control y tecnologia apropiada. Para edificios o comercios de ${route.comuna.comuna}, este enfoque reduce cierres, reclamos y limpiezas de emergencia.`,
+      `Para ${route.clientType}, la intervencion tambien protege la continuidad frente a usuarios y residentes. Durante una urgencia en ${route.sector}, un artefacto fuera de servicio o una camara saturada cambia la operacion diaria. La pauta posterior para ${ubicacion} evita que el cliente gestione la misma red solo mediante urgencias.`,
     ],
-    ctaHeading: `Solicita ${servicio} en ${route.sector} ahora`,
-    ctaParagraph: `Para solicitar ${routeContext}, indica direccion, sintomas, condicion de uso y fotos del punto afectado. Con esos datos preparamos el equipo y coordinamos ${routeContext} ${tone}.`,
+    ctaHeading: `Solicita atencion sanitaria en ${route.sector} ahora`,
+    ctaParagraph: `Para solicitar ${supportContext}, indica direccion, sintomas, condicion de uso y fotos del punto afectado. Con esos datos preparamos el equipo para ${route.sector} y coordinamos la visita ${tone}.`,
     faq: [
       {
-        question: `Atienden ${routeContext} durante la noche?`,
-        answer: `Si. La cobertura de ${routeContext} opera 24/7 y prioriza la perdida de uso sanitario, la exposicion de aguas servidas y la continuidad del inmueble.`,
+        question: `Atienden ${supportContext} durante la noche?`,
+        answer: `Si. La cobertura en ${route.sector} opera 24/7 y prioriza la perdida de uso sanitario, la exposicion de aguas servidas y la continuidad del inmueble.`,
       },
       {
-        question: `Que equipo usan para ${routeContext}?`,
-        answer: `Para ${routeContext} seleccionamos ${route.service.equipo}. Si el estado interno de ${routeContext} no es concluyente, la evaluacion puede complementarse con videoinspeccion RIDGID para ubicar puntos criticos.`,
+        question: `Que equipo usan para ${supportContext}?`,
+        answer: `Seleccionamos ${route.service.equipo}. Si el estado interno de la red en ${route.sector} no es concluyente, la evaluacion puede complementarse con videoinspeccion RIDGID para ubicar puntos criticos.`,
       },
       {
-        question: `Cuando conviene complementar ${routeContext} con hidrojet?`,
-        answer: `En ${routeContext}, el hidrojet se evalua cuando hay grasa adherida, sarro, sedimentos o perdida de seccion util en tramos compatibles con agua a presion.`,
+        question: `Cuando conviene complementar ${localAction} en ${route.sector} con hidrojet?`,
+        answer: `El hidrojet se evalua en ${route.comuna.comuna} cuando hay grasa adherida, sarro, sedimentos o perdida de seccion util en tramos compatibles con agua a presion.`,
       },
       {
-        question: `Que datos debo enviar por WhatsApp para ${routeContext}?`,
-        answer: `Para coordinar ${routeContext}, envia direccion, tipo de problema, fotos o video y confirma que artefactos o areas quedaron sin uso.`,
+        question: `Que datos debo enviar por WhatsApp desde ${route.sector}?`,
+        answer: `Envia direccion en ${route.sector}, tipo de problema, fotos o video y confirma que artefactos o areas quedaron sin uso.`,
       },
       {
-        question: `La atencion de ${routeContext} incluye recomendacion preventiva?`,
-        answer: `Si. Al cerrar ${routeContext}, la prueba hidraulica y la causa probable permiten proponer una accion preventiva acorde con la frecuencia de uso y la red revisada.`,
+        question: `La atencion de ${supportContext} incluye recomendacion preventiva?`,
+        answer: `Si. Al cerrar la visita en ${route.comuna.comuna}, la prueba hidraulica y la causa probable permiten proponer una accion preventiva acorde con la frecuencia de uso y la red revisada.`,
       },
     ],
   };

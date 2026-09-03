@@ -555,8 +555,30 @@ function buildPresentation(profile: ComunaProfile): ComunaLandingPresentation {
   };
 }
 
+function buildScope(serviceName: string, comuna: string) {
+  const normalizedService = serviceName
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+  const normalizedComuna = comuna
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+
+  return normalizedService.endsWith(` en ${normalizedComuna}`)
+    ? serviceName.toLowerCase()
+    : `${serviceName.toLowerCase()} en ${comuna}`;
+}
+
+function buildNaturalScope(scope: string, comuna: string) {
+  return scope.startsWith("destape de alcantarillado en ")
+    ? `atencion sanitaria en ${comuna}`
+    : scope;
+}
+
 function buildProcedure(profile: ComunaProfile, serviceName: string): ProcedureStep[] {
-  const scope = `${serviceName.toLowerCase()} en ${profile.comuna}`;
+  const scope = buildScope(serviceName, profile.comuna);
+  const naturalScope = buildNaturalScope(scope, profile.comuna);
 
   return [
     {
@@ -565,19 +587,19 @@ function buildProcedure(profile: ComunaProfile, serviceName: string): ProcedureS
     },
     {
       title: "2. Diagnostico en terreno con criterio tecnico",
-      description: `Durante ${scope}, inspeccionamos puntos de descarga, artefactos y trazado para identificar la causa principal.`,
+      description: `Durante la visita de ${naturalScope}, inspeccionamos puntos de descarga, artefactos y trazado para identificar la causa principal.`,
     },
     {
       title: "3. Ejecucion tecnica segun diagnostico",
-      description: `En ${scope}, aplicamos la tecnologia compatible con el diagnostico, el acceso y la seguridad sanitaria.`,
+      description: `En el tramo revisado, aplicamos la tecnologia compatible con el diagnostico, el acceso y la seguridad sanitaria.`,
     },
     {
       title: "4. Verificacion de flujo y estabilidad",
-      description: `Al cerrar ${scope}, realizamos pruebas de descarga y confirmamos la recuperacion observada en los puntos revisados.`,
+      description: `Al cerrar la intervencion en ${profile.comuna}, realizamos pruebas de descarga y confirmamos la recuperacion observada en los puntos revisados.`,
     },
     {
       title: "5. Plan de continuidad preventiva",
-      description: `La entrega de ${scope} incluye recomendaciones sobre frecuencia, puntos de control y criterios de seguimiento.`,
+      description: `La entrega tecnica incluye recomendaciones sobre frecuencia, puntos de control y criterios de seguimiento.`,
     },
   ];
 }
@@ -585,34 +607,39 @@ function buildProcedure(profile: ComunaProfile, serviceName: string): ProcedureS
 function buildFaq(profile: ComunaProfile): FaqItem[] {
   const presentation = buildPresentation(profile);
   const scope = presentation.serviceName.toLowerCase();
+  const naturalScope = buildNaturalScope(scope, profile.comuna);
 
   return [
     {
       question: `Atienden ${scope} durante las 24 horas?`,
-      answer: `Si. La cobertura de ${scope} prioriza escenarios que comprometen habitabilidad o continuidad del inmueble.`,
+      answer: `Si. La cobertura de ${naturalScope} prioriza escenarios que comprometen habitabilidad o continuidad del inmueble.`,
     },
     {
-      question: `Como seleccionan los equipos para ${scope}?`,
-      answer: `En ${scope}, el diagnostico define si corresponde equipo mecanico, hidrojet, videoinspeccion o una combinacion tecnica.`,
+      question: `Como seleccionan los equipos para la visita en ${profile.comuna}?`,
+      answer: `El diagnostico define si corresponde equipo mecanico, hidrojet, videoinspeccion o una combinacion tecnica.`,
     },
     {
-      question: `Puedo pedir una pauta preventiva despues de ${scope}?`,
-      answer: `Si. El cierre de ${scope} puede incluir frecuencia sugerida y puntos de control segun el uso real de la red.`,
+      question: `Puedo pedir una pauta preventiva despues de la atencion?`,
+      answer: `Si. El cierre puede incluir frecuencia sugerida y puntos de control segun el uso real de la red.`,
     },
     {
-      question: `Que datos envio por WhatsApp para ${scope}?`,
-      answer: `Para coordinar ${scope}, envia direccion, punto afectado, condicion de uso, accesos disponibles y evidencia visual.`,
+      question: `Que datos envio por WhatsApp para coordinar en ${profile.comuna}?`,
+      answer: `Envia direccion, punto afectado, condicion de uso, accesos disponibles y evidencia visual.`,
     },
     {
-      question: `Atienden administraciones y empresas que requieren ${scope}?`,
-      answer: `Si. La atencion de ${scope} puede coordinar accesos, responsables y trazabilidad para comunidades o clientes corporativos.`,
+      question: `Atienden administraciones y empresas en ${profile.comuna}?`,
+      answer: `Si. La atencion puede coordinar accesos, responsables y trazabilidad para comunidades o clientes corporativos.`,
     },
   ];
 }
 
 function buildLandingData(profile: ComunaProfile): ComunaLandingData {
   const presentation = buildPresentation(profile);
-  const scope = presentation.serviceName.toLowerCase();
+  const scope = buildScope(presentation.serviceName, profile.comuna);
+  const naturalScope = buildNaturalScope(scope, profile.comuna);
+  const technicalScope = scope.startsWith("destape de alcantarillado en ")
+    ? `intervencion de camaras, colectores y redes obstruidas en ${profile.comuna}`
+    : scope;
   const isHidrojetConcon = profile.slug === "hidrojet-concon";
   const isMaintenanceQuilpue = profile.slug === "mantencion-desagues-quilpue";
   const isUrgencyVillaAlemana = profile.slug === "urgencias-sanitarias-villa-alemana";
@@ -748,27 +775,27 @@ function buildLandingData(profile: ComunaProfile): ComunaLandingData {
     metaDescription,
     heroParagraphs: [
       `La atencion de ${scope} considera ${profile.localContext}. Para ${scope} se combinan diagnostico, tecnologia compatible y verificacion de flujo segun la condicion observada. La coordinacion de ${scope} busca recuperar continuidad sin ampliar innecesariamente el alcance.`,
-      `En ${scope}, los principales factores locales son ${riskList}. El diagnostico de ${scope} relaciona esos antecedentes con la red y el uso del inmueble. La decision tecnica de ${scope} se toma despues de identificar el punto o tramo que explica la falla.`,
-      `${profile.operationNote} Desde el primer contacto de ${scope} se solicitan datos suficientes para preparar la visita. El cierre de ${scope} deja una recomendacion vinculada con la causa probable y la prueba realizada.`,
+      `En ${naturalScope}, los principales factores locales son ${riskList}. El diagnostico relaciona esos antecedentes con la red y el uso del inmueble. La decision tecnica se toma despues de identificar el punto o tramo que explica la falla.`,
+      `${profile.operationNote} Desde el primer contacto se solicitan datos suficientes para preparar la visita. El cierre en ${profile.comuna} deja una recomendacion vinculada con la causa probable y la prueba realizada.`,
     ],
     problemBullets: profile.urgentScenarios.map((scenario) => scenario),
-    problemSummary: `Los escenarios considerados para ${scope} incluyen ${scenarios}. La prioridad de ${scope} se define con la exposicion sanitaria, los puntos sin uso y el impacto operativo del inmueble. La respuesta de ${scope} comienza con clasificacion, continua con diagnostico y termina con una recomendacion asociada al hallazgo.`,
+    problemSummary: `Los escenarios considerados para ${naturalScope} incluyen ${scenarios}. La prioridad se define con la exposicion sanitaria, los puntos sin uso y el impacto operativo del inmueble. La respuesta tecnica comienza con clasificacion, continua con diagnostico y termina con una recomendacion asociada al hallazgo.`,
     technicalParagraphs: [
-      `El bloque tecnico de ${scope} puede utilizar hidrojet para adherencias y equipos RIDGID para obstrucciones compatibles con trabajo mecanico. La seleccion para ${scope} depende del acceso, diametro, residuo y estado probable del tramo. La prueba posterior de ${scope} confirma el comportamiento observado antes del cierre.`,
-      `El diagnostico de ${scope} considera estado de red, historial, descarga y uso del inmueble. Con esa base, ${scope} distingue una accion correctiva puntual de una necesidad preventiva o de inspeccion. La recomendacion final de ${scope} queda vinculada con esa distincion.`,
+      `El bloque tecnico de ${technicalScope} puede utilizar hidrojet para adherencias y equipos RIDGID para obstrucciones compatibles con trabajo mecanico. La seleccion depende del acceso, diametro, residuo y estado probable del tramo. La prueba posterior confirma el comportamiento observado antes del cierre.`,
+      `El diagnostico en ${profile.comuna} considera estado de red, historial, descarga y uso del inmueble. Con esa base, la intervencion distingue una accion correctiva puntual de una necesidad preventiva o de inspeccion. La recomendacion final queda vinculada con esa distincion.`,
     ],
     procedureSteps: buildProcedure(profile, presentation.serviceName),
     nearbyZones: profile.nearbyZones,
     coverageParagraphs: [
-      `La cobertura de ${scope} considera sectores cercanos como ${nearby}. La coordinacion territorial de ${scope} ayuda a preparar accesos, equipos y prioridad antes del desplazamiento.`,
-      `Si una operacion requiere ${scope} en varias sedes, la programacion puede unificar responsables y antecedentes tecnicos. El orden documental de ${scope} facilita comparar intervenciones sin confundir redes ni alcances entre ubicaciones.`,
+      `La cobertura de ${naturalScope} considera sectores cercanos como ${nearby}. La coordinacion territorial ayuda a preparar accesos, equipos y prioridad antes del desplazamiento.`,
+      `Si una operacion requiere soporte sanitario en varias sedes, la programacion puede unificar responsables y antecedentes tecnicos. El orden documental facilita comparar intervenciones sin confundir redes ni alcances entre ubicaciones.`,
     ],
-    clientParagraph: `La atencion de ${scope} esta orientada a ${clients}. Para clientes de ${scope}, la coordinacion de accesos y la trazabilidad tecnica son parte del resultado esperado.`,
+    clientParagraph: `La atencion de ${naturalScope} esta orientada a ${clients}. Para estos clientes, la coordinacion de accesos y la trazabilidad tecnica son parte del resultado esperado.`,
     clientList: profile.clientFocus.map((item) => item),
     faq: buildFaq(profile),
     ctaPrimaryMessage: `Hola, necesito solicitar ${scope}. Puedo indicar punto afectado y accesos disponibles.`,
-    ctaMidMessage: `Hola, quiero cotizar una pauta preventiva asociada a ${scope}.`,
-    ctaFinalMessage: `Hola, necesito coordinar ${scope} y compartir antecedentes del caso.`,
+    ctaMidMessage: `Hola, quiero cotizar una pauta preventiva asociada a la red sanitaria en ${profile.comuna}.`,
+    ctaFinalMessage: `Hola, necesito coordinar una evaluacion sanitaria y compartir antecedentes del caso.`,
     presentation,
   };
 }
