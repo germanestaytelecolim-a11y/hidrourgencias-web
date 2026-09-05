@@ -501,18 +501,18 @@ function buildPresentation(profile: ComunaProfile): ComunaLandingPresentation {
 
   if (profile.slug === "mantencion-desagues-quilpue") {
     return {
-      serviceName: "Mantencion de desagues en Quilpue",
-      schemaServiceType: "Mantencion preventiva de desagues",
-      problemHeading: "Senales para programar mantencion de desagues en Quilpue",
-      servicesHeading: "Mantencion tecnica de desagues en Quilpue",
+      serviceName: "Mantención de redes de alcantarillado en Quilpué",
+      schemaServiceType: "Mantención preventiva de redes de alcantarillado",
+      problemHeading: "Señales para programar mantención de redes de alcantarillado en Quilpué",
+      servicesHeading: "Mantención técnica de redes de alcantarillado en Quilpué",
       servicesIntro:
         "La atencion combina revision de puntos recurrentes, limpieza programada y recomendaciones segun la carga real de la red sanitaria.",
-      technicalHeading: "Equipos para mantencion y control de desagues",
-      coverageServiceName: "mantencion de desagues",
-      closingHeading: "Programa mantencion de desagues en Quilpue",
+      technicalHeading: "Equipos para mantención y control de redes de alcantarillado",
+      coverageServiceName: "mantención de redes de alcantarillado",
+      closingHeading: "Programa mantención de redes de alcantarillado en Quilpue",
       closingParagraph:
         "Comparte el tipo de inmueble, los puntos criticos y el historial disponible para definir un alcance preventivo adecuado.",
-      primaryCtaLabel: "Solicitar mantencion de desagues",
+      primaryCtaLabel: "Solicitar mantención de redes de alcantarillado",
       secondaryCtaLabel: "Cotizar plan preventivo",
       finalCtaLabel: "Programar mantencion",
     };
@@ -646,21 +646,21 @@ function buildLandingData(profile: ComunaProfile): ComunaLandingData {
   const h1 = isHidrojetConcon
     ? "Hidrojet en Conc\u00f3n | Limpieza hidrodinámica de redes"
     : isMaintenanceQuilpue
-      ? "Mantencion de desagues en Quilpue | Plan preventivo"
+      ? "Mantención de redes de alcantarillado en Quilpué | Plan preventivo"
       : isUrgencyVillaAlemana
         ? "Urgencias sanitarias en Villa Alemana | Atencion 24/7"
         : `Destape de Alcantarillado en ${profile.comuna} | Urgencias 24/7`;
   const metaTitle = isHidrojetConcon
     ? "Hidrojet en Conc\u00f3n | Limpieza hidrodinámica de redes | Hidrourgencias SpA"
     : isMaintenanceQuilpue
-      ? "Mantencion de desagues en Quilpue | Plan preventivo"
+      ? "Mantención de redes de alcantarillado en Quilpué | Plan preventivo"
       : isUrgencyVillaAlemana
         ? "Urgencias sanitarias en Villa Alemana | Atencion 24/7"
         : `Destape de Alcantarillado en ${profile.comuna} | Urgencias 24/7`;
   const metaDescription = isHidrojetConcon
     ? "Servicio profesional de hidrojet en Conc\u00f3n para limpieza hidrodinámica de redes sanitarias, eliminación de grasa, sarro, sedimentos y obstrucciones complejas. Atención técnica en Conc\u00f3n y sectores cercanos."
     : isMaintenanceQuilpue
-      ? "Mantencion de desagues en Quilpue para comunidades, empresas y comercios. Revision de puntos criticos, limpieza programada y pauta preventiva."
+      ? "Mantención de redes de alcantarillado en Quilpué para comunidades, empresas y comercios. Revision de puntos criticos, limpieza programada y pauta preventiva."
       : isUrgencyVillaAlemana
         ? "Atencion de urgencias sanitarias en Villa Alemana con diagnostico tecnico, contencion del riesgo y respuesta disponible durante las 24 horas."
         : `Servicio profesional de destape de alcantarillado en ${profile.comuna}, con diagnostico tecnico, equipos RIDGID, hidrojet cuando corresponde y atencion 24/7.`;

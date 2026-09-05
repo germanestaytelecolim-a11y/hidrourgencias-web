@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 
 import { EmergencyAlertModal } from "@/components/EmergencyAlertModal";
 import "@/app/globals.css";
+import "@/styles/home.css";
 
 const manrope = Manrope({
   subsets: ["latin"],

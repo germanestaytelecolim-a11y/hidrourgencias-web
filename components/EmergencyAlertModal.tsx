@@ -767,8 +767,9 @@ const emergencyAlertModalScript = `
     return !hasBeenDismissed() && !isExcludedPath(getPathname());
   }
 
-  function openModal() {
-    if (!shouldShowModal() || modalIsOpen) {
+  function openModal(manual) {
+    var requested = manual === true;
+    if (isExcludedPath(getPathname()) || modalIsOpen || (!requested && (getPathname() === "/" || !shouldShowModal()))) {
       return;
     }
 
@@ -813,7 +814,7 @@ const emergencyAlertModalScript = `
     }
     lastPath = currentPath;
 
-    if (isExcludedPath(getPathname())) {
+    if (getPathname() === "/" || isExcludedPath(getPathname())) {
       closeModal({ persist: false, restoreFocus: false });
       return;
     }
@@ -837,6 +838,7 @@ const emergencyAlertModalScript = `
   patchHistoryMethod("pushState");
   patchHistoryMethod("replaceState");
   window.addEventListener("popstate", handlePathChange);
+  window.addEventListener("hu:open-emergency-form", function () { openModal(true); });
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", openModal, { once: true });

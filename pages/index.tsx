@@ -18,7 +18,10 @@ import {
   getCmsHomeSettings,
   getCmsVideoEntries,
 } from "@/lib/cms-content";
-import { createWhatsAppUrl } from "@/lib/site-config";
+import { SiteFooter } from "@/components/site-footer";
+import { navigationCoverage } from "@/lib/navigation";
+import { getAllSeoRoutes } from "@/lib/seo-territorial";
+import { homeServices } from "@/lib/home-services";
 
 const siteUrl = "https://hidrourgencias.cl";
 const ogImage = "/images/hero-urgencia.jpg";
@@ -116,6 +119,12 @@ export const getServerSideProps: GetServerSideProps<HomePageProps> = async () =>
     props: {
       cmsContent: {
         homeSettings: getCmsHomeSettings(),
+        coverage: {
+          areas: navigationCoverage,
+          routes: getAllSeoRoutes().filter(route => homeServices.some(service => service.seoSlug === route.service.slug)).map(route => ({
+            href: `/${route.slug}`, service: route.service.slug, commune: route.comuna.landingPath.slice(1), sector: route.sector,
+          })),
+        },
         featuredServices: getCmsFeaturedServices(),
         equipmentItems: getCmsEquipmentItems(),
         clients,
@@ -132,9 +141,6 @@ export const getServerSideProps: GetServerSideProps<HomePageProps> = async () =>
 
 export default function HomePage({ cmsContent }: HomePageProps) {
   const businessSchemaJson = JSON.stringify(homeStructuredData).replace(/</g, "\\u003c");
-  const floatingMessage = createWhatsAppUrl(
-    "Hola, necesito atención inmediata por urgencia sanitaria en la Región de Valparaíso.",
-  );
 
   return (
     <>
@@ -142,7 +148,7 @@ export default function HomePage({ cmsContent }: HomePageProps) {
         <title>Destape de alcantarillado, hidrojet y urgencias sanitarias 24/7 en Región de Valparaíso</title>
         <meta
           name="description"
-          content="Hidrourgencias SpA: destape de alcantarillado y desagües, hidrojet 4000 PSI, videoinspección sanitaria, mantención preventiva, sanitización e higienización con atención 24/7 en la Región de Valparaíso."
+          content="Destape de desagües y redes de alcantarillado, hidrojet, videoinspección y mantención preventiva para edificios y empresas. Urgencias 24/7 en la Región de Valparaíso."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="index,follow" />
@@ -155,7 +161,7 @@ export default function HomePage({ cmsContent }: HomePageProps) {
         <meta property="og:title" content="Hidrourgencias SpA | Urgencias sanitarias y destape técnico 24/7" />
         <meta
           property="og:description"
-          content="15 años resolviendo contingencias sanitarias con hidrojet 4000 PSI, equipos RIDGID y atención profesional en la Región de Valparaíso."
+          content="Diagnóstico, máquina eléctrica, hidrojet y videoinspección para edificios, comunidades y empresas de la Región de Valparaíso."
         />
         <meta property="og:url" content={siteUrl} />
         <meta property="og:type" content="website" />
@@ -170,21 +176,10 @@ export default function HomePage({ cmsContent }: HomePageProps) {
         <meta name="twitter:image" content={`${siteUrl}${ogImage}`} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: businessSchemaJson }} />
       </Head>
-      <SiteHeader />
+      <SiteHeader home />
       <HomePageContent cmsContent={cmsContent} />
       <ServiceTermsSection />
-      <div className="hu-floating-whatsapp fixed z-50 w-auto max-w-[calc(100vw-2rem)] sm:w-[17rem]">
-        <a
-          href={floatingMessage}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hu-floating-whatsapp__link hu-cta-primary inline-flex h-12 items-center gap-2 rounded-full px-5 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-300"
-          aria-label="Abrir WhatsApp de urgencias sanitarias"
-        >
-          <span className="h-2.5 w-2.5 rounded-full bg-white" aria-hidden="true" />
-          <span className="hu-floating-whatsapp__label">WhatsApp 24/7</span>
-        </a>
-      </div>
+      <SiteFooter home />
       <GoogleAdsConversionTracking />
     </>
   );
