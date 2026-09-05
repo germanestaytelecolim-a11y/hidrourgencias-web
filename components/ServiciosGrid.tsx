@@ -1,5 +1,13 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import {
+  ArrowUpRight,
+  Wrench,
+  Droplets,
+  Camera,
+  ClipboardCheck,
+  Building2,
+  ScanSearch,
+} from "lucide-react";
 import type { CmsFeaturedService } from "@/lib/cms-content";
 import { homeServices } from "@/lib/home-services";
 
@@ -13,8 +21,30 @@ export function ServiciosGrid({
     (service) => !homeServices.some((item) => item.href === service.url),
   );
   function card(service: (typeof homeServices)[number]) {
+    const Icon =
+      service.id === "hidrojet"
+        ? Droplets
+        : service.id === "video"
+          ? Camera
+          : service.type === "maintenance"
+            ? Building2
+            : service.type === "diagnostic"
+              ? ScanSearch
+              : service.id === "camaras"
+                ? ClipboardCheck
+                : Wrench;
+    const label =
+      service.type === "maintenance"
+        ? "B2B · Preventivo"
+        : service.type === "diagnostic"
+          ? "Diagnóstico"
+          : "Urgencia";
     return (
       <article key={service.id} className="home-service-card">
+        <div className="home-service-sign">
+          <Icon size={23} aria-hidden="true" />
+          <span>{label}</span>
+        </div>
         <h3>{service.title}</h3>
         <p>{service.problem}</p>
         <p className="home-service-method">{service.method}</p>

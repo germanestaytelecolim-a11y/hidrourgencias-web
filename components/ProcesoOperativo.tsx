@@ -1,3 +1,11 @@
+import {
+  MessageCircle,
+  ScanSearch,
+  Wrench,
+  CircleCheck,
+  FileText,
+} from "lucide-react";
+const icons = [MessageCircle, ScanSearch, Wrench, CircleCheck, FileText];
 const steps = [
   [
     "Coordinamos",
@@ -31,15 +39,21 @@ export function ProcesoOperativo() {
         </h2>
       </div>
       <ol className="home-process">
-        {steps.map(([title, text], index) => (
-          <li key={title}>
-            <span aria-hidden="true">0{index + 1}</span>
-            <div>
-              <h3>{title}</h3>
-              <p>{text}</p>
-            </div>
-          </li>
-        ))}
+        {steps.map(([title, text], index) => {
+          const Icon = icons[index];
+          return (
+            <li key={title}>
+              <span className="home-step-icon" aria-hidden="true">
+                <Icon size={23} />
+                <small>0{index + 1}</small>
+              </span>
+              <div>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </div>
+            </li>
+          );
+        })}
       </ol>
     </section>
   );

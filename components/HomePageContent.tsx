@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { HomeCoverageBoard, HomeEvidence } from "@/components/home-visual-evidence";
+import { VideosTecnicos } from "@/components/VideosTecnicos";
 import { trackCommercialEvent } from "@/lib/conversion";
 import type { Metadata } from "next";
 import {
@@ -160,6 +162,9 @@ export default function HomePage({ cmsContent }: HomePageContentProps) {
       />
       <HomeLeadPaths />
       <ServiciosGrid services={cmsContent?.featuredServices} />
+      <HomeCoverageBoard areas={cmsContent?.coverage.areas ?? []} />
+      <HomeEvidence />
+      <VideosTecnicos videos={cmsContent?.videos} />
       <section
         id="especialidad-sanitaria"
         className="home-section home-difference"
