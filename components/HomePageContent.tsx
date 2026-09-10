@@ -97,6 +97,7 @@ export const metadata: Metadata = {
     description:
       "Diagnóstico, máquina eléctrica, hidrojet y videoinspección para edificios, comunidades y empresas de la Región de Valparaíso.",
     url: siteUrl,
+    siteName: "Hidrourgencias SpA",
     type: "website",
     locale: "es_CL",
     images: [

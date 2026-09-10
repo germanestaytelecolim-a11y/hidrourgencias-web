@@ -32,7 +32,7 @@ const localBusinessSchema = {
   slogan: "Urgencias sanitarias 24/7 con criterio técnico profesional",
   description:
     "Empresa técnica especializada en evacuación sanitaria, alcantarillado, desagüe, hidrojet, videoinspección sanitaria, mantención preventiva y recuperación higiénico-sanitaria en la Región de Valparaíso.",
-  url: siteUrl,
+  url: `${siteUrl}/`,
   image: `${siteUrl}${ogImage}`,
   telephone: "+56 9 4091 8672",
   areaServed: [
@@ -89,7 +89,7 @@ const localBusinessSchema = {
 const organizationSchema = {
   "@type": "Organization",
   name: "Hidrourgencias SpA",
-  url: siteUrl,
+  url: `${siteUrl}/`,
   logo: `${siteUrl}/images/logo-hidrourgencias.jpg`,
   sameAs: localBusinessSchema.sameAs,
 };
@@ -97,7 +97,8 @@ const organizationSchema = {
 const websiteSchema = {
   "@type": "WebSite",
   name: "Hidrourgencias SpA",
-  url: siteUrl,
+  alternateName: "Hidrourgencias",
+  url: `${siteUrl}/`,
   inLanguage: "es-CL",
 };
 
@@ -145,12 +146,14 @@ export default function HomePage({ cmsContent }: HomePageProps) {
   return (
     <>
       <Head>
-        <title>Destape de alcantarillado, hidrojet y urgencias sanitarias 24/7 en Región de Valparaíso</title>
+        <title>Hidrourgencias SpA | Destape de alcantarillado, hidrojet y urgencias sanitarias</title>
         <meta
           name="description"
           content="Destape de desagües y redes de alcantarillado, hidrojet, videoinspección y mantención preventiva para edificios y empresas. Urgencias 24/7 en la Región de Valparaíso."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="application-name" content="Hidrourgencias" />
+        <meta name="apple-mobile-web-app-title" content="Hidrourgencias" />
         <meta name="robots" content="index,follow" />
         <link rel="canonical" href={`${siteUrl}/`} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -164,11 +167,12 @@ export default function HomePage({ cmsContent }: HomePageProps) {
           content="Diagnóstico, máquina eléctrica, hidrojet y videoinspección para edificios, comunidades y empresas de la Región de Valparaíso."
         />
         <meta property="og:url" content={siteUrl} />
+        <meta property="og:site_name" content="Hidrourgencias SpA" />
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="es_CL" />
         <meta property="og:image" content={`${siteUrl}${ogImage}`} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Hidrourgencias SpA | Urgencias sanitarias 24/7" />
+        <meta name="twitter:title" content="Hidrourgencias SpA" />
         <meta
           name="twitter:description"
           content="Destape de alcantarillado y desagües con hidrojet, RIDGID y diagnóstico técnico profesional."

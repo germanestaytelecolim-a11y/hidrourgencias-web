@@ -29,8 +29,9 @@ const rajdhani = Rajdhani({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+  applicationName: "Hidrourgencias",
   title: {
-    default: "Hidrourgencias SpA | Urgencias sanitarias 24/7 en Región de Valparaíso",
+    default: "Hidrourgencias SpA | Destape de alcantarillado, hidrojet y urgencias sanitarias",
     template: "%s | Hidrourgencias SpA",
   },
   description:
@@ -68,6 +69,9 @@ export const metadata: Metadata = {
     description: "Destape técnico, hidrojet, videoinspección sanitaria y mantención preventiva en Región de Valparaíso.",
     images: [ogImage],
   },
+  appleWebApp: {
+    title: "Hidrourgencias",
+  },
   robots: {
     index: true,
     follow: true,
@@ -87,7 +91,7 @@ const localBusinessSchema = {
   slogan: "Urgencias sanitarias 24/7 con criterio técnico profesional",
   description:
     "Empresa técnica especializada en evacuación sanitaria, alcantarillado, desagüe, hidrojet, videoinspección sanitaria, mantención preventiva y recuperación higiénico-sanitaria en la Región de Valparaíso.",
-  url: siteUrl,
+  url: `${siteUrl}/`,
   image: `${siteUrl}${ogImage}`,
   telephone: "+56 9 4091 8672",
   areaServed: [
@@ -144,7 +148,7 @@ const localBusinessSchema = {
 const organizationSchema = {
   "@type": "Organization",
   name: "Hidrourgencias SpA",
-  url: siteUrl,
+  url: `${siteUrl}/`,
   logo: `${siteUrl}/images/logo-hidrourgencias.jpg`,
   sameAs: localBusinessSchema.sameAs,
 };
@@ -152,7 +156,8 @@ const organizationSchema = {
 const websiteSchema = {
   "@type": "WebSite",
   name: "Hidrourgencias SpA",
-  url: siteUrl,
+  alternateName: "Hidrourgencias",
+  url: `${siteUrl}/`,
   inLanguage: "es-CL",
 };
 
