@@ -17,6 +17,7 @@ type TerritorialHeroStyle = CSSProperties & {
 
 export function TerritorialLandingHero({ landing }: Props) {
   const visual = landing.visual;
+  const isQuilpueAuthorityRevision = landing.slug === "destape-alcantarillado-quilpue";
 
   if (!visual) return null;
 
@@ -45,8 +46,9 @@ export function TerritorialLandingHero({ landing }: Props) {
             <p key={paragraph}>{paragraph}</p>
           ))}
           <p>
-            Sumamos 15 anos de experiencia en el rubro sanitario, tecnicos con certificacion SEC gas clase 3 y
-            maquinaria profesional RIDGID para dar respuestas de alto estandar en {landing.comuna}.
+            {isQuilpueAuthorityRevision
+              ? "Trabajamos con maquinaria especializada, hidrojet y videoinspección sanitaria según el tipo de obstrucción, el acceso disponible y la condición de la red."
+              : `Sumamos 15 anos de experiencia en el rubro sanitario, tecnicos con certificacion SEC gas clase 3 y maquinaria profesional RIDGID para dar respuestas de alto estandar en ${landing.comuna}.`}
           </p>
         </div>
 
