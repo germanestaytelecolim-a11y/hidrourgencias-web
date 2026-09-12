@@ -51,8 +51,12 @@ export function getVerifiedWorkDate(workCase: Pick<WorkCase, "date" | "createdAt
 }
 
 export function getCaseRecencyTimestamp(workCase: WorkCaseDateFields) {
-  const publicationDate = workCase.origin === "admin" ? workCase.publishedAt : undefined;
-  for (const value of [getVerifiedWorkDate(workCase), publicationDate, workCase.updatedAt, workCase.createdAt]) {
+  const verifiedDate = getVerifiedWorkDate(workCase);
+  if (workCase.origin === "legacy") {
+    return verifiedDate ? new Date(verifiedDate).getTime() : 0;
+  }
+
+  for (const value of [verifiedDate, workCase.publishedAt, workCase.updatedAt, workCase.createdAt]) {
     if (!value) continue;
     const time = new Date(value).getTime();
     if (!Number.isNaN(time)) return time;
