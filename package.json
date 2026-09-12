@@ -11,6 +11,7 @@
     "admin:migrate": "tsx scripts/admin-migrate.mjs",
     "admin:create-user": "node scripts/admin-create-user.mjs",
     "admin:import-legacy-cases": "tsx scripts/admin-import-legacy-cases.ts",
+    "admin:cleanup-legacy-case-dates": "tsx scripts/admin-cleanup-legacy-case-dates.ts",
     "admin:import-legacy-blog": "tsx scripts/admin-import-legacy-blog.ts",
     "audit:seo": "tsx scripts/audit-seo-routes.ts",
     "audit:indexation": "node scripts/audit-indexability.mjs",

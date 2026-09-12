@@ -58,7 +58,7 @@ async function main() {
       ctaCount: ctaLinks.length,
       whatsappCount: links.filter((link) => link.href.includes("wa.me")).length,
       callCount: links.filter((link) => link.href.startsWith("tel:")).length,
-      proofSignals: matches(text, /RIDGID|Google|15 anos|24\/7|certific|cliente/gi),
+      proofSignals: matches(text, /RIDGID|Google|hidrojet|videoinspeccion|evidencia|informe tecnico|24\/7/gi),
       technicalEvidence: matches(text, /hidrojet|videoinspecci|motobomba|camara|diagnost/gi),
       coverageSignals: matches(text, /cobertura|comuna|sector/gi),
       faqCount: matches(html, /<h[23][^>]*>[^<]*(FAQ|preguntas|frecuentes)/gi),

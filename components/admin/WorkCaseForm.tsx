@@ -131,7 +131,13 @@ export function WorkCaseForm({ initialWorkCase }: { initialWorkCase?: WorkCase |
 
       <AdminCard title="3. Información técnica">
         <TextField name="title" label="Título del trabajo *" defaultValue={initialWorkCase?.title} placeholder="Ej: Hidrojet en edificio" />
-        <TextField name="date" label="Fecha del trabajo" defaultValue={initialWorkCase?.date} placeholder="AAAA-MM-DD" />
+        <TextField
+          name="date"
+          label="Fecha del trabajo (solo si está verificada)"
+          type="date"
+          defaultValue={initialWorkCase?.date}
+          placeholder="AAAA-MM-DD"
+        />
         <TextArea name="problem" label="Situación encontrada *" defaultValue={initialWorkCase?.problem} />
         <TextArea name="diagnosis" label="Diagnóstico técnico" defaultValue={initialWorkCase?.diagnosis} />
         <TextArea name="intervention" label="Intervención realizada *" defaultValue={initialWorkCase?.intervention} />
@@ -282,6 +288,7 @@ function TextField({
   label,
   defaultValue,
   placeholder,
+  type = "text",
   value,
   onChange,
 }: {
@@ -289,6 +296,7 @@ function TextField({
   label: string;
   defaultValue?: string;
   placeholder?: string;
+  type?: "text" | "date";
   value?: string;
   onChange?: (value: string) => void;
 }) {
@@ -297,6 +305,7 @@ function TextField({
       {label}
       <input
         name={name}
+        type={type}
         value={value}
         defaultValue={value === undefined ? defaultValue : undefined}
         onChange={onChange ? (event) => onChange(event.currentTarget.value) : undefined}

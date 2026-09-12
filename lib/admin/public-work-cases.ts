@@ -29,14 +29,30 @@ export type PublicWorkCaseDto = {
     sortOrder: number;
   }>;
   publishedAt?: string;
-  createdAt: string;
-  updatedAt: string;
-  origin: "admin" | "legacy";
-  clientName?: string;
+  updatedAt?: string;
 };
 
-export function getCaseRecencyTimestamp(workCase: Pick<WorkCase, "date" | "publishedAt" | "createdAt" | "updatedAt">) {
-  for (const value of [workCase.date, workCase.publishedAt, workCase.createdAt, workCase.updatedAt]) {
+type WorkCaseDateFields = Pick<WorkCase, "date" | "publishedAt" | "createdAt" | "updatedAt" | "origin">;
+
+function normalizeIsoDate(value: string | undefined) {
+  const datePart = value?.slice(0, 10) ?? "";
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(datePart)) return "";
+
+  const date = new Date(`${datePart}T00:00:00.000Z`);
+  return !Number.isNaN(date.getTime()) && date.toISOString().startsWith(datePart) ? datePart : "";
+}
+
+export function getVerifiedWorkDate(workCase: Pick<WorkCase, "date" | "createdAt" | "origin">) {
+  const date = normalizeIsoDate(workCase.date);
+  if (!date) return "";
+
+  const importedPlaceholder = workCase.origin === "legacy" && date === normalizeIsoDate(workCase.createdAt);
+  return importedPlaceholder ? "" : date;
+}
+
+export function getCaseRecencyTimestamp(workCase: WorkCaseDateFields) {
+  const publicationDate = workCase.origin === "admin" ? workCase.publishedAt : undefined;
+  for (const value of [getVerifiedWorkDate(workCase), publicationDate, workCase.updatedAt, workCase.createdAt]) {
     if (!value) continue;
     const time = new Date(value).getTime();
     if (!Number.isNaN(time)) return time;
@@ -44,7 +60,7 @@ export function getCaseRecencyTimestamp(workCase: Pick<WorkCase, "date" | "publi
   return 0;
 }
 
-export function sortCasesByRecency<T extends Pick<WorkCase, "date" | "publishedAt" | "createdAt" | "updatedAt">>(cases: T[]) {
+export function sortCasesByRecency<T extends WorkCaseDateFields>(cases: T[]) {
   return [...cases].sort((a, b) => getCaseRecencyTimestamp(b) - getCaseRecencyTimestamp(a));
 }
 
@@ -84,7 +100,7 @@ export function toPublicWorkCaseDto(workCase: WorkCase): PublicWorkCaseDto {
     id: workCase.id,
     slug: workCase.slug,
     title: workCase.title,
-    date: workCase.date,
+    date: getVerifiedWorkDate(workCase),
     commune: workCase.commune,
     sector: workCase.sector,
     publicLocation: workCase.publicLocation,
@@ -108,10 +124,7 @@ export function toPublicWorkCaseDto(workCase: WorkCase): PublicWorkCaseDto {
         isCover: asset.isCover,
         sortOrder: asset.sortOrder,
       })),
-    publishedAt: workCase.publishedAt,
-    createdAt: workCase.createdAt,
-    updatedAt: workCase.updatedAt,
-    origin: workCase.origin,
-    clientName: workCase.clientName,
+    publishedAt: workCase.origin === "admin" ? workCase.publishedAt : undefined,
+    updatedAt: workCase.origin === "admin" ? workCase.updatedAt : undefined,
   };
 }

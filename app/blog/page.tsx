@@ -46,7 +46,7 @@ export default async function BlogPage() {
         </h1>
         <p className="mt-5 max-w-4xl text-base leading-8 text-slate-100 sm:text-lg">
           Publicamos guias pensadas para administradores, comunidades, empresas y clientes que necesitan decisiones
-          rapidas con criterio tecnico, experiencia de 15 anos y enfoque operativo real.
+          rapidas con criterio tecnico, maquinaria especializada y enfoque operativo real.
         </p>
         <ServiceTermsNotice tone="dark" className="mt-7 max-w-4xl" />
         <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">

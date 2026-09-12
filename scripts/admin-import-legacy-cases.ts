@@ -43,7 +43,7 @@ function mapProperty(categories: readonly string[]) {
   return "Otro";
 }
 
-function mediaFromCase(caseStudy: ReturnType<typeof getAllCaseStudies>[number]): MediaAsset[] {
+function mediaFromCase(caseStudy: ReturnType<typeof getAllCaseStudies>[number], importedAt: string): MediaAsset[] {
   const uniqueImages = Array.from(new Map([{ src: caseStudy.featuredImage, alt: caseStudy.h1 }, ...caseStudy.gallery].map((image) => [image.src, image])).values());
   return uniqueImages.map((image, index) => ({
     id: `legacy-media-${caseStudy.slug}-${index}`,
@@ -54,19 +54,18 @@ function mediaFromCase(caseStudy: ReturnType<typeof getAllCaseStudies>[number]):
     isCover: index === 0,
     isPublic: true,
     sortOrder: index,
-    createdAt: "2020-01-01T00:00:00.000Z",
+    createdAt: importedAt,
   }));
 }
 
-function toWorkCase(caseStudy: ReturnType<typeof getAllCaseStudies>[number], index: number): WorkCase {
-  const date = new Date(Date.UTC(2020, 0, 1 + index)).toISOString().slice(0, 10);
+function toWorkCase(caseStudy: ReturnType<typeof getAllCaseStudies>[number], importedAt: string): WorkCase {
   return {
     id: `legacy-${caseStudy.slug}`,
     legacyId: caseStudy.slug,
     title: caseStudy.title,
     slug: caseStudy.slug,
     status: "published",
-    date,
+    date: "",
     commune: caseStudy.city === "Región de Valparaíso" ? "Otra" : caseStudy.city,
     sector: caseStudy.client.name,
     privateAddress: "",
@@ -90,10 +89,9 @@ function toWorkCase(caseStudy: ReturnType<typeof getAllCaseStudies>[number], ind
     clientName: caseStudy.client.name,
     createdBy: "legacy-import",
     updatedBy: "legacy-import",
-    createdAt: `${date}T00:00:00.000Z`,
-    updatedAt: `${date}T00:00:00.000Z`,
-    publishedAt: `${date}T00:00:00.000Z`,
-    media: mediaFromCase(caseStudy),
+    createdAt: importedAt,
+    updatedAt: importedAt,
+    media: mediaFromCase(caseStudy, importedAt),
   };
 }
 
@@ -104,6 +102,7 @@ async function main() {
   process.env.ADMIN_STORAGE_DRIVER = process.env.ADMIN_STORAGE_DRIVER || "postgres";
 
   const legacyCases = getAllCaseStudies();
+  const importedAt = new Date().toISOString();
   const existing = await listWorkCases();
   const existingIds = new Set(existing.map((workCase) => workCase.id));
   const existingSlugs = new Set(existing.map((workCase) => workCase.slug));
@@ -115,8 +114,8 @@ async function main() {
     errors: [] as Array<{ slug: string; message: string }>,
   };
 
-  for (const [index, caseStudy] of legacyCases.entries()) {
-    const workCase = toWorkCase(caseStudy, index);
+  for (const caseStudy of legacyCases) {
+    const workCase = toWorkCase(caseStudy, importedAt);
     if (existingIds.has(workCase.id)) {
       report.skippedExisting += 1;
       continue;

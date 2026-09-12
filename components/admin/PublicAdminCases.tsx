@@ -9,8 +9,8 @@ import { createWhatsAppUrl } from "@/lib/site-config";
 
 export function PublicAdminCases({
   cases,
-  title = "Casos de éxito recientes",
-  description = "Trabajos reales ejecutados recientemente por Hidrourgencias, con evidencia fotográfica, antecedentes técnicos y resultados observados en terreno.",
+  title = "Casos técnicos documentados",
+  description = "Trabajos documentados por Hidrourgencias en terreno, utilizados como respaldo técnico y referencia de intervención sanitaria.",
 }: {
   cases: PublicWorkCaseDto[];
   title?: string;
@@ -22,7 +22,7 @@ export function PublicAdminCases({
     <section className="mt-9 rounded-3xl border border-sky-100 bg-sky-50 p-4 sm:p-6" aria-labelledby="admin-cases-heading">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="text-xs font-black uppercase tracking-[0.18em] text-sky-700">Evidencia reciente</p>
+          <p className="text-xs font-black uppercase tracking-[0.18em] text-sky-700">Evidencia técnica documentada</p>
           <h2 id="admin-cases-heading" className="mt-1 text-2xl font-black tracking-tight text-slate-950">
             {title}
           </h2>

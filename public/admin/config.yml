@@ -96,7 +96,7 @@ collections:
       - { label: "Descripción breve", name: "description", widget: "text" }
       - { label: "Servicio relacionado", name: "service", widget: "select", options: ["Destape de alcantarillado y desagües", "Hidrojet de alta presión", "Destape de edificios", "Mantención preventiva de redes", "Destape de verticales", "Destape de horizontales", "Destape de cámaras de inspección", "Destape de artefactos sanitarios", "Videoinspección sanitaria", "Reparación de tuberías HDPE", "Motobombas para extracción de aguas", "Sanitización e higienización", "Urgencias sanitarias 24/7"] }
       - { label: "Comuna", name: "commune", widget: "select", options: ["Viña del Mar", "Valparaíso", "Concón", "Quilpué", "Villa Alemana", "Limache", "Quillota", "Reñaca", "Placilla", "Curauma", "Casablanca", "Puchuncaví", "Quintero"] }
-      - { label: "Fecha del servicio", name: "date", widget: "datetime" }
+      - { label: "Fecha del servicio verificada", name: "date", widget: "datetime", required: false }
       - { label: "Cliente o referencia", name: "client", widget: "string", required: false }
       - { label: "Imagen principal", name: "image", widget: "image" }
       - { label: "Alt SEO", name: "alt", widget: "string" }
@@ -121,7 +121,7 @@ collections:
       - { label: "Descripción breve", name: "description", widget: "text" }
       - { label: "Servicio relacionado", name: "service", widget: "select", options: ["Destape de alcantarillado y desagües", "Hidrojet de alta presión", "Destape de edificios", "Mantención preventiva de redes", "Destape de verticales", "Destape de horizontales", "Destape de cámaras de inspección", "Destape de artefactos sanitarios", "Videoinspección sanitaria", "Reparación de tuberías HDPE", "Motobombas para extracción de aguas", "Sanitización e higienización", "Urgencias sanitarias 24/7"] }
       - { label: "Comuna", name: "commune", widget: "select", options: ["Viña del Mar", "Valparaíso", "Concón", "Quilpué", "Villa Alemana", "Limache", "Quillota", "Reñaca", "Placilla", "Curauma", "Casablanca", "Puchuncaví", "Quintero"] }
-      - { label: "Fecha del trabajo", name: "date", widget: "datetime" }
+      - { label: "Fecha del trabajo verificada", name: "date", widget: "datetime", required: false }
       - { label: "Cliente o referencia", name: "client", widget: "string", required: false }
       - { label: "Imagen principal", name: "image", widget: "image" }
       - { label: "Alt SEO", name: "alt", widget: "string" }

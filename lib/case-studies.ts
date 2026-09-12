@@ -285,7 +285,7 @@ function formatCaseDateLabel(value: string | undefined) {
     return "Fecha no publicada";
   }
 
-  return new Intl.DateTimeFormat("es-CL", { month: "long", year: "numeric" }).format(date);
+  return new Intl.DateTimeFormat("es-CL", { month: "long", year: "numeric", timeZone: "UTC" }).format(date);
 }
 
 function createCmsCaseStudy(entry: CmsCaseEntry, kind: "case" | "work"): CaseStudy {

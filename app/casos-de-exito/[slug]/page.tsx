@@ -373,7 +373,8 @@ Descripción:`);
     "@type": "Article",
     headline: workCase.title,
     image: cover?.url ? [cover.url] : undefined,
-    datePublished: workCase.publishedAt || workCase.createdAt,
+    datePublished: workCase.publishedAt,
+    dateModified: workCase.publishedAt ? workCase.updatedAt : undefined,
     mainEntityOfPage: buildCanonicalUrl(`/casos-de-exito/${workCase.slug}`),
     author: { "@type": "Organization", name: siteConfig.name },
     publisher: { "@type": "Organization", name: siteConfig.name },
@@ -471,5 +472,5 @@ function CaseDetailBlock({ title, text, highlight }: { title: string; text: stri
 function formatAdminCaseDate(value: string) {
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return "Fecha no publicada";
-  return new Intl.DateTimeFormat("es-CL", { day: "numeric", month: "long", year: "numeric" }).format(date);
+  return new Intl.DateTimeFormat("es-CL", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(date);
 }

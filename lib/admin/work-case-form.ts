@@ -23,6 +23,7 @@ export function validateWorkCaseForm(formData: FormData) {
   const problem = getString(formData, "problem");
   const intervention = getString(formData, "intervention");
   const result = getString(formData, "result");
+  const date = getString(formData, "date");
   const services = getServices(formData);
 
   if (!title) errors.push("Ingresa un título del trabajo.");
@@ -32,6 +33,7 @@ export function validateWorkCaseForm(formData: FormData) {
   if (!problem) errors.push("Describe la situación encontrada.");
   if (!intervention) errors.push("Describe la intervención realizada.");
   if (!result) errors.push("Describe el resultado observado.");
+  if (date && !/^\d{4}-\d{2}-\d{2}$/.test(date)) errors.push("Usa una fecha válida en formato AAAA-MM-DD o deja el campo vacío.");
 
   return errors;
 }
@@ -63,7 +65,7 @@ export async function buildWorkCaseFromForm({
     title,
     slug: slugifyAdmin(baseSlug),
     status,
-    date: getString(formData, "date") || now.slice(0, 10),
+    date: getString(formData, "date"),
     commune,
     sector,
     privateAddress: getString(formData, "privateAddress"),

@@ -56,7 +56,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Hidrourgencias SpA | Soluciones técnicas reales para urgencias sanitarias",
     description:
-      "15 años de experiencia con respuesta rápida 24/7 para alcantarillado y desagües en edificios, comunidades, empresas y locales comerciales.",
+      "Respuesta técnica 24/7 para alcantarillado y desagües en edificios, comunidades, empresas y locales comerciales.",
     url: siteUrl,
     siteName: "Hidrourgencias SpA",
     locale: "es_CL",

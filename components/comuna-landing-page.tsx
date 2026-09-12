@@ -3,7 +3,6 @@ import Link from "next/link";
 import Script from "next/script";
 import {
   AlarmClock,
-  BadgeCheck,
   ChevronDown,
   Camera,
   ChevronRight,
@@ -142,7 +141,6 @@ export function ComunaLandingPage({ landing, allLandings }: Props) {
     landing.slug === "destape-alcantarillado-vina-del-mar" || landing.slug === "destape-alcantarillado-valparaiso";
   const zoneCoverageTargets = getZonasDetalleByLandingSlug(landing.slug);
   const hasProgrammaticZones = zoneCoverageTargets.length > 0;
-  const isQuilpueAuthorityRevision = landing.slug === "destape-alcantarillado-quilpue";
   const coverageZones = zoneCoverageTargets.length > 0 ? zoneCoverageTargets.map((zone) => zone.nombre) : landing.nearbyZones;
   const mainLandingHref = `/${landing.slug}`;
   const coverageServiceLabel = `${presentation.coverageServiceName.charAt(0).toUpperCase()}${presentation.coverageServiceName.slice(1)}`;
@@ -263,8 +261,8 @@ export function ComunaLandingPage({ landing, allLandings }: Props) {
             <p key={paragraph}>{paragraph}</p>
           ))}
           <p>
-            Sumamos 15 anos de experiencia en el rubro sanitario, tecnicos con certificacion SEC gas clase 3 y
-            maquinaria profesional RIDGID para dar respuestas de alto estandar en {landing.comuna}.
+            Trabajamos con maquinaria especializada, hidrojet y videoinspección sanitaria según el tipo de
+            obstrucción, el acceso disponible y la condición de la red en {landing.comuna}.
           </p>
         </div>
         <ServiceTermsNotice tone="dark" className="mt-7 max-w-4xl" />
@@ -378,101 +376,54 @@ export function ComunaLandingPage({ landing, allLandings }: Props) {
         )}
       </section>
 
-      {isQuilpueAuthorityRevision ? (
-        <section className="brand-card mt-9 rounded-3xl p-6 sm:p-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-sky-700">Autoridad técnica</p>
-          <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
-            Autoridad técnica en redes sanitarias
-          </h2>
-          <div className="mt-5 space-y-4 text-base leading-8 text-slate-700 sm:text-lg">
-            <p>
-              Hidrourgencias SpA interviene redes de alcantarillado, desagües, cámaras de alcantarillado y tramos
-              horizontales o verticales con maquinaria especializada y criterio técnico según el tipo de obstrucción,
-              acceso disponible y condición de la red.
-            </p>
-            <p>
-              El servicio puede considerar destape mecánico, lavado hidrodinámico con hidrojet, videoinspección
-              sanitaria y respaldo fotográfico o audiovisual cuando corresponde.
-            </p>
-          </div>
-          <ul className="mt-6 grid gap-3 md:grid-cols-2">
-            {[
-              "Maquinaria profesional para destape de redes sanitarias.",
-              "Hidrojet para remoción de sedimentos, grasa, papel compactado y residuos adheridos.",
-              "Videoinspección para detectar obstrucciones, raíces, fisuras, contrapendientes o anomalías.",
-              "Intervención de cámaras de alcantarillado, redes horizontales y verticales.",
-              "Informe técnico o respaldo visual para administración, comité o encargado de mantención cuando corresponde.",
-            ].map((item) => (
-              <li
-                key={item}
-                className="rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4 text-sm font-semibold leading-7 text-slate-700"
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
-          <a
-            href={createWhatsAppUrl(landing.ctaMidMessage)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-6 inline-flex items-center justify-center rounded-full bg-sky-600 px-6 py-3 text-sm font-bold text-white transition hover:bg-sky-700"
-          >
-            Solicitar evaluación sanitaria en Quilpué
-          </a>
-        </section>
-      ) : (
       <section className="brand-card mt-9 rounded-3xl p-6 sm:p-8">
-        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-sky-700">Autoridad tecnica</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-sky-700">Autoridad técnica</p>
         <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
-          Respaldo profesional para urgencias sanitarias en {landing.comuna}
+          Autoridad técnica en redes sanitarias
         </h2>
-        <div className="mt-6 grid gap-4 md:grid-cols-2">
-          <article className="rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4">
-            <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-sky-50 text-sky-700">
-              <BadgeCheck className="h-5 w-5" />
-            </div>
-            <h3 className="mt-3 text-lg font-bold text-slate-950">15 anos de experiencia operativa</h3>
-            <p className="mt-2 text-sm leading-7 text-slate-700">
-              Experiencia en contingencias sanitarias complejas para edificios, comunidades y operaciones comerciales.
-            </p>
-          </article>
-          <article className="rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4">
-            <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-sky-50 text-sky-700">
-              <ShieldCheck className="h-5 w-5" />
-            </div>
-            <h3 className="mt-3 text-lg font-bold text-slate-950">Tecnicos certificados SEC gas clase 3</h3>
-            <p className="mt-2 text-sm leading-7 text-slate-700">
-              Equipo especializado para diagnosticar, ejecutar y validar intervenciones con estandar profesional.
-            </p>
-          </article>
-          <article className="rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4">
-            <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-sky-50 text-sky-700">
-              <Wrench className="h-5 w-5" />
-            </div>
-            <h3 className="mt-3 text-lg font-bold text-slate-950">Maquinaria profesional RIDGID</h3>
-            <p className="mt-2 text-sm leading-7 text-slate-700">
-              Integracion de maquinas destapadoras, hidrojet, aspiradoras y camaras tecnicas para resolver con precision.
-            </p>
-          </article>
-          <article className="rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4">
-            <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-sky-50 text-sky-700">
-              <AlarmClock className="h-5 w-5" />
-            </div>
-            <h3 className="mt-3 text-lg font-bold text-slate-950">Atencion 24/7 con enfoque corporativo</h3>
-            <p className="mt-2 text-sm leading-7 text-slate-700">
-              Priorizamos continuidad operativa, trazabilidad y respuesta rapida para clientes de alto estandar.
-            </p>
-          </article>
+        <div className="mt-5 space-y-4 text-base leading-8 text-slate-700 sm:text-lg">
+          <p>
+            Hidrourgencias SpA interviene redes de alcantarillado, desagües, cámaras de alcantarillado y tramos
+            horizontales o verticales en {landing.comuna} con maquinaria especializada y criterio técnico según el
+            tipo de obstrucción, acceso disponible y condición de la red.
+          </p>
+          <p>
+            El servicio puede considerar destape mecánico, lavado hidrodinámico con hidrojet, videoinspección
+            sanitaria y respaldo fotográfico o audiovisual cuando corresponde.
+          </p>
         </div>
+        <ul className="mt-6 grid gap-3 md:grid-cols-2">
+          {[
+            "Maquinaria profesional para destape de redes sanitarias.",
+            "Hidrojet para remoción de sedimentos, grasa, papel compactado y residuos adheridos.",
+            "Videoinspección para detectar obstrucciones, raíces, fisuras, contrapendientes o anomalías.",
+            "Intervención de cámaras de alcantarillado, redes horizontales y verticales.",
+            "Informe técnico o respaldo visual para administración, comité o encargado de mantención cuando corresponde.",
+          ].map((item) => (
+            <li
+              key={item}
+              className="rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4 text-sm font-semibold leading-7 text-slate-700"
+            >
+              {item}
+            </li>
+          ))}
+        </ul>
+        <a
+          href={createWhatsAppUrl(landing.ctaMidMessage)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-6 inline-flex items-center justify-center rounded-full bg-sky-600 px-6 py-3 text-sm font-bold text-white transition hover:bg-sky-700"
+        >
+          Solicitar evaluación sanitaria en {landing.comuna}
+        </a>
       </section>
-      )}
 
       {showSeoGallery && <Galeria comuna={landing.comuna} className="mt-9" />}
 
       <div className="mt-9">
         <PublicAdminCasesForPath
           path={mainLandingHref}
-          title={`Evidencia reciente en ${landing.comuna}`}
+          title={`Evidencia técnica documentada en ${landing.comuna}`}
           limit={6}
         />
       </div>
@@ -492,9 +443,7 @@ export function ComunaLandingPage({ landing, allLandings }: Props) {
             <p className="rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm font-semibold">Hidrojet 4000 PSI para limpieza profunda</p>
             <p className="rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm font-semibold">Equipos RIDGID para diagnostico en terreno</p>
             <p className="rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm font-semibold">
-              {isQuilpueAuthorityRevision
-                ? "Videoinspección sanitaria y respaldo visual cuando corresponde"
-                : "Tecnicos certificados SEC gas clase 3"}
+              Videoinspección sanitaria y respaldo visual cuando corresponde
             </p>
             <p className="rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm font-semibold">Recomendaciones para continuidad operativa</p>
           </div>

@@ -244,7 +244,7 @@ export default async function ServicioPage({ params }: Props) {
       <div className="mt-9">
         <PublicAdminCasesForPath
           path={`/servicios/${servicio.slug}`}
-          title={`Evidencia reciente de ${servicio.navLabel.toLowerCase()}`}
+          title={`Casos técnicos de ${servicio.navLabel.toLowerCase()}`}
           limit={6}
         />
       </div>
