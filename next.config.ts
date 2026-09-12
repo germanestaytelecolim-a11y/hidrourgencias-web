@@ -55,6 +55,26 @@ const legacyLandingRedirects = [
 
 const legacyServiceRedirects = [
   {
+    source: "/servicios/mantenimiento-redes-alcantarillado-hidrojet",
+    destination: "https://hidrourgencias.cl/servicios/mantencion-preventiva-redes",
+    permanent: true,
+  },
+  {
+    source: "/servicios/nuestro-equipo-experto-en-destapes",
+    destination: "https://hidrourgencias.cl/servicios/destape-alcantarillado",
+    permanent: true,
+  },
+  {
+    source: "/servicios/destape-alcantarillados/nuestro-equipo-experto-en-destapes",
+    destination: "https://hidrourgencias.cl/servicios/destape-alcantarillado",
+    permanent: true,
+  },
+  {
+    source: "/nuestro-equipo-experto-en-destapes",
+    destination: "https://hidrourgencias.cl/servicios/destape-alcantarillado",
+    permanent: true,
+  },
+  {
     source: "/servicios/destape-desagues",
     destination: "https://hidrourgencias.cl/servicios/destape-artefactos-sanitarios",
     permanent: true,
@@ -116,6 +136,16 @@ const encodedAccentRedirects = [
 
 const legacyZoneRedirects = [
   {
+    source: "/zona/maitencillo-puchuncavi",
+    destination: "https://hidrourgencias.cl/destape-alcantarillado-maitencillo-puchuncavi",
+    permanent: true,
+  },
+  {
+    source: "/zona/casablanca",
+    destination: "https://hidrourgencias.cl/destape-alcantarillado-casablanca",
+    permanent: true,
+  },
+  {
     source: "/zona/centro-concon",
     destination: "https://hidrourgencias.cl/zona/concon-centro",
     permanent: true,
@@ -128,6 +158,11 @@ const legacyZoneRedirects = [
   {
     source: "/zona/belloto-quilpue",
     destination: "https://hidrourgencias.cl/zona/belloto-sur-quilpue",
+    permanent: true,
+  },
+  {
+    source: "/zona/olmo-concon",
+    destination: "https://hidrourgencias.cl/destape-alcantarillado-colmo-concon",
     permanent: true,
   },
 ];
