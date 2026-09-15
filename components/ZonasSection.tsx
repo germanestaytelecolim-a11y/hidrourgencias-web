@@ -1,4 +1,5 @@
 import { generateContenidoZona } from "@/lib/generadorContenidoZona";
+import { createWhatsAppUrl } from "@/lib/site-config";
 
 type Props = {
   comuna: string;
@@ -24,8 +25,9 @@ export default function ZonasSection({ comuna, zonas }: Props) {
             <p>{contenido.parrafo3}</p>
 
             <a
-              href={`https://wa.me/56940918672?text=Necesito%20destape%20en%20${zona}%20${comuna}`}
+              href={createWhatsAppUrl(`Necesito destape en ${zona} ${comuna}`)}
               target="_blank"
+              rel="noopener noreferrer"
             >
               Solicitar servicio en {zona}
             </a>

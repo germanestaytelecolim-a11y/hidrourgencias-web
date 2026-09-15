@@ -7,10 +7,21 @@ Tipo de propiedad:
 Problema que presenta la red:
 Adjunto fotografías o videos para evaluación.`;
 
+export const URGENCY_MODAL_ALLOWED_PATHS = [
+  "/servicios/extraccion-aguas-estanques-piscinas",
+  "/servicios/destape-alcantarillado",
+  "/servicios/destape-artefactos-sanitarios",
+  "/servicios/destape-camaras-inspeccion",
+  "/casos-de-exito/carabineros-de-chile-mantencion-preventiva",
+  "/servicios/destape-verticales",
+  "/servicios/destape-edificios",
+] as const;
+
 export const emergencyAlertModalConfig = {
   enabled: true,
   sessionStorageKey: "hidrourgencias_emergency_gateway_2026",
   issuedAt: "2026",
+  allowedExactPaths: URGENCY_MODAL_ALLOWED_PATHS,
   excludedPathPrefixes: ["/admin", "/cms", "/api"],
   excludedExactPaths: ["/acceso-administradores-empresas"],
   content: {

@@ -9,6 +9,7 @@ import {
   trackCommercialEvent,
   type LeadType,
 } from "@/lib/conversion";
+import { openWhatsAppLeadForm } from "@/components/whatsapp-lead-form-modal";
 import { homeLeadMessage } from "@/lib/home-services";
 import { createWhatsAppUrl, siteConfig } from "@/lib/site-config";
 
@@ -35,19 +36,12 @@ export function HomeWhatsAppLink({
       target="_blank"
       rel="noopener noreferrer"
       className={className}
-      data-conversion-event={
-        type === "emergency" ? "click_whatsapp" : "generate_lead"
-      }
+      data-whatsapp-lead-trigger="true"
       data-lead-type={type}
-      onClick={() => {
-        trackCommercialEvent(`select_${type}`, {
-          lead_type: type,
-          cta_location: location,
-        });
-        trackCommercialEvent(
-          type === "emergency" ? "click_whatsapp" : "generate_lead",
-          { lead_type: type, cta_location: location, service, commune, sector },
-        );
+      data-cta-location={location}
+      onClick={(event) => {
+        event.preventDefault();
+        openWhatsAppLeadForm();
       }}
     >
       {children}
@@ -90,7 +84,7 @@ export function HomeLeadPaths() {
               trackCommercialEvent("select_emergency", {
                 cta_location: "home_form",
               });
-              window.dispatchEvent(new Event("hu:open-emergency-form"));
+              openWhatsAppLeadForm();
             }}
           >
             Completar formulario de urgencia

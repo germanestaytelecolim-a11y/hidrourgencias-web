@@ -1,3 +1,5 @@
+import { createWhatsAppLeadFormUrl } from "@/lib/site-config";
+
 export type LeadType = "emergency" | "maintenance" | "diagnostic";
 
 export type ConversionContext = {
@@ -35,7 +37,7 @@ export function buildConversionMessage(type: LeadType, context: ConversionContex
 }
 
 export function createContextualWhatsAppUrl(type: LeadType, context: ConversionContext = {}) {
-  return `https://wa.me/56940918672?text=${encodeURIComponent(buildConversionMessage(type, context))}`;
+  return createWhatsAppLeadFormUrl(buildConversionMessage(type, context));
 }
 
 export function captureCampaignParams() {

@@ -63,6 +63,19 @@ const emergencyAlertModalScript = `
     return false;
   }
 
+  function isAllowedPath(pathname) {
+    var path = pathname.toLowerCase();
+    var allowedExactPaths = config.allowedExactPaths || [];
+
+    for (var allowedIndex = 0; allowedIndex < allowedExactPaths.length; allowedIndex += 1) {
+      if (path === String(allowedExactPaths[allowedIndex]).toLowerCase().replace(/\\/+$/, "")) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   function hasBeenDismissed() {
     try {
       return window.sessionStorage.getItem(config.sessionStorageKey) === "dismissed";
@@ -764,12 +777,14 @@ const emergencyAlertModalScript = `
   }
 
   function shouldShowModal() {
-    return !hasBeenDismissed() && !isExcludedPath(getPathname());
+    var pathname = getPathname();
+    return isAllowedPath(pathname) && !hasBeenDismissed() && !isExcludedPath(pathname);
   }
 
   function openModal(manual) {
     var requested = manual === true;
-    if (isExcludedPath(getPathname()) || modalIsOpen || (!requested && (getPathname() === "/" || !shouldShowModal()))) {
+    var pathname = getPathname();
+    if (!isAllowedPath(pathname) || isExcludedPath(pathname) || modalIsOpen || (!requested && !shouldShowModal())) {
       return;
     }
 
@@ -814,7 +829,7 @@ const emergencyAlertModalScript = `
     }
     lastPath = currentPath;
 
-    if (getPathname() === "/" || isExcludedPath(getPathname())) {
+    if (!isAllowedPath(getPathname()) || isExcludedPath(getPathname())) {
       closeModal({ persist: false, restoreFocus: false });
       return;
     }

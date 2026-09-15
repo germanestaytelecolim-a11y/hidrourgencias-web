@@ -23,6 +23,7 @@ import {
   HomeServiceFinder,
   type HomeCoverage,
 } from "@/components/home-service-finder";
+import { WhatsAppLeadFormModal } from "@/components/whatsapp-lead-form-modal";
 import type { BlogPost } from "@/lib/blog-data";
 import type {
   CmsClientItem,
@@ -280,6 +281,7 @@ export default function HomePage({ cmsContent }: HomePageContentProps) {
         </div>
       </section>
       <HomeMobileBar />
+      <WhatsAppLeadFormModal />
     </main>
   );
 }

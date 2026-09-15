@@ -30,8 +30,17 @@ Quedo atento a su respuesta.`,
 export const GOOGLE_REVIEWS_URL =
   "https://www.google.com/search?sca_esv=4ab3cf3b309b04c5&q=Destapes+de+alcantarillado+Vi%C3%B1a+del+Mar&sa=X&sqi=2&ved=2ahUKEwik-aSXqu-UAxUis5UCHViNGEwQ1QJ6BAgpEAE&biw=1280&bih=665&dpr=1.5#sv=CAESzQEKuQEStgEKd0FNbjMteVE5TG9uWmZWLTduU2ZPMnpUVjBRUklKRk8xeXJDZFN0S2RwVnRVUHJZbFJuTlJ3Z0RhakFRaDFKWTdEM2FsdW5OOFFvaEhOOFEzdnRNVWxVTXRwNDEzYTdDMXdLTU9xaEdFZlJpLTQyRk5mWkU4T0s0EhdSM3dpYXRtOU81bmMxc1FQLXVmM2dBYxoiQUpLTEZtSVNPUUI2SDJNNHRNbVplNnpQYl80dHBsZDQ0dxIEODA1MRoBMyoAMAA4AUAAGAAg1JbA1ARKAhAC";
 
-export function createWhatsAppUrl(message: string) {
+export function createDirectWhatsAppUrl(message: string) {
   return `https://wa.me/${siteConfig.phone}?text=${encodeURIComponent(message)}`;
+}
+
+export function createWhatsAppLeadFormUrl(message?: string) {
+  const params = message ? `?origen=${encodeURIComponent(message)}` : "";
+  return `/contacto${params}#whatsapp-solicitud`;
+}
+
+export function createWhatsAppUrl(message: string) {
+  return createWhatsAppLeadFormUrl(message);
 }
 
 export type ServiceCatalogItem = {

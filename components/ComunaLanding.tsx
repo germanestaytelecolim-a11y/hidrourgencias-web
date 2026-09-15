@@ -1,4 +1,5 @@
 import { generateContenidoZona } from "@/lib/generadorContenidoZona";
+import { createWhatsAppUrl } from "@/lib/site-config";
 import { getZonasByLandingSlug } from "@/lib/zonas";
 
 interface ComunaLandingProps {
@@ -52,7 +53,7 @@ export function ComunaLanding({ slug, comuna }: ComunaLandingProps) {
 
               <div className="mt-6">
                 <a
-                  href={`https://wa.me/56940918672?text=Necesito%20destape%20en%20${zona}%20${comuna}`}
+                  href={createWhatsAppUrl(`Necesito destape en ${zona} ${comuna}`)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-full bg-[color:var(--secondary)] px-6 py-3 text-sm font-bold text-white shadow-lg shadow-sky-500/30 transition hover:brightness-95"

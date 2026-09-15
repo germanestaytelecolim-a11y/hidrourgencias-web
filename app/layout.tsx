@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope, Rajdhani } from "next/font/google";
 
-import { EmergencyAlertModal } from "@/components/EmergencyAlertModal";
+import { EmergencyAlertModalGate } from "@/components/EmergencyAlertModalGate";
 import { GoogleAdsConversionTracking } from "@/components/google-ads-conversion-tracking";
 import { ServiceTermsSection } from "@/components/service-terms";
 import { SiteFooter } from "@/components/site-footer";
@@ -204,7 +204,7 @@ export default function RootLayout({
           </a>
         </div>
         <GoogleAdsConversionTracking />
-        <EmergencyAlertModal />
+        <EmergencyAlertModalGate />
         <script dangerouslySetInnerHTML={{ __html: themeToggleScript }} />
       </body>
     </html>

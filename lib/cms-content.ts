@@ -117,7 +117,7 @@ const defaultHomeSettings: CmsHomeSettings = {
   heroImage: "/images/logo-hidrourgencias.jpg",
   heroImageAlt: "Logo Hidrourgencias SpA",
   primaryCtaText: "WhatsApp urgencia",
-  primaryCtaUrl: "whatsapp:Urgencia sanitaria: necesito ayuda inmediata en la Región de Valparaíso",
+  primaryCtaUrl: "/contacto#whatsapp-solicitud",
   secondaryCtaText: "Servicios sanitarios",
   secondaryCtaUrl: "/#servicios",
 };

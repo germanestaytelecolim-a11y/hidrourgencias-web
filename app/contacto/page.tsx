@@ -4,7 +4,8 @@ import Link from "next/link";
 import { ExternalLink, Mail, PhoneCall } from "@/components/icons";
 import { ServiceTermsNotice } from "@/components/service-terms";
 import { SocialProofLinksSection } from "@/components/SocialProofLinksSection";
-import { GOOGLE_REVIEWS_URL, buildCanonicalUrl, createMailToUrl, createWhatsAppUrl, siteConfig } from "@/lib/site-config";
+import { WhatsAppLeadForm } from "@/components/whatsapp-lead-form";
+import { GOOGLE_REVIEWS_URL, buildCanonicalUrl, createMailToUrl, siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Contacto Hidrourgencias | WhatsApp, telefono y solicitudes sanitarias",
@@ -40,11 +41,11 @@ export default function ContactoPage() {
         <ServiceTermsNotice tone="dark" className="mt-7 max-w-4xl" />
       </section>
 
+      <WhatsAppLeadForm />
+
       <section className="mt-9 grid gap-4 md:grid-cols-2">
         <a
-          href={createWhatsAppUrl("Hola Hidrourgencias. Necesito solicitar atencion sanitaria. Comuna: Tipo de inmueble: Sintoma:")}
-          target="_blank"
-          rel="noopener noreferrer"
+          href="#whatsapp-solicitud"
           className="rounded-3xl border border-emerald-200 bg-emerald-50 p-6 text-emerald-950 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
         >
           <PhoneCall className="h-7 w-7" />

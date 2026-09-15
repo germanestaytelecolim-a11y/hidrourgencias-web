@@ -133,6 +133,6 @@ export function homeLeadMessage(
   const location = `Comuna: ${commune || "[comuna]"}${sector ? `\nSector: ${sector}` : ""}`;
   const detail = service ? `\nServicio: ${service}` : "";
   if (type === "emergency")
-    return `Hola, necesito atención sanitaria. Soy de [empresa/comunidad/propiedad].\n${location}\nDirección: [dirección]\nSíntoma: [problema]\nPunto afectado: [desagüe/baño/cámara de alcantarillado/cocina/red/patio/estacionamiento]\nNombre y cargo del solicitante: [detalle]\nPuedo enviar fotos o videos para evaluación.${detail}`;
+    return `Solicitud de urgencia sanitaria para formulario previo.\n${location}\nEl cliente completará datos obligatorios antes de abrir WhatsApp.${detail}`;
   return `Hola, necesito ${type === "maintenance" ? "cotizar mantención preventiva de redes sanitarias" : "solicitar una evaluación técnica sanitaria"}.\nTipo de instalación: [edificio/condominio/restaurante/empresa/institución/propiedad]\n${location}\nCantidad aproximada de cámaras de alcantarillado, verticales o redes: [detalle]\nFecha estimada: [fecha]\nNombre, cargo y contacto: [detalle]\nRequiero evaluación técnica, hidrojet, videoinspección o informe: [detalle]${detail}`;
 }

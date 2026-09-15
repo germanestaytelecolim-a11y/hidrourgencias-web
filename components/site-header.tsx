@@ -11,6 +11,7 @@ import {
 
 import { StaticPicture } from "@/components/static-picture";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { openWhatsAppLeadForm } from "@/components/whatsapp-lead-form-modal";
 import { createWhatsAppUrl } from "@/lib/site-config";
 import {
   navigationCoverage,
@@ -21,7 +22,7 @@ import {
 
 const adminAccessHref = "/acceso-administradores-empresas";
 const whatsappHref = createWhatsAppUrl(
-  "Hola, necesito urgencia sanitaria 24/7 en Region de Valparaiso.",
+  "Solicitud de servicio sanitario desde el encabezado del sitio.",
 );
 const firstCoverageId = navigationCoverage[0]?.id ?? "";
 type DesktopPanelName = "services" | "coverage" | "resources";
@@ -241,7 +242,7 @@ export function SiteHeader({ home = false }: { home?: boolean }) {
             compact
             className="site-header__theme-toggle h-10 w-10 px-0"
           />
-          <WhatsAppLink href={whatsappHref} />
+          <WhatsAppLink href={whatsappHref} openForm={home} />
         </div>
 
         <button
@@ -298,6 +299,7 @@ export function SiteHeader({ home = false }: { home?: boolean }) {
           setMobileCoverage((current) => (current === id ? null : id))
         }
         onNavigate={closeAll}
+        openWhatsAppForm={home}
       />
     </header>
   );
@@ -512,14 +514,29 @@ function DesktopResourcesPanel({
   );
 }
 
-function WhatsAppLink({ href }: { href: string }) {
+function WhatsAppLink({
+  href,
+  openForm = false,
+  onNavigate,
+}: {
+  href: string;
+  openForm?: boolean;
+  onNavigate?: () => void;
+}) {
   return (
     <a
       href={href}
-      target="_blank"
-      rel="noopener noreferrer"
+      target={openForm ? undefined : "_blank"}
+      rel={openForm ? undefined : "noopener noreferrer"}
       aria-label="Abrir WhatsApp de urgencias sanitarias"
       className="brand-focus-ring inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#06c286] px-3.5 py-2 text-xs font-black text-white shadow-lg shadow-emerald-500/30 transition hover:-translate-y-0.5 hover:bg-emerald-600"
+      data-whatsapp-lead-trigger={openForm ? "true" : undefined}
+      onClick={(event) => {
+        if (!openForm) return;
+        event.preventDefault();
+        onNavigate?.();
+        openWhatsAppLeadForm();
+      }}
     >
       <PhoneCall className="h-4 w-4" aria-hidden="true" />
       WhatsApp 24/7
@@ -535,6 +552,7 @@ function MobileNavigation({
   onToggleSection,
   onToggleCoverage,
   onNavigate,
+  openWhatsAppForm,
 }: {
   open: boolean;
   section: MobileSectionName | null;
@@ -543,6 +561,7 @@ function MobileNavigation({
   onToggleSection: (section: MobileSectionName) => void;
   onToggleCoverage: (id: string) => void;
   onNavigate: () => void;
+  openWhatsAppForm: boolean;
 }) {
   return (
     <div
@@ -764,7 +783,7 @@ function MobileNavigation({
           </a>
           <div className="mt-3 grid gap-2 border-t border-slate-200 pt-3">
             <ThemeToggle className="min-h-11 rounded-lg" />
-            <WhatsAppLink href={whatsappHref} />
+            <WhatsAppLink href={whatsappHref} openForm={openWhatsAppForm} onNavigate={onNavigate} />
           </div>
         </nav>
       </div>
