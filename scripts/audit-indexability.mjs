@@ -46,10 +46,9 @@ const searchConsoleSeedUrls = [
 ];
 
 const expectedRedirects = new Map([
-  ["/zona/costa-de-montemar-concon", "/zona/bosques-de-montemar-concon"],
-  ["/zona/centro-concon", "/zona/concon-centro"],
-  ["/zona/belloto-quilpue", "/zona/belloto-sur-quilpue"],
-  ["/servicios", "/destape-alcantarillado-vina-del-mar"],
+  ["/zona/costa-de-montemar-concon", "/destape-alcantarillado-bosques-de-montemar-concon"],
+  ["/zona/centro-concon", "/destape-alcantarillado-centro-concon-concon"],
+  ["/zona/belloto-quilpue", "/destape-alcantarillado-el-belloto-sur-quilpue"],
   ["/servicios/hidrourgencias", "/destape-alcantarillado-vina-del-mar"],
   ["/servicios/servicios-destape-alcantarillado", "/destape-alcantarillado-vina-del-mar"],
   ["/destape-de-alcantarillado-vina-del-mar", "/destape-alcantarillado-vina-del-mar"],
@@ -67,9 +66,9 @@ const expectedRedirects = new Map([
   ["/servicios/mantencion-preventiva", "/servicios/mantencion-preventiva-redes"],
   ["/blog/mantencion-preventiva", "/blog/mantencion-preventiva-clave-redes-sanitarias"],
   ["/destape-alcantarillado-vi%C3%B1a-del-mar", "/destape-alcantarillado-vina-del-mar"],
-  ["/zona/re%C3%B1aca-vina-del-mar", "/zona/renaca-vina-del-mar"],
-  ["/zona/g%C3%B3mez-carre%C3%B1o-vina-del-mar", "/zona/gomez-carreno-vina-del-mar"],
-  ["/zona/pe%C3%B1ablanca-villa-alemana", "/zona/penablanca-villa-alemana"],
+  ["/zona/re%C3%B1aca-vina-del-mar", "/destape-alcantarillado-renaca-vina-del-mar"],
+  ["/zona/g%C3%B3mez-carre%C3%B1o-vina-del-mar", "/destape-alcantarillado-gomez-carreno-vina-del-mar"],
+  ["/zona/pe%C3%B1ablanca-villa-alemana", "/destape-alcantarillado-penablanca-villa-alemana"],
 ]);
 
 const intentional404Paths = new Set([
@@ -210,7 +209,9 @@ function classifySeed(result) {
       ...result,
       expectedDestination: toCanonicalUrl(expectedDestination),
       classification:
-        result.status === 301 || result.status === 308 ? "REDIRECT_INTENCIONAL_CON_EQUIVALENTE" : "ERROR_REDIRECT_NO_ACTIVO",
+        (result.status === 301 || result.status === 308) && result.redirectCount === 1 &&
+        result.finalStatus === 200 && result.finalUrl === toCanonicalUrl(expectedDestination)
+          ? "REDIRECT_INTENCIONAL_CON_EQUIVALENTE" : "ERROR_REDIRECT_NO_ACTIVO",
     };
   }
 
@@ -298,17 +299,17 @@ async function main() {
     fixedRedirects: [
       {
         source: "/zona/costa-de-montemar-concon",
-        destination: "/zona/bosques-de-montemar-concon",
+        destination: "/destape-alcantarillado-bosques-de-montemar-concon",
         reason: "Slug historico enlazado internamente con equivalente actual de Bosques de Montemar.",
       },
       {
         source: "/zona/centro-concon",
-        destination: "/zona/concon-centro",
+        destination: "/destape-alcantarillado-centro-concon-concon",
         reason: "Slug historico con orden de palabras distinto al slug actual generado.",
       },
       {
         source: "/zona/belloto-quilpue",
-        destination: "/zona/belloto-sur-quilpue",
+        destination: "/destape-alcantarillado-el-belloto-sur-quilpue",
         reason: "Slug historico amplio de El Belloto consolidado hacia landing existente de zona.",
       },
     ],
@@ -330,6 +331,8 @@ async function main() {
     ],
     fixedNoindex: [],
     errors: [
+      ...seedResults.filter((result) => result.classification.startsWith("ERROR_") || result.classification === "REVISAR_NO_ES_404")
+        .map((result) => ({ type: result.classification, path: result.path, status: result.status, finalUrl: result.finalUrl })),
       ...sitemapRedirects.map((result) => ({ type: "SITEMAP_REDIRECT_OR_NON_200", path: result.path, status: result.status })),
       ...sitemap404.map((result) => ({ type: "SITEMAP_404", path: result.path })),
       ...sitemapNoindex.map((result) => ({ type: "SITEMAP_NOINDEX", path: result.path })),

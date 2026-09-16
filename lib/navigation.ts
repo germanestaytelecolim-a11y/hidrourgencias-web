@@ -1,3 +1,4 @@
+import { getZonaPath } from "@/lib/territorial-canonical";
 import { getAllComunaLandings, getComunaPaths } from "@/lib/comuna-landings";
 import { getAllServicios, type ServicioPageData } from "@/lib/servicios";
 import { comunasSeo, getAllSeoRoutes } from "@/lib/seo-territorial";
@@ -108,7 +109,7 @@ export const navigationCoverage: NavigationCoverage[] = comunasSeo
     sectors: uniqueSectors([
       ...getZonasByLandingSlug(comuna.landingPath.slice(1)).map((zone) => ({
         label: zone.nombre,
-        href: `/zona/${zone.slug}`,
+        href: getZonaPath(zone.slug),
       })),
       ...comunaChildLandings
         .filter((landing) => landing.parentLandingSlug === comuna.landingPath.slice(1))

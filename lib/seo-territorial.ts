@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { mantaguaCanonicalPaths, resolveTerritorialPath } from "./territorial-canonical";
 
 import { createSeoLandingContent, stableHash, type SeoLandingContent } from "./seo-content-engine";
 import { buildCanonicalUrl, siteConfig } from "./site-config";
@@ -306,7 +307,7 @@ export const comunasSeo: ComunaSeo[] = [
   {
     comuna: "Renaca",
     slug: "renaca",
-    landingPath: "/zona/renaca-vina-del-mar",
+    landingPath: "/destape-alcantarillado-renaca-vina-del-mar",
     sectores: ["Renaca Centro", "Renaca Alto", "Jardin del Mar", "Los Almendros", "El Encanto", "Costa de Renaca", "Cochoa"],
     tiposRed: ["redes costeras", "verticales de edificios", "desagues de comercio y turismo"],
     clientes: ["edificios", "condominios", "locales gastronomicos"],
@@ -471,11 +472,11 @@ const allSeoRoutes = comunasSeo
 const routeMap = new Map(allSeoRoutes.map((route) => [route.slug, route] as const));
 
 export function getAllSeoRoutes(): SeoRoute[] {
-  return allSeoRoutes;
+  return allSeoRoutes.filter((route) => !mantaguaCanonicalPaths[`/${route.slug}`]);
 }
 
 export function getSeoRouteBySlug(slug: string): SeoRoute | undefined {
-  return routeMap.get(slug);
+  return mantaguaCanonicalPaths[`/${slug}`] ? undefined : routeMap.get(slug);
 }
 
 export function getComunaSeoBySlug(slug: string): ComunaSeo | undefined {
@@ -487,7 +488,7 @@ export function getServicioSeoBySlug(slug: string): ServicioSeo | undefined {
 }
 
 export function getSeoStaticParams(): Array<{ seoSlug: string }> {
-  return allSeoRoutes.map((route) => ({ seoSlug: route.slug }));
+  return getAllSeoRoutes().map((route) => ({ seoSlug: route.slug }));
 }
 
 export function getServicePagePath(service: ServicioSeo): string {
@@ -503,7 +504,7 @@ export function getNearbySeoRoutes(route: SeoRoute, count = 3): SeoRoute[] {
     .filter((item) => item.sector !== route.sector)
     .sort((a, b) => a.distance - b.distance || a.sector.localeCompare(b.sector))
     .slice(0, count)
-    .map((item) => getSeoRouteBySlug(createSeoSlug(route.service.slug, item.sector, route.comuna.slug)))
+    .map((item) => getSeoRouteBySlug(resolveTerritorialPath(`/${createSeoSlug(route.service.slug, item.sector, route.comuna.slug)}`).slice(1)))
     .filter((item): item is SeoRoute => item !== undefined);
 }
 
@@ -512,7 +513,11 @@ export function getPrioritySeoRoutes(limit = MAX_PROGRAMMATIC_ROUTES): SeoRoute[
   const priorityRoutes = allSeoRoutes.filter((route) => prioritySet.has(route.comuna.slug));
   const restRoutes = allSeoRoutes.filter((route) => !prioritySet.has(route.comuna.slug));
 
-  return [...priorityRoutes, ...restRoutes].slice(0, limit);
+  // Preserve the existing sitemap selection while replacing each retired URL.
+  const selected = [...priorityRoutes, ...restRoutes].slice(0, limit)
+    .map((route) => routeMap.get(resolveTerritorialPath(`/${route.slug}`).slice(1)))
+    .filter((route): route is SeoRoute => route !== undefined);
+  return Array.from(new Map(selected.map((route) => [route.slug, route])).values());
 }
 
 export function buildSeoMetadata(route: SeoRoute): Metadata {
@@ -572,16 +577,17 @@ export function buildProgrammaticWhatsAppMessage(route: SeoRoute): string {
 }
 
 export function getSeoRouteCounts() {
+  const routes = getAllSeoRoutes();
   const byComuna = new Map<string, number>();
   const byService = new Map<string, number>();
 
-  for (const route of allSeoRoutes) {
+  for (const route of routes) {
     byComuna.set(route.comuna.comuna, (byComuna.get(route.comuna.comuna) ?? 0) + 1);
     byService.set(route.service.nombre, (byService.get(route.service.nombre) ?? 0) + 1);
   }
 
   return {
-    total: allSeoRoutes.length,
+    total: routes.length,
     byComuna: Object.fromEntries(byComuna),
     byService: Object.fromEntries(byService),
   };

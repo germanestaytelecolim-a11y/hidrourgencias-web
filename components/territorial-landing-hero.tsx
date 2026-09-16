@@ -1,3 +1,4 @@
+import { coverageLocationLabel } from "@/lib/coverage-scope";
 import Image from "next/image";
 import { ExternalLink, Mail } from "lucide-react";
 import type { CSSProperties } from "react";
@@ -88,7 +89,7 @@ export function TerritorialLandingHero({ landing }: Props) {
       <div className="territorial-hero__local" aria-label={`Sectores de cobertura en ${landing.comuna}`}>
         <strong>{landing.comuna}</strong>
         {landing.nearbyZones.slice(0, 4).map((zone) => (
-          <span key={zone}>{zone}</span>
+          <span key={zone}>{coverageLocationLabel(zone)}</span>
         ))}
       </div>
     </section>

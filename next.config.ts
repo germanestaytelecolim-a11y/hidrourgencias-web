@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { mantaguaCanonicalPaths, resolveTerritorialPath, territorialCanonicalPaths } from "./lib/territorial-canonical";
 
 // Critical redirect map:
 // - hostRedirect canonicalizes www to the apex domain.
@@ -278,8 +279,18 @@ const nextConfig: NextConfig = {
     return [
       ...legacyLandingRedirects,
       ...legacyServiceRedirects,
-      ...encodedAccentRedirects,
-      ...legacyZoneRedirects,
+      ...[...encodedAccentRedirects, ...legacyZoneRedirects].map(({ source, destination, permanent }) => {
+        const url = new URL(destination);
+        const finalPath = resolveTerritorialPath(url.pathname);
+        return source.startsWith("/zona/")
+          ? { source, destination: `${url.origin}${finalPath}`, statusCode: 301 }
+          : { source, destination, permanent };
+      }),
+      ...Object.entries({ ...territorialCanonicalPaths, ...mantaguaCanonicalPaths }).map(([source, destination]) => ({
+        source,
+        destination: `https://hidrourgencias.cl${destination}`,
+        statusCode: 301,
+      })),
       hostRedirect,
     ];
   },

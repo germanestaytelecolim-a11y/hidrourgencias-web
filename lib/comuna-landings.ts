@@ -1,3 +1,4 @@
+import { coverageLocationLabel } from "@/lib/coverage-scope";
 import type { Metadata } from "next";
 
 import { buildCanonicalUrl, siteConfig } from "@/lib/site-config";
@@ -665,7 +666,7 @@ function buildLandingData(profile: ComunaProfile): ComunaLandingData {
         ? "Atencion de urgencias sanitarias en Villa Alemana con diagnostico tecnico, contencion del riesgo y respuesta disponible durante las 24 horas."
         : `Servicio profesional de destape de alcantarillado en ${profile.comuna}, con diagnostico tecnico, equipos RIDGID, hidrojet cuando corresponde y atencion 24/7.`;
   const riskList = profile.riskDrivers.join(", ");
-  const nearby = profile.nearbyZones.join(", ");
+  const nearby = profile.nearbyZones.map(coverageLocationLabel).join(", ");
   const scenarios = profile.urgentScenarios.join("; ");
   const clients = profile.clientFocus.join(", ");
 

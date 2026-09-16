@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     canonical: buildCanonicalUrl("/acceso-administradores-empresas"),
   },
   robots: {
-    index: true,
+    index: false,
     follow: true,
   },
 };

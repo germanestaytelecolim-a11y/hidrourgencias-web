@@ -1,3 +1,4 @@
+import { getZonaPath } from "@/lib/territorial-canonical";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ExternalLink, PhoneCall } from "lucide-react";
@@ -291,7 +292,7 @@ export default async function ServicioPage({ params }: Props) {
             {relatedZones.map((zone) => (
               <Link
                 key={zone.slug}
-                href={`/zona/${zone.slug}`}
+                href={getZonaPath(zone.slug)}
                 className="brand-blue-soft-cta rounded-xl px-4 py-3 text-sm font-black transition hover:-translate-y-0.5"
               >
                 {`Destape en ${zone.nombre}, ${zone.comuna}`}

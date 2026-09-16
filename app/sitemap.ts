@@ -7,6 +7,7 @@ import { MAX_PROGRAMMATIC_ROUTES, getPrioritySeoRoutes, getSeoRouteBySlug } from
 import { buildCanonicalUrl, normalizeCanonicalPath } from "@/lib/site-config";
 import { getServicioSlugs } from "@/lib/servicios";
 import { getZonaSlugs } from "@/lib/zonas-detalle";
+import { getZonaPath } from "@/lib/territorial-canonical";
 
 const dailyLastModified = (() => {
   const now = new Date();
@@ -87,7 +88,7 @@ export function getSitemapRouteSpecs(): SitemapRouteSpec[] {
     { path: "/blog", kind: "blog-index" },
     { path: "/casos-de-exito", kind: "case-study-index" },
     ...getComunaPaths().map((slug) => ({ path: `/${slug}`, kind: "landing" as const })),
-    ...getZonaSlugs().map((slug) => ({ path: `/zona/${slug}`, kind: "zone" as const })),
+    ...getZonaSlugs().map((slug) => ({ path: getZonaPath(slug), kind: "zone" as const })),
     ...getServicioSlugs().map((slug) => ({ path: `/servicios/${slug}`, kind: "service" as const })),
     ...getBlogSlugs().map((slug) => ({ path: `/blog/${slug}`, kind: "blog-post" as const })),
     ...getCaseStudySlugs().map((slug) => ({ path: `/casos-de-exito/${slug}`, kind: "case-study" as const })),

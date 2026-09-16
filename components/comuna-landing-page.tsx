@@ -1,3 +1,5 @@
+import { isRoutineCoverage, coverageLocationLabel } from "@/lib/coverage-scope";
+import { getZonaPath } from "@/lib/territorial-canonical";
 import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
@@ -191,7 +193,7 @@ export function ComunaLandingPage({ landing, allLandings }: Props) {
           "@context": "https://schema.org",
           "@type": "Service",
           serviceType: presentation.schemaServiceType,
-          areaServed: [landing.comuna, ...coverageZones],
+          areaServed: [landing.comuna, ...coverageZones.filter(isRoutineCoverage)],
           provider: {
             "@type": "LocalBusiness",
             name: siteConfig.name,
@@ -523,7 +525,7 @@ export function ComunaLandingPage({ landing, allLandings }: Props) {
               {zoneCoverageTargets.map((zone) => (
                 <Link
                   key={zone.slug}
-                  href={`/zona/${zone.slug}`}
+                  href={getZonaPath(zone.slug)}
                   className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm font-semibold text-slate-700 transition hover:border-sky-300 hover:bg-white hover:text-sky-800"
                 >
                   {`${coverageServiceLabel} en ${zone.nombre}`}
@@ -564,7 +566,7 @@ export function ComunaLandingPage({ landing, allLandings }: Props) {
                         WhatsApp para {zone.nombre}
                       </a>
                       <Link
-                        href={`/zona/${zone.slug}`}
+                        href={getZonaPath(zone.slug)}
                         className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-900 transition hover:border-sky-300 hover:text-sky-800"
                       >
                         {`Ver detalle en ${zone.nombre}`}
@@ -585,7 +587,7 @@ export function ComunaLandingPage({ landing, allLandings }: Props) {
           <div className="mt-5 flex flex-wrap gap-2">
             {landing.nearbyZones.map((zone) => (
               <span key={zone} className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm font-medium text-slate-700">
-                {zone}
+                {coverageLocationLabel(zone)}
               </span>
             ))}
           </div>

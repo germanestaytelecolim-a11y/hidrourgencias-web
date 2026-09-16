@@ -1,3 +1,4 @@
+import { getZonaPath } from "@/lib/territorial-canonical";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Image from "next/image";
@@ -61,7 +62,7 @@ export default async function BlogPostPage({ params }: Props) {
       }
 
       return {
-        href: `/zona/${zone.slug}`,
+        href: getZonaPath(zone.slug),
         label: `destape en ${zone.nombre}, ${zone.comuna}`,
       };
     })

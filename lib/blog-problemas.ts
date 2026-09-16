@@ -41,9 +41,9 @@ export const blogProblemas: BlogProblemaPost[] = [
       { href: "/destape-alcantarillado-quilpue", label: "destape de alcantarillado en Quilpue" },
     ],
     relatedZonaLinks: [
-      { href: "/zona/recreo-vina-del-mar", label: "destape en Recreo, Vina del Mar" },
-      { href: "/zona/cerro-alegre-valparaiso", label: "destape en Cerro Alegre, Valparaiso" },
-      { href: "/zona/belloto-sur-quilpue", label: "destape en El Belloto, Quilpue" },
+      { href: "/destape-alcantarillado-recreo-vina-del-mar", label: "destape en Recreo, Vina del Mar" },
+      { href: "/destape-alcantarillado-cerro-alegre-valparaiso", label: "destape en Cerro Alegre, Valparaiso" },
+      { href: "/destape-alcantarillado-el-belloto-sur-quilpue", label: "destape en El Belloto, Quilpue" },
     ],
     sections: [
       {
@@ -104,9 +104,9 @@ export const blogProblemas: BlogProblemaPost[] = [
       { href: "/destape-alcantarillado-limache", label: "destape de alcantarillado en Limache" },
     ],
     relatedZonaLinks: [
-      { href: "/zona/penablanca-villa-alemana", label: "destape en Penablanca, Villa Alemana" },
-      { href: "/zona/centro-quilpue", label: "destape en Centro Quilpue" },
-      { href: "/zona/forestal-vina-del-mar", label: "destape en Forestal, Vina del Mar" },
+      { href: "/destape-alcantarillado-penablanca-villa-alemana", label: "destape en Penablanca, Villa Alemana" },
+      { href: "/destape-alcantarillado-centro-quilpue-quilpue", label: "destape en Centro Quilpue" },
+      { href: "/destape-alcantarillado-forestal-vina-del-mar", label: "destape en Forestal, Vina del Mar" },
     ],
     sections: [
       {
@@ -161,9 +161,9 @@ export const blogProblemas: BlogProblemaPost[] = [
       { href: "/destape-alcantarillado-quintero", label: "destape de alcantarillado en Quintero" },
     ],
     relatedZonaLinks: [
-      { href: "/zona/bosques-de-montemar-concon", label: "destape en Bosques de Montemar, Concon" },
-      { href: "/zona/concon-centro", label: "destape en Centro Concon" },
-      { href: "/zona/cerro-placeres-valparaiso", label: "destape en Cerro Placeres, Valparaiso" },
+      { href: "/destape-alcantarillado-bosques-de-montemar-concon", label: "destape en Bosques de Montemar, Concon" },
+      { href: "/destape-alcantarillado-centro-concon-concon", label: "destape en Centro Concon" },
+      { href: "/destape-alcantarillado-cerro-placeres-valparaiso", label: "destape en Cerro Placeres, Valparaiso" },
     ],
     sections: [
       {
@@ -224,9 +224,9 @@ export const blogProblemas: BlogProblemaPost[] = [
       { href: "/destape-alcantarillado-placilla-curauma", label: "destape de alcantarillado en Placilla de Curauma" },
     ],
     relatedZonaLinks: [
-      { href: "/zona/concon-centro", label: "destape en Centro Concon" },
-      { href: "/zona/centro-villa-alemana", label: "destape en Centro Villa Alemana" },
-      { href: "/zona/belloto-sur-quilpue", label: "destape en El Belloto, Quilpue" },
+      { href: "/destape-alcantarillado-centro-concon-concon", label: "destape en Centro Concon" },
+      { href: "/destape-alcantarillado-centro-villa-alemana-villa-alemana", label: "destape en Centro Villa Alemana" },
+      { href: "/destape-alcantarillado-el-belloto-sur-quilpue", label: "destape en El Belloto, Quilpue" },
     ],
     sections: [
       {

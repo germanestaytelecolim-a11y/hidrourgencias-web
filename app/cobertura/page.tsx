@@ -1,3 +1,4 @@
+import { getZonaPath } from "@/lib/territorial-canonical";
 import type { Metadata } from "next";
 import Link from "next/link";
 
@@ -76,7 +77,7 @@ export default function CoberturaPage() {
         <h2 className="text-2xl font-black text-slate-950">Sectores con cobertura publicada</h2>
         <div className="mt-5 flex flex-wrap gap-2">
           {zonas.map((zona) => (
-            <Link key={zona.slug} href={`/zona/${zona.slug}`} className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-bold text-slate-800 transition hover:border-sky-300 hover:text-sky-900">
+            <Link key={zona.slug} href={getZonaPath(zona.slug)} className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-bold text-slate-800 transition hover:border-sky-300 hover:text-sky-900">
               {zona.nombre}, {zona.comuna}
             </Link>
           ))}

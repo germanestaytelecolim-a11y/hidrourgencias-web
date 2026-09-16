@@ -1,3 +1,4 @@
+import { getZonaPath } from "@/lib/territorial-canonical";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronRight, ExternalLink } from "lucide-react";
@@ -131,7 +132,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const title = `Destape en ${zona.nombre} | Urgencias 24/7 | ${zona.comuna}`;
   const contextoZona = getContextoZona(zona.nombre, zona.comuna);
   const description = `En ${zona.nombre}, ${contextoZona}. Servicio profesional de destape de alcantarillado, control de rebalses y urgencias sanitarias 24/7 en ${zona.comuna}.`;
-  const canonical = buildCanonicalUrl(`/zona/${zona.slug}`);
+  const canonical = buildCanonicalUrl(getZonaPath(zona.slug));
 
   return {
     title,
@@ -224,7 +225,7 @@ export default async function ZonaPage({ params }: Props) {
         "@type": "ListItem",
         position: 2,
         name: `Destape de alcantarillado en ${zona.nombre}`,
-        item: buildCanonicalUrl(`/zona/${zona.slug}`),
+        item: buildCanonicalUrl(getZonaPath(zona.slug)),
       },
     ],
   }).replace(/</g, "\\u003c");

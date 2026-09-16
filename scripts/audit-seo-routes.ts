@@ -1,5 +1,7 @@
 import { existsSync, mkdirSync, readdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
+import { auditPageBodies, CONTENT_NGRAM_SIZE, CONTENT_SIMILARITY_THRESHOLD } from "./lib/seo-content-audit";
+import { resolveTerritorialPath } from "../lib/territorial-canonical";
 
 import sitemap, { getSitemapPriority, getSitemapRouteSpecs, type SitemapRouteKind } from "../app/sitemap";
 import nextConfig from "../next.config";
@@ -76,8 +78,6 @@ type SimilarityPair = {
 };
 
 const MIN_REPEATED_SENTENCE_WORDS = 8;
-const CONTENT_NGRAM_SIZE = 5;
-const CONTENT_SIMILARITY_THRESHOLD = 0.9;
 
 const seoContentBaseline = {
   source: "Medicion local previa a la correccion editorial del 2026-08-04.",
@@ -326,6 +326,7 @@ function auditSeoContent() {
     )
     .map((entry) => entry.path);
   const similarity = getContentSimilarity(entries);
+  const bodies = auditPageBodies(entries);
 
   return {
     method: {
@@ -334,6 +335,7 @@ function auditSeoContent() {
       similarity: `${CONTENT_NGRAM_SIZE}-gramas de palabras con Jaccard`,
       similarityThreshold: CONTENT_SIMILARITY_THRESHOLD,
       globalExceptions: [],
+      blockingPolicy: "Duplicate SEO identities, copied main bodies, excessive document/body similarity and malformed content block. Shared fragments remain editorial warnings, not proof of duplicate pages.",
     },
     baseline: seoContentBaseline,
     current: {
@@ -349,18 +351,25 @@ function auditSeoContent() {
       defectivePhraseOccurrences: defectivePhrasePaths.length,
       excessiveSimilarityPairs: similarity.excessivePairs.length,
       maximumPairwiseSimilarity: similarity.maximum,
+      duplicateBodyGroups: bodies.exactBodies.length,
+      excessiveBodySimilarityPairs: bodies.similarBodies.length,
+      maximumBodySimilarity: bodies.maximum,
     },
     failures: {
       duplicateTitles: titleDuplicates,
       duplicateH1s: h1Duplicates,
       duplicateMetaDescriptions: descriptionDuplicates,
+      identicalHeadingSequences: headingSequenceDuplicates,
+      defectivePhrasePaths,
+      excessiveSimilarityPairs: similarity.excessivePairs,
+      exactBodies: bodies.exactBodies,
+      similarBodies: bodies.similarBodies,
+    },
+    editorialWarnings: {
       exactParagraphs: exactParagraphDuplicates,
       repeatedSentences,
       duplicateFaqQuestions: faqQuestionDuplicates,
       duplicateFaqAnswers: faqAnswerDuplicates,
-      identicalHeadingSequences: headingSequenceDuplicates,
-      defectivePhrasePaths,
-      excessiveSimilarityPairs: similarity.excessivePairs,
     },
   };
 }
@@ -534,7 +543,7 @@ function writeIndexationPriorityReport(knownPathSet: Set<string>, sitemapPathSet
     lines.push(level.title);
 
     for (const path of level.paths) {
-      const normalizedPath = normalizeCanonicalPath(path);
+      const normalizedPath = resolveTerritorialPath(normalizeCanonicalPath(path));
       const status = knownPathSet.has(normalizedPath) ? "OK build" : "REVISAR build";
       const sitemapStatus = sitemapPathSet.has(normalizedPath) ? "en sitemap" : "fuera de sitemap";
       lines.push(`- ${buildCanonicalUrl(normalizedPath)} (${status}, ${sitemapStatus})`);
@@ -659,10 +668,10 @@ async function main() {
   const expectedCanonicals = knownRoutes.map((route) => ({
     path: route.path,
     url: buildCanonicalUrl(route.path),
-    canonical: buildCanonicalUrl(route.path),
+    canonical: buildCanonicalUrl(resolveTerritorialPath(route.path)),
     kind: route.kind,
     inSitemap: sitemapPathSet.has(route.path),
-    indexable: true,
+    indexable: !redirectSourceSet.has(route.path),
   }));
 
   const recommendedPriorities = sitemapPaths.map((path) => {
@@ -678,7 +687,7 @@ async function main() {
 
   const manualIndexationCandidates = manualIndexationLevels.flatMap((level) =>
     level.paths.map((path) => {
-      const normalizedPath = normalizeCanonicalPath(path);
+      const normalizedPath = resolveTerritorialPath(normalizeCanonicalPath(path));
 
       return {
         level: level.title,
@@ -725,7 +734,7 @@ async function main() {
     sitemapMissingBuild,
     noindex: {
       sitemapUrls: [],
-      note: "Known sitemap routes are generated from indexable route data. noindex appears only in not-found fallbacks for invalid dynamic params.",
+      note: "Sitemap routes are generated from indexable data; private access, image credits and not-found fallbacks are excluded. HTTP metadata is checked separately by audit:seo:runtime.",
     },
     expectedCanonicals,
     recommendedPriorities,
@@ -770,6 +779,8 @@ async function main() {
       identicalSeoHeadingSequences: contentUniqueness.current.identicalHeadingSequenceGroups,
       defectiveSeoPhrases: contentUniqueness.current.defectivePhraseOccurrences,
       excessiveSeoSimilarityPairs: contentUniqueness.current.excessiveSimilarityPairs,
+      duplicateSeoBodies: contentUniqueness.current.duplicateBodyGroups,
+      excessiveSeoBodySimilarityPairs: contentUniqueness.current.excessiveBodySimilarityPairs,
     },
   };
 
@@ -787,6 +798,7 @@ async function main() {
   console.log("");
   console.log("Validacion");
   console.table(report.validationSummary);
+  console.log("Shared paragraph, sentence and FAQ counts are editorial warnings; complete bodies and SEO identities are checked independently.");
   console.log("Canonical esperado (muestra)");
   console.table(expectedCanonicals.slice(0, 12));
   console.log("Prioridad recomendada (muestra)");
@@ -809,10 +821,8 @@ async function main() {
     contentUniqueness.current.duplicateTitleGroups > 0 ||
     contentUniqueness.current.duplicateH1Groups > 0 ||
     contentUniqueness.current.duplicateMetaDescriptionGroups > 0 ||
-    contentUniqueness.current.exactParagraphGroups > 0 ||
-    contentUniqueness.current.repeatedSentenceGroups > 0 ||
-    contentUniqueness.current.duplicateFaqQuestionGroups > 0 ||
-    contentUniqueness.current.duplicateFaqAnswerGroups > 0 ||
+    contentUniqueness.current.duplicateBodyGroups > 0 ||
+    contentUniqueness.current.excessiveBodySimilarityPairs > 0 ||
     contentUniqueness.current.identicalHeadingSequenceGroups > 0 ||
     contentUniqueness.current.defectivePhraseOccurrences > 0 ||
     contentUniqueness.current.excessiveSimilarityPairs > 0;
