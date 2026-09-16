@@ -28,15 +28,8 @@ export function WhatsAppLeadFormModal() {
 
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-
-    function handleKeydown(event: KeyboardEvent) {
-      if (event.key === "Escape") setOpen(false);
-    }
-
-    window.addEventListener("keydown", handleKeydown);
     return () => {
       document.body.style.overflow = previousOverflow;
-      window.removeEventListener("keydown", handleKeydown);
     };
   }, [open]);
 
@@ -44,15 +37,12 @@ export function WhatsAppLeadFormModal() {
 
   return (
     <div
-      className="fixed inset-0 z-[90] overflow-y-auto bg-slate-950/72 px-3 py-4 backdrop-blur-sm sm:px-5 sm:py-8"
+      className="fixed inset-0 z-[90] flex items-center justify-center bg-slate-950/72 p-3 backdrop-blur-sm sm:p-8"
       role="dialog"
       aria-modal="true"
       aria-label="Formulario previo para WhatsApp"
-      onMouseDown={(event) => {
-        if (event.target === event.currentTarget) setOpen(false);
-      }}
     >
-      <div className="mx-auto w-full max-w-5xl">
+      <div className="relative w-full max-w-6xl">
         <WhatsAppLeadForm variant="modal" onClose={() => setOpen(false)} />
       </div>
     </div>
