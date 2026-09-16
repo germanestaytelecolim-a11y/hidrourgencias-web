@@ -266,62 +266,71 @@ export function WhatsAppLeadForm({ variant = "section", onClose }: WhatsAppLeadF
       id="whatsapp-solicitud"
       className={
         isModal
-          ? "relative flex max-h-[calc(100dvh-2rem)] flex-col overflow-hidden rounded-lg border border-sky-200 bg-white shadow-[0_24px_70px_-48px_rgba(8,56,95,0.85)] sm:max-h-[calc(100dvh-4rem)]"
+          ? "relative flex max-h-[calc(100dvh-1rem)] flex-col overflow-hidden rounded-lg border border-sky-200 bg-white shadow-[0_24px_70px_-48px_rgba(8,56,95,0.85)] sm:max-h-[calc(100dvh-4rem)]"
           : "mt-9 scroll-mt-28 rounded-lg border border-sky-200 bg-white p-5 shadow-[0_24px_70px_-48px_rgba(8,56,95,0.85)] sm:p-7"
       }
       aria-labelledby="whatsapp-solicitud-title"
     >
-      <header className={isModal ? "flex items-center justify-between gap-4 border-b border-slate-200 px-4 py-3 sm:px-5" : "flex items-center gap-3 border-b border-slate-100 pb-4"}>
+      <header className={isModal ? "flex items-center justify-between gap-3 border-b border-slate-200 px-3 py-2 sm:gap-4 sm:px-5 sm:py-3" : "flex items-center gap-3 border-b border-slate-100 pb-4"}>
         <div className="flex min-w-0 items-center gap-3">
           <StaticPicture
             src="/images/logo-hidrourgencias.jpg"
             alt="Hidrourgencias SpA"
             width={48}
             height={48}
-            className="h-11 w-11 rounded-lg border border-sky-100 object-cover p-0.5"
-            pictureClassName="block h-11 w-11 shrink-0"
+            className="h-8 w-8 rounded-lg border border-sky-100 object-cover p-0.5 sm:h-11 sm:w-11"
+            pictureClassName="block h-8 w-8 shrink-0 sm:h-11 sm:w-11"
           />
           <div className="min-w-0">
             <p className="text-[11px] font-black uppercase tracking-[0.16em] text-sky-700">Solicitud sanitaria</p>
-            <h2 id="whatsapp-solicitud-title" className="truncate text-lg font-black text-slate-950 sm:text-xl">
+            <h2 id="whatsapp-solicitud-title" className="hidden text-lg font-black text-slate-950 sm:block sm:text-xl">
               Coordinemos tu requerimiento
             </h2>
+            <p className="mt-0.5 text-xs font-semibold leading-4 text-slate-600 sm:hidden">Completa los datos para coordinar por WhatsApp.</p>
           </div>
         </div>
         {isModal ? (
           <button
             type="button"
             onClick={requestClose}
-            className="shrink-0 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-black text-slate-700 transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-100"
+            className="shrink-0 rounded-lg border border-slate-200 bg-white px-2 py-1.5 text-xs font-black text-slate-700 transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-100 sm:px-3 sm:py-2 sm:text-sm"
           >
             Cerrar
           </button>
         ) : null}
       </header>
 
-      <div className={isModal ? "flex min-h-0 flex-1 flex-col gap-4 p-4 sm:p-5 lg:grid lg:grid-cols-[minmax(14rem,0.38fr)_minmax(0,0.62fr)] lg:gap-5" : "mt-5 grid gap-5 lg:grid-cols-[minmax(14rem,0.38fr)_minmax(0,0.62fr)]"}>
-        <aside className="shrink-0">
-          <p className="text-sm font-semibold leading-6 text-slate-700">
+      <div className={isModal ? "flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto overscroll-contain p-3 sm:p-5 lg:grid lg:grid-cols-[minmax(14rem,0.38fr)_minmax(0,0.62fr)] lg:gap-5 lg:overflow-hidden" : "mt-5 grid gap-5 lg:grid-cols-[minmax(14rem,0.38fr)_minmax(0,0.62fr)]"}>
+        <aside className={isModal ? "order-2 shrink-0 lg:order-1" : "shrink-0"}>
+          <p className="text-sm font-semibold leading-6 text-slate-700 sm:hidden">
+            Estos datos nos ayudan a responder más rápido y derivar correctamente tu solicitud.
+          </p>
+          <p className="hidden text-sm font-semibold leading-6 text-slate-700 sm:block">
             Completa estos antecedentes para que nuestro equipo pueda evaluar tu requerimiento con mayor rapidez,
             priorizar urgencias reales y derivar el servicio correcto sin hacerte repetir la misma información por
             WhatsApp.
           </p>
-          <p className="mt-3 text-sm font-black text-sky-800">Mientras más claro sea el antecedente, más rápida será la coordinación.</p>
-          <div className="mt-4 grid gap-2 text-sm font-bold text-slate-700">
+          <p className="mt-3 hidden text-sm font-black text-sky-800 sm:block">Mientras más claro sea el antecedente, más rápida será la coordinación.</p>
+          <div className="mt-3 flex flex-wrap gap-1.5 text-[0.65rem] font-bold text-slate-600 sm:hidden">
+            <span className="rounded-md border border-slate-200 bg-slate-50 px-2 py-1">Sin precios automáticos</span>
+            <span className="rounded-md border border-slate-200 bg-slate-50 px-2 py-1">Cobertura V Región</span>
+            <span className="rounded-md border border-slate-200 bg-slate-50 px-2 py-1">Respuesta más rápida</span>
+          </div>
+          <div className="mt-4 hidden gap-2 text-sm font-bold text-slate-700 sm:grid">
             <span className="inline-flex items-center gap-2"><CheckCircle className="h-4 w-4 text-emerald-600" /> Sin precios automáticos</span>
             <span className="inline-flex items-center gap-2"><MapPin className="h-4 w-4 text-sky-700" /> Cobertura Región de Valparaíso</span>
             <span className="inline-flex items-center gap-2"><FileText className="h-4 w-4 text-sky-700" /> Mensaje listo para coordinar</span>
           </div>
         </aside>
 
-        <form noValidate onSubmit={handleSubmit} className={isModal ? "min-h-0 flex-1 overflow-y-auto pr-1 lg:pr-2" : ""} aria-describedby="whatsapp-form-status">
+        <form noValidate onSubmit={handleSubmit} className={isModal ? "order-1 min-h-0 flex-none overflow-visible pr-0 lg:order-2 lg:flex-1 lg:overflow-y-auto lg:pr-2" : ""} aria-describedby="whatsapp-form-status">
           <div className="grid gap-3 sm:grid-cols-2">
             <label className="grid gap-1.5 text-sm font-extrabold text-slate-900" htmlFor="name">
               Nombre o alias <span className="text-rose-700">*</span>
               <input id="name" name="name" required value={values.name} onChange={updateField} className={fieldClassName} autoComplete="name" placeholder="Ej: Ana, conserjería o administración" />
             </label>
-            <SelectField id="propertyType" label="Tipo de propiedad" value={values.propertyType} options={propertyTypes} onChange={updateField} />
             <SelectField id="requestType" label="Tipo de solicitud" value={values.requestType} options={requestTypes} onChange={updateField} />
+            <SelectField id="propertyType" label="Tipo de propiedad" value={values.propertyType} options={propertyTypes} onChange={updateField} />
             <SelectField id="commune" label="Comuna" value={values.commune} options={communes} onChange={updateField} />
             <label className="grid gap-1.5 text-sm font-extrabold text-slate-900" htmlFor="sector">
               Sector <span className="text-rose-700">*</span>
@@ -338,8 +347,8 @@ export function WhatsAppLeadForm({ variant = "section", onClose }: WhatsAppLeadF
             <SelectField id="evidence" label="Evidencia fotográfica o video" value={values.evidence} options={evidenceOptions} onChange={updateField} />
           </div>
 
-          <div className={`mt-3 flex gap-3 rounded-lg border p-3 text-sm font-bold leading-5 ${requestGuidance.className}`} aria-live="polite">
-            <span className={`mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full ${requestGuidance.markerClassName}`} aria-hidden="true" />
+          <div className={`mt-3 flex gap-2.5 rounded-lg border p-2.5 text-xs font-bold leading-5 sm:gap-3 sm:p-3 sm:text-sm ${requestGuidance.className}`} aria-live="polite">
+            <span className={`mt-1.5 h-2 w-2 shrink-0 rounded-full sm:h-2.5 sm:w-2.5 ${requestGuidance.markerClassName}`} aria-hidden="true" />
             <p><span className="font-black">{requestGuidance.label}.</span> {requestGuidance.text}</p>
           </div>
 

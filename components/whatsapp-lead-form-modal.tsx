@@ -37,7 +37,7 @@ export function WhatsAppLeadFormModal() {
 
   return (
     <div
-      className="fixed inset-0 z-[90] flex items-center justify-center bg-slate-950/72 p-3 backdrop-blur-sm sm:p-8"
+      className="fixed inset-0 z-[90] flex items-start justify-center bg-slate-950/72 p-2 backdrop-blur-sm sm:items-center sm:p-8"
       role="dialog"
       aria-modal="true"
       aria-label="Formulario previo para WhatsApp"
