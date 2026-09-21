@@ -35,8 +35,9 @@ export function createDirectWhatsAppUrl(message: string) {
 }
 
 export function createWhatsAppLeadFormUrl(message?: string) {
-  const params = message ? `?origen=${encodeURIComponent(message)}` : "";
-  return `/contacto${params}#whatsapp-solicitud`;
+  // Fragments are not sent to the server or used as crawlable URL parameters. The contact
+  // page transfers this short-lived context to sessionStorage, then restores a clean URL.
+  return message ? `/contacto#origen=${encodeURIComponent(message)}` : "/contacto#whatsapp-solicitud";
 }
 
 export function createWhatsAppUrl(message: string) {

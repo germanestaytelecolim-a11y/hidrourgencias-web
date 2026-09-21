@@ -78,9 +78,12 @@ async function main() {
   );
   const coverage = await request("/cobertura");
   const buildings = await request("/servicios/destape-edificios");
-  for (const result of [coverage, buildings]) {
+  const hidrojetConcon = await request("/hidrojet-concon");
+  const caseStudies = await request("/casos-de-exito");
+  for (const result of [coverage, buildings, hidrojetConcon, caseStudies]) {
     check(!result.html.includes('href="/mantencion-desagues-quilpue"'), `${result.path}: Quilpue service landing used as territorial entry`);
     check(!result.html.includes('href="/urgencias-sanitarias-villa-alemana"'), `${result.path}: Villa Alemana service landing used as territorial entry`);
+    check(!result.html.includes("/contacto?origen="), `${result.path}: emits crawlable contact-origin query links`);
   }
   const portal = await request("/acceso-administradores-empresas");
   check(portal.status === 200 && portal.robots.some((r) => /noindex, follow/.test(r)), "Portal must be 200 noindex, follow");

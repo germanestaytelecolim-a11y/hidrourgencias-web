@@ -87,15 +87,25 @@ const comunaChildLandings = getAllComunaLandings().filter((landing) => landing.p
 const destapeSectorRoutes = getAllSeoRoutes().filter((route) => route.service.slug === "destape-alcantarillado");
 
 function uniqueSectors(sectors: Array<{ label: string; href: string }>) {
+  const normalize = (label: string) =>
+    label
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .replace(/^el\s+/, "")
+      .replace(/^centro\s+concon$/, "concon centro");
+  const publicLabels: Record<string, string> = {
+    "concon centro": "Concón Centro",
+    "belloto norte": "Belloto Norte",
+    "belloto sur": "Belloto Sur",
+  };
+
   return Array.from(
     new Map(
-      sectors.map((sector) => [
-        sector.label
-          .normalize("NFD")
-          .replace(/[\u0300-\u036f]/g, "")
-          .toLowerCase(),
-        sector,
-      ] as const),
+      sectors.map((sector) => {
+        const key = normalize(sector.label);
+        return [key, { ...sector, label: publicLabels[key] ?? sector.label }] as const;
+      }),
     ).values(),
   );
 }

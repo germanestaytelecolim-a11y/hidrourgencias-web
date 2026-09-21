@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ExternalLink, Mail, PhoneCall } from "@/components/icons";
 import { ServiceTermsNotice } from "@/components/service-terms";
 import { SocialProofLinksSection } from "@/components/SocialProofLinksSection";
-import { WhatsAppLeadForm } from "@/components/whatsapp-lead-form";
+import { ContactOriginForm } from "@/components/contact-origin-form";
 import { GOOGLE_REVIEWS_URL, buildCanonicalUrl, createMailToUrl, siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
@@ -41,7 +41,7 @@ export default function ContactoPage() {
         <ServiceTermsNotice tone="dark" className="mt-7 max-w-4xl" />
       </section>
 
-      <WhatsAppLeadForm />
+      <ContactOriginForm />
 
       <section className="mt-9 grid gap-4 md:grid-cols-2">
         <a

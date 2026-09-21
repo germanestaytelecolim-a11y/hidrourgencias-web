@@ -199,12 +199,13 @@ function SelectField({
 }
 
 type WhatsAppLeadFormProps = {
+  initialDescription?: string;
   variant?: "section" | "modal";
   onClose?: () => void;
 };
 
-export function WhatsAppLeadForm({ variant = "section", onClose }: WhatsAppLeadFormProps) {
-  const [values, setValues] = useState<FormState>(initialFormState);
+export function WhatsAppLeadForm({ initialDescription = "", variant = "section", onClose }: WhatsAppLeadFormProps) {
+  const [values, setValues] = useState<FormState>(() => ({ ...initialFormState, description: initialDescription }));
   const [showDiscardConfirm, setShowDiscardConfirm] = useState(false);
   const isModal = variant === "modal";
   const requestGuidance = getRequestGuidance(values.requestType);
@@ -257,6 +258,7 @@ export function WhatsAppLeadForm({ variant = "section", onClose }: WhatsAppLeadF
       servicio_requerido: values.service,
       tipo_propiedad: values.propertyType,
       property_type: values.propertyType,
+      contact_origin: initialDescription ? "contexto_precargado" : undefined,
     });
     window.open(createDirectWhatsAppUrl(message), "_blank", "noopener,noreferrer");
   }
