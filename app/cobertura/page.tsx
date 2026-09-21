@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import { ArrowRight, MapPin, PhoneCall } from "@/components/icons";
 import { SocialProofLinksSection } from "@/components/SocialProofLinksSection";
-import { getAllComunaLandings } from "@/lib/comuna-landings";
+import { getPrimaryTerritorialLandings } from "@/lib/comuna-landings";
 import { buildCanonicalUrl, createWhatsAppUrl } from "@/lib/site-config";
 import { getZonaSlugs, getZonaBySlug } from "@/lib/zonas-detalle";
 
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 };
 
 export default function CoberturaPage() {
-  const comunas = getAllComunaLandings();
+  const comunas = getPrimaryTerritorialLandings();
   const zonas = getZonaSlugs()
     .map((slug) => getZonaBySlug(slug))
     .filter((zona): zona is NonNullable<ReturnType<typeof getZonaBySlug>> => Boolean(zona));

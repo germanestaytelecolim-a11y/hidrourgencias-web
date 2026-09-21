@@ -826,6 +826,27 @@ export function getAllComunaLandings() {
   return landingData;
 }
 
+// The coverage index represents municipalities, not every valid service + municipality landing.
+// Specialised pages remain routable and indexable through the full landing catalogue.
+const primaryTerritorialLandingSlugs = new Set([
+  "destape-alcantarillado-vina-del-mar",
+  "destape-alcantarillado-valparaiso",
+  "hidrojet-concon",
+  "destape-alcantarillado-quilpue",
+  "destape-alcantarillado-villa-alemana",
+  "destape-alcantarillado-puchuncavi",
+  "destape-alcantarillado-casablanca",
+  "destape-alcantarillado-maitencillo-puchuncavi",
+  "destape-alcantarillado-quintero",
+  "destape-alcantarillado-limache",
+  "destape-alcantarillado-quillota",
+  "destape-alcantarillado-placilla-curauma",
+]);
+
+export function getPrimaryTerritorialLandings() {
+  return landingData.filter((landing) => primaryTerritorialLandingSlugs.has(landing.slug));
+}
+
 export function getComunaPaths() {
   return landingData.map((item) => item.slug);
 }

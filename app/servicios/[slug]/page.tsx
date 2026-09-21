@@ -10,7 +10,7 @@ import { ConversionExperience } from "@/components/conversion-experience";
 import { ServiceTermsNotice } from "@/components/service-terms";
 import { SocialProofLinksSection } from "@/components/SocialProofLinksSection";
 import { getAllBlogPosts } from "@/lib/blog-data";
-import { getAllComunaLandings } from "@/lib/comuna-landings";
+import { getPrimaryTerritorialLandings } from "@/lib/comuna-landings";
 import { getServiceVisualProfile } from "@/lib/landing-visuals";
 import { GOOGLE_REVIEWS_URL, createWhatsAppUrl, siteConfig } from "@/lib/site-config";
 import { buildServicioMetadata, getAllServicios, getServicioBySlug, getServicioSlugs } from "@/lib/servicios";
@@ -72,7 +72,7 @@ export default async function ServicioPage({ params }: Props) {
           ),
         )
       : getAllServicios().filter((item) => item.slug !== servicio.slug).slice(0, 4);
-  const relatedComunas = getAllComunaLandings().slice(0, 8);
+  const relatedComunas = getPrimaryTerritorialLandings().slice(0, 8);
   const relatedPosts = isPrepurchaseService
     ? prepurchaseRelatedPostSlugs
         .map((postSlug) => getAllBlogPosts().find((post) => post.slug === postSlug))

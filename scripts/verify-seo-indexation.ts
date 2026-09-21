@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { mkdirSync, writeFileSync } from "node:fs";
 import nextConfig from "../next.config";
+import { getAllComunaLandings, getPrimaryTerritorialLandings } from "../lib/comuna-landings";
 import { getAllSeoRoutes } from "../lib/seo-territorial";
 import { mantaguaCanonicalPaths, territorialCanonicalPaths } from "../lib/territorial-canonical";
 
@@ -64,6 +65,22 @@ async function main() {
     check(result.status === 200 && result.canonicals.length === 1 && result.canonicals[0] === `${origin}/contacto`, `Contact query canonical: ${query}`);
     check(JSON.stringify(mainMetadata(result.html)) === JSON.stringify(mainMetadata(contact.html)) && JSON.stringify(result.robots) === JSON.stringify(contact.robots), `Contact query changes metadata: ${query}`);
     check(result.html.includes('id="whatsapp-solicitud"') && result.html.includes("<form"), `Contact form absent: ${query}`);
+  }
+  const primaryLandings = getPrimaryTerritorialLandings();
+  check(
+    primaryLandings.length === new Set(primaryLandings.map((landing) => landing.comuna)).size,
+    "Territorial coverage data contains duplicate municipalities",
+  );
+  check(
+    getAllComunaLandings().some((landing) => landing.slug === "mantencion-desagues-quilpue") &&
+      getAllComunaLandings().some((landing) => landing.slug === "urgencias-sanitarias-villa-alemana"),
+    "Specialised Quilpue or Villa Alemana landing was removed",
+  );
+  const coverage = await request("/cobertura");
+  const buildings = await request("/servicios/destape-edificios");
+  for (const result of [coverage, buildings]) {
+    check(!result.html.includes('href="/mantencion-desagues-quilpue"'), `${result.path}: Quilpue service landing used as territorial entry`);
+    check(!result.html.includes('href="/urgencias-sanitarias-villa-alemana"'), `${result.path}: Villa Alemana service landing used as territorial entry`);
   }
   const portal = await request("/acceso-administradores-empresas");
   check(portal.status === 200 && portal.robots.some((r) => /noindex, follow/.test(r)), "Portal must be 200 noindex, follow");

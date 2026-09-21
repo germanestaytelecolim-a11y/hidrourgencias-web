@@ -7,7 +7,7 @@ import { notFound } from "next/navigation";
 import { LandingVisualHero } from "@/components/landing-visual-hero";
 import { ServiceTermsNotice } from "@/components/service-terms";
 import { getAllBlogPosts } from "@/lib/blog-data";
-import { getAllComunaLandings, getComunaLandingBySlug } from "@/lib/comuna-landings";
+import { getComunaLandingBySlug, getPrimaryTerritorialLandings } from "@/lib/comuna-landings";
 import { getZoneVisualProfile } from "@/lib/landing-visuals";
 import { GOOGLE_REVIEWS_URL, buildCanonicalUrl, createWhatsAppUrl, siteConfig } from "@/lib/site-config";
 import { getAllServicios } from "@/lib/servicios";
@@ -179,7 +179,7 @@ export default async function ZonaPage({ params }: Props) {
 
   const landing = getComunaLandingBySlug(zona.landingSlug);
   const relatedServices = getAllServicios().slice(0, 5);
-  const relatedComunas = getAllComunaLandings().filter((item) => item.slug !== zona.landingSlug).slice(0, 5);
+  const relatedComunas = getPrimaryTerritorialLandings().filter((item) => item.slug !== zona.landingSlug).slice(0, 5);
   const relatedPosts = getAllBlogPosts().slice(0, 4);
   const contextoZona = getContextoZona(zona.nombre, zona.comuna);
   const keywordVariations = getKeywordVariations(zona.nombre);

@@ -22,7 +22,7 @@ import { PublicAdminCasesForPath } from "@/components/admin/PublicAdminCasesForP
 import { ConversionExperience } from "@/components/conversion-experience";
 import { ServiceTermsNotice } from "@/components/service-terms";
 import { TerritorialLandingHero } from "@/components/territorial-landing-hero";
-import type { ComunaLandingData } from "@/lib/comuna-landings";
+import { getPrimaryTerritorialLandings, type ComunaLandingData } from "@/lib/comuna-landings";
 import {
   GOOGLE_REVIEWS_URL,
   createMailToUrl,
@@ -36,7 +36,6 @@ import { getZonasByLandingSlug as getZonasDetalleByLandingSlug } from "@/lib/zon
 
 type Props = {
   landing: ComunaLandingData;
-  allLandings: ComunaLandingData[];
 };
 
 const serviceIcons: LucideIcon[] = [Droplets, Gauge, ShieldCheck, Camera, AlarmClock, Wrench];
@@ -130,9 +129,11 @@ function CompactServiceGroups({ services }: { services: ServiceCatalogItem[] }) 
   );
 }
 
-export function ComunaLandingPage({ landing, allLandings }: Props) {
+export function ComunaLandingPage({ landing }: Props) {
   const { presentation } = landing;
-  const linksToOtherCommunes = allLandings.filter((item) => item.slug !== landing.slug).slice(0, 7);
+  const linksToOtherCommunes = getPrimaryTerritorialLandings()
+    .filter((item) => item.slug !== landing.slug)
+    .slice(0, 7);
   const linkedServices = getAllServicios();
   const displayedServices =
     landing.slug === "hidrojet-concon"

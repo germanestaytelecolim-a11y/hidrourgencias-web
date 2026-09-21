@@ -9,7 +9,7 @@ import { notFound } from "next/navigation";
 import { ServiceTermsNotice } from "@/components/service-terms";
 import { buildBlogPostMetadata, getBlogPostBySlug, getBlogPostFaq, getBlogSlugs } from "@/lib/blog-data";
 import { getPublicBlogPostBySlug, getPublicBlogPosts } from "@/lib/admin/public-blog-posts";
-import { getAllComunaLandings } from "@/lib/comuna-landings";
+import { getPrimaryTerritorialLandings } from "@/lib/comuna-landings";
 import { GOOGLE_REVIEWS_URL, createWhatsAppUrl } from "@/lib/site-config";
 import { getZonaBySlug, getZonaSlugs } from "@/lib/zonas-detalle";
 
@@ -49,7 +49,7 @@ export default async function BlogPostPage({ params }: Props) {
   }
 
   const relatedPosts = (await getPublicBlogPosts()).filter((item) => item.slug !== post.slug).slice(0, 3);
-  const fallbackComunaLinks = getAllComunaLandings().slice(0, 4).map((item) => ({
+  const fallbackComunaLinks = getPrimaryTerritorialLandings().slice(0, 4).map((item) => ({
     href: `/${item.slug}`,
     label: `destape de alcantarillado en ${item.comuna}`,
   }));
