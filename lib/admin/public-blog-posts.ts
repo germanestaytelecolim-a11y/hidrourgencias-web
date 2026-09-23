@@ -1,6 +1,7 @@
 import type { BlogPost } from "@/lib/blog-data";
 import { getAllBlogPosts, getBlogPostBySlug } from "@/lib/blog-data";
 import { listBlogPosts } from "@/lib/admin/db";
+import { canUseStaticPublicFallback, reportStaticPublicFallback } from "@/lib/admin/public-data-resilience";
 import type { AdminBlogPost } from "@/lib/admin/types";
 
 export type PublicBlogPost = BlogPost & {
@@ -40,7 +41,10 @@ export async function getPublicBlogPosts(): Promise<PublicBlogPost[]> {
     const adminPosts = (await listBlogPosts()).filter((post) => post.status === "published").map(adminBlogToPublicBlog);
     return Array.from(new Map([...adminPosts, ...legacy].map((post) => [post.slug, post] as const)).values());
   } catch (error) {
-    if (process.env.NODE_ENV === "production" && !process.env.POSTGRES_URL && !process.env.DATABASE_URL) return legacy;
+    if (canUseStaticPublicFallback(error)) {
+      reportStaticPublicFallback("blog posts", error);
+      return legacy;
+    }
     throw error;
   }
 }
@@ -50,7 +54,8 @@ export async function getPublicBlogPostBySlug(slug: string): Promise<PublicBlogP
     const adminPost = (await listBlogPosts()).find((post) => post.status === "published" && post.slug === slug);
     if (adminPost) return adminBlogToPublicBlog(adminPost);
   } catch (error) {
-    if (!(process.env.NODE_ENV === "production" && !process.env.POSTGRES_URL && !process.env.DATABASE_URL)) throw error;
+    if (!canUseStaticPublicFallback(error)) throw error;
+    reportStaticPublicFallback("blog post", error);
   }
 
   const legacy = getBlogPostBySlug(slug);

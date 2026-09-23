@@ -829,13 +829,17 @@ export function getAllComunaLandings() {
 
 // The coverage index represents municipalities, not every valid service + municipality landing.
 // Specialised pages remain routable and indexable through the full landing catalogue.
-export function getPrimaryTerritorialLandings() {
+export function getPrimaryTerritorialLandings(): ComunaLandingData[] {
   return uniqueByCanonicalPath(
     getCoverageTerritories()
       .map((territory) => landingData.find((landing) => `/${landing.slug}` === territory.canonicalPath))
-      .filter((landing): landing is ComunaLandingData => landing !== undefined)
+      .filter((landing): landing is (typeof landingData)[number] => landing !== undefined)
       .map((landing) => ({ ...landing, canonicalPath: `/${landing.slug}` })),
-  );
+  ).map((entry) => {
+    const { canonicalPath, ...landing } = entry;
+    void canonicalPath;
+    return landing;
+  });
 }
 
 export function getComunaPaths() {

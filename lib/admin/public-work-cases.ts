@@ -1,5 +1,6 @@
 import { getPublicDistributionPaths } from "@/lib/admin/distribution-paths";
 import { listWorkCases } from "@/lib/admin/db";
+import { canUseStaticPublicFallback, reportStaticPublicFallback } from "@/lib/admin/public-data-resilience";
 import type { WorkCase } from "@/lib/admin/types";
 
 export type PublicWorkCaseDto = {
@@ -78,7 +79,8 @@ export async function getPublicWorkCasesForPath(path: string, limit = 12) {
       .slice(0, limit)
       .map(toPublicWorkCaseDto);
   } catch (error) {
-    if (process.env.NODE_ENV === "production" && !process.env.POSTGRES_URL && !process.env.DATABASE_URL) {
+    if (canUseStaticPublicFallback(error)) {
+      reportStaticPublicFallback("work cases", error);
       return [];
     }
     throw error;
@@ -90,7 +92,8 @@ export async function getPublicWorkCaseBySlug(slug: string) {
     const workCase = (await listWorkCases()).find((item) => item.status === "published" && item.slug === slug);
     return workCase ? toPublicWorkCaseDto(workCase) : null;
   } catch (error) {
-    if (process.env.NODE_ENV === "production" && !process.env.POSTGRES_URL && !process.env.DATABASE_URL) {
+    if (canUseStaticPublicFallback(error)) {
+      reportStaticPublicFallback("work case", error);
       return null;
     }
     throw error;
