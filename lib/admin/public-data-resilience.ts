@@ -14,5 +14,5 @@ export function canUseStaticPublicFallback(error: unknown): boolean {
 
 export function reportStaticPublicFallback(resource: string, error: unknown) {
   if (!isDatabaseQuotaExceeded(error)) return;
-  console.error(`Public ${resource} fallback activated: PostgreSQL quota exceeded (53000).`);
+  console.warn(`Public ${resource} fallback activated: PostgreSQL quota exceeded (53000).`);
 }
