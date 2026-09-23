@@ -6,6 +6,7 @@ import { CheckCircle, FileText, MapPin, PhoneCall } from "@/components/icons";
 import { StaticPicture } from "@/components/static-picture";
 import { captureCampaignParams, trackCommercialEvent } from "@/lib/conversion";
 import { createDirectWhatsAppUrl } from "@/lib/site-config";
+import { territorialCoverage } from "@/lib/territory";
 
 type FormState = {
   name: string;
@@ -55,44 +56,10 @@ const requestTypes = [
   "Servicio programado",
 ];
 
-const communes = [
-  "Viña del Mar",
-  "Valparaíso",
-  "Concón",
-  "Quilpué",
-  "Villa Alemana",
-  "Limache",
-  "Quillota",
-  "Casablanca",
-  "Reñaca",
-  "Curauma",
-  "Placilla",
-  "Puchuncaví",
-  "Quintero",
-  "Mantagua",
-  "Maitencillo",
-  "Algarrobo",
-  "Otra comuna / consultar disponibilidad",
-];
-
-const sectorSuggestions: Record<string, string[]> = {
-  "Viña del Mar": ["Centro", "Reñaca Alto", "Gómez Carreño", "Forestal", "Miraflores"],
-  Valparaíso: ["Plan de Valparaíso", "Playa Ancha", "Cerro Alegre", "Curauma", "Placilla"],
-  Concón: ["Centro", "Costa de Montemar", "Bosques de Montemar", "Lomas de Montemar"],
-  Quilpué: ["Centro", "El Belloto", "Los Pinos", "Marga Marga"],
-  "Villa Alemana": ["Centro", "Peñablanca", "El Rincón", "Troncos Viejos"],
-  Limache: ["Centro", "Olmué", "Lliu Lliu", "San Francisco de Limache"],
-  Quillota: ["Centro", "San Pedro", "La Calera", "La Cruz"],
-  Casablanca: ["Centro", "Valle de Casablanca", "Las Dichas", "Quintay"],
-  Reñaca: ["Reñaca Alto", "Reñaca Bajo", "Jardín del Mar", "Sector costero"],
-  Curauma: ["Curauma Norte", "Curauma Sur", "Placilla", "Avenida Cardenal Samoré"],
-  Placilla: ["Placilla Oriente", "Placilla Poniente", "Curauma", "La Pólvora"],
-  Puchuncaví: ["Puchuncaví", "Ventanas", "La Greda", "Horcón"],
-  Quintero: ["Centro", "Loncura", "Mantagua", "Sector costero"],
-  Mantagua: ["Mantagua", "Santa Adela", "Valle Alegre", "Ruta F-30-E"],
-  Maitencillo: ["Maitencillo", "Aguas Blancas", "La Laguna", "Sector costero"],
-  Algarrobo: ["Centro", "El Canelo", "Mirasol", "San Alfonso"],
-};
+const communes = [...territorialCoverage.map((comuna) => comuna.comuna), "Otra comuna / consultar disponibilidad"];
+const sectorSuggestions = Object.fromEntries(
+  territorialCoverage.map((comuna) => [comuna.comuna, comuna.sectores.map((sector) => sector.name)]),
+) as Record<string, string[]>;
 
 const services = [
   "Destape de baño / WC",

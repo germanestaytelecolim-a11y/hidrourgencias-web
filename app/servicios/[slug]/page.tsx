@@ -10,11 +10,11 @@ import { ConversionExperience } from "@/components/conversion-experience";
 import { ServiceTermsNotice } from "@/components/service-terms";
 import { SocialProofLinksSection } from "@/components/SocialProofLinksSection";
 import { getAllBlogPosts } from "@/lib/blog-data";
-import { getPrimaryTerritorialLandings } from "@/lib/comuna-landings";
 import { getServiceVisualProfile } from "@/lib/landing-visuals";
 import { GOOGLE_REVIEWS_URL, createWhatsAppUrl, siteConfig } from "@/lib/site-config";
 import { buildServicioMetadata, getAllServicios, getServicioBySlug, getServicioSlugs } from "@/lib/servicios";
 import { getZonaBySlug, getZonaSlugs } from "@/lib/zonas-detalle";
+import { territorialCoverage, uniqueByCanonicalPath } from "@/lib/territory";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -72,7 +72,9 @@ export default async function ServicioPage({ params }: Props) {
           ),
         )
       : getAllServicios().filter((item) => item.slug !== servicio.slug).slice(0, 4);
-  const relatedComunas = getPrimaryTerritorialLandings().slice(0, 8);
+  const relatedComunas = uniqueByCanonicalPath(
+    territorialCoverage.slice(0, 8).map((comuna) => ({ ...comuna, canonicalPath: comuna.canonicalPath })),
+  );
   const relatedPosts = isPrepurchaseService
     ? prepurchaseRelatedPostSlugs
         .map((postSlug) => getAllBlogPosts().find((post) => post.slug === postSlug))
@@ -272,8 +274,8 @@ export default async function ServicioPage({ params }: Props) {
         <div className="mt-5 flex flex-wrap gap-2">
           {relatedComunas.map((item) => (
             <Link
-              key={item.slug}
-              href={`/${item.slug}`}
+              key={item.canonicalPath}
+              href={item.canonicalPath}
               className="brand-blue-soft-cta rounded-full px-4 py-2 text-sm font-black transition hover:-translate-y-0.5"
             >
               {item.comuna}

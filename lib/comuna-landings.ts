@@ -1,4 +1,5 @@
 import { coverageLocationLabel } from "@/lib/coverage-scope";
+import { getCoverageTerritories, uniqueByCanonicalPath } from "@/lib/territory";
 import type { Metadata } from "next";
 
 import { buildCanonicalUrl, siteConfig } from "@/lib/site-config";
@@ -283,7 +284,7 @@ const comunaProfiles: ComunaProfile[] = [
   {
     slug: "destape-alcantarillado-quilpue",
     comuna: "Quilpue",
-    nearbyZones: ["Centro Quilpue", "El Belloto Norte", "El Belloto Sur", "Los Pinos", "Valencia", "Canal Chacao"],
+    nearbyZones: ["Centro Quilpue", "Belloto Norte", "Belloto Sur", "Los Pinos", "Valencia", "Canal Chacao"],
     localContext:
       "una comuna mixta residencial y comercial donde las redes sanitarias requieren control continuo por alta carga en horarios punta",
     riskDrivers: [
@@ -828,27 +829,21 @@ export function getAllComunaLandings() {
 
 // The coverage index represents municipalities, not every valid service + municipality landing.
 // Specialised pages remain routable and indexable through the full landing catalogue.
-const primaryTerritorialLandingSlugs = new Set([
-  "destape-alcantarillado-vina-del-mar",
-  "destape-alcantarillado-valparaiso",
-  "hidrojet-concon",
-  "destape-alcantarillado-quilpue",
-  "destape-alcantarillado-villa-alemana",
-  "destape-alcantarillado-puchuncavi",
-  "destape-alcantarillado-casablanca",
-  "destape-alcantarillado-maitencillo-puchuncavi",
-  "destape-alcantarillado-quintero",
-  "destape-alcantarillado-limache",
-  "destape-alcantarillado-quillota",
-  "destape-alcantarillado-placilla-curauma",
-]);
-
 export function getPrimaryTerritorialLandings() {
-  return landingData.filter((landing) => primaryTerritorialLandingSlugs.has(landing.slug));
+  return uniqueByCanonicalPath(
+    getCoverageTerritories()
+      .map((territory) => landingData.find((landing) => `/${landing.slug}` === territory.canonicalPath))
+      .filter((landing): landing is ComunaLandingData => landing !== undefined)
+      .map((landing) => ({ ...landing, canonicalPath: `/${landing.slug}` })),
+  );
 }
 
 export function getComunaPaths() {
-  return landingData.map((item) => item.slug);
+  const territorialPaths = getCoverageTerritories().map((territory) => territory.canonicalPath.slice(1));
+  const specialisedPaths = landingData
+    .map((landing) => landing.slug)
+    .filter((slug) => !territorialPaths.includes(slug));
+  return Array.from(new Set([...territorialPaths, ...specialisedPaths]));
 }
 
 export function buildComunaMetadata(data: ComunaLandingData): Metadata {

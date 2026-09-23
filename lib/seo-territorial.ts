@@ -3,6 +3,7 @@ import { mantaguaCanonicalPaths, resolveTerritorialPath } from "./territorial-ca
 
 import { createSeoLandingContent, stableHash, type SeoLandingContent } from "./seo-content-engine";
 import { buildCanonicalUrl, siteConfig } from "./site-config";
+import { territorialCoverage, type TerritoryComuna } from "./territory";
 
 export const MAX_PROGRAMMATIC_ROUTES = 300;
 
@@ -15,15 +16,7 @@ export const priorityProgrammaticComunas = [
   "renaca",
 ] as const;
 
-export type ComunaSeo = {
-  comuna: string;
-  slug: string;
-  landingPath: string;
-  sectores: string[];
-  tiposRed: string[];
-  clientes: string[];
-  contexto: string;
-};
+export type ComunaSeo = TerritoryComuna & { landingPath: string };
 
 export type ServicioSeo = {
   nombre: string;
@@ -148,173 +141,6 @@ export const recomendacionesTecnicasSeo = [
   "realizar prueba hidraulica posterior para confirmar recuperacion de flujo",
 ] as const;
 
-export const comunasSeo: ComunaSeo[] = [
-  {
-    comuna: "Vina del Mar",
-    slug: "vina-del-mar",
-    landingPath: "/destape-alcantarillado-vina-del-mar",
-    sectores: [
-      "Recreo",
-      "Forestal",
-      "Miraflores",
-      "Achupallas",
-      "Renaca",
-      "Gomez Carreno",
-      "Santa Ines",
-      "Chorrillos",
-      "El Olivar",
-      "Nueva Aurora",
-      "Glorias Navales",
-      "Vina Oriente",
-      "Villa Dulce",
-      "Agua Santa",
-    ],
-    tiposRed: ["redes verticales de edificios", "colectores horizontales", "camaras domiciliarias"],
-    clientes: ["administradores de edificios", "comunidades residenciales", "locales comerciales"],
-    contexto: "alta densidad residencial, edificios en altura y comercio activo",
-  },
-  {
-    comuna: "Valpara\u00edso",
-    slug: "valparaiso",
-    landingPath: "/destape-alcantarillado-valparaiso",
-    sectores: [
-      "Cerro Alegre",
-      "Cerro Concepcion",
-      "Cerro Baron",
-      "Cerro Placeres",
-      "Cerro Polanco",
-      "Cerro Cordillera",
-      "Cerro Artilleria",
-      "Cerro Mariposas",
-      "Cerro Bellavista",
-      "Cerro Florida",
-      "Cerro Merced",
-      "Cerro Toro",
-      "Cerro Larrain",
-      "Playa Ancha",
-    ],
-    tiposRed: ["redes con pendiente variable", "colectores antiguos", "edificios de uso mixto"],
-    clientes: ["comunidades", "comercios", "administradores de inmuebles"],
-    contexto: "topografia de cerros, redes antiguas y actividad comercial intensiva",
-  },
-  {
-    comuna: "Conc\u00f3n",
-    slug: "concon",
-    landingPath: "/hidrojet-concon",
-    sectores: [
-      "Bosques de Montemar",
-      "Costa de Montemar",
-      "Lomas de Montemar",
-      "Centro Conc\u00f3n",
-      "La Boca",
-      "Colmo",
-      "Mantagua",
-      "Rotonda Conc\u00f3n",
-      "Av. Conc\u00f3n-Renaca",
-    ],
-    tiposRed: ["desagues gastronomicos", "redes de condominios", "colectores costeros"],
-    clientes: ["restaurantes", "condominios", "administraciones premium"],
-    contexto: "carga gastronomica, condominios y sectores costeros de alta demanda",
-  },
-  {
-    comuna: "Quilpue",
-    slug: "quilpue",
-    landingPath: "/destape-alcantarillado-quilpue",
-    sectores: [
-      "Centro Quilpue",
-      "El Belloto Norte",
-      "El Belloto Sur",
-      "Los Pinos",
-      "Valencia",
-      "Marga Marga",
-      "Paso Hondo",
-      "Colliguay",
-      "Canal Chacao",
-      "Villa Olimpica",
-      "Sol del Pacifico",
-      "Retiro",
-    ],
-    tiposRed: ["camaras domiciliarias", "redes horizontales de condominios", "desagues comerciales"],
-    clientes: ["familias", "condominios", "locales de barrio"],
-    contexto: "crecimiento residencial, comercio local y redes con uso sostenido",
-  },
-  {
-    comuna: "Villa Alemana",
-    slug: "villa-alemana",
-    landingPath: "/destape-alcantarillado-villa-alemana",
-    sectores: [
-      "Centro Villa Alemana",
-      "Penablanca",
-      "Troncos Viejos",
-      "Villa Alemana Norte",
-      "Villa Alemana Sur",
-      "El Sauce",
-      "Quebrada Escobares",
-      "Las Americas",
-      "Nueva Esperanza",
-      "San Enrique",
-      "Villa Alemana Oriente",
-    ],
-    tiposRed: ["redes domiciliarias", "camaras de condominios", "tramos interiores de alto uso"],
-    clientes: ["clientes residenciales", "comunidades", "comercios de cercania"],
-    contexto: "uso residencial intenso, condominios y comercio de barrio",
-  },
-  {
-    comuna: "Quintero",
-    slug: "quintero",
-    landingPath: "/destape-alcantarillado-quintero",
-    sectores: ["Centro Quintero", "Loncura", "Ritoque", "Mantagua", "Santa Adela", "El Bato"],
-    tiposRed: ["redes costeras", "camaras domiciliarias", "desagues comerciales"],
-    clientes: ["viviendas", "comercios", "servicios costeros"],
-    contexto: "actividad costera, viviendas y redes con demanda estacional",
-  },
-  {
-    comuna: "Puchuncavi",
-    slug: "puchuncavi",
-    landingPath: "/destape-alcantarillado-puchuncavi",
-    sectores: ["Centro Puchuncavi", "Ventanas", "La Greda", "Maitencillo", "Horcon", "Campiche", "La Chocota", "Los Maitenes", "El Rungue"],
-    tiposRed: ["redes de uso mixto", "camaras con sedimentos", "desagues de temporada"],
-    clientes: ["condominios", "viviendas", "empresas de servicio"],
-    contexto: "sectores residenciales, costeros e industriales con uso variable",
-  },
-  {
-    comuna: "Limache",
-    slug: "limache",
-    landingPath: "/destape-alcantarillado-limache",
-    sectores: ["Centro Limache", "San Francisco de Limache", "Limache Viejo", "Los Laureles", "Tabolango", "Lliu Lliu", "Lo Gamboa"],
-    tiposRed: ["redes domiciliarias extensas", "camaras interiores", "tramos productivos"],
-    clientes: ["viviendas", "bodegas", "comercio local"],
-    contexto: "uso residencial y productivo con sectores de carga concentrada",
-  },
-  {
-    comuna: "Quillota",
-    slug: "quillota",
-    landingPath: "/destape-alcantarillado-quillota",
-    sectores: ["Centro Quillota", "San Pedro", "Boco", "La Palma", "Pocochay", "Manzanar", "Rauten"],
-    tiposRed: ["colectores urbanos", "camaras domiciliarias", "redes comerciales"],
-    clientes: ["edificios", "empresas", "viviendas"],
-    contexto: "actividad urbana, comercial y residencial con redes de alto uso",
-  },
-  {
-    comuna: "Placilla Curauma",
-    slug: "placilla-curauma",
-    landingPath: "/destape-alcantarillado-placilla-curauma",
-    sectores: ["Placilla", "Curauma", "Placilla Oriente", "Placilla Poniente", "Curauma Norte", "Curauma Sur", "Lago Penuelas", "Sector Universidad"],
-    tiposRed: ["redes compartidas de condominios", "camaras comunitarias", "desagues comerciales"],
-    clientes: ["condominios", "comunidades", "comercios"],
-    contexto: "expansion residencial y comercial con redes compartidas",
-  },
-  {
-    comuna: "Renaca",
-    slug: "renaca",
-    landingPath: "/destape-alcantarillado-renaca-vina-del-mar",
-    sectores: ["Renaca Centro", "Renaca Alto", "Jardin del Mar", "Los Almendros", "El Encanto", "Costa de Renaca", "Cochoa"],
-    tiposRed: ["redes costeras", "verticales de edificios", "desagues de comercio y turismo"],
-    clientes: ["edificios", "condominios", "locales gastronomicos"],
-    contexto: "zona costera con edificios, comercio y demanda estacional",
-  },
-];
-
 export const serviciosSeo: ServicioSeo[] = [
   {
     nombre: "Destape de alcantarillado",
@@ -425,6 +251,11 @@ export const reservedRootSlugs = [
   "urgencias-sanitarias-villa-alemana",
 ] as const;
 
+export const comunasSeo: readonly ComunaSeo[] = territorialCoverage.map((comuna) => ({
+  ...comuna,
+  landingPath: comuna.canonicalPath,
+}));
+
 const comunaMap = new Map(comunasSeo.map((comuna) => [comuna.slug, comuna] as const));
 const serviceMap = new Map(serviciosSeo.map((service) => [service.slug, service] as const));
 
@@ -446,14 +277,14 @@ function pickDeterministic<T>(items: readonly T[], seed: number): T {
   return items[seed % items.length];
 }
 
-function buildSeoRoute(comuna: ComunaSeo, service: ServicioSeo, sector: string): SeoRoute {
-  const sectorSlug = slugifySeo(sector);
-  const slug = createSeoSlug(service.slug, sector, comuna.slug);
+function buildSeoRoute(comuna: ComunaSeo, service: ServicioSeo, sector: ComunaSeo["sectores"][number]): SeoRoute {
+  const sectorSlug = sector.slug;
+  const slug = `${service.slug}-${sectorSlug}-${comuna.slug}`;
   const seed = stableHash(slug);
 
   return {
     slug,
-    sector,
+    sector: sector.name,
     sectorSlug,
     comuna,
     service,
@@ -497,14 +328,14 @@ export function getServicePagePath(service: ServicioSeo): string {
 
 export function getNearbySeoRoutes(route: SeoRoute, count = 3): SeoRoute[] {
   const sectors = route.comuna.sectores;
-  const currentIndex = sectors.indexOf(route.sector);
+  const currentIndex = sectors.findIndex((sector) => sector.name === route.sector);
 
   return sectors
     .map((sector, index) => ({ sector, distance: Math.abs(index - currentIndex) || sectors.length }))
-    .filter((item) => item.sector !== route.sector)
-    .sort((a, b) => a.distance - b.distance || a.sector.localeCompare(b.sector))
+    .filter((item) => item.sector.name !== route.sector)
+    .sort((a, b) => a.distance - b.distance || a.sector.name.localeCompare(b.sector.name))
     .slice(0, count)
-    .map((item) => getSeoRouteBySlug(resolveTerritorialPath(`/${createSeoSlug(route.service.slug, item.sector, route.comuna.slug)}`).slice(1)))
+    .map((item) => getSeoRouteBySlug(resolveTerritorialPath(`/${route.service.slug}-${item.sector.slug}-${route.comuna.slug}`).slice(1)))
     .filter((item): item is SeoRoute => item !== undefined);
 }
 

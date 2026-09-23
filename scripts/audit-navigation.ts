@@ -78,7 +78,7 @@ async function main() {
   const missing = navigationCoverage.flatMap((comuna) => {
     const published = new Set(getZonasByLandingSlug(comuna.landingPath.slice(1)).map((zone) => zone.nombre.toLowerCase()));
     const source = comunasSeo.find((item) => item.landingPath === comuna.landingPath);
-    const allRegisteredSectors = source?.sectores.map((sector) => ({ label: sector, href: "" })) ?? [];
+    const allRegisteredSectors = source?.sectores.map((sector) => ({ label: sector.name, href: "" })) ?? [];
     return allRegisteredSectors.filter((sector) => !published.has(sector.label.toLowerCase())).map((sector) => ({
       comuna: comuna.comuna,
       sector: sector.label,
