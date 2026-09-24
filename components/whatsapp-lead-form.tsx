@@ -1,14 +1,15 @@
 "use client";
 
-import { useMemo, useState, type ChangeEvent, type FormEvent } from "react";
+import { useMemo, useRef, useState, type ChangeEvent, type FormEvent } from "react";
 
 import { CheckCircle, FileText, MapPin, PhoneCall } from "@/components/icons";
 import { StaticPicture } from "@/components/static-picture";
 import { captureCampaignParams, trackCommercialEvent } from "@/lib/conversion";
+import { createWhatsAppConversionSubmitter } from "@/lib/google-ads";
 import { createDirectWhatsAppUrl } from "@/lib/site-config";
 import { territorialCoverage } from "@/lib/territory";
 
-type FormState = {
+export type WhatsAppLeadFormState = {
   name: string;
   propertyType: string;
   requestType: string;
@@ -21,7 +22,7 @@ type FormState = {
   terms: boolean;
 };
 
-const initialFormState: FormState = {
+const initialFormState: WhatsAppLeadFormState = {
   name: "",
   propertyType: "",
   requestType: "",
@@ -84,7 +85,7 @@ const evidenceOptions = [
 const fieldClassName =
   "min-h-11 rounded-lg border border-slate-300 bg-white px-3 py-2 text-base font-semibold text-slate-900 shadow-sm outline-none transition focus:border-sky-600 focus:ring-4 focus:ring-sky-100";
 
-function buildWhatsAppMessage(values: FormState) {
+function buildWhatsAppMessage(values: WhatsAppLeadFormState) {
   return [
     "Hola Hidrourgencias, solicito apoyo para un servicio sanitario.",
     "",
@@ -101,6 +102,20 @@ function buildWhatsAppMessage(values: FormState) {
     "",
     "Quedo atento para coordinación.",
   ].join("\n");
+}
+
+export function isWhatsAppLeadFormValid(values: WhatsAppLeadFormState) {
+  return Boolean(
+    values.name.trim() &&
+      values.propertyType &&
+      values.requestType &&
+      values.commune &&
+      values.sector.trim() &&
+      values.service &&
+      values.description.trim() &&
+      values.evidence &&
+      values.terms,
+  );
 }
 
 function getRequestGuidance(requestType: string) {
@@ -172,26 +187,17 @@ type WhatsAppLeadFormProps = {
 };
 
 export function WhatsAppLeadForm({ initialDescription = "", variant = "section", onClose }: WhatsAppLeadFormProps) {
-  const [values, setValues] = useState<FormState>(() => ({ ...initialFormState, description: initialDescription }));
+  const [values, setValues] = useState<WhatsAppLeadFormState>(() => ({ ...initialFormState, description: initialDescription }));
   const [showDiscardConfirm, setShowDiscardConfirm] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const conversionSubmitter = useRef(createWhatsAppConversionSubmitter());
   const isModal = variant === "modal";
   const requestGuidance = getRequestGuidance(values.requestType);
   const sectorOptions = sectorSuggestions[values.commune] ?? [];
   const hasEnteredInformation = Object.values(values).some((value) => (typeof value === "string" ? value.trim() : value));
 
   const isValid = useMemo(
-    () =>
-      Boolean(
-        values.name.trim() &&
-          values.propertyType &&
-          values.requestType &&
-          values.commune &&
-          values.sector.trim() &&
-          values.service &&
-          values.description.trim() &&
-          values.evidence &&
-          values.terms,
-      ),
+    () => isWhatsAppLeadFormValid(values),
     [values],
   );
 
@@ -213,9 +219,15 @@ export function WhatsAppLeadForm({ initialDescription = "", variant = "section",
     event.preventDefault();
     captureCampaignParams();
 
-    if (!isValid) return;
+    if (!isValid || isSubmitting) return;
 
     const message = buildWhatsAppMessage(values);
+    const whatsappUrl = createDirectWhatsAppUrl(message);
+    if (!whatsappUrl) return;
+
+    if (!conversionSubmitter.current(whatsappUrl)) return;
+    setIsSubmitting(true);
+
     trackCommercialEvent("whatsapp_form_submit", {
       event_category: "lead",
       event_label: "formulario_whatsapp_servicio",
@@ -227,7 +239,6 @@ export function WhatsAppLeadForm({ initialDescription = "", variant = "section",
       property_type: values.propertyType,
       contact_origin: initialDescription ? "contexto_precargado" : undefined,
     });
-    window.open(createDirectWhatsAppUrl(message), "_blank", "noopener,noreferrer");
   }
 
   return (
@@ -337,7 +348,7 @@ export function WhatsAppLeadForm({ initialDescription = "", variant = "section",
             <p id="whatsapp-form-status" className="min-h-5 text-sm font-extrabold text-rose-700" role="status">
               {!isValid ? "Completa los campos obligatorios para continuar" : ""}
             </p>
-            <button type="submit" disabled={!isValid} className="mt-2 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg bg-emerald-600 px-5 py-2.5 text-base font-black text-white shadow-[0_18px_40px_-24px_rgba(5,150,105,0.9)] transition hover:bg-emerald-700 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-200 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:text-slate-600 disabled:shadow-none" aria-disabled={!isValid}>
+            <button type="submit" disabled={!isValid || isSubmitting} className="mt-2 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg bg-emerald-600 px-5 py-2.5 text-base font-black text-white shadow-[0_18px_40px_-24px_rgba(5,150,105,0.9)] transition hover:bg-emerald-700 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-200 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:text-slate-600 disabled:shadow-none" aria-disabled={!isValid || isSubmitting}>
               <PhoneCall className="h-5 w-5" /> Enviar solicitud por WhatsApp
             </button>
           </div>
