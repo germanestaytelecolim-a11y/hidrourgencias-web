@@ -30,9 +30,9 @@
     "@types/js-yaml": "^4.0.9",
     "@vercel/blob": "^2.8.0",
     "bcryptjs": "^3.0.3",
-    "js-yaml": "^4.2.0",
+    "js-yaml": "4.3.2",
     "lucide-react": "^1.8.0",
-    "next": "16.2.3",
+    "next": "16.4.6",
     "postgres": "^3.4.9",
     "react": "19.2.4",
     "react-dom": "19.2.4"
@@ -43,9 +43,14 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.2.3",
+    "eslint-config-next": "16.4.6",
     "tailwindcss": "^4",
     "tsx": "^4.22.3",
     "typescript": "^5"
+  },
+  "overrides": {
+    "@vercel/cli-config": {
+      "zod": "4.6.7"
+    }
   }
 }
