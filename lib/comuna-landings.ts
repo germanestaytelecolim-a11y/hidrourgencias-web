@@ -72,6 +72,40 @@ export type ComunaLandingData = {
   visual?: ComunaLandingVisual;
 };
 
+const commercialLandingCopy: Partial<Record<string, {
+  h1: string;
+  metaTitle: string;
+  metaDescription: string;
+  heroIntro: string;
+  primaryCtaLabel: string;
+  ctaPrimaryMessage: string;
+}>> = {
+  "destape-alcantarillado-vina-del-mar": {
+    h1: "Destape de alcantarillado en Viña del Mar | Atención 24/7",
+    metaTitle: "Destape de alcantarillado en Viña del Mar 24/7",
+    metaDescription: "¿Rebalse o desagüe obstruido en Viña del Mar? Solicita diagnóstico y destape de alcantarillado para edificios, comercios y viviendas. Atención 24/7 por WhatsApp.",
+    heroIntro: "Si hay un rebalse, retorno de aguas servidas o desagüe obstruido en Viña del Mar, indícanos el sector y el punto afectado para coordinar una evaluación técnica. Atendemos edificios, comunidades, comercios y viviendas; el equipo y la intervención se definen según el acceso y el diagnóstico en terreno.",
+    primaryCtaLabel: "Solicitar destape por WhatsApp 24/7",
+    ctaPrimaryMessage: "Hola, necesito destape de alcantarillado en Viña del Mar. Sector: [indicar]. Punto afectado: [indicar]. ¿Pueden evaluar la urgencia?",
+  },
+  "destape-alcantarillado-valparaiso": {
+    h1: "Destape de alcantarillado en Valparaíso | Atención 24/7",
+    metaTitle: "Destape de alcantarillado en Valparaíso 24/7",
+    metaDescription: "Destape de alcantarillado en Valparaíso para rebalses y redes obstruidas en cerros, edificios y comercios. Coordina evaluación técnica 24/7 por WhatsApp.",
+    heroIntro: "Ante un rebalse o una red de alcantarillado obstruida en Valparaíso, comparte el cerro o sector, los accesos y los puntos afectados. Evaluamos la condición de la red antes de definir destape mecánico, hidrojet o inspección, especialmente en edificios y locales donde la falla interrumpe el uso sanitario.",
+    primaryCtaLabel: "Solicitar destape por WhatsApp 24/7",
+    ctaPrimaryMessage: "Hola, necesito destape de alcantarillado en Valparaíso. Cerro o sector: [indicar]. Punto afectado: [indicar]. ¿Pueden evaluar la urgencia?",
+  },
+  "destape-alcantarillado-quilpue": {
+    h1: "Destape de alcantarillado en Quilpué | Atención 24/7",
+    metaTitle: "Destape de alcantarillado en Quilpué 24/7",
+    metaDescription: "¿Alcantarillado tapado en Quilpué? Atención 24/7 para viviendas, condominios y comercios. Solicita diagnóstico y destape técnico por WhatsApp.",
+    heroIntro: "Si una cámara rebalsa o varios desagües fallan en Quilpué, indica si estás en el centro, Belloto u otro sector y describe el punto afectado. Coordinamos la evaluación de viviendas, condominios y comercios antes de escoger la técnica de destape apropiada.",
+    primaryCtaLabel: "Solicitar destape por WhatsApp 24/7",
+    ctaPrimaryMessage: "Hola, necesito destape de alcantarillado en Quilpué. Sector: [indicar]. Punto afectado: [indicar]. ¿Pueden evaluar la urgencia?",
+  },
+};
+
 const territorialVisuals: Record<string, ComunaLandingVisual> = {
   "destape-alcantarillado-casablanca": {
     treatment: "residential",
@@ -637,6 +671,8 @@ function buildFaq(profile: ComunaProfile): FaqItem[] {
 
 function buildLandingData(profile: ComunaProfile): ComunaLandingData {
   const presentation = buildPresentation(profile);
+  const commercialCopy = commercialLandingCopy[profile.slug];
+  if (commercialCopy) presentation.primaryCtaLabel = commercialCopy.primaryCtaLabel;
   const scope = buildScope(presentation.serviceName, profile.comuna);
   const naturalScope = buildNaturalScope(scope, profile.comuna);
   const technicalScope = scope.startsWith("destape de alcantarillado en ")
@@ -772,11 +808,11 @@ function buildLandingData(profile: ComunaProfile): ComunaLandingData {
   return {
     slug: profile.slug,
     comuna: profile.comuna,
-    h1,
-    metaTitle,
-    metaDescription,
+    h1: commercialCopy?.h1 ?? h1,
+    metaTitle: commercialCopy?.metaTitle ?? metaTitle,
+    metaDescription: commercialCopy?.metaDescription ?? metaDescription,
     heroParagraphs: [
-      `La atencion de ${scope} considera ${profile.localContext}. Para ${scope} se combinan diagnostico, tecnologia compatible y verificacion de flujo segun la condicion observada. La coordinacion de ${scope} busca recuperar continuidad sin ampliar innecesariamente el alcance.`,
+      commercialCopy?.heroIntro ?? `La atencion de ${scope} considera ${profile.localContext}. Para ${scope} se combinan diagnostico, tecnologia compatible y verificacion de flujo segun la condicion observada. La coordinacion de ${scope} busca recuperar continuidad sin ampliar innecesariamente el alcance.`,
       `En ${naturalScope}, los principales factores locales son ${riskList}. El diagnostico relaciona esos antecedentes con la red y el uso del inmueble. La decision tecnica se toma despues de identificar el punto o tramo que explica la falla.`,
       `${profile.operationNote} Desde el primer contacto se solicitan datos suficientes para preparar la visita. El cierre en ${profile.comuna} deja una recomendacion vinculada con la causa probable y la prueba realizada.`,
     ],
@@ -795,7 +831,7 @@ function buildLandingData(profile: ComunaProfile): ComunaLandingData {
     clientParagraph: `La atencion de ${naturalScope} esta orientada a ${clients}. Para estos clientes, la coordinacion de accesos y la trazabilidad tecnica son parte del resultado esperado.`,
     clientList: profile.clientFocus.map((item) => item),
     faq: buildFaq(profile),
-    ctaPrimaryMessage: `Hola, necesito solicitar ${scope}. Puedo indicar punto afectado y accesos disponibles.`,
+    ctaPrimaryMessage: commercialCopy?.ctaPrimaryMessage ?? `Hola, necesito solicitar ${scope}. Puedo indicar punto afectado y accesos disponibles.`,
     ctaMidMessage: `Hola, quiero cotizar una pauta preventiva asociada a la red sanitaria en ${profile.comuna}.`,
     ctaFinalMessage: `Hola, necesito coordinar una evaluacion sanitaria y compartir antecedentes del caso.`,
     presentation,
