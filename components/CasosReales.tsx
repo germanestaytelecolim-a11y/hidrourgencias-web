@@ -4,11 +4,16 @@ import type { CaseStudy } from "@/lib/case-studies";
 import type { PublicWorkCaseDto } from "@/lib/admin/public-work-cases";
 import { trackCommercialEvent } from "@/lib/conversion";
 
+export type HomeCaseStudy = Pick<
+  CaseStudy,
+  "slug" | "title" | "city" | "problem" | "equipment" | "result" | "featuredImage"
+> & { client: Pick<CaseStudy["client"], "name"> };
+
 export function CasosReales({
   cases = [],
   adminCases = [],
 }: {
-  cases?: CaseStudy[];
+  cases?: HomeCaseStudy[];
   adminCases?: PublicWorkCaseDto[];
 }) {
   // Published CMS cases have priority; deduplicate the legacy catalogue by slug.
