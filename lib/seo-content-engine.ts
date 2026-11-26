@@ -148,6 +148,75 @@ function getServicePhrase(route: SeoRoute, seed: number) {
 
 function applyExclusiveContent(route: SeoRoute, content: SeoLandingContent): SeoLandingContent {
   switch (route.slug) {
+    case "destape-verticales-forestal-vina-del-mar":
+      return {
+        ...content,
+        introParagraphs: [
+          "Cuando una bajada sanitaria de un edificio en Forestal afecta varios pisos, limpiar un artefacto aislado puede dejar intacto el bloqueo compartido. Para orientar el destape de verticales se identifican los pisos afectados, el primer punto con retorno y los accesos a la bajada.",
+          "La evaluación en Forestal, Viña del Mar, distingue una falla del ramal interior de una obstrucción en la vertical. La maniobra se define después de revisar el trazado y el acceso; al terminar se comparan las descargas de los puntos involucrados.",
+        ],
+        localHeading: "Cómo delimitar una bajada sanitaria afectada en Forestal",
+        localParagraphs: [
+          "Para coordinar una visita en Forestal conviene reunir el piso donde comenzó el problema, los artefactos que descargan lento y si otros departamentos comparten la falla. Esos datos ayudan a la administración a facilitar el acceso al tramo correcto.",
+          "Si el retorno aparece en niveles inferiores mientras los superiores descargan, se revisa la continuidad de la bajada y su conexión con la red horizontal. Si solo falla un artefacto, el diagnóstico puede orientarse al ramal local antes de intervenir la vertical.",
+        ],
+        problemIntro: "La señal que justifica revisar una vertical es la relación entre descargas de distintos pisos. Olor, retorno o drenaje lento se interpretan junto con el trazado y los accesos; ninguno confirma por sí solo la ubicación del bloqueo.",
+        procedureIntro: "Se registra qué pisos y puntos comparten la falla, se comprueban los accesos a la bajada y se elige el equipo compatible con el tramo. La verificación compara la evacuación de los puntos afectados después de la intervención.",
+        ctaHeading: "Coordinar evaluación de una bajada en Forestal",
+        ctaParagraph: "Indica el edificio o sector de Forestal, los pisos afectados, el primer punto con retorno y quién puede abrir los accesos técnicos. Con esos antecedentes se prepara la evaluación de la vertical.",
+        faq: [
+          { question: "¿Cómo saber si la falla está en la bajada y no en un WC?", answer: "Si varios artefactos o pisos comparten el problema, es necesario revisar la red común. El recorrido de descarga y los accesos permiten distinguir la vertical de un ramal interior." },
+          { question: "¿Qué accesos necesita el técnico para revisar una vertical?", answer: "Depende del edificio: pueden ser registros de la bajada, cámaras o puntos de descarga. La administración puede confirmar cuáles están disponibles antes de la visita." },
+          ...content.faq.slice(2),
+        ],
+      };
+
+    case "hidrojet-cerro-alegre-valparaiso":
+      return {
+        ...content,
+        introParagraphs: [
+          "El hidrojet puede limpiar grasa o sedimentos adheridos dentro de una red sanitaria en Cerro Alegre cuando el conducto admite agua a presión y existe un punto de descarga controlable. Antes de proponerlo se revisan material, diámetro, accesos y tipo de residuo probable.",
+          "En un local, comunidad o vivienda de Cerro Alegre, la limpieza se delimita por tramo. El objetivo es retirar la acumulación sin trasladarla a otra cámara y comparar el flujo después de la maniobra; una fisura o contrapendiente requiere otra evaluación.",
+        ],
+        localHeading: "Factibilidad de hidrojet en Cerro Alegre",
+        localParagraphs: [
+          "Para evaluar una red en Cerro Alegre se necesita ubicar la cámara o registro de entrada y el punto al que llegará el material removido. También conviene indicar si el problema reaparece y qué limpieza se intentó antes.",
+          "El diagnóstico separa una adherencia distribuida, que puede justificar limpieza hidrodinámica, de un objeto atrapado o una falla estructural. Presión, boquilla y avance se eligen según la condición del tramo; no se aplica la misma configuración a cualquier tubería.",
+        ],
+        problemIntro: "El hidrojet se considera cuando grasa, sarro o sedimentos reducen la capacidad de una red compatible. Un desagüe lento no basta para indicarlo: primero se identifica el tramo y se revisa si hay accesos y descarga segura.",
+        procedureIntro: "Se confirma el tramo y la factibilidad del conducto, se prepara la boquilla y el punto de recepción del residuo, y luego se limpia con pasadas controladas. El cierre compara el flujo y registra si hace falta inspección adicional.",
+        ctaHeading: "Consultar si una red de Cerro Alegre admite hidrojet",
+        ctaParagraph: "Comparte el tipo de inmueble, la ubicación de los registros, los síntomas y cualquier antecedente de limpiezas anteriores. Con esa información se coordina una evaluación de factibilidad.",
+        faq: [
+          { question: "¿El hidrojet sirve para cualquier tubería de Cerro Alegre?", answer: "No. Se revisan material, estado, diámetro, acceso y descarga antes de utilizar agua a presión." },
+          { question: "¿Cómo comprueban que la limpieza no trasladó el bloqueo?", answer: "Se controla el residuo en el punto de salida y se compara la evacuación entre accesos después de las pasadas de limpieza." },
+          ...content.faq.slice(2),
+        ],
+      };
+
+    case "destape-camaras-alcantarillado-colmo-concon":
+      return {
+        ...content,
+        introParagraphs: [
+          "Si una cámara de alcantarillado en Colmo sube de nivel o rebalsa, el diagnóstico debe identificar qué descarga recibe y si el tramo hacia la siguiente cámara mantiene continuidad. Limpiar solo la cámara visible puede dejar una obstrucción aguas abajo.",
+          "Para definir el destape se comparan niveles, accesos y comportamiento de los artefactos conectados. Según el residuo y el conducto, la maniobra puede requerir equipo mecánico o limpieza hidrodinámica; el resultado se comprueba con una descarga controlada.",
+        ],
+        localHeading: "Revisión de cámaras conectadas en Colmo",
+        localParagraphs: [
+          "Antes de la visita en Colmo conviene ubicar la cámara afectada, señalar si existe otra aguas abajo y precisar qué puntos del inmueble descargan hacia ella. Una fotografía del nivel, sin entrar ni manipular la cámara, puede ayudar a preparar el acceso.",
+          "La relación entre cámaras permite distinguir una acumulación dentro del registro de un bloqueo en el colector de salida. También se revisa cómo contener el agua y el material extraído para no desplazar el problema a otro punto de la red.",
+        ],
+        problemIntro: "Una cámara llena puede ser consecuencia de una obstrucción posterior, no necesariamente el origen de la falla. La evaluación compara niveles y sentido de descarga antes de seleccionar dónde intervenir.",
+        procedureIntro: "Se inspeccionan accesos y niveles entre cámaras, se delimita el tramo con pérdida de flujo y se retira o moviliza el material de forma controlada. Luego se verifica la descarga hacia el punto siguiente.",
+        ctaHeading: "Solicitar revisión de una cámara en Colmo",
+        ctaParagraph: "Indica la ubicación de la cámara, si rebalsa, qué artefactos dejaron de evacuar y si hay acceso a la cámara siguiente. Estos datos ayudan a preparar la evaluación del colector.",
+        faq: [
+          { question: "¿Basta con vaciar la cámara que rebalsa?", answer: "No siempre. Si el colector de salida está bloqueado, el nivel volverá a subir; se debe comprobar la continuidad hacia la siguiente cámara." },
+          { question: "¿Qué información ayuda a localizar el tramo afectado?", answer: "La ubicación de cámaras, su nivel, los puntos que descargan hacia ellas y el momento en que comenzó el rebalse orientan el diagnóstico." },
+          ...content.faq.slice(2),
+        ],
+      };
+
     case "destape-horizontales-cerro-bellavista-valparaiso":
       return {
         ...content,

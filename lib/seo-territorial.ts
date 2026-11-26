@@ -53,6 +53,33 @@ export type ExclusiveSeoIntent = {
 };
 
 const exclusiveSeoIntents: Record<string, ExclusiveSeoIntent> = {
+  "destape-verticales-forestal-vina-del-mar": {
+    intent: "Diagnóstico de bajadas sanitarias que afectan varios pisos",
+    service: "Destape de redes verticales",
+    ctaLabel: "Solicitar diagnóstico de bajada vertical",
+    whatsappMessage: "Hola, necesito evaluar una bajada sanitaria en Forestal, Viña del Mar. Puedo indicar los pisos y puntos afectados.",
+    h1: "Destape de verticales en Forestal, Viña del Mar",
+    title: "Destape de verticales en Forestal | Bajadas sanitarias",
+    description: "¿Hay retorno o descarga lenta en varios pisos de un edificio en Forestal? Evaluamos la bajada sanitaria, sus accesos y el tramo afectado antes del destape.",
+  },
+  "hidrojet-cerro-alegre-valparaiso": {
+    intent: "Limpieza hidrodinámica de adherencias en redes compatibles",
+    service: "Limpieza de redes con hidrojet",
+    ctaLabel: "Consultar limpieza de red con hidrojet",
+    whatsappMessage: "Hola, necesito evaluar hidrojet para una red en Cerro Alegre, Valparaíso. Puedo indicar accesos, tipo de inmueble y síntomas.",
+    h1: "Hidrojet en Cerro Alegre, Valparaíso",
+    title: "Hidrojet en Cerro Alegre | Limpieza técnica de redes",
+    description: "Hidrojet en Cerro Alegre para redes con grasa o sedimentos adheridos, sujeto a revisión de material, acceso y descarga. Consulta una evaluación técnica.",
+  },
+  "destape-camaras-alcantarillado-colmo-concon": {
+    intent: "Diagnóstico de cámaras y continuidad entre colectores",
+    service: "Destape de cámaras de alcantarillado",
+    ctaLabel: "Solicitar revisión de cámara sanitaria",
+    whatsappMessage: "Hola, necesito revisar una cámara de alcantarillado en Colmo, Concón. Puedo indicar su ubicación, nivel y puntos de descarga.",
+    h1: "Destape de cámaras de alcantarillado en Colmo, Concón",
+    title: "Destape de cámaras en Colmo | Alcantarillado en Concón",
+    description: "¿Una cámara de alcantarillado rebalsa en Colmo? Revisamos accesos y continuidad de descarga antes de definir el destape y comprobar el flujo.",
+  },
   "destape-horizontales-cerro-bellavista-valparaiso": {
     intent: "Diagnostico y despeje de colectores, ramales horizontales y camaras",
     service: "Destape de redes horizontales",

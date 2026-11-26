@@ -40,6 +40,21 @@ const equipmentBenefits: Record<string, string> = {
     "Diagnostico visual de fisuras, contrapendientes, raices, deformaciones y puntos criticos antes o despues del destape.",
 };
 
+const pilotRelatedRoutes: Record<string, { href: string; label: string }> = {
+  "destape-verticales-forestal-vina-del-mar": {
+    href: "/destape-alcantarillado-forestal-vina-del-mar",
+    label: "Destape de alcantarillado en Forestal",
+  },
+  "hidrojet-cerro-alegre-valparaiso": {
+    href: "/destape-camaras-alcantarillado-cerro-alegre-valparaiso",
+    label: "Revisión de cámaras en Cerro Alegre",
+  },
+  "destape-camaras-alcantarillado-colmo-concon": {
+    href: "/hidrojet-colmo-concon",
+    label: "Limpieza con hidrojet en Colmo",
+  },
+};
+
 const exclusiveProblemItems: Record<string, string[]> = {
   "destape-horizontales-cerro-bellavista-valparaiso": [
     "colector detenido entre dos camaras",
@@ -94,6 +109,7 @@ export function SeoServiceAreaLanding({ route }: Props) {
   const ctaLabel = buildProgrammaticCtaLabel(route);
   const exclusiveIntent = getExclusiveSeoIntent(route);
   const servicePath = getServicePagePath(route.service);
+  const relatedRoute = pilotRelatedRoutes[route.slug];
   const h1 = buildSeoH1(route);
   const problemItems =
     exclusiveProblemItems[route.slug] ??
@@ -332,6 +348,12 @@ export function SeoServiceAreaLanding({ route }: Props) {
                 {route.service.nombre}
                 <ArrowRight className="h-4 w-4 text-sky-700" />
               </Link>
+              {relatedRoute ? (
+                <Link href={relatedRoute.href} className="mt-2 inline-flex w-full items-center justify-between rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-900 transition hover:border-sky-300 hover:bg-white">
+                  {relatedRoute.label}
+                  <ArrowRight className="h-4 w-4 text-sky-700" />
+                </Link>
+              ) : null}
             </article>
             <article>
               <h3 className="text-base font-extrabold text-slate-950">{content.nearbyCoverageHeading}</h3>
