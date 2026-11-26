@@ -2,6 +2,7 @@ import Head from "next/head";
 import type { GetServerSideProps } from "next";
 
 import HomePageContent, { type HomePageCmsContent } from "@/components/HomePageContent";
+import type { HomeCaseStudy } from "@/components/CasosReales";
 import { GoogleAdsConversionTracking } from "@/components/google-ads-conversion-tracking";
 import { ServiceTermsSection } from "@/components/service-terms";
 import { SiteHeader } from "@/components/site-header";
@@ -115,6 +116,30 @@ export const getServerSideProps: GetServerSideProps<HomePageProps> = async () =>
   const clients = Array.from(
     new Map([...getCmsClients(), ...getCmsHighlightedClients()].map((client) => [client.name, client] as const)).values(),
   );
+  const adminCases = await getPublicWorkCasesForPath("/", 3);
+  const cases: HomeCaseStudy[] = getAllCaseStudies()
+    .filter((item) => !adminCases.some((adminCase) => adminCase.slug === item.slug))
+    .slice(0, Math.max(0, 3 - adminCases.length))
+    .map((item) => ({
+      slug: item.slug,
+      title: item.title,
+      city: item.city,
+      client: { name: item.client.name },
+      problem: item.problem,
+      equipment: item.equipment.slice(0, 2),
+      result: item.result,
+      featuredImage: item.featuredImage,
+    }));
+  const blogPosts = (await getPublicBlogPosts())
+    .filter((post, index) =>
+      index < 3 ||
+      [
+        "que-revisar-alcantarillado-antes-comprar-propiedad",
+        "vicios-ocultos-sanitarios-alcantarillado-desagues",
+        "videoinspeccion-sanitaria-antes-invertir-propiedad",
+      ].includes(post.slug),
+    )
+    .map(({ slug, title }) => ({ slug, title }));
 
   return {
     props: {
@@ -132,9 +157,9 @@ export const getServerSideProps: GetServerSideProps<HomePageProps> = async () =>
         commercialBlocks: getCmsCommercialBlocks(),
         galleryItems: getCmsGalleryEntries(),
         videos: getCmsVideoEntries(),
-        cases: getAllCaseStudies(),
-        adminCases: await getPublicWorkCasesForPath("/", 6),
-        blogPosts: await getPublicBlogPosts(),
+        cases,
+        adminCases,
+        blogPosts,
       },
     },
   };

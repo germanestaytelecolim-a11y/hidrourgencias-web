@@ -13,7 +13,7 @@ import {
 import { HeroUrgencias } from "@/components/HeroUrgencias";
 import { ServiciosGrid } from "@/components/ServiciosGrid";
 import { ProcesoOperativo } from "@/components/ProcesoOperativo";
-import { CasosReales } from "@/components/CasosReales";
+import { CasosReales, type HomeCaseStudy } from "@/components/CasosReales";
 import {
   HomeLeadPaths,
   HomeMobileBar,
@@ -24,7 +24,6 @@ import {
   type HomeCoverage,
 } from "@/components/home-service-finder";
 import { WhatsAppLeadFormModal } from "@/components/whatsapp-lead-form-modal";
-import type { BlogPost } from "@/lib/blog-data";
 import type {
   CmsClientItem,
   CmsCommercialBlock,
@@ -34,7 +33,6 @@ import type {
   CmsHomeSettings,
   CmsVideoEntry,
 } from "@/lib/cms-content";
-import type { CaseStudy } from "@/lib/case-studies";
 import type { PublicWorkCaseDto } from "@/lib/admin/public-work-cases";
 import {
   GOOGLE_REVIEWS_URL,
@@ -53,9 +51,9 @@ export type HomePageCmsContent = {
   commercialBlocks: CmsCommercialBlock[];
   galleryItems: CmsGalleryEntry[];
   videos: CmsVideoEntry[];
-  cases: CaseStudy[];
+  cases: HomeCaseStudy[];
   adminCases: PublicWorkCaseDto[];
-  blogPosts: BlogPost[];
+  blogPosts: Array<{ slug: string; title: string }>;
   coverage: HomeCoverage;
 };
 
@@ -232,17 +230,7 @@ export default function HomePage({ cmsContent }: HomePageContentProps) {
         <details id="blog" className="home-resource-links">
           <summary>Guías técnicas para administradores y propietarios</summary>
           <div>
-            {(cmsContent?.blogPosts ?? [])
-              .filter(
-                (post, index) =>
-                  index < 3 ||
-                  [
-                    "que-revisar-alcantarillado-antes-comprar-propiedad",
-                    "vicios-ocultos-sanitarios-alcantarillado-desagues",
-                    "videoinspeccion-sanitaria-antes-invertir-propiedad",
-                  ].includes(post.slug),
-              )
-              .map((post) => (
+            {(cmsContent?.blogPosts ?? []).map((post) => (
                 <Link
                   key={post.slug}
                   href={`/blog/${post.slug}`}
