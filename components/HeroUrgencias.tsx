@@ -7,9 +7,15 @@ import {
 } from "lucide-react";
 import { CommercialChoices } from "@/components/commercial-entry";
 import type { CmsHomeSettings } from "@/lib/cms-content";
-import { siteConfig } from "@/lib/site-config";
+
 
 export function HeroUrgencias({ settings }: { settings?: CmsHomeSettings }) {
+  const approvedImage = "/images/commercial/servicio-aprobado-768.webp";
+  const heroImage = settings?.heroImage?.trim() || approvedImage;
+  const approved = heroImage === approvedImage;
+  const heroAlt = settings?.heroImageAlt?.trim() || (approved
+    ? "Imagen comercial ilustrativa de atención sanitaria Hidrourgencias con equipo de destape"
+    : "Imagen de atención sanitaria configurada por Hidrourgencias");
   return (
     <section className="home-hero" aria-labelledby="home-title">
       <div className="home-hero-inner">
@@ -40,9 +46,7 @@ export function HeroUrgencias({ settings }: { settings?: CmsHomeSettings }) {
           <p className="home-slogan">
             {settings?.heroSubtitle || "No intentamos, solucionamos."}
           </p>
-          <a href={siteConfig.phoneHref} className="home-hero-call">
-            Llamar
-          </a>
+
           <ul className="home-hero-facts">
             <li>
               <Clock3 aria-hidden="true" />
@@ -65,10 +69,17 @@ export function HeroUrgencias({ settings }: { settings?: CmsHomeSettings }) {
         <figure className="home-hero-photo">
           <picture className="home-approved-picture">
             <img
-              src="/images/commercial/servicio-aprobado-768.webp"
-              srcSet="/images/commercial/servicio-aprobado-480.webp 480w, /images/commercial/servicio-aprobado-768.webp 768w, /images/commercial/servicio-aprobado-1254.webp 1254w"
+              src={heroImage}
+              srcSet={approved ? "/images/commercial/servicio-aprobado-480.webp 480w, /images/commercial/servicio-aprobado-768.webp 768w, /images/commercial/servicio-aprobado-1254.webp 1254w" : undefined}
               sizes="(min-width: 1024px) 40vw, (min-width: 640px) 80vw, calc(100vw - 32px)"
-              alt="Imagen comercial ilustrativa de atención sanitaria Hidrourgencias con equipo de destape"
+              alt={heroAlt}
+              onError={event => {
+                const image = event.currentTarget;
+                if (image.getAttribute("src") === approvedImage) return;
+                image.removeAttribute("srcset");
+                image.src = approvedImage;
+                image.alt = "Imagen comercial ilustrativa de atención sanitaria Hidrourgencias";
+              }}
               width={1254}
               height={1254}
               className="home-hero-image"
@@ -77,7 +88,7 @@ export function HeroUrgencias({ settings }: { settings?: CmsHomeSettings }) {
               decoding="async"
             />
           </picture>
-          <figcaption>Hidrourgencias SpA · Imagen comercial ilustrativa</figcaption>
+          <figcaption>Hidrourgencias SpA{approved ? " · Imagen comercial ilustrativa" : ""}</figcaption>
         </figure>
       </div>
     </section>

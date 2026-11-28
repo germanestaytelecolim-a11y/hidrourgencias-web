@@ -44,7 +44,8 @@ function getBrowserEnvironment(): WhatsAppConversionEnvironment | null {
 }
 
 /**
- * Reports the final WhatsApp lead conversion and then navigates to WhatsApp.
+ * Reports the existing Ads WhatsApp click action and then navigates to WhatsApp.
+ * This does not confirm that a message was sent, received, or contracted.
  *
  * The blank window is intentionally reserved during the user gesture so that
  * callback- and timeout-based navigation keeps the existing new-tab behavior

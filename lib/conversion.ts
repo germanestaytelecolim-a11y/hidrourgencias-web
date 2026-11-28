@@ -73,3 +73,21 @@ declare global {
     gtag?: (...args: unknown[]) => void;
   }
 }
+
+/** Form events contain only an allowlisted flow and stage, never field/campaign data.
+ * gtag already queues in dataLayer; use one transport to avoid duplicate events.
+ */
+export function trackCommercialFormEvent(
+  event: "commercial_form_open" | "commercial_whatsapp_click",
+  mode: "urgent" | "quote",
+) {
+  if (typeof window === "undefined") return;
+  const payload = { form_type: mode, contact_stage: event === "commercial_form_open" ? "form_open" : "whatsapp_click" };
+  try {
+    if (typeof window.gtag === "function") window.gtag("event", event, payload);
+    else {
+      window.dataLayer = window.dataLayer ?? [];
+      window.dataLayer.push({ event, ...payload });
+    }
+  } catch { /* Tracking must never block contact or read stored personal data. */ }
+}

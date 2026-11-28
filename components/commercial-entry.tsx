@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { COMMERCIAL_EVENT, COMMERCIAL_SESSION, TERMS_URL, TERMS_VERSION, commercialWhatsAppUrl, emptyCommercialFields, isLanding, openCommercialEntry, quoteServices, urgencyTypes, type CommercialFields, type CommercialMode } from "@/lib/commercial-entry";
+import { trackCommercialFormEvent } from "@/lib/conversion";
+import { createWhatsAppConversionSubmitter } from "@/lib/google-ads";
 import { serviceTerms, serviceTermsNoticeSummary } from "@/components/service-terms";
 export function CommercialChoices() {
     return <div className="commercial-choices">
@@ -13,15 +15,17 @@ function CommercialForm({ mode }: {
 }) {
     const [fields, setFields] = useState<CommercialFields>({ ...emptyCommercialFields });
     const [opened, setOpened] = useState(false);
+    const conversionSubmitter = useRef(createWhatsAppConversionSubmitter());
     function input(key: keyof CommercialFields, label: string, required = false, type = "text") {
-        return <label>{label}{required ? " *" : " (opcional)"}<input name={key} type={type} required={required} maxLength={key === "address" ? 240 : 120} autoComplete={key === "name" ? "name" : key === "email" ? "email" : key === "phone" ? "tel" : "off"} value={String(fields[key])} onChange={e => { setOpened(false); setFields({ ...fields, [key]: e.target.value }); }}/></label>;
+        return <label>{label}{required ? " *" : " (opcional)"}<input name={key} type={type} required={required} maxLength={key === "address" ? 240 : 120} autoComplete={key === "name" ? "name" : key === "email" ? "email" : key === "phone" ? "tel" : "off"} value={String(fields[key])} onChange={e => { setFields({ ...fields, [key]: e.target.value }); }}/></label>;
     }
     function submit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
         const url = commercialWhatsAppUrl(mode, fields);
         if (!url)
             return;
-        window.open(url, "_blank", "noopener,noreferrer");
+        if (!conversionSubmitter.current(url)) return;
+        trackCommercialFormEvent("commercial_whatsapp_click", mode);
         setOpened(true);
     }
     return <form className="commercial-form" onSubmit={submit}>
@@ -34,8 +38,8 @@ function CommercialForm({ mode }: {
     <label>Descripción breve de la situación o solicitud *<textarea name="description" required maxLength={1200} rows={3} value={fields.description} onChange={e => setFields({ ...fields, description: e.target.value })}/></label>
     {<><p className="commercial-notice">{serviceTermsNoticeSummary} La movilización, diagnóstico y recursos ejecutados en terreno están sujetos a cobro según los términos. La atención depende de disponibilidad y confirmación del equipo.</p><details><summary>Leer términos y condiciones vigentes</summary><p>Referencia del texto: {TERMS_VERSION}</p>{serviceTerms.map(term => <p key={term}>{term}</p>)}<a href={TERMS_URL} target="_blank" rel="noopener noreferrer">Ver documento en el sitio (otra pestaña)</a></details><label className="commercial-consent"><input name="terms" type="checkbox" required checked={fields.terms} onChange={e => setFields({ ...fields, terms: e.target.checked })}/>Declaro haber leído y aceptado los términos y condiciones aplicables a la evaluación y prestación de servicios de Hidrourgencias SpA.</label></>}
     <p>Se abrirá WhatsApp con un mensaje preparado. Debes enviarlo manualmente. Abrir WhatsApp no confirma la recepción ni la aceptación del servicio por la empresa.</p>
-    <button className="commercial-submit" type="submit">{mode === "urgent" ? "ENVIAR SOLICITUD URGENTE POR WHATSAPP" : "SOLICITAR COTIZACIÓN POR WHATSAPP"}</button>
-    {opened && <p role="status">Mensaje preparado. Completa el envío en WhatsApp; si no se abrió, permite la ventana emergente y vuelve a pulsar el botón.</p>}
+    <button className="commercial-submit" type="submit" disabled={opened}>{mode === "urgent" ? "ENVIAR SOLICITUD URGENTE POR WHATSAPP" : "SOLICITAR COTIZACIÓN POR WHATSAPP"}</button>
+    {opened && <p role="status">Mensaje preparado. Completa el envío en WhatsApp. Esto no acredita un envío confirmado; si necesitas reintentar, cierra y vuelve a abrir el formulario.</p>}
   </form>;
 }
 export function CommercialEntry({ pathname }: {
@@ -44,6 +48,7 @@ export function CommercialEntry({ pathname }: {
     const dialog = useRef<HTMLDialogElement>(null);
     const previousFocus = useRef<HTMLElement | null>(null);
     const [mode, setMode] = useState<CommercialMode | "welcome">("welcome");
+    const [formInstance, setFormInstance] = useState(0);
     const excluded = /^\/(?:admin|api|cms|acceso-administradores-empresas)(?:\/|$)/.test(pathname);
     useEffect(() => {
         if (excluded)
@@ -57,6 +62,8 @@ export function CommercialEntry({ pathname }: {
             remember();
             previousFocus.current = document.activeElement as HTMLElement;
             setMode(next);
+            setFormInstance(instance => instance + 1);
+            if (next !== "welcome") trackCommercialFormEvent("commercial_form_open", next);
             dialog.current?.showModal();
         }
         function open(event: Event) { const next = (event as CustomEvent).detail; if (next === "urgent" || next === "quote")
@@ -83,7 +90,7 @@ export function CommercialEntry({ pathname }: {
     <dialog className="commercial-dialog" ref={dialog} aria-labelledby="commercial-title" onClose={() => previousFocus.current?.focus()} onClick={e => { if (e.target === e.currentTarget)
         dialog.current?.close(); }}>
       <header><h2 id="commercial-title">{mode === "welcome" ? "¿Cómo podemos ayudarte?" : mode === "urgent" ? "Tengo una urgencia sanitaria" : "Consultar o solicitar cotización"}</h2><button autoFocus type="button" onClick={() => dialog.current?.close()} aria-label="Cerrar acceso comercial">Cerrar ×</button></header>
-      {mode === "welcome" ? <CommercialChoices /> : <CommercialForm key={mode} mode={mode}/>}
+      {mode === "welcome" ? <CommercialChoices /> : <CommercialForm key={`${mode}-${formInstance}`} mode={mode}/>}
     </dialog>
   </>;
 }
