@@ -14,7 +14,7 @@ export const serviceTerms = [
   "Cuando durante la ejecución se detecten condiciones no visibles previamente, Hidrourgencias SpA podrá recomendar procedimientos adicionales. Ningún trabajo adicional será ejecutado sin autorización previa del cliente, salvo situaciones que impliquen riesgo sanitario inminente para las personas o la propiedad.",
   "La garantía aplica únicamente sobre la intervención realizada y exclusivamente cuando la causa de la obstrucción corresponda al mismo punto tratado. La garantía no será aplicable cuando existan daños estructurales, mal uso de la red sanitaria, ingreso de objetos extraños, acumulación de grasas posterior al servicio, raíces o cualquier condición ajena a la intervención efectuada.",
   "La prestación de servicios técnicos ejecutados en terreno genera la obligación de pago correspondiente, independientemente de que posteriormente se determine la existencia de daños estructurales o condiciones que requieran reparaciones adicionales.",
-  "Al solicitar una visita técnica, cotización, llamada telefónica, contacto vía WhatsApp, formulario web o contratación de servicios, el cliente declara haber leído y aceptado los presentes términos y condiciones.",
+  "La aceptación de los presentes términos y condiciones debe ser expresa. El solo hecho de visitar el sitio, solicitar información, llamar o abrir WhatsApp no constituye aceptación. En los formularios web, el solicitante debe marcar voluntariamente la casilla de aceptación antes de continuar.",
 ];
 
 type ServiceTermsNoticeProps = {

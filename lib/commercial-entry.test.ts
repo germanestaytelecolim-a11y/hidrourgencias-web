@@ -14,12 +14,15 @@ test("urgencia requiere cada antecedente y aceptación expresa", () => {
     assert.ok(url.searchParams.get("text")!.includes(TERMS_URL));
 });
 test("cotización tiene mensaje independiente y campos opcionales vacíos", () => {
-    const quote = { ...fields, category: quoteServices[0], property: "Vivienda", address: "", terms: false };
+    const quote = { ...fields, category: quoteServices[0], property: "Vivienda", address: "", terms: true };
     assert.ok(validCommercialFields("quote", quote));
     assert.equal(validCommercialFields("quote", { ...quote, property: "" }), false);
+    assert.equal(commercialWhatsAppUrl("quote", { ...quote, terms: false }), null);
     const message = new URL(commercialWhatsAppUrl("quote", quote)!).searchParams.get("text")!;
     assert.match(message, /CONSULTA \/ SOLICITUD DE COTIZACIÓN/);
-    assert.doesNotMatch(message, /Dirección del servicio|Declaro haber|Correo:/);
+    assert.doesNotMatch(message, /Dirección del servicio|Correo:/);
+    assert.ok(message.includes(TERMS_VERSION));
+    assert.ok(message.includes(TERMS_URL));
 });
 test("bienvenida limitada a landings; nunca administración ni portada", () => {
     for (const route of ["/destape-alcantarillado-quillota", "/servicios/hidrojet", "/hidrojet-concon"])

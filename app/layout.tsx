@@ -31,7 +31,7 @@ const rajdhani = Rajdhani({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   applicationName: "Hidrourgencias",
-  icons: { icon: "/favicon.ico", apple: "/apple-touch-icon.png" },
+  icons: { icon: [{ url: "/favicon.ico?v=hu-final-20261128", sizes: "any" }, { url: "/favicon-96.png?v=hu-final-20261128", type: "image/png", sizes: "96x96" }], apple: "/apple-touch-icon.png?v=hu-final-20261128" },
   title: {
     default: "Hidrourgencias SpA | Destape de alcantarillado, hidrojet y urgencias sanitarias",
     template: "%s | Hidrourgencias SpA",

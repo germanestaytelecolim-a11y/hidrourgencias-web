@@ -2,3 +2,6 @@
 
 html:has(.commercial-dialog[open]){overflow:hidden}.commercial-dialog header{position:sticky;top:-24px;background:white;z-index:2;padding-block:8px}.commercial-reopen--home{bottom:12px}@media(max-width:600px){.commercial-dialog header{top:-18px}.commercial-reopen--home{bottom:12px}.home-page .home-hero h1{font-size:1.8rem}}
 .home-page .home-hero-photo{align-self:stretch;min-height:420px}
+
+.home-page .home-hero-photo{display:block;align-self:center;min-height:0;max-height:none;aspect-ratio:1;background:#103c4c;padding-bottom:46px}.home-page .home-approved-picture{display:block;width:100%;height:auto;position:static}.home-page .home-hero-image{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:contain;object-position:center}.home-page .home-hero-photo figcaption{padding:12px;font-size:.75rem;line-height:1.4}@media(min-width:1024px){.home-page .home-approved-picture{position:static}}
+.home-page .home-hero-photo{aspect-ratio:auto}

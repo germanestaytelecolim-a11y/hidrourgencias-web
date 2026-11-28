@@ -5,7 +5,6 @@ import {
   Wrench,
   FileText,
 } from "lucide-react";
-import { StaticPicture } from "@/components/static-picture";
 import { CommercialChoices } from "@/components/commercial-entry";
 import type { CmsHomeSettings } from "@/lib/cms-content";
 import { siteConfig } from "@/lib/site-config";
@@ -64,22 +63,21 @@ export function HeroUrgencias({ settings }: { settings?: CmsHomeSettings }) {
           </ul>
         </div>
         <figure className="home-hero-photo">
-          <StaticPicture
-            src={
-              settings?.heroImage ||
-              "/images/PRINCIPAL/WhatsApp Image 2026-05-24 at 3.54.35 AM.webp"
-            }
-            alt={
-              settings?.heroImageAlt ||
-              "Intervención con máquina eléctrica en una cámara de alcantarillado"
-            }
-            width={899}
-            height={1599}
-            className="home-hero-image"
-            loading="eager"
-            fetchPriority="high"
-          />
-          <figcaption>Maquinaria especializada · Trabajo en terreno</figcaption>
+          <picture className="home-approved-picture">
+            <img
+              src="/images/commercial/servicio-aprobado-768.webp"
+              srcSet="/images/commercial/servicio-aprobado-480.webp 480w, /images/commercial/servicio-aprobado-768.webp 768w, /images/commercial/servicio-aprobado-1254.webp 1254w"
+              sizes="(min-width: 1024px) 40vw, (min-width: 640px) 80vw, calc(100vw - 32px)"
+              alt="Imagen comercial ilustrativa de atención sanitaria Hidrourgencias con equipo de destape"
+              width={1254}
+              height={1254}
+              className="home-hero-image"
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+            />
+          </picture>
+          <figcaption>Hidrourgencias SpA · Imagen comercial ilustrativa</figcaption>
         </figure>
       </div>
     </section>
