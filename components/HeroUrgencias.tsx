@@ -1,5 +1,4 @@
 import {
-  MessageCircle,
   ArrowRight,
   Clock3,
   MapPin,
@@ -7,7 +6,7 @@ import {
   FileText,
 } from "lucide-react";
 import { StaticPicture } from "@/components/static-picture";
-import { HomeWhatsAppLink } from "@/components/home-contact";
+import { CommercialChoices } from "@/components/commercial-entry";
 import type { CmsHomeSettings } from "@/lib/cms-content";
 import { siteConfig } from "@/lib/site-config";
 
@@ -23,6 +22,16 @@ export function HeroUrgencias({ settings }: { settings?: CmsHomeSettings }) {
             {settings?.heroTitle ||
               "Destape de alcantarillado, hidrojet y mantenimiento técnico de redes sanitarias"}
           </h1>
+          <div className="home-actions">
+            <CommercialChoices />
+            <a
+              href="#servicio-cobertura"
+              className="home-button home-button--light"
+            >
+              Ver servicios y cobertura{" "}
+              <ArrowRight size={18} aria-hidden="true" />
+            </a>
+          </div>
           <p className="home-hero-description">
             Intervenimos desagües, redes de alcantarillado y cámaras de
             alcantarillado con maquinaria especializada, hidrojet y
@@ -32,19 +41,6 @@ export function HeroUrgencias({ settings }: { settings?: CmsHomeSettings }) {
           <p className="home-slogan">
             {settings?.heroSubtitle || "No intentamos, solucionamos."}
           </p>
-          <div className="home-actions">
-            <HomeWhatsAppLink location="home_hero">
-              <MessageCircle size={19} aria-hidden="true" />
-              Solicitar atención por WhatsApp
-            </HomeWhatsAppLink>
-            <a
-              href="#servicio-cobertura"
-              className="home-button home-button--light"
-            >
-              Ver servicios y cobertura{" "}
-              <ArrowRight size={18} aria-hidden="true" />
-            </a>
-          </div>
           <a href={siteConfig.phoneHref} className="home-hero-call">
             Llamar
           </a>

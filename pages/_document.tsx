@@ -6,6 +6,8 @@ export default function Document() {
   return (
     <Html lang="es-CL" suppressHydrationWarning>
       <Head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </Head>
       <body>

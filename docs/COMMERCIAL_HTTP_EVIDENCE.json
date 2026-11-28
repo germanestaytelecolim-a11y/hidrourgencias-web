@@ -1,0 +1,64 @@
+{
+  "base": "7e9a238 (árbol de f87a476)",
+  "runtime": "v24.22.3",
+  "generatedAt": "2026-11-28T03:25:35.256Z",
+  "before": {
+    "html": 305240,
+    "nextData": 119352,
+    "compressed": 37502,
+    "encoding": "gzip"
+  },
+  "after": {
+    "html": 305298,
+    "nextData": 119352,
+    "compressed": 37995,
+    "encoding": "gzip"
+  },
+  "propsUnchanged": true,
+  "routes": [
+    {
+      "path": "/",
+      "status": 200
+    },
+    {
+      "path": "/servicios",
+      "status": 200
+    },
+    {
+      "path": "/cobertura",
+      "status": 200
+    },
+    {
+      "path": "/contacto",
+      "status": 200
+    },
+    {
+      "path": "/destape-alcantarillado-quillota",
+      "status": 200
+    },
+    {
+      "path": "/servicios/hidrojet",
+      "status": 200
+    },
+    {
+      "path": "/destape-alcantarillado-forestal-vina-del-mar",
+      "status": 200
+    },
+    {
+      "path": "/robots.txt",
+      "status": 200
+    },
+    {
+      "path": "/sitemap.xml",
+      "status": 200
+    },
+    {
+      "path": "/favicon.ico",
+      "status": 200
+    },
+    {
+      "path": "/apple-touch-icon.png",
+      "status": 200
+    }
+  ]
+}

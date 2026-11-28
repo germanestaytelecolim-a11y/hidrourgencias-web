@@ -10,6 +10,7 @@ import { createWhatsAppUrl } from "@/lib/site-config";
 import { themeInitScript, themeToggleScript } from "@/lib/theme-scripts";
 
 import "./globals.css";
+import "@/styles/commercial-entry.css";
 
 const siteUrl = "https://hidrourgencias.cl";
 const ogImage = "/images/hero-urgencia.jpg";
@@ -30,6 +31,7 @@ const rajdhani = Rajdhani({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   applicationName: "Hidrourgencias",
+  icons: { icon: "/favicon.ico", apple: "/apple-touch-icon.png" },
   title: {
     default: "Hidrourgencias SpA | Destape de alcantarillado, hidrojet y urgencias sanitarias",
     template: "%s | Hidrourgencias SpA",

@@ -16,7 +16,6 @@ import { ProcesoOperativo } from "@/components/ProcesoOperativo";
 import { CasosReales, type HomeCaseStudy } from "@/components/CasosReales";
 import {
   HomeLeadPaths,
-  HomeMobileBar,
   HomeWhatsAppLink,
 } from "@/components/home-contact";
 import {
@@ -268,7 +267,6 @@ export default function HomePage({ cmsContent }: HomePageContentProps) {
           </div>
         </div>
       </section>
-      <HomeMobileBar />
       <WhatsAppLeadFormModal />
     </main>
   );
