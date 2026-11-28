@@ -1,17 +1,21 @@
 import {
-  MessageCircle,
   ArrowRight,
   Clock3,
   MapPin,
   Wrench,
   FileText,
 } from "lucide-react";
-import { StaticPicture } from "@/components/static-picture";
-import { HomeWhatsAppLink } from "@/components/home-contact";
+import { CommercialChoices } from "@/components/commercial-entry";
 import type { CmsHomeSettings } from "@/lib/cms-content";
-import { siteConfig } from "@/lib/site-config";
+
 
 export function HeroUrgencias({ settings }: { settings?: CmsHomeSettings }) {
+  const approvedImage = "/images/commercial/servicio-aprobado-768.webp";
+  const heroImage = settings?.heroImage?.trim() || approvedImage;
+  const approved = heroImage === approvedImage;
+  const heroAlt = settings?.heroImageAlt?.trim() || (approved
+    ? "Imagen comercial ilustrativa de atención sanitaria Hidrourgencias con equipo de destape"
+    : "Imagen de atención sanitaria configurada por Hidrourgencias");
   return (
     <section className="home-hero" aria-labelledby="home-title">
       <div className="home-hero-inner">
@@ -23,6 +27,16 @@ export function HeroUrgencias({ settings }: { settings?: CmsHomeSettings }) {
             {settings?.heroTitle ||
               "Destape de alcantarillado, hidrojet y mantenimiento técnico de redes sanitarias"}
           </h1>
+          <div className="home-actions">
+            <CommercialChoices />
+            <a
+              href="#servicio-cobertura"
+              className="home-button home-button--light"
+            >
+              Ver servicios y cobertura{" "}
+              <ArrowRight size={18} aria-hidden="true" />
+            </a>
+          </div>
           <p className="home-hero-description">
             Intervenimos desagües, redes de alcantarillado y cámaras de
             alcantarillado con maquinaria especializada, hidrojet y
@@ -32,22 +46,7 @@ export function HeroUrgencias({ settings }: { settings?: CmsHomeSettings }) {
           <p className="home-slogan">
             {settings?.heroSubtitle || "No intentamos, solucionamos."}
           </p>
-          <div className="home-actions">
-            <HomeWhatsAppLink location="home_hero">
-              <MessageCircle size={19} aria-hidden="true" />
-              Solicitar atención por WhatsApp
-            </HomeWhatsAppLink>
-            <a
-              href="#servicio-cobertura"
-              className="home-button home-button--light"
-            >
-              Ver servicios y cobertura{" "}
-              <ArrowRight size={18} aria-hidden="true" />
-            </a>
-          </div>
-          <a href={siteConfig.phoneHref} className="home-hero-call">
-            Llamar
-          </a>
+
           <ul className="home-hero-facts">
             <li>
               <Clock3 aria-hidden="true" />
@@ -68,22 +67,28 @@ export function HeroUrgencias({ settings }: { settings?: CmsHomeSettings }) {
           </ul>
         </div>
         <figure className="home-hero-photo">
-          <StaticPicture
-            src={
-              settings?.heroImage ||
-              "/images/PRINCIPAL/WhatsApp Image 2026-05-24 at 3.54.35 AM.webp"
-            }
-            alt={
-              settings?.heroImageAlt ||
-              "Intervención con máquina eléctrica en una cámara de alcantarillado"
-            }
-            width={899}
-            height={1599}
-            className="home-hero-image"
-            loading="eager"
-            fetchPriority="high"
-          />
-          <figcaption>Maquinaria especializada · Trabajo en terreno</figcaption>
+          <picture className="home-approved-picture">
+            <img
+              src={heroImage}
+              srcSet={approved ? "/images/commercial/servicio-aprobado-480.webp 480w, /images/commercial/servicio-aprobado-768.webp 768w, /images/commercial/servicio-aprobado-1254.webp 1254w" : undefined}
+              sizes="(min-width: 1024px) 40vw, (min-width: 640px) 80vw, calc(100vw - 32px)"
+              alt={heroAlt}
+              onError={event => {
+                const image = event.currentTarget;
+                if (image.getAttribute("src") === approvedImage) return;
+                image.removeAttribute("srcset");
+                image.src = approvedImage;
+                image.alt = "Imagen comercial ilustrativa de atención sanitaria Hidrourgencias";
+              }}
+              width={1254}
+              height={1254}
+              className="home-hero-image"
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+            />
+          </picture>
+          <figcaption>Hidrourgencias SpA{approved ? " · Imagen comercial ilustrativa" : ""}</figcaption>
         </figure>
       </div>
     </section>

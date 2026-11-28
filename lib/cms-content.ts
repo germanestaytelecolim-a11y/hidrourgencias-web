@@ -114,8 +114,8 @@ export type CmsBlogEntry = {
 const defaultHomeSettings: CmsHomeSettings = {
   heroTitle: "Disponibles 24/7 en la Región de Valparaíso",
   heroSubtitle: "Urgencias sanitarias 24 horas con respuesta técnica",
-  heroImage: "/images/logo-hidrourgencias.jpg",
-  heroImageAlt: "Logo Hidrourgencias SpA",
+  heroImage: "/images/commercial/servicio-aprobado-768.webp",
+  heroImageAlt: "Imagen comercial ilustrativa de atención sanitaria Hidrourgencias con equipo de destape",
   primaryCtaText: "WhatsApp urgencia",
   primaryCtaUrl: "/contacto#whatsapp-solicitud",
   secondaryCtaText: "Servicios sanitarios",

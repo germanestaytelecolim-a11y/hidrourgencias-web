@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import type { CmsFeaturedService } from "@/lib/cms-content";
 import { homeServices } from "@/lib/home-services";
+import { openCommercialEntry } from "@/lib/commercial-entry";
 
 export function ServiciosGrid({
   services = [],
@@ -51,6 +52,7 @@ export function ServiciosGrid({
         <a href={service.href} className="home-text-link">
           Ver servicio <ArrowUpRight size={17} aria-hidden="true" />
         </a>
+        <button className="commercial-service-cta" type="button" onClick={() => openCommercialEntry(service.type === "emergency" ? "urgent" : "quote")}>Solicitar evaluación de {service.title.toLowerCase()}</button>
       </article>
     );
   }

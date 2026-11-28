@@ -1,0 +1,73 @@
+{
+  "generatedAt": "2026-11-28T04:38:28.877Z",
+  "runtime": "v24.22.3",
+  "reviewedHead": "e92017c462b826cb53f94ba3e7996d035fe1a20d",
+  "scope": "Localhost sin credenciales externas. Sin envío real ni eventos comerciales externos.",
+  "tests": 11,
+  "typescript": "PASS",
+  "eslint": "PASS",
+  "build": "PASS Node24 webpack",
+  "nextDataBytes": 119353,
+  "previousNextDataBytes": 119352,
+  "htmlBytes": 305709,
+  "gzip": {
+    "bytes": 38132,
+    "encoding": "gzip"
+  },
+  "routes": [
+    {
+      "path": "/",
+      "status": 200,
+      "bytes": 305709,
+      "canonical": "https://hidrourgencias.cl/"
+    },
+    {
+      "path": "/destape-alcantarillado-quillota",
+      "status": 200,
+      "bytes": 478800,
+      "canonical": "https://hidrourgencias.cl/destape-alcantarillado-quillota"
+    },
+    {
+      "path": "/contacto",
+      "status": 200,
+      "bytes": 366264,
+      "canonical": "https://hidrourgencias.cl/contacto"
+    },
+    {
+      "path": "/admin/login",
+      "status": 200,
+      "bytes": 6077
+    },
+    {
+      "path": "/favicon.ico?v=hu-final-20261128",
+      "status": 200,
+      "bytes": 4644,
+      "hashMatched": true
+    },
+    {
+      "path": "/favicon-96.png",
+      "status": 200,
+      "bytes": 7902,
+      "hashMatched": true
+    },
+    {
+      "path": "/apple-touch-icon.png",
+      "status": 200,
+      "bytes": 24329,
+      "hashMatched": true
+    },
+    {
+      "path": "/images/commercial/servicio-aprobado-768.webp",
+      "status": 200,
+      "bytes": 126736,
+      "hashMatched": true
+    }
+  ],
+  "browser": {
+    "forms": "Urgencia y cotización abren, cierran y reabren",
+    "terms": "Visibles antes de aceptar; formulario urgente completo bloqueado únicamente por terms sin marcar",
+    "mobile": "360/390 solicitados; anchos cliente 345/375, sin desbordamiento",
+    "console": "Sin errores en prueba final con URL local sin cache y CSP de solo pruebas"
+  },
+  "seoFilesUnchanged": true
+}

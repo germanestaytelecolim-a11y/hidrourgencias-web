@@ -1,0 +1,88 @@
+{
+  "base": "3e205ce",
+  "runtime": "v24.22.3",
+  "generatedAt": "2026-11-28T04:13:43.734Z",
+  "before": {
+    "html": 305298,
+    "nextData": 119352,
+    "compressed": 37995,
+    "encoding": "gzip"
+  },
+  "after": {
+    "html": 305760,
+    "nextData": 119352,
+    "compressed": 38164,
+    "encoding": "gzip"
+  },
+  "propsUnchanged": true,
+  "routes": [
+    {
+      "path": "/",
+      "status": 200
+    },
+    {
+      "path": "/servicios",
+      "status": 200
+    },
+    {
+      "path": "/cobertura",
+      "status": 200
+    },
+    {
+      "path": "/contacto",
+      "status": 200
+    },
+    {
+      "path": "/destape-alcantarillado-quillota",
+      "status": 200
+    },
+    {
+      "path": "/servicios/hidrojet",
+      "status": 200
+    },
+    {
+      "path": "/destape-alcantarillado-forestal-vina-del-mar",
+      "status": 200
+    },
+    {
+      "path": "/robots.txt",
+      "status": 200
+    },
+    {
+      "path": "/sitemap.xml",
+      "status": 200
+    },
+    {
+      "path": "/favicon.ico",
+      "status": 200
+    },
+    {
+      "path": "/apple-touch-icon.png",
+      "status": 200
+    }
+  ],
+  "iconPages": [
+    "/",
+    "/destape-alcantarillado-quillota",
+    "/contacto",
+    "/admin/login"
+  ],
+  "iconSha256": "bb8d7d19bd7a160ffb51407b1242796c0fff3ebbc2540286cdcec0c5c9d66f50",
+  "imageResults": [
+    {
+      "path": "/images/commercial/servicio-aprobado-480.webp",
+      "bytes": 60362,
+      "sha256": "f49f5adfa94fec2ad437128273d85bc0004340150b1495ca7322ec4d6aaab814"
+    },
+    {
+      "path": "/images/commercial/servicio-aprobado-768.webp",
+      "bytes": 126736,
+      "sha256": "f4f9fade6269e88ab23a9d964fd458e69983d980ea4369bccd81dde95a305b49"
+    },
+    {
+      "path": "/images/commercial/servicio-aprobado-1254.webp",
+      "bytes": 254496,
+      "sha256": "108e262ee5015f61caa59f16ce88bd168d0aa6078fc561bdfe40bd403922257d"
+    }
+  ]
+}
